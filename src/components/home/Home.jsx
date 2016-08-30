@@ -9,8 +9,8 @@ export class Home extends Component {
 	}
 }
 
-App.defaultProps = {
+Home.defaultProps = {
 }
 
-App.propTypes = {
+Home.propTypes = {
 };
