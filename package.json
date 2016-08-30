@@ -32,6 +32,9 @@
     "glob": "^7.0.3",
     "pre-commit": "1.x"
   },
+  "theme": {
+    "primary-color": "#FF9241"
+  },
   "pre-commit": [
     "lint"
   ],
