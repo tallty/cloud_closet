@@ -1,7 +1,7 @@
-// 模块名 - 组件名
+// 品牌主页
 import React, { Component, PropTypes } from 'react';
 
-export class App extends Component {
+export class Home extends Component {
 	render() {
 		return (
 			<div>首页</div>
