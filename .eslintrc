@@ -24,7 +24,6 @@
   ],
   "env": {
     "browser": true,
-    "jQuery": true,
     "node": true
   }
 }
