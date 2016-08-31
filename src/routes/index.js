@@ -6,6 +6,7 @@ import { Profile } from '../components/profile/Profile'
 import { MyCloset } from '../components/my_closet/MyCloset'
 import { Vip } from '../components/vip/Vip'
 import { ChargeDetail } from '../components/ChargeDetail/ChargeDetail'
+import { MyOrder } from '../components/my_order/MyOrder'
 
 export class Routes extends Component {
 	render() {
@@ -21,9 +22,11 @@ export class Routes extends Component {
           {/* 添加个人中心导航路由 */}
           <Route path="/profile" component={Profile}/>
         </Route>
-        
+        {/* －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－ */}
       	{/* 收费详情 */}
 		    <Route path="/charge_detail" component={ChargeDetail} />
+        {/* 添加衣橱预约路由 */}
+        <Route path="/MyOrder" component={MyOrder}/>
 		  </Router>
 		)
 	}

@@ -21,7 +21,7 @@ export class Home extends Component {
             _____
           </Col>
           <Col span={24} className={styles.home_order_btn}>
-            <NavLink to="" onlyActiveOnIndex={true}>马上预约</NavLink>
+            <NavLink to="/MyOrder" onlyActiveOnIndex={true}>马上预约</NavLink>
           </Col>
         </Row>
         <img src="src/images/home_two.png" alt="" className={styles.home_pic}/>
