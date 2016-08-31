@@ -1,7 +1,7 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
 import { Row, Col } from 'antd'
-import NavLink from '../nav_link/NavLink'
+import NavLink from '../../layouts/NavigationLayout/NavLink'
 import classnames from 'classnames'
 import styles from './Home.less'
 

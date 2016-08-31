@@ -21,6 +21,7 @@ export class Routes extends Component {
           {/* 添加个人中心导航路由 */}
           <Route path="/Profile" component={Profile}/>
         </Route>
+        
       	{/* 收费详情 */}
 		    <Route path="/charge_detail" component={ChargeDetail} />
 		  </Router>
