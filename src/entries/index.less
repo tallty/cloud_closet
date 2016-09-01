@@ -35,8 +35,32 @@
       color: #fff !important;
     }
   }
+  .ant-input:hover {
+    border-color: #FFB075 !important;
+  }
+  .ant-input:focus{ 
+    border-color: #FFB075 !important;
+    box-shadow: none !important;
+  }
   .ant-calendar-cell {
     color: #919191 !important;
+  }
+  .ant-calendar-picker-container {
+    // 元素水平垂直居中显示
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    // 添加毛玻璃效果
+    // background: inherit;
+    // -webkit-filter: blur(5px);
+    // -moz-filter: blur(5px);
+    // -ms-filter: blur(5px);
+    // -o-filter: blur(5px);
+    // filter: blur(5px);
+    // filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=4, MakeShadow=false);
   }
   .ant-calendar-column-header {
     color: #ccc !important;
@@ -47,8 +71,12 @@
   .ant-calendar-picker-icon {
     display:none !important;
   }
-  .ant-calendar-next-month-btn-day {
-
+  .has-success {
+    input {
+      background-color: #FF9241 !important;
+      color: #fff;
+      border: 0;
+    }
   }
   .ant-calendar-selected-day .ant-calendar-date {
     background-color: #FF9241 !important;
@@ -57,12 +85,5 @@
   .ant-calendar-today .ant-calendar-date {
     border-color: #FF9241 !important;
     border-radius: 50% !important;
-  }
-  .ant-calendar-picker-container {
-    // width: 100% !important;
-    // height: 100% !important;
-    background-color: #fff !important;
-    // left: auto !important;
-    // top: auto !important;
   }
 }
