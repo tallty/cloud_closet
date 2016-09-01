@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Router, Route, IndexRoute, Link } from 'react-router'
-import Navigation from '../components/Navigation'
+import Navigation from '../layouts/NavigationLayout/Navigation'
 import { Home } from '../components/home/Home'
 import { Profile } from '../components/profile/Profile'
 import { MyCloset } from '../components/my_closet/MyCloset'
