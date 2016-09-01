@@ -7,6 +7,8 @@ import { MyCloset } from '../components/my_closet/MyCloset'
 import { Vip } from '../components/vip/Vip'
 import { ChargeDetail } from '../components/ChargeDetail/ChargeDetail'
 import { MyOrder } from '../components/my_order/MyOrder'
+import { Success } from '../components/my_order/Success'
+import { LogIn } from '../components/log_in/LogIn'
 
 export class Routes extends Component {
 	render() {
@@ -27,6 +29,9 @@ export class Routes extends Component {
 		    <Route path="/charge_detail" component={ChargeDetail} />
         {/* 添加衣橱预约路由 */}
         <Route path="/MyOrder" component={MyOrder}/>
+        <Route path="/Success" component={Success}/>
+        {/* 添加登陆路由 */}
+        <Route path="/login" component={LogIn}/>
 		  </Router>
 		)
 	}

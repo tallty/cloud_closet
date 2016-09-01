@@ -10,32 +10,20 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
 export class MyOrder extends Component {
-  getInitialState() {
-    return {
-      checked: true,
-    };
+  constructor(props) {
+    super(props);
+    this.state = { checked: true, };
   }
-
   handleSubmit(e) {
     e.preventDefault();
     console.log('收到表单值：', this.props.form.getFieldsValue());
-  }
-
-  normFile(e) {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
-  }
-
-  onChange(e) {
-    console.log(`checked = ${e.target.checked}`);
   }
 
   render() {
     const { getFieldProps } = this.props.form;
     return (
       <div className={styles.order_container}>
+        {this.props.children}
         <p className={styles.title}>乐存</p>
         
         <Row className={styles.order_content}>
@@ -68,7 +56,9 @@ export class MyOrder extends Component {
             </Col>
             <Col span={24}>
               <FormItem>
-                <Button className={styles.order_btn} type="primary" htmlType="submit">预 约</Button>
+                <NavLink to="/login" >
+                  <Button className={styles.order_btn} type="primary" htmlType="submit">预 约</Button>
+                </NavLink>
               </FormItem>
             </Col>
           </Form>
