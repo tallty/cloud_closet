@@ -15,11 +15,11 @@ export class Routes extends Component {
           {/* 云衣橱品牌主页 */}
           <IndexRoute component={Home}/>
           {/* 添加Fanc_Club导航路由 */}
-          <Route path="/VIP" component={Vip}/>
+          <Route path="/vip" component={Vip}/>
           {/* 添加我的衣橱导航路由 */}
-          <Route path="/MyCloset" component={MyCloset}/>
+          <Route path="/my_closet" component={MyCloset}/>
           {/* 添加个人中心导航路由 */}
-          <Route path="/Profile" component={Profile}/>
+          <Route path="/profile" component={Profile}/>
         </Route>
         
       	{/* 收费详情 */}
