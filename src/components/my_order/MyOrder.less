@@ -1,0 +1,119 @@
+@orange: #FF9241;
+.order_container {
+  text-align: center;
+  background-color: #F9F9F9;
+  .title {
+    padding: 50px 0;
+    font-size: 22px;
+    color: @orange;
+    border-bottom: 1px solid #D1C8C0;
+  }
+  .line_one {
+    color: #D1C8C0;
+  }
+  .order_content {
+    margin-bottom: 0;
+    padding: 35px 20px;
+    input {
+      height: 35px;
+      background-color: #F9F9F9;
+      // border-color: #C9C9C9;
+    }
+
+    ::-webkit-input-placeholder { /* Chrome */
+      color: #757575;
+      transition: opacity 250ms ease-in-out;
+    }
+    :focus::-webkit-input-placeholder {
+      opacity: 0.5;
+    }
+    :-ms-input-placeholder { /* IE 10+ */
+      color: #757575;
+      transition: opacity 250ms ease-in-out;
+    }
+    :focus:-ms-input-placeholder {
+      opacity: 0.5;
+    }
+    ::-moz-placeholder { /* Firefox 19+ */
+      color: #757575;
+      opacity: 1;
+      transition: opacity 250ms ease-in-out;
+    }
+    :focus::-moz-placeholder {
+      opacity: 0.5;
+    }
+    :-moz-placeholder { /* Firefox 4 - 18 */
+      color: #757575;
+      opacity: 1;
+      transition: opacity 250ms ease-in-out;
+    }
+    :focus:-moz-placeholder {
+      opacity: 0.5;
+    }
+
+    .location_icon {
+      width: 20px;
+      height: 22px;
+      margin-right: 8px;
+      margin-top: 2px;
+    }
+    .address_input {
+      height: 40px;
+      background-color: #ECECEC;
+      color: #BBBBBB;
+      border: 0;
+      border-radius: 0;
+    }
+    .line_two {
+      border-top: 1px dashed #D1C8C0;
+      padding-top: 24px;
+    }
+    .clo_number_radio {
+      label {
+        padding: 0 30px;
+        color: #919191;
+        font-size: 15px;
+        background-color: #F9F9F9;
+      }
+      .label_one {
+        margin-right: 10px;
+        border-radius: 6px;
+        border-color: @orange !important;
+      }
+      .label_two {
+        border-radius: 6px;
+        border-left: 1px solid #d9d9d9;
+        border-color: @orange !important;
+      }
+      .label_three {
+        margin-left: 10px;
+        border-radius: 6px;
+        border-left: 1px solid #d9d9d9;
+        border-color: @orange !important;
+      }
+    }
+    .ruls_label {
+      color: #757575;
+    }
+    .ruls {
+      color: red;
+    }
+    .date_input {
+      margin-top: -10px;
+      input {
+        height: 25px !important;
+        border-radius: 0;
+        text-align: center;
+        padding: 0;
+      }
+    }
+    .order_btn {
+      margin-top: 20px;
+      background-color: @orange;
+      border-color: @orange;
+      padding: 5px 0;
+      border-radius: 15px;
+      width: 100%;
+    }
+  }
+}
