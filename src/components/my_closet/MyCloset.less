@@ -1,0 +1,115 @@
+@orange: #FF9241;
+.my_cliset_content {
+  color: #7F7F7F;
+  .my_cliset_header_part_one_content {
+    padding-top: 27px;
+    .user_name {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 300;
+      color: #555555;
+    }
+    .user_pic_content {
+      text-align: center;
+      .user_pic_position {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        .user_pic {
+          width: 130px;
+          height: 130px;
+        }
+        .empty_cicle {
+          width: 28px;
+          height: 28px;
+          background-color: #F3D696;
+          border: 2px solid #fff;
+          border-radius: 50%;
+
+          position: absolute;
+          bottom: 20px;
+          right: 22px;
+        }
+      }
+    }
+  }
+
+  .my_cliset_header_part_two_content {
+    border-bottom: 1px solid #EBEBEB;
+    padding-bottom: 8px;
+    .closet_number_tab {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      .number_closet {
+        font-size: 24px;
+        color: #555555;
+      }
+      .input_closet_btn {
+        padding: 4px 14px;
+        border-radius: 23px;
+      }
+      .input_closet_number_tab {
+        border-left: 1px solid #B0B0B0;
+      }
+    }
+  }
+
+  .closet_rank_content {
+    padding: 18px 0;
+    border-bottom: 2px solid @orange;
+    .closet_all {
+      text-align: center;
+      font-size: 16px;
+    }
+    .closet_rank {
+      line-height: 24px;
+      text-align: center;
+      color: #FFA35E;
+      .rank_btn {
+        border: 0;
+        background: #fff;
+      }
+      .icon_down {
+        width: 10px;
+        height: 10px;
+      }
+    }
+    .closet_control {
+      font-size: 16px;
+      color: @orange;
+    }
+    .rank_btn_time {
+      border: 0;
+      border-radius: 0;
+      background: #fff;
+      border-top: 1px solid #EBEBEB;
+      padding-left: 40px;
+      text-align: left;
+      width: 100%;
+    }
+  }
+
+  .tab_content {
+    padding: 18px 20px;
+    .tag_content {
+      .tag {
+        margin: 2px 6px;
+        width: 60px;
+        line-height: 2px;
+        height: 20px;
+        color: #fff;
+        border: 0;
+        border-radius: 20px;
+        text-align: center;
+        background-color: #E0E0E0;
+      }
+      .tag::after {
+        background-color: @orange;
+      }
+      .search_icon {
+        font-size: 20px;
+      }
+    }
+  }
+}

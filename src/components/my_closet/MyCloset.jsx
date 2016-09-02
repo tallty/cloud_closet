@@ -1,10 +1,20 @@
 // 品牌主页
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
+import { Row, Col, Button } from 'antd'
+import MyClosetHeader from './MyClosetHeader'
+import { ClosetRank } from './ClosetRank'
+import { ClosetClassify } from './ClosetClassify'
+import classnames from 'classnames'
+import styles from './MyCloset.less'
 
 export class MyCloset extends Component {
   render() {
     return (
-      <div>MyCloset</div>
+      <div className={styles.my_cliset_content}>
+        <MyClosetHeader />
+        <ClosetRank />
+        <ClosetClassify />
+      </div>
     );
   }
 }

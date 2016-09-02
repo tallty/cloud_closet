@@ -15,7 +15,7 @@ export class Success extends Component {
             工作人员将在规定时间内抵达您设定的所在地<br/>请记得及时接听上门电话。
           </Col>
           <Col span={24}>
-            <NavLink to="/Success" >
+            <NavLink to="/MyCloset" >
               <Button className={styles.go_closet_btn} type="primary" htmlType="submit">进入我的衣橱</Button>
             </NavLink>
           </Col>
