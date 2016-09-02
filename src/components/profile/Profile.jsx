@@ -2,29 +2,34 @@
 import React, { Component, PropTypes } from 'react'
 import css from './profile.less'
 import { Row, Col, Icon, Button, Progress } from 'antd'
+import { Level } from './share/Level'
 
 export class Profile extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			level: 80,
-			level_name: "白金级别"
+			level_name: "白金级别",
+			messages: [false, true, false, false, false, false]
 		}
 	}
 
 	getGrid() {
 		let list = []
 		this.props.items.forEach((item, index, items) => {
+			let dot = this.state.messages[index] ? <div className={css.dot}></div> : null
 			index++
 			list.push(
 				index === 5 ?
 				<Col span={8} className={css.item} key={index}>
+					{dot}
 					<div className={css.ticket}>
 						6800<span className={css.ticket_icon}>￥</span>
 					</div>
 					<div className={css.ticket_text}>{item}</div>
 				</Col> : 
 				<Col span={8} className={css.item} key={index}>
+					{dot}
 					<img src={`/src/images/profile_item${index}.png`} alt=""/>
 					<div>{item}</div>
 				</Col>
@@ -49,11 +54,7 @@ export class Profile extends Component {
 					<div style={{paddingTop: user_info_top}}>
 						<img src="/src/images/photo.png" alt="头像"/>
 						<div className={css.user_name}>John Snow</div>
-						<div className={css.level}>
-							<div className={css.level_icon}></div>
-							<Progress percent={this.state.level} showInfo={false} strokeWidth={6} className={css.progress} />
-							<div className={css.level_name}>{this.state.level_name}</div>
-						</div>
+						<Level level={this.state.level} level_name={this.state.level_name}/>
 					</div>
 				</div>
 				{/* 业务模块 */}
