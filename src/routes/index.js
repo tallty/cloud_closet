@@ -15,6 +15,8 @@ import { LogIn } from '../components/log_in/LogIn'
 // 个人中心
 import { FancClub } from '../components/profile/FancClub'
 import { MyOrders } from '../components/profile/MyOrders/MyOrders'
+import { Ticket } from '../components/profile/Ticket'
+import { Notification } from '../components/profile/Notification'
 //搜索
 import { Search } from '../components/my_closet/search/Search'
 import { Manage } from '../components/my_closet/manage/Manage'
@@ -38,6 +40,8 @@ export class Routes extends Component {
 		    <Route path="/charge_detail" component={ChargeDetail} />
         {/* 个人中心相关 */}
         <Route path="/my_orders" component={MyOrders} />
+        <Route path="/tickets" component={Ticket} />
+        <Route path="/notifications" component={Notification} />
         {/* 搜索 */}
         <Route path="/search" component={Search} />
         {/* 添加衣橱管理路由 */}

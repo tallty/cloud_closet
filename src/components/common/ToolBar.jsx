@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import css from './toolbar.less'
 
-export class ToolBar extends Component {
+export class Toolbar extends Component {
 	render() {
 		return (
 			<div className={css.toolbar}>
@@ -14,12 +14,12 @@ export class ToolBar extends Component {
 	}
 }
 
-ToolBar.defaultProps = {
+Toolbar.defaultProps = {
 	title: " ",
 	url: "/"
 }
 
-ToolBar.propTypes = {
+Toolbar.propTypes = {
 	title: PropTypes.string,
 	url: PropTypes.string
 }

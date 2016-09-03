@@ -86,7 +86,7 @@ export class Profile extends Component {
 
 Profile.defaultProps = {
 	items: ["我的卡券", "我的订单", "系统通知", "VIP会员", "发票", "我的小蜜"],
-	gridLinks: ["/#", "/my_orders", "/#", "/#", "/#", "/#"]
+	gridLinks: ["/tickets", "/my_orders", "/notifications", "/#", "/#", "/#"]
 }
 
 Profile.propTypes = {

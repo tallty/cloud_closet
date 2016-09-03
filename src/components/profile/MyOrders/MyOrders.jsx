@@ -2,7 +2,8 @@
 import React, { Component, PropTypes } from 'react'
 import css from './my_orders.less'
 import { ToolBar } from '../../common/ToolBar'
-import { Tabs, Spin } from 'antd'
+import { Spiner } from '../../common/Spiner'
+import { Tabs } from 'antd'
 import { Orders } from './Orders'
 import SuperAgent from 'superagent'
 
@@ -43,23 +44,22 @@ export class MyOrders extends Component {
 
 	render() {
 		let orders = this.state.orders
-		let spin = <div className={css.spin_container}><Spin size="large" /></div>
 
 		return (
 			<div className={css.container}>
 				<ToolBar title="我的订单" />
 				<Tabs defaultActiveKey="1" className={css.tab_bar}>
 			    <TabPane tab="全部" key="1">
-						{ orders ? <Orders type="all" orders={orders} /> : spin }
+						{ orders ? <Orders type="all" orders={orders} /> : <Spiner/> }
 			    </TabPane>
 			    <TabPane tab="待付款" key="2">
-						{ orders ? <Orders type="pay" orders={orders} /> : spin }
+						{ orders ? <Orders type="pay" orders={orders} /> : <Spiner/> }
 			    </TabPane>
 			    <TabPane tab="待发货" key="3">
-						{ orders ? <Orders type="transmit" orders={orders} /> : spin }
+						{ orders ? <Orders type="transmit" orders={orders} /> : <Spiner/> }
 			    </TabPane>
 			    <TabPane tab="待收货" key="4">
-						{ orders ? <Orders type="receive" orders={orders} /> : spin }
+						{ orders ? <Orders type="receive" orders={orders} /> : <Spiner/> }
 			    </TabPane>
 			  </Tabs>
 			</div>
