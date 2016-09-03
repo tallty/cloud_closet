@@ -25,11 +25,13 @@ export class ClosetClassify extends Component {
             <Button type="primary" className={styles.tag} onClick={this.show_type}>外套</Button>
             <Button type="primary" className={styles.tag} onClick={this.show_type}>上衣</Button>
             <Button type="primary" className={styles.tag} onClick={this.show_type}>裤装</Button>
-            <Button type="primary" className={styles.tag} onClick={this.show_type}>半裙</Button>
+            <Button type="primary" className={styles.ellipsis_btn}><Icon type="ellipsis" className={styles.ellipsis_icon} /></Button>
+            {/* <Button type="primary" className={styles.tag} onClick={this.show_type}>半裙</Button> */}
           </Col>
-          <Col span={4}>
-            <Icon type="search" className={styles.search_icon} />
+          <Col span={4} className={styles.search_btn_content}>
+            <Button type="primary" className={styles.search_btn}><Icon type="search" className={styles.search_icon} /></Button>
           </Col>
+        {/* 
           <Col span={24}>
             <Button type="primary" className={styles.tag} onClick={this.show_type}>羽绒服</Button>
             <Button type="primary" className={styles.tag} onClick={this.show_type}>泳衣</Button>
@@ -39,9 +41,10 @@ export class ClosetClassify extends Component {
             <Button type="primary" className={styles.tag} onClick={this.show_type}>秋冬</Button>
             <Button type="primary" className={styles.tag} onClick={this.show_type}>冬</Button>
           </Col>
+         */}
         </Row>
         <Row>
-          <p>裙装<label htmlFor="">（25）</label></p>
+          <p className={styles.tab_name}>裙装<label htmlFor="">（25）</label></p>
         </Row>
       </div>
     );

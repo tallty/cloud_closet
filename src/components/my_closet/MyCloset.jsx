@@ -4,6 +4,7 @@ import { Row, Col, Button } from 'antd'
 import MyClosetHeader from './MyClosetHeader'
 import { ClosetRank } from './ClosetRank'
 import { ClosetClassify } from './ClosetClassify'
+import { ClosetTab } from './ClosetTab'
 import classnames from 'classnames'
 import styles from './MyCloset.less'
 
@@ -14,6 +15,7 @@ export class MyCloset extends Component {
         <MyClosetHeader />
         <ClosetRank />
         <ClosetClassify />
+        <ClosetTab />
       </div>
     );
   }
