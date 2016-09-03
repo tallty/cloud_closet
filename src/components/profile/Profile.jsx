@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import css from './profile.less'
 import { Row, Col, Icon, Button, Progress } from 'antd'
 import { Level } from './share/Level'
+import { Link } from 'react-router'
 
 export class Profile extends Component {
 	constructor(props) {
@@ -18,20 +19,23 @@ export class Profile extends Component {
 		let list = []
 		this.props.items.forEach((item, index, items) => {
 			let dot = this.state.messages[index] ? <div className={css.dot}></div> : null
-			index++
 			list.push(
-				index === 5 ?
+				index === 4 ?
 				<Col span={8} className={css.item} key={index}>
-					{dot}
-					<div className={css.ticket}>
-						6800<span className={css.ticket_icon}>￥</span>
-					</div>
+					<Link to={this.props.gridLinks[index]}>
+						{dot}
+						<div className={css.ticket}>
+							6800<span className={css.ticket_icon}>￥</span>
+						</div>
+					</Link>
 					<div className={css.ticket_text}>{item}</div>
 				</Col> : 
 				<Col span={8} className={css.item} key={index}>
-					{dot}
-					<img src={`/src/images/profile_item${index}.png`} alt=""/>
-					<div>{item}</div>
+					<Link to={this.props.gridLinks[index]}>
+						{dot}
+						<img src={`/src/images/profile_item${index}.png`} alt=""/>
+						<div>{item}</div>
+					</Link>
 				</Col>
 			)
 		})
@@ -81,7 +85,8 @@ export class Profile extends Component {
 }
 
 Profile.defaultProps = {
-	items: ["我的卡券", "我的订单", "系统通知", "VIP会员", "发票", "我的小蜜"]
+	items: ["我的卡券", "我的订单", "系统通知", "VIP会员", "发票", "我的小蜜"],
+	gridLinks: ["/#", "/my_orders", "/#", "/#", "/#", "/#"]
 }
 
 Profile.propTypes = {

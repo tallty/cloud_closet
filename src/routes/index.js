@@ -14,6 +14,7 @@ import { Success } from '../components/my_order/Success'
 import { LogIn } from '../components/log_in/LogIn'
 // 个人中心
 import { FancClub } from '../components/profile/FancClub'
+import { MyOrders } from '../components/profile/MyOrders/MyOrders'
 
 export class Routes extends Component {
 	render() {
@@ -33,7 +34,7 @@ export class Routes extends Component {
       	{/* 收费详情 */}
 		    <Route path="/charge_detail" component={ChargeDetail} />
         {/* 个人中心相关 */}
-        
+        <Route path="/my_orders" component={MyOrders} />
         {/* 添加衣橱预约路由 */}
         <Route path="/MyOrder" component={MyOrder}/>
         <Route path="/Success" component={Success}/>

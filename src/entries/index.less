@@ -1,3 +1,8 @@
+@import "~antd/lib/style/themes/default.less";
+@import "./theme.less"; // theme.less，用于覆盖变量值
+@import "~antd/lib/style/core/index.less";
+@import "~antd/lib/style/components.less";
+
 :global {
   html, body, #root {
     height: 100%;
@@ -9,6 +14,10 @@
 
   .active {
     color: #FF9241 !important;
+  }
+
+  .full_height {
+    height: 100%;
   }
 
   .text-left {
@@ -34,6 +43,29 @@
   // profile  progress
   .ant-progress-bg {
     background-color: #F4C87B !important;
+  }
+
+  // tab
+  .ant-tabs-bar {
+    margin-bottom: 0 !important;
+    background-color: #fff;
+    .ant-tabs-nav {
+      width: 100%;
+      .ant-tabs-tab {
+        margin-right: 0 !important;
+        width: 25%;
+        .ant-tabs-tab-inner {
+          padding: 8px 0px;
+          font-size: 12px;
+          text-align: center;
+          color: #7f7f7f !important;
+        }
+      }
+      .ant-tabs-ink-bar {
+        width: 11% !important;
+        left: 7% !important;
+      }
+    }
   }
 
   label.ant-radio-button-wrapper-checked {
