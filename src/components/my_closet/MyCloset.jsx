@@ -14,8 +14,10 @@ export class MyCloset extends Component {
       <div className={styles.my_cliset_content}>
         <MyClosetHeader />
         <ClosetRank />
-        <ClosetClassify />
-        <ClosetTab />
+        <div className={styles.closet_content_down}>
+          <ClosetClassify />
+          <ClosetTab />
+        </div>
       </div>
     );
   }

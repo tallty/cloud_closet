@@ -50,7 +50,7 @@ export class ClosetRank extends Component {
           <Col span={3} offset={5} className={styles.closet_control}>
             管理
           </Col>
-          <QueueAnim className="demo-content" animConfig={[ { opacity: [1, 0], translateY: [0, 50] },{ opacity: [1, 0], translateY: [0, -50] },]}>
+          <QueueAnim component="ul" type={['right', 'left']}>
             {list}
           </QueueAnim>
         </Row>

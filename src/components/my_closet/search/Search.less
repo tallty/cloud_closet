@@ -1,0 +1,43 @@
+@orange: #FF9241;
+.Search_content {
+  .Search_content_header {
+    padding: 13px 12px;
+    border-bottom: 2px solid #ADADAD;
+    input::before {
+      content: "dddddd"
+    }
+    input {
+      height: 30px;
+      border-radius: 30px;
+      border: 0;
+      background-color: #EFEFEF;
+    }
+    .cross_icon {
+      color: @orange;
+      font-size: 25px;
+      line-height: 30px;
+      padding-left: 5px;
+    }
+  }
+  .Search_content_row {
+    padding: 0 15px;
+    .Search_content_tab_title {
+      padding: 10px 2px;
+      color: @orange;
+      font-size: 14px;
+    }
+    .Search_content_tab {
+      padding-bottom: 5px;
+      .tag {
+        margin: 2px 6px 6px 0;
+        line-height: 2px;
+        height: 20px;
+        color: #919191;
+        border: 1px solid #979797;
+        border-radius: 20px;
+        text-align: center;
+        background-color: #fff;
+      }
+    }
+  }
+}

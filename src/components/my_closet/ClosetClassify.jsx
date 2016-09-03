@@ -1,6 +1,7 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
 import { Icon, Row, Col, Button } from 'antd'
+import NavLink from '../../layouts/NavigationLayout/NavLink'
 import classnames from 'classnames'
 import styles from './MyCloset.less'
 
@@ -29,7 +30,9 @@ export class ClosetClassify extends Component {
             {/* <Button type="primary" className={styles.tag} onClick={this.show_type}>半裙</Button> */}
           </Col>
           <Col span={4} className={styles.search_btn_content}>
-            <Button type="primary" className={styles.search_btn}><Icon type="search" className={styles.search_icon} /></Button>
+            <NavLink to="/search" >
+              <Button type="primary" className={styles.search_btn}><Icon type="search" className={styles.search_icon} /></Button>
+            </NavLink>
           </Col>
         {/* 
           <Col span={24}>
