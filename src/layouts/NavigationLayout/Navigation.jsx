@@ -4,17 +4,20 @@ import Home from '../../components/home/Home'
 import NavLink from './NavLink'
 import classnames from 'classnames'
 import styles from './Navigation.less'
-import { Affix, Menu, Icon, Row, Col } from 'antd'
+import { Icon, Row, Col } from 'antd'
 
 
 export default class Navigation extends React.Component {
   render() {
+    let tab_height = document.body.clientHeight - 60
     return (
       <div className={styles.container}>
         {/* tab内容 */}
+        <div style={{height: tab_height, overflow: "auto"}}>
         {this.props.children || <Home/>}
+        </div>
         {/* 底部导航条 */}
-        <Affix offsetBottom={0}>
+        <div>
           <Row className={styles.nav_ul}>
             <NavLink to="/" onlyActiveOnIndex={true}>
               <Col span={6} className={styles.home_tab_btn}>
@@ -57,7 +60,7 @@ export default class Navigation extends React.Component {
               </Col>
             </NavLink>
           </Row>
-        </Affix>
+        </div>
       </div>
     )
   }  

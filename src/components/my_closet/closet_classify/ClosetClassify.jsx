@@ -1,9 +1,9 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
 import { Icon, Row, Col, Button } from 'antd'
-import NavLink from '../../layouts/NavigationLayout/NavLink'
+import NavLink from '../../../layouts/NavigationLayout/NavLink'
 import classnames from 'classnames'
-import styles from './MyCloset.less'
+import styles from './ClosetClassify.less'
 
 export class ClosetClassify extends Component {
   constructor(props) {
@@ -45,9 +45,6 @@ export class ClosetClassify extends Component {
             <Button type="primary" className={styles.tag} onClick={this.show_type}>冬</Button>
           </Col>
          */}
-        </Row>
-        <Row>
-          <p className={styles.tab_name}>裙装<label htmlFor="">（25）</label></p>
         </Row>
       </div>
     );
