@@ -38,18 +38,7 @@ export class Goods extends Component {
 }
 
 Goods.defaultProps = {
-	goods: [
-		{
-			image: "/src/images/goods_example.png",
-			name: "DOLCE&GABBANA  印花包臀短裙",
-			link: "/"
-		},
-		{
-			image: "/src/images/goods_example.png",
-			name: "DOLCE&GABBANA  印花包臀短裙",
-			link: "/"
-		}
-	],
+	goods: [],
 	total_price: 0
 }
 
