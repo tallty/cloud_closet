@@ -19,7 +19,7 @@ export class Manage extends Component {
     return (
       <div className={styles.Manage_content}>
         <Row className={styles.tab_header}>
-          <Col span={18} offset={2} className={styles.tab_title}>管理</Col>
+          <Col span={16} offset={4} className={styles.tab_title}>管理</Col>
           <Col span={4} ><NavLink to="/MyCloset" style={{color:'#7F7F7F'}}>完成</NavLink></Col>
         </Row>
         <div className={styles.tab_body} style={{height: tab_height, overflow: "auto"}}>

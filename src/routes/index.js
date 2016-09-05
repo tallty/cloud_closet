@@ -23,6 +23,9 @@ import { WithdrawFund } from '../components/profile/WithdrawFund'
 //搜索
 import { Search } from '../components/my_closet/search/Search'
 import { Manage } from '../components/my_closet/manage/Manage'
+//地址
+import { Address } from '../components/address/Address'
+import { AddAddress } from '../components/address/add_address/AddAddress'
 
 export class Routes extends Component {
 	render() {
@@ -58,6 +61,10 @@ export class Routes extends Component {
         <Route path="/Success" component={Success}/>
         {/* 添加登陆路由 */}
         <Route path="/login" component={LogIn}/>
+        {/* 添加地址路由 */}
+        <Route path="/address" component={Address}/>
+      {/* 添加新增地址路由 */}
+        <Route path="/add_address" component={AddAddress}/>
 		  </Router>
 		)
 	}
