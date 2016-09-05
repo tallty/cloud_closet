@@ -66,10 +66,14 @@ export class PersonalCenter extends Component {
 					</Row>
 					<Row>
 						<Col span={12} className={css.left_col}>
-							<Button type="primary" className={css.charge_btn}>充值</Button>
+							<Link to="/recharge">
+								<Button type="primary" className={css.charge_btn}>充值</Button>
+							</Link>
 						</Col>
 						<Col span={12} className={css.right_col}>
-							<Button type="primary" className={css.charge_btn}>提现</Button>
+							<Link to="/withdraw_fund">
+								<Button type="primary" className={css.charge_btn}>提现</Button>
+							</Link>
 						</Col>
 					</Row>
 					<Row className={css.grid}>
@@ -87,4 +91,6 @@ PersonalCenter.defaultProps = {
 }
 
 PersonalCenter.propTypes = {
+	items: PropTypes.arrayOf(PropTypes.string),
+	gridLinks: PropTypes.arrayOf(PropTypes.string)
 }
