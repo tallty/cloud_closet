@@ -47,7 +47,7 @@ export class Notification extends Component {
 	render() {
 		return (
 			<div className={css.container}>
-				<Toolbar title="系统通知" url="/profile"/>
+				<Toolbar title="系统通知" url="/personal_center"/>
 				<div style={{height: 5}}></div>
 				{ this.state.cells ? this.cells() : <Spiner/> }
 			</div>

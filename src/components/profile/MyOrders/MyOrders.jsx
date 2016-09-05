@@ -1,7 +1,7 @@
 // 我的订单
 import React, { Component, PropTypes } from 'react'
 import css from './my_orders.less'
-import { ToolBar } from '../../common/ToolBar'
+import { Toolbar } from '../../common/Toolbar'
 import { Spiner } from '../../common/Spiner'
 import { Tabs } from 'antd'
 import { Orders } from './Orders'
@@ -10,11 +10,8 @@ import SuperAgent from 'superagent'
 const TabPane = Tabs.TabPane
 
 export class MyOrders extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			orders: null
-		}
+	state = {
+		orders: null
 	}
 
 	componentDidMount() {
@@ -47,7 +44,7 @@ export class MyOrders extends Component {
 
 		return (
 			<div className={css.container}>
-				<ToolBar title="我的订单" />
+				<Toolbar title="我的订单" url="/personal_center" />
 				<Tabs defaultActiveKey="1" className={css.tab_bar}>
 			    <TabPane tab="全部" key="1">
 						{ orders ? <Orders type="all" orders={orders} /> : <Spiner/> }

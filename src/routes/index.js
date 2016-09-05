@@ -3,7 +3,7 @@ import { Router, Route, IndexRoute, Link } from 'react-router'
 // 底部导航
 import Navigation from '../layouts/NavigationLayout/Navigation'
 import { Home } from '../components/home/Home'
-import { Profile } from '../components/profile/Profile'
+import { PersonalCenter } from '../components/profile/PersonalCenter'
 import { MyCloset } from '../components/my_closet/MyCloset'
 import { Vip } from '../components/vip/Vip'
 // 收费详情
@@ -13,6 +13,7 @@ import { MyOrder } from '../components/my_order/MyOrder'
 import { Success } from '../components/my_order/Success'
 import { LogIn } from '../components/log_in/LogIn'
 // 个人中心
+import { Profile } from '../components/profile/Profile'
 import { FancClub } from '../components/profile/FancClub'
 import { MyOrders } from '../components/profile/MyOrders/MyOrders'
 import { Ticket } from '../components/profile/Ticket'
@@ -33,12 +34,13 @@ export class Routes extends Component {
           {/* 添加我的衣橱导航路由 */}
           <Route path="/MyCloset" component={MyCloset}/>
           {/* 添加个人中心导航路由 */}
-          <Route path="/profile" component={Profile}/>
+          <Route path="/personal_center" component={PersonalCenter}/>
         </Route>
         {/* －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－ */}
       	{/* 收费详情 */}
 		    <Route path="/charge_detail" component={ChargeDetail} />
         {/* 个人中心相关 */}
+        <Route path="/profile" component={Profile} />
         <Route path="/my_orders" component={MyOrders} />
         <Route path="/tickets" component={Ticket} />
         <Route path="/notifications" component={Notification} />
