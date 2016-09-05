@@ -12,7 +12,9 @@ export class Goods extends Component {
 		let list = []
 		this.props.goods.forEach((item, i, array) => {
 			let price = (i === this.props.goods.length - 1) ? 
-									<div className={css.price}>合计：<span>{ this.props.total_price }</span></div> : null
+									<div className={css.price}>
+										合计：<span>{ this.props.total_price }</span>
+									</div> : null
 			list.push(
 				<Row key={i}>
 					<Col span={6} className={css.goods_left}>

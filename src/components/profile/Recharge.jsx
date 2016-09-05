@@ -3,6 +3,7 @@
  */
 import React, { Component, PropTypes } from 'react'
 import css from './recharge.less'
+import { Link } from 'react-router'
 
 export class Recharge extends Component {
 	render() {
@@ -21,7 +22,7 @@ export class Recharge extends Component {
 						<input type="number" placeholder="请输入金额" ref="myAmountInput"/>
 					</div>
 				</div>
-				<a href="/profile" className={css.next}>下一步</a>
+				<Link to="/profile" className={css.next}>下一步</Link>
 			</div>
 		)
 	}

@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import css from './fanc_club.less'
 import { Level } from './share/Level'
 import { Icon } from 'antd'
+import { Link } from 'react-router'
 
 export class FancClub extends Component {
 	constructor(props) {
@@ -29,9 +30,9 @@ export class FancClub extends Component {
 			<div className={css.container}>
 				<div className={css.user_info}>
 					<div className={css.back}>
-						<a href="/" className={css.back_link}>
+						<Link to="/" className={css.back_link}>
 							<Icon type="left"/>
-						</a>
+						</Link>
 					</div>
 					<div className={css.name}>John Snow</div>
 					<Level level={this.state.level} level_name={this.state.level_name} />
