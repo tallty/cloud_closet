@@ -1,4 +1,6 @@
 import './index.html';
+// package.json theme配置无效时，使用global覆盖
+// import './global.less';
 import './index.less';
 import ReactDOM from 'react-dom';
 import React from 'react';

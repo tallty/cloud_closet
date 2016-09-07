@@ -1,7 +1,7 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
 import { Row, Col } from 'antd'
-import NavLink from '../../layouts/NavigationLayout/NavLink'
+import { Link } from 'react-router'
 import classnames from 'classnames'
 import styles from './Home.less'
 
@@ -21,12 +21,16 @@ export class Home extends Component {
             _____
           </Col>
           <Col span={24} className={styles.home_order_btn}>
-            <NavLink to="/MyOrder" onlyActiveOnIndex={true}>马上预约</NavLink>
+            <Link to="/MyOrder">马上预约</Link>
           </Col>
         </Row>
-        <img src="src/images/home_two.png" alt="" className={styles.home_pic}/>
-        <img src="src/images/home_three.png" alt="" className={styles.home_pic}/>
-        <img src="src/images/home_fore.png" alt="" className={styles.home_pic}/>
+        <Row>
+          <Col span={24}>
+            <img src="src/images/home_two.png" alt="" className={styles.home_pic}/>
+            <img src="src/images/home_three.png" alt="" className={styles.home_pic}/>
+            <img src="src/images/home_fore.png" alt="" className={styles.home_pic}/>
+          </Col>
+        </Row>
       </div>
 		);
 	}

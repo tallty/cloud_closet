@@ -28,18 +28,18 @@ export class LogInForm extends Component {
         styles.login_input_header_label1,
         styles.login_input_header_label,
       )
-      let container_classnames2 = classnames(
-        styles.login_input_header_label2,
-        styles.login_input_header_label,
-      )
-      let container_classnames3 = classnames(
-        styles.login_input_header_label3,
-        styles.login_input_header_label31,
-      )
-      let container_classnames4 = classnames(
-        styles.login_input_header_label4,
-        styles.login_input_header_label,
-      )
+    let container_classnames2 = classnames(
+      styles.login_input_header_label2,
+      styles.login_input_header_label,
+    )
+    let container_classnames3 = classnames(
+      styles.login_input_header_label3,
+      styles.login_input_header_label31,
+    )
+    let container_classnames4 = classnames(
+      styles.login_input_header_label4,
+      styles.login_input_header_label,
+    )
     return (
       <div className={styles.login_body_content}>
         <InputGroup>
