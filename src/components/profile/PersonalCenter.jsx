@@ -18,22 +18,22 @@ export class PersonalCenter extends Component {
 			let dot = this.state.messages[index] ? <div className={css.dot}></div> : null
 			list.push(
 				index === 4 ?
-				<Col span={8} className={css.item} key={index}>
-					<Link to={this.props.gridLinks[index]}>
-						{dot}
-						<div className={css.ticket}>
-							6800<span className={css.ticket_icon}>￥</span>
-						</div>
-					</Link>
-					<div className={css.ticket_text}>{item}</div>
-				</Col> : 
-				<Col span={8} className={css.item} key={index}>
-					<Link to={this.props.gridLinks[index]}>
-						{dot}
-						<img src={`/src/images/profile_item${index}.png`} alt=""/>
+					<Col span={8} className={css.item} key={index}>
+						<Link to={this.props.gridLinks[index]}>
+							{dot}
+							<div className={css.ticket}>
+								6800<span className={css.ticket_icon}>￥</span>
+							</div>
+						</Link>
 						<div>{item}</div>
-					</Link>
-				</Col>
+					</Col> : 
+					<Col span={8} className={css.item} key={index}>
+						<Link to={this.props.gridLinks[index]}>
+							{dot}
+							<img src={`/src/images/profile_item${index}.png`} alt=""/>
+							<div>{item}</div>
+						</Link>
+					</Col>
 			)
 		})
 		return list

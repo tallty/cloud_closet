@@ -8,13 +8,10 @@ import classNames from 'classnames/bind'
 const cx = classNames.bind(css)
 
 export class Orders extends Component {
-	constructor(props) {
-		super(props)
-	}
 
-	orderList() {
+	// 订单列表
+	getOrders() {
     let list = []
-
 		this.props.orders.forEach((order, index, orders) => {
 			if (this.props.type == "all" || order.type === this.props.type) {
 				let headerColor = cx({
@@ -52,19 +49,23 @@ export class Orders extends Component {
 		return list
 	}
 
+	// 空列表样式
+	getOrdersNone() {
+		return (
+			<div className={css.orders_none}>
+				<img src="/src/images/orders_none.png" alt="无订单"/>
+				<p>您还没有相关的订单</p>
+			</div>
+		)
+	}
+	
 	render() {
 		let tab_height = document.body.clientHeight - 94
-		let orders = this.orderList()
+		let orders = this.getOrders()
 
 		return (
 			<div style={{height: tab_height, overflow: "auto"}}>
-				{ 
-					orders.length > 0 ? orders : 
-					<div className={css.orders_none}>
-						<img src="/src/images/orders_none.png" alt="无订单"/>
-						<p>您还没有相关的订单</p>
-					</div>
-				}
+				{ orders.length > 0 ? orders : this.getOrdersNone() }
 			</div>
 		)
 	}
