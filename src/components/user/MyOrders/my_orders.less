@@ -1,0 +1,116 @@
+.container {
+	height: 100%;
+	background-color: #ebebeb;
+}
+
+// 我的订单页面（MyOrders）
+.tab_bar {
+	margin-top: 1px;	
+	.spin_container {
+		text-align: center;
+		padding: 15px;
+	}
+}
+// 订单列表（orders）
+.orders {
+	background-color: #fff;
+	margin: 5px 0 10px;
+	.header {
+		height: 50px;
+		line-height: 50px;
+		padding: 0px 15px;
+		font-size: 14px;
+		.going {
+			color: #EC1C1C;
+		}
+		.complete {
+			color: #C9C9C9;
+		}
+		.time {
+			font-size: 12px;
+			color: #757575;
+			float: right;
+		}
+	}
+	.content {
+		border-top: 1px solid #ebebeb;
+		border-bottom: 1px solid #ebebeb;
+		padding: 5px 15px;
+		* {
+			color: #7f7f7f;
+		}
+	}
+	.footer {
+		color: #919191;
+		font-size: 10px;
+		line-height: 1.2;
+		padding: 11px 15px;
+		.info {
+			min-width: 192px;
+			display: inline-block;
+		}
+		.btns {
+			float: right;
+			.show_btn {
+				border-radius: 4px;
+				padding: 5px 10px;
+				color: #919191;
+				font-size: 12px;
+				font-weight: normal;
+				margin-right: 10px;
+				border-color: #919191;
+			}
+			.sure_btn {
+				border-radius: 4px;
+				padding: 5px 10px;
+				font-size: 12px;
+				font-weight: normal;
+			}
+		}
+	}
+}
+
+// 订单中的商品列表（Goods）
+.goods {
+	.goods_left {
+		text-align: center;
+		img {
+			height: 75px;
+			width: auto;
+			margin: 0 auto;
+		}
+	}
+	.goods_name {
+		height: 40px;
+		margin: 15px 10px 0;
+		line-height: 1.5;
+		font-size: 13px;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+	}
+	.price {
+		text-align: right;
+		font-size: 14px;
+		color: #757575;
+		span {
+			color: #FFA452;
+		}
+	}
+}
+
+// 空列表样式
+.orders_none {
+	text-align: center;
+	padding-top: 80px;
+	img {
+		width: 28%;
+		height: auto;
+	}
+	p {
+		color: #4A4A4A;
+		font-size: 14px;
+		padding-top: 20px;
+	}
+}
