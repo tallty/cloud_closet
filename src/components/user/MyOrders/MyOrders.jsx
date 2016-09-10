@@ -68,7 +68,7 @@ export class MyOrders extends Component {
 
 		return (
 			<div className={css.container}>
-				<Toolbar title="我的订单" url="/personal_center" />
+				<Toolbar title="我的订单" url="/user" />
 				<Tabs defaultActiveKey="1" className={css.tab_bar}>
 			    <TabPane tab="全部" key="1">
 						{ orders ? <Orders type="all" orders={orders} /> : <Spiner/> }

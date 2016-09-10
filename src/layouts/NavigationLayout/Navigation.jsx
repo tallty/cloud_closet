@@ -49,7 +49,7 @@ export default class Navigation extends React.Component {
                 </Col>
               </Col>
             </NavLink>
-            <NavLink to="/personal_center" >
+            <NavLink to="/user" >
               <Col span={6} className={styles.home_tab_btn}>
                 <Col span={24} className={styles.icon_col}>
                   <img src="src/images/my.svg" alt="" className={styles.home_icon}/>

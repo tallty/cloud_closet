@@ -3,7 +3,7 @@ import { Router, Route, IndexRoute, Link } from 'react-router'
 // 底部导航
 import Navigation from '../layouts/NavigationLayout/Navigation'
 import { Home } from '../components/home/Home'
-import { PersonalCenter } from '../components/profile/PersonalCenter'
+import { User } from '../components/user/User'
 import { MyCloset } from '../components/my_closet/MyCloset'
 import { Vip } from '../components/vip/Vip'
 // 收费详情
@@ -13,13 +13,13 @@ import { MyOrder } from '../components/my_order/MyOrder'
 import { Success } from '../components/my_order/Success'
 import { LogIn } from '../components/log_in/LogIn'
 // 个人中心
-import { Profile } from '../components/profile/Profile'
-import { FancClub } from '../components/profile/FancClub'
-import { MyOrders } from '../components/profile/MyOrders/MyOrders'
-import { Ticket } from '../components/profile/Ticket'
-import { Notification } from '../components/profile/Notification'
-import { Recharge } from '../components/profile/Recharge'
-import { WithdrawFund } from '../components/profile/WithdrawFund'
+import { Profile } from '../components/user/Profile'
+import { FancClub } from '../components/user/FancClub'
+import { MyOrders } from '../components/user/MyOrders/MyOrders'
+import { Ticket } from '../components/user/Ticket'
+import { Notification } from '../components/user/Notification'
+import { Recharge } from '../components/user/Recharge'
+import { WithdrawFund } from '../components/user/WithdrawFund'
 //搜索
 import { Search } from '../components/my_closet/search/Search'
 import { Manage } from '../components/my_closet/manage/Manage'
@@ -39,18 +39,18 @@ export class Routes extends Component {
           {/* 添加我的衣橱导航路由 */}
           <Route path="/MyCloset" component={MyCloset}/>
           {/* 添加个人中心导航路由 */}
-          <Route path="/personal_center" component={PersonalCenter}/>
+          <Route path="/user" component={User}/>
         </Route>
         {/* －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－ */}
       	{/* 收费详情 */}
 		    <Route path="/charge_detail" component={ChargeDetail} />
         {/* 个人中心相关 */}
-        <Route path="/profile" component={Profile} />
-        <Route path="/my_orders" component={MyOrders} />
-        <Route path="/tickets" component={Ticket} />
-        <Route path="/notifications" component={Notification} />
-        <Route path="/recharge" component={Recharge} />
-        <Route path="/withdraw_fund" component={WithdrawFund} />
+        <Route path="/user/profile" component={Profile} />
+        <Route path="/user/my_orders" component={MyOrders} />
+        <Route path="/user/tickets" component={Ticket} />
+        <Route path="/user/notifications" component={Notification} />
+        <Route path="/user/recharge" component={Recharge} />
+        <Route path="/user/withdraw_fund" component={WithdrawFund} />
         {/* 搜索 */}
         <Route path="/search" component={Search} />
         {/* 添加衣橱管理路由 */}

@@ -1,11 +1,11 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
-import css from './personal_center.less'
 import { Row, Col, Icon, Button, Progress } from 'antd'
 import { Level } from './share/Level'
 import { Link } from 'react-router'
+import css from './user.less'
 
-export class PersonalCenter extends Component {
+export class User extends Component {
 	state = {
 		level: 80,
 		level_name: "白金级别",
@@ -52,7 +52,7 @@ export class PersonalCenter extends Component {
     	<div className={css.personal_center} style={{height: container_height}}>
     		{/* 头像信息 */}
 				<div className={css.user_info} style={{height: info_height, minHeight: 194}}>
-					<Link to="/profile" className={css.link_profile} style={{paddingTop: user_info_top}}>
+					<Link to="/user/profile" className={css.link_profile} style={{paddingTop: user_info_top}}>
 						<img src="/src/images/photo.png" alt="头像"/>
 						<div className={css.user_name}>John Snow</div>
 						<Level level={this.state.level} level_name={this.state.level_name}/>
@@ -66,12 +66,12 @@ export class PersonalCenter extends Component {
 					</Row>
 					<Row>
 						<Col span={12} className={css.left_col}>
-							<Link to="/recharge">
+							<Link to="/user/recharge">
 								<Button type="primary" className={css.charge_btn}>充值</Button>
 							</Link>
 						</Col>
 						<Col span={12} className={css.right_col}>
-							<Link to="/withdraw_fund">
+							<Link to="/user/withdraw_fund">
 								<Button type="primary" className={css.charge_btn}>提现</Button>
 							</Link>
 						</Col>
@@ -85,12 +85,12 @@ export class PersonalCenter extends Component {
   }
 }
 
-PersonalCenter.defaultProps = {
+User.defaultProps = {
 	items: ["我的卡券", "我的订单", "系统通知", "VIP会员", "发票", "我的小蜜"],
-	gridLinks: ["/tickets", "/my_orders", "/notifications", "/vip", "/#", "/#"]
+	gridLinks: ["/user/tickets", "/user/my_orders", "/user/notifications", "/vip", "/#", "/#"]
 }
 
-PersonalCenter.propTypes = {
+User.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.string),
 	gridLinks: PropTypes.arrayOf(PropTypes.string)
 }

@@ -1,98 +1,96 @@
-// 我的订单
-import React, { Component, PropTypes } from 'react'
+// 我的订单 - 订单列表
+import React, { Component, PropTypes } from 'react' 
+import { Goods } from './Goods'
+import { Row, Col, Button } from 'antd'
 import css from './my_orders.less'
-import { Toolbar } from '../../common/Toolbar'
-import { Spiner } from '../../common/Spiner'
-import { Tabs } from 'antd'
-import { Orders } from './Orders'
-import SuperAgent from 'superagent'
+import classNames from 'classnames/bind'
 
-const TabPane = Tabs.TabPane
+const cx = classNames.bind(css)
 
-export class MyOrders extends Component {
-	state = {
-		orders: null
-	}
+export class Orders extends Component {
 
-	componentDidMount() {
-		// 模拟数据 Data
-		let orders = [
-			{
-				type: "pay",
-				time: "2016-5-28",
-				transmit_time: "2016-5-28 12:00～13:00",
-				spent_time: "3天",
-				goods: [
-					{
-						image: "/src/images/goods_example.png",
-						name: "DOLCE&GABBANA  印花包臀短裙",
-						link: "/"
-					}
-				]
-			},
-			{
-				type: "complete",
-				time: "2016-5-28",
-				transmit_time: "2016-5-28 12:00～13:00",
-				spent_time: "3天",
-				goods: [
-					{
-						image: "/src/images/goods_example.png",
-						name: "DOLCE&GABBANA  印花包臀短裙",
-						link: "/"
-					}
-				]
-			},
-			{
-				type: "receive",
-				time: "2016-5-28",
-				transmit_time: "2016-5-28 12:00～13:00",
-				spent_time: "3天",
-				goods: [
-					{
-						image: "/src/images/goods_example.png",
-						name: "DOLCE&GABBANA  印花包臀短裙",
-						link: "/"
-					}
-				]
+	// 订单列表
+	getOrders() {
+    let list = []
+		this.props.orders.forEach((order, index, orders) => {
+			if (this.props.type == "all" || order.type === this.props.type) {
+				let headerColor = cx({
+		      'going': order.type != "complete",
+		      'complete': order.type === "complete"
+		    })
+				list.push(
+					<div className={css.orders} key={index}>
+						<div className={css.header}>
+							<span className={headerColor}>{ order.type === "complete" ? "交易成功" : "交易进行中" }</span>
+							<span className={css.time}>{ order.time }</span>
+						</div>
+						<div className={css.content}>
+							<Goods goods={ order.goods } />
+						</div>
+						<div className={css.footer}>
+							<Row>
+								<Col span={24}>
+									<div className={css.info}>
+										<span>配送时间：{ order.transmit_time }</span>
+										<p>使用时间：{ order.spent_time }</p>
+									</div>
+									{/*判断是否显示*/}
+									<div className={css.btns}>
+										<Button type="ghost" className={css.show_btn}>查看物流</Button>
+										<Button type="primary" className={css.sure_btn}>确认收货</Button>
+									</div>
+								</Col>
+							</Row>
+						</div>
+					</div>
+				)
 			}
-		]
-		
-		this.setState({
-			orders: orders
 		})
+		return list
 	}
 
+	// 空列表样式
+	getOrdersNone() {
+		return (
+			<div className={css.orders_none}>
+				<img src="/src/images/orders_none.png" alt="无订单"/>
+				<p>您还没有相关的订单</p>
+			</div>
+		)
+	}
+	
 	render() {
-		let orders = this.state.orders
+		let tab_height = document.body.clientHeight - 94
+		let orders = this.getOrders()
 
 		return (
-			<div className={css.container}>
-				<Toolbar title="我的订单" url="/personal_center" />
-				<Tabs defaultActiveKey="1" className={css.tab_bar}>
-			    <TabPane tab="全部" key="1">
-						{ orders ? <Orders type="all" orders={orders} /> : <Spiner/> }
-			    </TabPane>
-			    <TabPane tab="待付款" key="2">
-						{ orders ? <Orders type="pay" orders={orders} /> : <Spiner/> }
-			    </TabPane>
-			    <TabPane tab="待发货" key="3">
-						{ orders ? <Orders type="transmit" orders={orders} /> : <Spiner/> }
-			    </TabPane>
-			    <TabPane tab="待收货" key="4">
-						{ orders ? <Orders type="receive" orders={orders} /> : <Spiner/> }
-			    </TabPane>
-			  </Tabs>
+			<div style={{height: tab_height, overflow: "auto"}}>
+				{ orders.length > 0 ? orders : this.getOrdersNone() }
 			</div>
-
 		)
 	}
 }
 
-MyOrders.defaultProps = {
-
+Orders.defaultProps = {
+	type: "all",
+	orders: []
 }
 
-MyOrders.propTypes = {
-
+Orders.propTypes = {
+	all: PropTypes.string,
+	orders: PropTypes.arrayOf(
+		PropTypes.shape({
+			type: PropTypes.string,
+			time: PropTypes.string,
+			transmit_time: PropTypes.string,
+			spent_time: PropTypes.string,
+			goods: PropTypes.arrayOf(
+				PropTypes.shape({
+					image: PropTypes.string,
+					name: PropTypes.string,
+					link: PropTypes.string
+				})
+			)
+		})
+	)
 }
