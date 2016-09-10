@@ -1,22 +1,22 @@
 // 我的订单
 import React, { Component, PropTypes } from 'react'
-import css from './my_orders.less'
+import css from './orders.less'
 import { Toolbar } from '../../common/Toolbar'
 import { Spiner } from '../../common/Spiner'
 import { Tabs } from 'antd'
-import { Orders } from './Orders'
+import { OrderItems } from './OrderItems'
 import SuperAgent from 'superagent'
 
 const TabPane = Tabs.TabPane
 
-export class MyOrders extends Component {
+export class Orders extends Component {
 	state = {
-		orders: null
+		items: null
 	}
 
 	componentDidMount() {
 		// 模拟数据 Data
-		let orders = [
+		let items = [
 			{
 				type: "pay",
 				time: "2016-5-28",
@@ -59,28 +59,28 @@ export class MyOrders extends Component {
 		]
 		
 		this.setState({
-			orders: orders
+			items: items
 		})
 	}
 
 	render() {
-		let orders = this.state.orders
+		let items = this.state.items
 
 		return (
 			<div className={css.container}>
 				<Toolbar title="我的订单" url="/user" />
 				<Tabs defaultActiveKey="1" className={css.tab_bar}>
 			    <TabPane tab="全部" key="1">
-						{ orders ? <Orders type="all" orders={orders} /> : <Spiner/> }
+						{ items ? <OrderItems type="all" items={items} /> : <Spiner/> }
 			    </TabPane>
 			    <TabPane tab="待付款" key="2">
-						{ orders ? <Orders type="pay" orders={orders} /> : <Spiner/> }
+						{ items ? <OrderItems type="pay" items={items} /> : <Spiner/> }
 			    </TabPane>
 			    <TabPane tab="待发货" key="3">
-						{ orders ? <Orders type="transmit" orders={orders} /> : <Spiner/> }
+						{ items ? <OrderItems type="transmit" items={items} /> : <Spiner/> }
 			    </TabPane>
 			    <TabPane tab="待收货" key="4">
-						{ orders ? <Orders type="receive" orders={orders} /> : <Spiner/> }
+						{ items ? <OrderItems type="receive" items={items} /> : <Spiner/> }
 			    </TabPane>
 			  </Tabs>
 			</div>
@@ -89,10 +89,10 @@ export class MyOrders extends Component {
 	}
 }
 
-MyOrders.defaultProps = {
+Orders.defaultProps = {
 
 }
 
-MyOrders.propTypes = {
+Orders.propTypes = {
 
 }

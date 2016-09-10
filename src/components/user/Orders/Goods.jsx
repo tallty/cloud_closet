@@ -1,6 +1,6 @@
 // 我的订单 - 商品列表
 import React, { Component, PropTypes } from 'react'
-import css from './my_orders.less'
+import css from './orders.less'
 import { Row, Col } from 'antd'
 
 export class Goods extends Component {

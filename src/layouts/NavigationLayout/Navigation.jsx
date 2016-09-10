@@ -22,7 +22,7 @@ export default class Navigation extends React.Component {
             <NavLink to="/" onlyActiveOnIndex={true}>
               <Col span={6} className={styles.home_tab_btn}>
                 <Col span={24} className={styles.icon_col}>
-                  <img src="src/images/home.svg" alt="" className={styles.home_icon}/>
+                  <img src="/src/images/home.svg" alt="" className={styles.home_icon}/>
                 </Col>
                 <Col span={24}>
                   主页
@@ -32,7 +32,7 @@ export default class Navigation extends React.Component {
             <NavLink to="/vip" >
               <Col span={6} className={styles.home_tab_btn}>
                 <Col span={24} className={styles.icon_col}>
-                  <img src="src/images/fc.svg" alt="" className={styles.home_icon}/>
+                  <img src="/src/images/fc.svg" alt="" className={styles.home_icon}/>
                 </Col>
                 <Col span={24}>
                   Fanc Club
@@ -42,17 +42,17 @@ export default class Navigation extends React.Component {
             <NavLink to="/MyCloset" >
               <Col span={6} className={styles.home_tab_btn}>
                 <Col span={24} className={styles.icon_col}>
-                  <img src="src/images/closet.svg" alt="" className={styles.home_icon}/>
+                  <img src="/src/images/closet.svg" alt="" className={styles.home_icon}/>
                 </Col>
                 <Col span={24}>
                   我的衣橱
                 </Col>
               </Col>
             </NavLink>
-            <NavLink to="/user" >
+            <NavLink to="user" >
               <Col span={6} className={styles.home_tab_btn}>
                 <Col span={24} className={styles.icon_col}>
-                  <img src="src/images/my.svg" alt="" className={styles.home_icon}/>
+                  <img src="/src/images/my.svg" alt="" className={styles.home_icon}/>
                 </Col>
                 <Col span={24}>
                   个人中心

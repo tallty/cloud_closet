@@ -9,29 +9,37 @@ export class User extends Component {
 	state = {
 		level: 80,
 		level_name: "白金级别",
-		messages: [false, true, false, false, false, false]
+		grids: [
+			{ name: "我的卡券", message: false, url: "/tickets" },
+			{ name: "我的订单", message: true, url: "/orders" },
+			{ name: "系统通知", message: false, url: "/notifications" },
+			{ name: "VIP会员", message: false, url: "/vip" },
+			{ name: "发票", message: false, url: "/" },
+			{ name: "我的小蜜", message: false, url: "/" }
+		]
 	}
 
 	getGrid() {
 		let list = []
-		this.props.items.forEach((item, index, items) => {
-			let dot = this.state.messages[index] ? <div className={css.dot}></div> : null
+
+		this.state.grids.forEach((grid, index, obj) => {
+			let dot = grid.message ? <div className={css.dot}></div> : null
 			list.push(
 				index === 4 ?
 					<Col span={8} className={css.item} key={index}>
-						<Link to={this.props.gridLinks[index]}>
+						<Link to={grid.url}>
 							{dot}
 							<div className={css.ticket}>
 								6800<span className={css.ticket_icon}>￥</span>
 							</div>
 						</Link>
-						<div>{item}</div>
+						<div>{grid.name}</div>
 					</Col> : 
 					<Col span={8} className={css.item} key={index}>
-						<Link to={this.props.gridLinks[index]}>
+						<Link to={grid.url}>
 							{dot}
 							<img src={`/src/images/profile_item${index}.png`} alt=""/>
-							<div>{item}</div>
+							<div>{grid.name}</div>
 						</Link>
 					</Col>
 			)
@@ -86,11 +94,9 @@ export class User extends Component {
 }
 
 User.defaultProps = {
-	items: ["我的卡券", "我的订单", "系统通知", "VIP会员", "发票", "我的小蜜"],
-	gridLinks: ["/user/tickets", "/user/my_orders", "/user/notifications", "/vip", "/#", "/#"]
+
 }
 
 User.propTypes = {
-	items: PropTypes.arrayOf(PropTypes.string),
-	gridLinks: PropTypes.arrayOf(PropTypes.string)
+
 }

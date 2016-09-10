@@ -15,7 +15,7 @@ import { LogIn } from '../components/log_in/LogIn'
 // 个人中心
 import { Profile } from '../components/user/Profile'
 import { FancClub } from '../components/user/FancClub'
-import { MyOrders } from '../components/user/MyOrders/MyOrders'
+import { Orders } from '../components/user/Orders/Orders'
 import { Ticket } from '../components/user/Ticket'
 import { Notification } from '../components/user/Notification'
 import { Recharge } from '../components/user/Recharge'
@@ -35,22 +35,22 @@ export class Routes extends Component {
           {/* 云衣橱品牌主页 */}
           <IndexRoute component={Home}/>
           {/* 添加Fanc_Club导航路由 */}
-          <Route path="/vip" component={FancClub}/>
+          <Route path="vip" component={FancClub}/>
           {/* 添加我的衣橱导航路由 */}
-          <Route path="/MyCloset" component={MyCloset}/>
+          <Route path="MyCloset" component={MyCloset}/>
           {/* 添加个人中心导航路由 */}
-          <Route path="/user" component={User}/>
+          <Route path="user" component={User}/>
         </Route>
         {/* －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－ */}
       	{/* 收费详情 */}
 		    <Route path="/charge_detail" component={ChargeDetail} />
         {/* 个人中心相关 */}
-        <Route path="/user/profile" component={Profile} />
-        <Route path="/user/my_orders" component={MyOrders} />
-        <Route path="/user/tickets" component={Ticket} />
-        <Route path="/user/notifications" component={Notification} />
-        <Route path="/user/recharge" component={Recharge} />
-        <Route path="/user/withdraw_fund" component={WithdrawFund} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/orders" component={Orders} />
+        <Route path="/tickets" component={Ticket} />
+        <Route path="/notifications" component={Notification} />
+        <Route path="/recharge" component={Recharge} />
+        <Route path="/withdraw_fund" component={WithdrawFund} />
         {/* 搜索 */}
         <Route path="/search" component={Search} />
         {/* 添加衣橱管理路由 */}

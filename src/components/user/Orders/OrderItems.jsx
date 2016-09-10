@@ -2,37 +2,37 @@
 import React, { Component, PropTypes } from 'react' 
 import { Goods } from './Goods'
 import { Row, Col, Button } from 'antd'
-import css from './my_orders.less'
+import css from './orders.less'
 import classNames from 'classnames/bind'
 
 const cx = classNames.bind(css)
 
-export class Orders extends Component {
+export class OrderItems extends Component {
 
 	// 订单列表
-	getOrders() {
+	getItems() {
     let list = []
-		this.props.orders.forEach((order, index, orders) => {
-			if (this.props.type == "all" || order.type === this.props.type) {
+		this.props.items.forEach((item, index, items) => {
+			if (this.props.type == "all" || item.type === this.props.type) {
 				let headerColor = cx({
-		      'going': order.type != "complete",
-		      'complete': order.type === "complete"
+		      'going': item.type != "complete",
+		      'complete': item.type === "complete"
 		    })
 				list.push(
 					<div className={css.orders} key={index}>
 						<div className={css.header}>
-							<span className={headerColor}>{ order.type === "complete" ? "交易成功" : "交易进行中" }</span>
-							<span className={css.time}>{ order.time }</span>
+							<span className={headerColor}>{ item.type === "complete" ? "交易成功" : "交易进行中" }</span>
+							<span className={css.time}>{ item.time }</span>
 						</div>
 						<div className={css.content}>
-							<Goods goods={ order.goods } />
+							<Goods goods={ item.goods } />
 						</div>
 						<div className={css.footer}>
 							<Row>
 								<Col span={24}>
 									<div className={css.info}>
-										<span>配送时间：{ order.transmit_time }</span>
-										<p>使用时间：{ order.spent_time }</p>
+										<span>配送时间：{ item.transmit_time }</span>
+										<p>使用时间：{ item.spent_time }</p>
 									</div>
 									{/*判断是否显示*/}
 									<div className={css.btns}>
@@ -50,7 +50,7 @@ export class Orders extends Component {
 	}
 
 	// 空列表样式
-	getOrdersNone() {
+	getItemsNone() {
 		return (
 			<div className={css.orders_none}>
 				<img src="/src/images/orders_none.png" alt="无订单"/>
@@ -61,24 +61,24 @@ export class Orders extends Component {
 	
 	render() {
 		let tab_height = document.body.clientHeight - 94
-		let orders = this.getOrders()
+		let items = this.getItems()
 
 		return (
 			<div style={{height: tab_height, overflow: "auto"}}>
-				{ orders.length > 0 ? orders : this.getOrdersNone() }
+				{ items.length > 0 ? items : this.getItemsNone() }
 			</div>
 		)
 	}
 }
 
-Orders.defaultProps = {
+OrderItems.defaultProps = {
 	type: "all",
-	orders: []
+	items: []
 }
 
-Orders.propTypes = {
+OrderItems.propTypes = {
 	all: PropTypes.string,
-	orders: PropTypes.arrayOf(
+	items: PropTypes.arrayOf(
 		PropTypes.shape({
 			type: PropTypes.string,
 			time: PropTypes.string,
