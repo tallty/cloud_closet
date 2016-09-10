@@ -16,10 +16,35 @@ export class MyOrders extends Component {
 
 	componentDidMount() {
 		// 模拟数据 Data
-		let orders = []
-		for(let item of ["pay","complete","transmit","receive"]) {
-			let order = {
-				type: item,
+		let orders = [
+			{
+				type: "pay",
+				time: "2016-5-28",
+				transmit_time: "2016-5-28 12:00～13:00",
+				spent_time: "3天",
+				goods: [
+					{
+						image: "/src/images/goods_example.png",
+						name: "DOLCE&GABBANA  印花包臀短裙",
+						link: "/"
+					}
+				]
+			},
+			{
+				type: "complete",
+				time: "2016-5-28",
+				transmit_time: "2016-5-28 12:00～13:00",
+				spent_time: "3天",
+				goods: [
+					{
+						image: "/src/images/goods_example.png",
+						name: "DOLCE&GABBANA  印花包臀短裙",
+						link: "/"
+					}
+				]
+			},
+			{
+				type: "receive",
 				time: "2016-5-28",
 				transmit_time: "2016-5-28 12:00～13:00",
 				spent_time: "3天",
@@ -31,9 +56,8 @@ export class MyOrders extends Component {
 					}
 				]
 			}
-			orders.push(order)
-		}
-
+		]
+		
 		this.setState({
 			orders: orders
 		})

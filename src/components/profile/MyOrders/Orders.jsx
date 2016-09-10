@@ -54,8 +54,18 @@ export class Orders extends Component {
 
 	render() {
 		let tab_height = document.body.clientHeight - 94
+		let orders = this.orderList()
+
 		return (
-			<div style={{height: tab_height, overflow: "auto"}}>{ this.orderList() }</div>
+			<div style={{height: tab_height, overflow: "auto"}}>
+				{ 
+					orders.length > 0 ? orders : 
+					<div className={css.orders_none}>
+						<img src="/src/images/orders_none.png" alt="无订单"/>
+						<p>您还没有相关的订单</p>
+					</div>
+				}
+			</div>
 		)
 	}
 }
