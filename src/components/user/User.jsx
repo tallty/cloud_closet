@@ -60,7 +60,7 @@ export class User extends Component {
     	<div className={css.personal_center} style={{height: container_height}}>
     		{/* 头像信息 */}
 				<div className={css.user_info} style={{height: info_height, minHeight: 194}}>
-					<Link to="/user/profile" className={css.link_profile} style={{paddingTop: user_info_top}}>
+					<Link to="/profile" className={css.link_profile} style={{paddingTop: user_info_top}}>
 						<img src="/src/images/photo.png" alt="头像"/>
 						<div className={css.user_name}>John Snow</div>
 						<Level level={this.state.level} level_name={this.state.level_name}/>
@@ -74,12 +74,12 @@ export class User extends Component {
 					</Row>
 					<Row>
 						<Col span={12} className={css.left_col}>
-							<Link to="/user/recharge">
+							<Link to="/recharge">
 								<Button type="primary" className={css.charge_btn}>充值</Button>
 							</Link>
 						</Col>
 						<Col span={12} className={css.right_col}>
-							<Link to="/user/withdraw_fund">
+							<Link to="/withdraw">
 								<Button type="primary" className={css.charge_btn}>提现</Button>
 							</Link>
 						</Col>

@@ -13,13 +13,13 @@ import { MyOrder } from '../components/my_order/MyOrder'
 import { Success } from '../components/my_order/Success'
 import { LogIn } from '../components/log_in/LogIn'
 // 个人中心
-import { Profile } from '../components/user/Profile'
+import { Profile } from '../components/user/Profile/Profile'
 import { FancClub } from '../components/user/FancClub'
 import { Orders } from '../components/user/Orders/Orders'
 import { Ticket } from '../components/user/Ticket'
 import { Notification } from '../components/user/Notification'
 import { Recharge } from '../components/user/Recharge'
-import { WithdrawFund } from '../components/user/WithdrawFund'
+import { Withdraw } from '../components/user/Withdraw'
 //搜索
 import { Search } from '../components/my_closet/search/Search'
 import { Manage } from '../components/my_closet/manage/Manage'
@@ -50,7 +50,7 @@ export class Routes extends Component {
         <Route path="/tickets" component={Ticket} />
         <Route path="/notifications" component={Notification} />
         <Route path="/recharge" component={Recharge} />
-        <Route path="/withdraw_fund" component={WithdrawFund} />
+        <Route path="/withdraw" component={Withdraw} />
         {/* 搜索 */}
         <Route path="/search" component={Search} />
         {/* 添加衣橱管理路由 */}
@@ -63,7 +63,7 @@ export class Routes extends Component {
         <Route path="/login" component={LogIn}/>
         {/* 添加地址路由 */}
         <Route path="/address" component={Address}/>
-      {/* 添加新增地址路由 */}
+        {/* 添加新增地址路由 */}
         <Route path="/add_address" component={AddAddress}/>
 		  </Router>
 		)
