@@ -4,9 +4,19 @@
 import React, { Component, PropTypes } from 'react'
 import css from './recharge.less'
 import { Link } from 'react-router'
+import { Form, InputNumber } from 'antd'
+
+const FormItem = Form.Item
 
 export class Recharge extends Component {
+
+	handleSubmit(e) {
+		e.preventDefault();
+    console.log('收到表单值：', this.props.form.getFieldsValue());
+	}
+
 	render() {
+		const { getFieldProps } = this.props.form
 		return (
 			<div className={css.container}>
 				<div className={css.item}>
@@ -19,7 +29,11 @@ export class Recharge extends Component {
 				<div className={css.item}>
 					<div className={css.label}>金额(元)</div>
 					<div className={css.item_right}>
-						<input type="number" placeholder="请输入金额" ref="myAmountInput"/>
+						<Form inline nSubmit={this.handleSubmit}>
+							<FormItem>
+								<InputNumber placeholder="请输入金额" className={css.input}/>
+							</FormItem>
+						</Form>
 					</div>
 				</div>
 				<Link to="/profile" className={css.next}>下一步</Link>

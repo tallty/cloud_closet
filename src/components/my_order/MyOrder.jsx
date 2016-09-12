@@ -32,10 +32,14 @@ export class MyOrder extends Component {
               <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
             </Col>
             <Col span={22}>
-              <FormItem id="control-input1"><Input id="control-input1" placeholder="上门服务" /></FormItem>
+              <FormItem id="control-input1">
+                <Input id="control-input1" placeholder="上门服务" />
+              </FormItem>
             </Col>
             <Col span={22} offset={2}>
-              <FormItem id="control-input2"><Input id="control-input2" placeholder="输入您的所在楼层或门牌号码" className={styles.address_input}/></FormItem>
+              <FormItem id="control-input2">
+                <Input id="control-input2" placeholder="输入您的所在楼层或门牌号码" className={styles.address_input}/>
+              </FormItem>
             </Col>
             <Col span={24} className={styles.line_two}>
               <FormItem className={styles.clo_number_radio}>
