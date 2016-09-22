@@ -29,7 +29,11 @@ export class Manage extends Component {
         <Row className={styles.tab_footer}>
           <Col span={4}>2件</Col>
           <Col span={6} offset={8}><Button type="primary" className={styles.story_btn}>续存</Button></Col>
-          <Col span={6} ><Button type="primary" className={styles.distribution_btn}>加入配送</Button></Col>
+          <Col span={6} >
+            <NavLink to="/dispatching">
+              <Button type="primary" className={styles.distribution_btn}>加入配送</Button>
+            </NavLink>
+          </Col>
         </Row>
       </div>
     );

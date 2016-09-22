@@ -1,0 +1,123 @@
+.Dispatching_content {
+  padding-bottom: 80px;
+  color: #919191;
+  .Dispatching_content_header {
+    padding-top: 5px;
+    a {
+      font-size: 22px;
+      color: #FF9241;
+      font-weight: 900;
+    }
+  }
+  .tab_cell {
+    border-bottom: 1px dashed #D1C8C0;
+    margin: 0 21px;
+    padding: 12px 0;
+    .tab_title {
+      padding: 4px 0;
+      .location_icon_content {
+        padding-top: 2px;
+      }
+      .people_name {
+        padding-left: 15px;
+      }
+      .add_name {
+        font-size: 14px;
+      }
+      .location_icon, .edit_icon, .delete_icon {
+        margin-right: 3px;
+      }
+      .location_icon {
+        width: 12px;
+        height: 15px;
+      }
+      .edit_icon {
+        width: 12px;
+        height: 12px;
+      }
+      .delete_icon {
+        width: 12px;
+        height: 12px;
+      }
+      .address {
+        text-align: right;
+        color: red;
+      }
+    }
+    .time_btn {
+      text-align: center;
+      padding-top: 12px;
+    }
+    .pay_one {
+      text-align: right;
+    }
+    .pay_two {
+      text-align: left;
+      font-size: 19px;
+      label {
+        font-size: 19px;
+        color: #FF9241;
+      }
+    }
+    .icon_down {
+      padding-top: 3px;
+    }
+    input {
+      width: 100%;
+      text-align: right;
+    }
+  }
+  .dispatching_btn_div {
+    z-index: 8;
+    width: 100%;
+    position: fixed;
+    bottom: 25px;
+    left: 0;
+    .dispatching_btn_col {
+      text-align: center;
+      .dispatching_btn {
+        font-size: 18px;
+        color: #fff;
+        padding: 6px 90px;
+        background-color: #FF9241;
+        border-radius: 22px;
+      }
+    }
+  }
+  .dispatch_footer_modal {
+    z-index: 10;
+  }
+
+  .picker_modal {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    width: 100%;
+    background-color: #efeff4;
+    transform: translate(0, 100%);
+    backface-visibility: hidden;
+    transition: transform .3s;
+    &.picker_modal_toggle {
+      transform: translate(0, 0);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 40px;
+      padding: 0 15px;
+      background-color: #fbf9fe;
+      .title {
+        flex: 1 1;
+        color: #888;
+      }
+      a {
+        text-decoration: none;
+        color: #0F72E7;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+    }
+  }
+}

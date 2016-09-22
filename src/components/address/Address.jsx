@@ -22,9 +22,14 @@ export class Address extends Component {
           <Col span={20}  className={styles.tab_title}>管理收货地址</Col>
         </Row>
         <div className={styles.list_tab_body} style={{height: tab_height, overflow: "auto"}}>
+          <AddAddress />
         </div>
         <Row className={styles.tab_footer}>
-          <Col span={24}><Button type="primary" className={styles.add_address_btn}>添加新地址</Button></Col>
+          <Col span={24}>
+            <NavLink to="/address/new" style={{color:'#fff'}}>
+              <Button type="primary" className={styles.add_address_btn}>添加新地址</Button>
+            </NavLink>
+          </Col>
         </Row>
       </div>
     );

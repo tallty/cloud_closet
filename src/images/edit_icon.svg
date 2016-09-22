@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="22px" height="26px" viewBox="0 0 22 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 6</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="管理地址" transform="translate(-48.000000, -579.000000)">
+            <g id="Group-4" transform="translate(-1.000000, 128.000000)">
+                <g id="表单">
+                    <g id="件数按钮" transform="translate(50.000000, 251.000000)">
+                        <g id="Group-2">
+                            <g id="Group-6" transform="translate(0.000000, 200.000000)">
+                                <path d="M20,8.99706188 L20,19.0029381 C20,22.3150239 17.3234637,25 13.9993405,25 L6.00065947,25 C2.68658675,25 0,22.3133742 0,19.0029381 L0,8.99706188 L0,8.99706188 C0,5.68497606 2.67653633,3 6.00065947,3 L13.9993405,3" id="Rectangle-454" stroke="#FF9241" stroke-width="2" stroke-linecap="round"></path>
+                                <rect id="Rectangle-454" fill="#FF9241" transform="translate(16.031524, 7.714353) rotate(-330.000000) translate(-16.031524, -7.714353) " x="14.8790977" y="-0.352634199" width="2.30485351" height="16.1339746" rx="1.15242676"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

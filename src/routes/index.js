@@ -23,9 +23,12 @@ import { Withdraw } from '../components/user/Withdraw'
 //搜索
 import { Search } from '../components/my_closet/search/Search'
 import { Manage } from '../components/my_closet/manage/Manage'
+import { ClosetDetails } from '../components/my_closet/closet_tab/closet_details/ClosetDetails'
 //地址
 import { Address } from '../components/address/Address'
-import { AddAddress } from '../components/address/add_address/AddAddress'
+import { NewAddress } from '../components/address/new_address/NewAddress'
+//配送
+import { Dispatching } from '../components/dispatching/Dispatching'
 
 export class Routes extends Component {
 	render() {
@@ -53,6 +56,8 @@ export class Routes extends Component {
         <Route path="/withdraw" component={Withdraw} />
         {/* 搜索 */}
         <Route path="/search" component={Search} />
+        {/* 添加衣橱详情页 */}
+        <Route path="/closet_details" component={ClosetDetails} />
         {/* 添加衣橱管理路由 */}
         <Route path="/manage" component={Manage} />
         {/* 添加衣橱预约路由 */}
@@ -65,6 +70,13 @@ export class Routes extends Component {
         <Route path="/address" component={Address}/>
         {/* 添加新增地址路由 */}
         <Route path="/add_address" component={AddAddress}/>
+
+        <Route path="/address/new" component={NewAddress}/>
+        {/* 添加配送路由 */}
+        <Route path="/dispatching" component={Dispatching}/>
+        {/* 添加续存路由 */}
+        <Route path="/dispatching" component={Dispatching}/>
+
 		  </Router>
 		)
 	}

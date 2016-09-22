@@ -16,8 +16,8 @@
     "rc-tween-one": "^0.8.5",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
+    "react-mobile-picker": "^0.1.10",
     "react-router": "^2.0.1",
-    "react-weui": "^0.4.0",
     "src": "^1.1.2",
     "superagent": "^2.2.0"
   },
@@ -36,7 +36,7 @@
     "eslint-plugin-react": "4.x",
     "expect": "^1.20.1",
     "glob": "^7.0.3",
-    "pre-commit": "1.x"
+    // "pre-commit": "1.x"
   },
   "pre-commit": [
     "lint"
