@@ -53,32 +53,34 @@ export class Dispatching extends Component {
     return (
       <div className={styles.Dispatching_content}>
         <Row className={styles.Dispatching_content_header}>
-          <Col span={2} offset={22}>
-            <NavLink to="/MyCloset"><Icon type="cross" className={styles.cross_icon} /></NavLink>
+          <Col className={styles.cross_icon_col} span={2} offset={22}>
+            <NavLink to="/manage"><Icon type="cross" className={styles.cross_icon} /></NavLink>
           </Col>
         </Row>
         <Row className={styles.tab_cell}>
-          <Col span={24}  className={styles.tab_title}>
-            <Col span={1} className={styles.location_icon_content}>
-              <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
+          <NavLink to="/address">
+            <Col span={24}  className={styles.tab_title}>
+              <Col span={1} className={styles.location_icon_content}>
+                <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
+              </Col>
+              <Col span={23} className={styles.add_name}>
+                黄浦区济南路260弄翠湖天地隽荟12栋6
+              </Col>
             </Col>
-            <Col span={23} className={styles.add_name}>
-              黄浦区济南路260弄翠湖天地隽荟12栋6
+            <Col span={24}  className={styles.tab_title}>
+              <Col span={10} className={styles.people_name}>
+                XXX收
+              </Col>
+              <Col span={14}>
+                电话：18743353579
+              </Col>
             </Col>
-          </Col>
-          <Col span={24}  className={styles.tab_title}>
-            <Col span={10} className={styles.people_name}>
-              XXX收
+            <Col span={24}  className={styles.tab_title}>
+              <Col span={5} offset={19} className={styles.address}>
+                默认地址
+              </Col>
             </Col>
-            <Col span={14}>
-              电话：18743353579
-            </Col>
-          </Col>
-          <Col span={24}  className={styles.tab_title}>
-            <Col span={5} offset={19} className={styles.address}>
-              默认地址
-            </Col>
-          </Col>
+          </NavLink>
         </Row>
         <Row className={styles.tab_cell}>
           <DispatchingCard />

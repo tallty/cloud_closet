@@ -41,7 +41,7 @@ export class NewAddress extends Component {
   }
 
   render() {
-    let tab_height = document.body.clientHeight-80;
+    let tab_height = document.body.clientHeight;
     const {isPickerShow, optionGroups, valueGroups} = this.state;
     const maskStyle = {
       display: isPickerShow ? 'block' : 'none'
@@ -51,12 +51,12 @@ export class NewAddress extends Component {
       isPickerShow ? styles.picker_modal_toggle : ''
     );
     return (
-      <div className={styles.NewAddress_content}>
+      <div className={styles.NewAddress_content} style={{height: tab_height}}>
         <Row className={styles.new_address_header}>
           <Col span={2} ><NavLink to="/address" style={{color:'#fff'}}><Icon type="left" /></NavLink></Col>
           <Col span={16} offset={2}  className={styles.tab_title}>编辑地址</Col>
           <Col span={4}  className={styles.tab_save}>
-            <NavLink to="/address/new" style={{color:'#fff'}}>
+            <NavLink to="/address" style={{color:'#fff'}}>
               <Button type="primary" className={styles.add_new_address_btn}>保存</Button>
             </NavLink>
           </Col>
@@ -96,7 +96,7 @@ export class NewAddress extends Component {
         </Row>
         <Row className={styles.new_address_footer}>
           <Col span={24}>
-            <NavLink to="/address/new" style={{color:'#fff'}}>
+            <NavLink to="/address" style={{color:'#fff'}}>
               <Button type="primary" className={styles.delete_new_address_btn}>取消</Button>
             </NavLink>
           </Col>

@@ -115,9 +115,11 @@ export class ClosetDetails extends Component {
         </div>
         {/* 加入配送按钮 */}
         <Row>
-          <Col span={24} className={styles.dispatching_btn} >
-            <Button type="primary" >加入配送</Button>
-          </Col>
+          <NavLink to="/dispatching">
+            <Col span={24} className={styles.dispatching_btn} >
+              <Button type="primary" >加入配送</Button>
+            </Col>
+          </NavLink>
         </Row>
       </div>
     );

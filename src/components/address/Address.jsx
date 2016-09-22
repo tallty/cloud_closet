@@ -18,7 +18,7 @@ export class Address extends Component {
     return (
       <div className={styles.Address_content}>
         <Row className={styles.tab_header}>
-          <Col span={2} ><NavLink to="/MyCloset" style={{color:'#fff'}}><Icon type="left" /></NavLink></Col>
+          <Col span={2} ><NavLink to="/dispatching" style={{color:'#fff'}}><Icon type="left" /></NavLink></Col>
           <Col span={20}  className={styles.tab_title}>管理收货地址</Col>
         </Row>
         <div className={styles.list_tab_body} style={{height: tab_height, overflow: "auto"}}>
