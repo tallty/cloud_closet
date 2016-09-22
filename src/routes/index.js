@@ -9,8 +9,8 @@ import { Vip } from '../components/vip/Vip'
 // 收费详情
 import { ChargeDetail } from '../components/ChargeDetail/ChargeDetail'
 // 我的衣橱
-import { MyOrder } from '../components/my_order/MyOrder'
-import { Success } from '../components/my_order/Success'
+import { Appointment } from '../components/appointment/Appointment'
+import { Success } from '../components/appointment/Success'
 import { LogIn } from '../components/log_in/LogIn'
 // 个人中心
 import { Profile } from '../components/user/Profile/Profile'
@@ -56,9 +56,9 @@ export class Routes extends Component {
         {/* 添加衣橱管理路由 */}
         <Route path="/manage" component={Manage} />
         {/* 添加衣橱预约路由 */}
-        <Route path="/MyOrder" component={MyOrder}/>
+        <Route path="/appointment" component={Appointment}/>
         {/* 添加衣橱预约成功路由 */}
-        <Route path="/Success" component={Success}/>
+        <Route path="/success" component={Success}/>
         {/* 添加登陆路由 */}
         <Route path="/login" component={LogIn}/>
         {/* 添加地址路由 */}

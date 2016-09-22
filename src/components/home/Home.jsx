@@ -21,7 +21,7 @@ export class Home extends Component {
             _____
           </Col>
           <Col span={24} className={styles.home_order_btn}>
-            <Link to="/MyOrder">马上预约</Link>
+            <Link to="/appointment">马上预约</Link>
           </Col>
         </Row>
         <Row>

@@ -1,7 +1,7 @@
 // 登陆页
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Input, Button } from 'antd'
-import NavLink from '../../layouts/NavigationLayout/NavLink'
+import { Link } from 'react-router'
 import classnames from 'classnames'
 import styles from './LogInForm.less'
 
@@ -68,9 +68,9 @@ export class LogInForm extends Component {
         </InputGroup>
         <Row className={styles.login_btn_content}>
           <Col span={24}>
-            <NavLink to="/Success" >
+            <Link to="/Success" >
               <Button className={styles.login_btn} type="primary" htmlType="submit">快速登入</Button>
-            </NavLink>
+            </Link>
           </Col>
         </Row>
         {this.props.children}
