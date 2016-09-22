@@ -13,7 +13,7 @@ export default class Navigation extends React.Component {
     return (
       <div className={styles.container}>
         {/* tab内容 */}
-        <div style={{height: tab_height, overflow: "auto"}}>
+        <div style={{height: tab_height}} className="scrollContainer">
         {this.props.children || <Home/>}
         </div>
         {/* 底部导航条 */}

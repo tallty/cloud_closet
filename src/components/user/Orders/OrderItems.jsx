@@ -64,7 +64,7 @@ export class OrderItems extends Component {
 		let items = this.getItems()
 
 		return (
-			<div style={{height: tab_height, overflow: "auto"}}>
+			<div style={{height: tab_height}} className="scrollContainer">
 				{ items.length > 0 ? items : this.getItemsNone() }
 			</div>
 		)
