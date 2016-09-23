@@ -1,0 +1,64 @@
+.container {
+	padding: 25px 12px 12px;
+	color: #7F7F7F;
+	font-size: 16px;
+	.card {
+		height: 50px;
+		width: 100%;
+		background-color: #EFEFEF;
+		line-height: 50px;
+		padding: 0 22px;
+		.card_info {
+			color: #FF9241;
+			padding-left: 13px;
+		}
+	}
+	.content {
+		background-color: #fff;
+		padding: 25px 22px 14px;
+		.input_container {
+			padding: 13px 0 18px;
+			border-bottom: 1px solid #C9C9C9;
+			margin-bottom: 10px;
+			height: 66px;
+			.label{
+				color: #7F7F7F;
+				font-size: 24px;
+				display: inline-block;
+				vertical-align: middle;
+				line-height: 32px;
+			}
+			.input {
+        width: 100%;
+        border: none;
+        font-size: 18px;
+        padding: 0;
+        line-height: 1;
+        color: #FF9421;
+        vertical-align: middle;
+      }
+		}
+		.account {
+			font-size: 14px;
+			font-weight: 100;
+			padding-top: 4px;
+			span {
+				color: #FF9241;
+			}
+		}
+	}
+	.withdraw {
+  	width: 72%;
+		height: 44px;
+		line-height: 44px;
+		border-radius: 22px;
+		background-color: #FF9421;
+		color: #fff;
+		text-align: center;
+		margin: 30px auto 0;
+		display: block;
+		&:active {
+			background-color: darken(#FF9421, 10%);
+		}
+  }
+}

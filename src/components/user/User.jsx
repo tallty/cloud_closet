@@ -14,8 +14,8 @@ export class User extends Component {
 			{ name: "我的订单", message: true, url: "/orders" },
 			{ name: "系统通知", message: false, url: "/notifications" },
 			{ name: "VIP会员", message: false, url: "/vip" },
-			{ name: "发票", message: false, url: "/" },
-			{ name: "我的小蜜", message: false, url: "/" }
+			{ name: "发票", message: false, url: "/receipt" },
+			{ name: "我的小蜜", message: false, url: "/help" }
 		]
 	}
 

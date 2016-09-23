@@ -16,7 +16,7 @@
     color: #FF9241 !important;
   }
 
-  // global
+  // 全局通用类
   .text-left {
   	text-align: left;
   }
@@ -36,17 +36,24 @@
     float: left;
   }
 
-  // common
+  // 满屏
   .full_height {
     height: 100%;
   }
-  .ant-card-body {
-    padding: 0 !important;
-  }
+  // 滚动控制（触控滚动、隐藏滚动条）
   .scrollContainer {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
   }
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 1px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+  } 
 
   // 个人中心相关
   .ant-progress-bg {
@@ -68,9 +75,34 @@
       border-radius: 14px;
     }
   }
+  // 我的小蜜 - 问题
+  .ant-collapse {
+    border: none !important;
+    border-radius: 0 !important;
+    .ant-collapse-item {
+      border: 1px solid #f8f8f8 !important;
+      background-color: #fff;
+      .ant-collapse-header {
+        height: 48px !important;
+        line-height: 48px !important;
+        color: #7F7F7F !important;
+        font-size: 16px !important;
+        padding-left: 48px !important;
+        .arrow {
+          font-size: 16px !important;
+          line-height: 48px !important;
+          color: #7F7F7F !important;
+          left: 24px !important;
+        }
+      }
+      .ant-collapse-content {
+        background-color: #f8f8f8;
+      }
+    }
+  }
 
 
-  // tab
+  // 我的订单 - tab 样式
   .ant-tabs-bar {
     margin-bottom: 0 !important;
     background-color: #fff;
@@ -140,5 +172,8 @@
   }
   .ant-calendar-today .ant-calendar-date {
     border-radius: 50% !important;
+  }
+  .ant-card-body {
+    padding: 0 !important;
   }
 }

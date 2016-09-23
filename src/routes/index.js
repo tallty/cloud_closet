@@ -20,6 +20,8 @@ import { Ticket } from '../components/user/Ticket'
 import { Notification } from '../components/user/Notification'
 import { Recharge } from '../components/user/Recharge'
 import { Withdraw } from '../components/user/Withdraw'
+import { Help } from '../components/user/Help'
+import { Receipt } from '../components/user/Receipt'
 //搜索
 import { Search } from '../components/my_closet/search/Search'
 import { Manage } from '../components/my_closet/manage/Manage'
@@ -55,6 +57,8 @@ export class Routes extends Component {
         <Route path="/notifications" component={Notification} />
         <Route path="/recharge" component={Recharge} />
         <Route path="/withdraw" component={Withdraw} />
+        <Route path="/help" component={Help} />
+        <Route path="/receipt" component={Receipt} />
         {/* 搜索 */}
         <Route path="/search" component={Search} />
         {/* 添加衣橱详情页 */}

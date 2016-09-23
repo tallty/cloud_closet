@@ -39,7 +39,7 @@ export class Ticket extends Component {
 	render() {
 		return (
 			<div className={css.container}>
-				<Toolbar title="我的卡券" url="/user"/>
+				<Toolbar title="我的卡券" url="/user"></Toolbar>
 				<div style={{height: 25}}></div>
 				{ this.state.cells ? this.cells() : <Spiner/> }
 			</div>

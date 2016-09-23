@@ -10,6 +10,12 @@ export class Toolbar extends Component {
 					<img src="/src/images/toolbar_back_icon.png" alt="返回"/>
 				</Link>
 				<span>{ this.props.title }</span>
+				{
+					this.props.children ? 
+						<Link to={this.props.menuUrl} className={css.menu}>
+							{this.props.children}
+						</Link> : null
+				}
 			</div>
 		)
 	}
@@ -17,10 +23,12 @@ export class Toolbar extends Component {
 
 Toolbar.defaultProps = {
 	title: " ",
-	url: "/"
+	url: "/",
+	menuUrl: "/"
 }
 
 Toolbar.propTypes = {
 	title: PropTypes.string,
-	url: PropTypes.string
+	url: PropTypes.string,
+	menuUrl: PropTypes.string
 }

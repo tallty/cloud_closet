@@ -4,7 +4,7 @@
 import React, { Component, PropTypes } from 'react'
 import css from './recharge.less'
 import { Link } from 'react-router'
-import { Form, InputNumber } from 'antd'
+import { Form, Input, Button } from 'antd'
 
 const FormItem = Form.Item
 
@@ -26,21 +26,31 @@ export class Recharge extends Component {
 						<p className={css.tips}>单日交易限额 ¥ 50000.00</p>
 					</div>
 				</div>
-				<div className={css.item}>
-					<div className={css.label}>金额(元)</div>
-					<div className={css.item_right}>
-						<Form inline nSubmit={this.handleSubmit}>
+
+				<Form inline onSubmit={this.handleSubmit}>
+					<div className={css.item}>
+						<div className={css.label} style={{lineHeight: '30px'}}>金额(元)</div>
+						<div className={css.item_right}>
 							<FormItem>
-								<InputNumber placeholder="请输入金额" className={css.input}/>
+								<Input placeholder="请输入金额" {...getFieldProps('money')} className={css.input} type="number" />
 							</FormItem>
-						</Form>
+						</div>
 					</div>
-				</div>
-				<Link to="/profile" className={css.next}>下一步</Link>
+
+					{/*
+						<FormItem>
+						<Button type="primary" htmlType="submit" className={css.next}>确定</Button>
+					</FormItem>
+					*/}
+
+					<Link to="/user" className={css.next}>下一步</Link>
+				</Form>
 			</div>
 		)
 	}
 }
+
+Recharge = Form.create()(Recharge)
 
 Recharge.defaultProps = {
 
