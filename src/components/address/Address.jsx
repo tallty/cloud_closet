@@ -14,7 +14,7 @@ export class Address extends Component {
   }
 
   render() {
-    let tab_height = document.body.clientHeight-80
+    let tab_height = document.body.clientHeight-50
     return (
       <div className={styles.Address_content}>
         <Row className={styles.tab_header}>
