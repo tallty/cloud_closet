@@ -23,9 +23,9 @@ export class Success extends Component {
             <Link to="/success" >
               <Button className={styles.success_online} type="ghost" htmlType="submit">平台在线客服</Button>
             </Link>
-            <Link to="/success" >
+            <a href="tel:01082990966" >
               <Button className={styles.success_online_phone} type="ghost" htmlType="submit">平台客服热线<br/>400-123-2345</Button>
-            </Link>
+            </a>
           </Col>
         </Row>
       </div>
