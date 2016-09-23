@@ -49,7 +49,6 @@ export class Dispatching extends Component {
       styles.picker_modal,
       isPickerShow ? styles.picker_modal_toggle : ''
     );
-
     return (
       <div className={styles.Dispatching_content}>
         <Row className={styles.Dispatching_content_header}>

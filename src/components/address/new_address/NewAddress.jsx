@@ -56,7 +56,7 @@ export class NewAddress extends Component {
           <Col span={2} ><NavLink to="/address" style={{color:'#fff'}}><Icon type="left" /></NavLink></Col>
           <Col span={16} offset={2}  className={styles.tab_title}>编辑地址</Col>
           <Col span={4}  className={styles.tab_save}>
-            <NavLink to="/address" style={{color:'#fff'}}>
+            <NavLink to="/dispatching" style={{color:'#fff'}}>
               <Button type="primary" className={styles.add_new_address_btn}>保存</Button>
             </NavLink>
           </Col>
@@ -80,7 +80,6 @@ export class NewAddress extends Component {
               <Col span={22} >
                 <input
                 type="text"
-                className={styles.weui_select}
                 value={valueGroups.title + '-' + valueGroups.firstName + '-' + valueGroups.secondName}
                 readOnly
                 onClick={this.togglePicker} />
@@ -101,7 +100,6 @@ export class NewAddress extends Component {
             </NavLink>
           </Col>
         </Row>
-
         <Row className={styles.new_address_footer_modal}>
           <Col span={24}>
             <div className={styles.picker_modal_container}>

@@ -33,7 +33,7 @@ export class Appointment extends Component {
             </Col>
             <Col span={22}>
               <FormItem id="control-input1">
-                <Input id="control-input1" placeholder="上门服务" />
+                <Input id="control-input1" placeholder="上门服务"/>
               </FormItem>
             </Col>
             <Col span={22} offset={2}>

@@ -22,9 +22,11 @@ export class Manage extends Component {
           <Col span={16} offset={4} className={styles.tab_title}>管理</Col>
           <Col span={4} ><NavLink to="/MyCloset" style={{color:'#7F7F7F'}}>完成</NavLink></Col>
         </Row>
-        <div className={styles.tab_body} style={{height: tab_height, overflow: "auto"}}>
-          <ClosetClassify />
-          <ClosetTab />
+        <div className="scrollContainer" style={{height: tab_height}}>
+          <div className={styles.tab_body}>
+            <ClosetClassify />
+            <ClosetTab />
+          </div>
         </div>
         <Row className={styles.tab_footer}>
           <Col span={4}>2件</Col>

@@ -17,40 +17,40 @@ export class DispatchingCard extends Component {
   render() {
     return (
       <div>
-        <Row className={styles.DispatchingCard}>
+        <Row type="flex" justify="space-around" align="middle" className={styles.DispatchingCard}>
           <div className={styles.cross_icon_link}><Button type="primary" shape="circle" icon="cross" /></div>
           <Col span={6} className={styles.dispatch_pic_col}>
             <img src="src/images/recommend_one.png" alt="" className={styles.dispatch_pic}/>
           </Col>
           <Col span={18} className={styles.dispatch_title_col}>
-            <div>DOLCE&GABBANA  印花包臀短裙 </div>
+            <div className={styles.dispatch_title}>DOLCE&GABBANA  印花包臀短裙 </div>
           </Col>
         </Row>
-        <Row className={styles.DispatchingCard}>
+        <Row type="flex" justify="space-around" align="middle" className={styles.DispatchingCard}>
           <div className={styles.cross_icon_link}><Button type="primary" shape="circle" icon="cross" /></div>
           <Col span={6} className={styles.dispatch_pic_col}>
             <img src="src/images/recommend_one.png" alt="" className={styles.dispatch_pic}/>
           </Col>
           <Col span={18} className={styles.dispatch_title_col}>
-            <div>DOLCE&GABBANA  印花包臀短裙 </div>
+            <div className={styles.dispatch_title}>DOLCE&GABBANA  印花包臀短裙 </div>
           </Col>
         </Row>
-        <Row className={styles.DispatchingCard}>
+        <Row type="flex" justify="space-around" align="middle" className={styles.DispatchingCard}>
           <div className={styles.cross_icon_link}><Button type="primary" shape="circle" icon="cross" /></div>
           <Col span={6} className={styles.dispatch_pic_col}>
             <img src="src/images/recommend_one.png" alt="" className={styles.dispatch_pic}/>
           </Col>
           <Col span={18} className={styles.dispatch_title_col}>
-            <div>DOLCE&GABBANA  印花包臀短裙 </div>
+            <div className={styles.dispatch_title}>DOLCE&GABBANA  印花包臀短裙 </div>
           </Col>
         </Row>
-        <Row className={styles.DispatchingCard}>
+        <Row type="flex" justify="space-around" align="middle" className={styles.DispatchingCard}>
           <div className={styles.cross_icon_link}><Button type="primary" shape="circle" icon="cross" /></div>
           <Col span={6} className={styles.dispatch_pic_col}>
             <img src="src/images/recommend_one.png" alt="" className={styles.dispatch_pic}/>
           </Col>
           <Col span={18} className={styles.dispatch_title_col}>
-            <div>DOLCE&GABBANA  印花包臀短裙 </div>
+            <div className={styles.dispatch_title}>DOLCE&GABBANA  印花包臀短裙 </div>
           </Col>
         </Row>
       </div>
