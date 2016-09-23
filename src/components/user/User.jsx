@@ -70,7 +70,10 @@ export class User extends Component {
 	      <div className={css.center_container}>
 					<Row className={css.account}>
 						<Col span={18} className={css.money}>6,430.08</Col>
-						<Col span={6} className={css.money_link}>账户账单<Icon type="right" /></Col>
+						<Col span={6} className={css.money_link}>
+							<Link to="/bills">账户账单</Link>
+							<Icon type="right" />
+						</Col>
 					</Row>
 					<Row>
 						<Col span={12} className={css.left_col}>

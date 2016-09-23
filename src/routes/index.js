@@ -22,6 +22,7 @@ import { Recharge } from '../components/user/Recharge'
 import { Withdraw } from '../components/user/Withdraw'
 import { Help } from '../components/user/Help'
 import { Receipt } from '../components/user/Receipt'
+import { Bills } from '../components/user/Bills'
 //搜索
 import { Search } from '../components/my_closet/search/Search'
 import { Manage } from '../components/my_closet/manage/Manage'
@@ -59,6 +60,7 @@ export class Routes extends Component {
         <Route path="/withdraw" component={Withdraw} />
         <Route path="/help" component={Help} />
         <Route path="/receipt" component={Receipt} />
+        <Route path="/bills" component={Bills} />
         {/* 搜索 */}
         <Route path="/search" component={Search} />
         {/* 添加衣橱详情页 */}

@@ -7,16 +7,16 @@ import { Toolbar } from '../common/Toolbar'
 
 export class Receipt extends Component {
 	state = {
-		money: null
+		money: 6800
 	}
 
 	render() {
 		let tips = this.state.money ? "可开发票额度" : "（暂不可开，单张发票需大于50元）"
-
+		let money = this.state.money ? `${this.state.money}元` : "--"
 		return (
 			<div className={css.container}>
 				<Toolbar url="/user" menuUrl="/receipt" title="发票">开票记录</Toolbar>
-				<div className={css.money}>6800元</div>
+				<div className={css.money}>{money}</div>
 				<p className={css.tips}>{tips}</p>
 				<div className={css.content}>
 					<button>我要开票</button>
