@@ -18,18 +18,18 @@ export class Profile extends Component {
   },
   {
     label: '拍照',
-    className: 'customClassName',
+    className: css.photo_item,
     onClick: this.takePhoto.bind(this)
   }, 
   {
     label: '从相册中选取',
-    className: 'customClassName',
+    className: css.photo_item,
     onClick: this.choosePhoto.bind(this)
   }]
 	// 头像选择操作
   actions = [{
       label: '取消',
-      className: 'customClassName',
+      className: css.photo_item,
       onClick: this.hidePhotoModal.bind(this)
   }]
 	

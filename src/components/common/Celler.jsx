@@ -36,13 +36,21 @@ export class Celler extends Component {
 					this.props.event ? 
 						<div onClick={this.props.event} className={cell_class} style={{marginBottom: this.props.bottom, color: this.props.color}}>
 							<span className="pull-left">{this.props.name}</span>
-							{ type === "image" ? <img src={this.valueFormat()} className={css.photo} alt="头像"/> : this.valueFormat() }
-							{ type === "logout" ? null : <img src="/src/images/right_icon.svg" className={css.icon} alt="icon"/> }
+							{ 
+								type === "image" ? <img src={this.valueFormat()} className={css.photo} alt="头像"/> : this.valueFormat() 
+							}
+							{ 
+								type === "logout" ? null : <img src="/src/images/right_icon.svg" className={css.icon} alt="icon"/> 
+							}
 						</div> :
 						<Link to={this.props.url} className={cell_class} style={{marginBottom: this.props.bottom, color: this.props.color}}>
 							<span className="pull-left">{this.props.name}</span>
-							{ type === "image" ? <img src={this.valueFormat()} className={css.photo} alt="头像"/> : this.valueFormat() }
-							{ type === "logout" ? null : <img src="/src/images/right_icon.svg" className={css.icon} alt="icon"/> }
+							{ 
+								type === "image" ? <img src={this.valueFormat()} className={css.photo} alt="头像"/> : this.valueFormat() 
+							}
+							{ 
+								type === "logout" ? null : <img src="/src/images/right_icon.svg" className={css.icon} alt="icon"/> 
+							}
 						</Link>
 				}
 			</div>
