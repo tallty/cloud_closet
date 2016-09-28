@@ -18,6 +18,8 @@ export class GetOpenId extends Component {
     var OAuth = require('wechat-oauth');
     var client = new OAuth(this.appid, this.secret);
     console.log('out of token function')
+    console.log(code);
+    console.log(client);
     client.getAccessToken(code, function (err, result) {
       console.log('in token function line 1');
       var accessToken = result.data.access_token;
@@ -44,7 +46,7 @@ export class GetOpenId extends Component {
   render() {
     return (
       <div>
-        {this.state.openid}
+        {this.state.openid}-45678
       </div>
     );
   }
