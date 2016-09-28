@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Router, Route, IndexRoute, Link } from 'react-router'
+import { Router, Route, IndexRoute, Link, Redirect } from 'react-router'
 // 底部导航
 import Navigation from '../layouts/NavigationLayout/Navigation'
 import { Home } from '../components/home/Home'
@@ -12,6 +12,10 @@ import { ChargeDetail } from '../components/ChargeDetail/ChargeDetail'
 import { Appointment } from '../components/appointment/Appointment'
 import { Success } from '../components/appointment/Success'
 import { LogIn } from '../components/log_in/LogIn'
+
+// 执行微信jdk功能
+import {WechatConect} from '../components/WechatConect/WechatConect'
+import { GetOpenId } from '../components/WechatConect/GetOpenId'
 // 个人中心
 import { Profile } from '../components/user/Profile/Profile'
 import { FancClub } from '../components/user/FancClub'
@@ -38,6 +42,7 @@ export class Routes extends Component {
 	render() {
 		return (
 			<Router history={this.props.history}>
+        <Route path="/wechat" component={WechatConect} />
 		    <Route path="/" component={Navigation} >
           {/* 云衣橱品牌主页 */}
           <IndexRoute component={Home}/>
@@ -71,8 +76,6 @@ export class Routes extends Component {
         <Route path="/appointment" component={Appointment}/>
         {/* 添加衣橱预约成功路由 */}
         <Route path="/success" component={Success}/>
-        {/* 添加登陆路由 */}
-        <Route path="/login" component={LogIn}/>
         {/* 添加地址路由 */}
         <Route path="/address" component={Address}/>
         {/* 添加新增地址路由 */}
@@ -83,6 +86,10 @@ export class Routes extends Component {
         <Route path="/dispatching" component={Dispatching}/>
         {/* 添加续存路由 */}
         <Route path="/dispatching" component={Dispatching}/>
+
+        {/*  添加登陆路由 */}
+        <Route path="/login" component={LogIn}/>
+        <Route path="/get_open_id" component={GetOpenId}/>
 
 		  </Router>
 		)
