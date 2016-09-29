@@ -5,7 +5,6 @@ export class WechatConect extends Component {
   appid = 'wx47b02e6b45bf1dad'
   secret = 'b78a5266c57391d8bd7bce75e86fc3c0'
 
-
   componentWillMount() {
     var OAuth = require('wechat-oauth');
     var client = new OAuth(this.appid, this.secret);
