@@ -14,9 +14,10 @@ export class GetOpenId extends Component {
     var appid = 'wx47b02e6b45bf1dad'
     var secret = 'b78a5266c57391d8bd7bce75e86fc3c0'
     var code = this.getQueryString('code')
-
+    var url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appid+"&secret="+secret+"&code="+code+"&grant_type=authorization_code"
+    console.log(url);
     //获取图片资源
-    SuperAgent.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+{appid}+"&secret="+{secret}+"&code="+{code}+"&grant_type=authorization_code")
+    SuperAgent.get(url)
               .set('Accept', 'application/json')
               .end( (err, res) => {
                 let result = res.openid
@@ -25,7 +26,6 @@ export class GetOpenId extends Component {
                 // 改变状态
                 this.setState({openid:openid})
               })
-    
   }
 
   componentDidMount() {
@@ -44,7 +44,7 @@ export class GetOpenId extends Component {
   render() {
     return (
       <div>
-        {this.state.openid}-45678
+        当前用户的OpenId是: {this.state.openid}
       </div>
     );
   }
