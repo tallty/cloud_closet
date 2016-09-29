@@ -1,6 +1,5 @@
 import SuperAgent from 'superagent'
 import React, { Component } from 'react';
-import Navigation from '../../layouts/NavigationLayout/Navigation'
 
 export class GetOpenId extends Component {
   constructor(props) {
@@ -14,11 +13,21 @@ export class GetOpenId extends Component {
     var appid = 'wx47b02e6b45bf1dad'
     var secret = 'b78a5266c57391d8bd7bce75e86fc3c0'
     var code = this.getQueryString('code')
+
+
+    // client.getAccessToken(code, function (err, result) {
+    //   console.log('in token function line 1');
+    //   var accessToken = result.data.access_token;
+    //   var openid = result.data.openid;
+    //   this.setState({ openid: openid  });
+    //   console.log(openid);
+    //   console.log('in token function line the end');
+    // });  
+    
     var url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appid+"&secret="+secret+"&code="+code+"&grant_type=authorization_code"
     console.log(url);
     //获取图片资源
     SuperAgent.get(url)
-              .set('Accept', 'application/json')
               .end( (err, res) => {
                 let result = res.openid
                 console.log(result)

@@ -8,7 +8,7 @@ export class WechatConect extends Component {
   componentWillMount() {
     var OAuth = require('wechat-oauth');
     var client = new OAuth(this.appid, this.secret);
-    var url = client.getAuthorizeURL('http://closet.tallty.com/get_open_id', '123', 'snsapi_base');
+    var url = client.getAuthorizeURL('http://closet.tallty.com', '123', 'snsapi_base');
     console.log(url);
     this.skipUrl(url)
   }
