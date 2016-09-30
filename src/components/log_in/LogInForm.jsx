@@ -83,6 +83,15 @@ export class LogInForm extends Component {
                 let result = res.body
                 console.log(result)
               })
+
+    var url2 = "http://closet-api.tallty.com/user_info/bind"
+    SuperAgent.post(url)
+              .set('Accept', 'application/json')
+              .send({'user': {'openid': openid}})
+              .end( (err, res) => {
+                let result = res.body
+                console.log(result)
+              })
   }
 
   // enterLoading() {

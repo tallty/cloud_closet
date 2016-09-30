@@ -20,7 +20,7 @@ export class GetOpenId extends Component {
               .send({code: code})
               .end( (err, res) => {
                 if (res.ok) {
-                  var openid = res.body.openid
+                  openid = res.body.openid
                   var url = "http://closet-api.tallty.com/user_info/check_openid"
                   //获取open
                   SuperAgent.post(url)
