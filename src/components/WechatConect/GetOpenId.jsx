@@ -10,26 +10,16 @@ export class GetOpenId extends Component {
   }
 
   componentWillMount() {
-    var appid = 'wx47b02e6b45bf1dad'
-    var secret = 'b78a5266c57391d8bd7bce75e86fc3c0'
     var code = this.getQueryString('code')
-
-
-    // client.getAccessToken(code, function (err, result) {
-    //   console.log('in token function line 1');
-    //   var accessToken = result.data.access_token;
-    //   var openid = result.data.openid;
-    //   this.setState({ openid: openid  });
-    //   console.log(openid);
-    //   console.log('in token function line the end');
-    // });  
-    
-    var url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appid+"&secret="+secret+"&code="+code+"&grant_type=authorization_code"
+    var url = "http://wechat-api.tallty.com/cloud_closet_wechat/web_access_token"
     console.log(url);
-    //获取图片资源
-    SuperAgent.get(url)
+    //获取open
+    SuperAgent.post(url)
+              .set('Accept', 'application/json')
+              .send({code: code})
               .end( (err, res) => {
                 let result = res.openid
+                console.log(res)
                 console.log(result)
                 // let openid = result
                 // 改变状态
