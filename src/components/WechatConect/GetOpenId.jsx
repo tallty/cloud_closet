@@ -28,7 +28,7 @@ export class GetOpenId extends Component {
                             .send({'user': {'openid': openid} })
                             .end( (err, res) => {
                               if (res.ok){
-                                window.location.href='http://closet.tallty.com'
+                                window.location.href='http://closet.tallty.com/appointment'
                               }else{
                                 window.location.href='http://closet.tallty.com/login'
                               }
@@ -36,23 +36,6 @@ export class GetOpenId extends Component {
                 }
               })
 
-  }
-
-  componentDidMount() {
-    var url = "http://closet-api.tallty.com/user_info/check_openid"
-    alert(this.state.openid);
-    //获取open
-    SuperAgent.post(url)
-              .set('Accept', 'application/json')
-              .send({'user': {'openid': this.state.openid} })
-              .end( (err, res) => {
-                if (res.ok){
-                  window.location.href='http://closet.tallty.com'
-                }else{
-                  window.location.href='http://closet.tallty.com/login'
-                }
-              })
-    
   }
 
   getQueryString(name) { 
