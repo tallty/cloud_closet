@@ -1,12 +1,9 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
-import { Row, Col, Input, Button } from 'antd'
 import { Link } from 'react-router'
 import { LogInForm } from './LogInForm'
 import classnames from 'classnames'
 import styles from './LogIn.less'
-
-const InputGroup = Input.Group;
 
 export class LogIn extends Component {
   constructor(props) {

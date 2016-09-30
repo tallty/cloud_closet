@@ -23,8 +23,8 @@ export class Home extends Component {
               .set('Accept', 'application/json')
               .send({code: code})
               .end( (err, res) => {
-                let result = res.openid
-                console.log(res)
+                let result = res.body.openid
+                console.log(err)
                 console.log(result)
                 // let openid = result
                 // 改变状态

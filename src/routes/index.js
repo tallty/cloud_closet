@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Router, Route, IndexRoute, Link, Redirect } from 'react-router'
+import auth from '../components/WechatConect/auth'
 // 底部导航
 import Navigation from '../layouts/NavigationLayout/Navigation'
 import { Home } from '../components/home/Home'
@@ -39,19 +40,30 @@ import { NewAddress } from '../components/address/new_address/NewAddress'
 import { Dispatching } from '../components/dispatching/Dispatching'
 
 export class Routes extends Component {
+
+  checkout(){
+    if(auth.loggedIn() == true){
+
+    }
+  }
+
+  requireAuth() {
+    auth.getSkipUrl()
+  }
+
 	render() {
 		return (
 			<Router history={this.props.history}>
         <Route path="/wechat" component={WechatConect} />
 		    <Route path="/" component={Navigation} >
           {/* 云衣橱品牌主页 */}
-          <IndexRoute component={Home}/>
+          <IndexRoute component={Home} />
           {/* 添加Fanc_Club导航路由 */}
-          <Route path="vip" component={FancClub}/>
+          <Route path="vip" component={FancClub} />
           {/* 添加我的衣橱导航路由 */}
-          <Route path="MyCloset" component={MyCloset}/>
+          <Route path="MyCloset" component={MyCloset} />
           {/* 添加个人中心导航路由 */}
-          <Route path="user" component={User}/>
+          <Route path="user" component={User} />
         </Route>
         {/* －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－ */}
       	{/* 收费详情 */}
@@ -73,7 +85,7 @@ export class Routes extends Component {
         {/* 添加衣橱管理路由 */}
         <Route path="/manage" component={Manage} />
         {/* 添加衣橱预约路由 */}
-        <Route path="/appointment" component={Appointment}/>
+        <Route path="/appointment" component={Appointment} onEnter={this.requireAuth}/>
         {/* 添加衣橱预约成功路由 */}
         <Route path="/success" component={Success}/>
         {/* 添加地址路由 */}
@@ -89,7 +101,7 @@ export class Routes extends Component {
 
         {/*  添加登陆路由 */}
         <Route path="/login" component={LogIn}/>
-        <Route path="/get_open_id" component={GetOpenId}/>
+        <Route path="/get_open_id" component={GetOpenId} onLeave={this.checkout}/>
 
 		  </Router>
 		)
