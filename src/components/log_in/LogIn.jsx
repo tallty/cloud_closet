@@ -1,7 +1,7 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
-import { LogInForm } from './LogInForm'
+import LogInForm from './LogInForm'
 import classnames from 'classnames'
 import styles from './LogIn.less'
 

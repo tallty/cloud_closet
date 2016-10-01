@@ -1,8 +1,9 @@
 import SuperAgent from 'superagent'
+import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import auth from './auth'
 
-export class GetOpenId extends Component {
+class GetOpenId extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,28 +15,28 @@ export class GetOpenId extends Component {
     var code = this.getQueryString('code')
     var url = "http://wechat-api.tallty.com/cloud_closet_wechat/web_access_token"
     console.log(url);
+    this.props.router.replace('/login')
     //获取open
     SuperAgent.post(url)
               .set('Accept', 'application/json')
               .send({code: code})
               .end( (err, res) => {
                 if (res.ok) {
-                  openid = res.body.openid
+                  sessionStorage.openid = res.body.openid
                   var url = "http://closet-api.tallty.com/user_info/check_openid"
                   //获取open
                   SuperAgent.post(url)
                             .set('Accept', 'application/json')
-                            .send({'user': {'openid': openid} })
+                            .send({'user': {'openid': sessionStorage.openid} })
                             .end( (err, res) => {
                               if (res.ok){
-                                window.location.href='http://closet.tallty.com/appointment'
+                                this.props.router.replace('/appointment')
                               }else{
-                                window.location.href='http://closet.tallty.com/login'
+                                this.props.router.replace('/login')
                               }
                             })
                 }
               })
-
   }
 
   getQueryString(name) { 
@@ -53,3 +54,5 @@ export class GetOpenId extends Component {
     );
   }
 }
+
+export default withRouter(GetOpenId)

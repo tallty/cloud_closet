@@ -19,17 +19,17 @@ export class Home extends Component {
     var url = "http://wechat-api.tallty.com/cloud_closet_wechat/web_access_token"
     console.log(url);
     //获取open
-    SuperAgent.post(url)
-              .set('Accept', 'application/json')
-              .send({code: code})
-              .end( (err, res) => {
-                let result = res.body.openid
-                console.log(err)
-                console.log(result)
-                // let openid = result
-                // 改变状态
-                this.setState({openid:openid})
-              })
+    // SuperAgent.post(url)
+    //           .set('Accept', 'application/json')
+    //           .send({code: code})
+    //           .end( (err, res) => {
+    //             let result = res.body.openid
+    //             console.log(err)
+    //             console.log(result)
+    //             // let openid = result
+    //             // 改变状态
+    //             this.setState({openid:openid})
+    //           })
   }
 
   getQueryString(name) { 

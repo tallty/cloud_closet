@@ -2,13 +2,13 @@
 import SuperAgent from 'superagent'
 import React, { Component, PropTypes } from 'react'
 import {Row, Col, Input, Button } from 'antd'
-import { Link } from 'react-router'
+import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'
 import styles from './LogInForm.less'
 
 const InputGroup = Input.Group;
 
-export class LogInForm extends Component {
+class LogInForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -85,10 +85,13 @@ export class LogInForm extends Component {
               })
 
     var url2 = "http://closet-api.tallty.com/user_info/bind"
-    SuperAgent.post(url)
+    SuperAgent.post(url2)
               .set('Accept', 'application/json')
-              .send({'user': {'openid': openid}})
+              .send({'user': {'openid': sessionStorage.openid}})
               .end( (err, res) => {
+                if (res.ok) {
+                  this.props.router.replace('/appointment')
+                }
                 let result = res.body
                 console.log(result)
               })
@@ -154,9 +157,9 @@ export class LogInForm extends Component {
         </InputGroup>
         <Row className={styles.login_btn_content}>
           <Col span={24}>
-            <Link to="/Success" >
-              <Button className={styles.login_btn} type="primary" htmlType="submit" onClick={this.register.bind(this)}>快速登入</Button>
-            </Link>
+            {/* <Link to="/Success" > */}
+              <Button className={styles.login_btn} type="primary" htmlType="submit" onClick={this.register.bind(this)}>注册绑定</Button>
+            {/* </Link> */}
           </Col>
         </Row>
         {this.props.children}
@@ -165,8 +168,4 @@ export class LogInForm extends Component {
   }
 }
 
-LogInForm.defaultProps = {
-}
-
-LogInForm.propTypes = {
-};
+export default withRouter(LogInForm)

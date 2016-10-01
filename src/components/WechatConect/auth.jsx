@@ -24,7 +24,6 @@ module.exports = {
               .end( (err, res) => {
                 if (res.ok) {
                   let result = res.body.openid
-                  localStorage.openid = res.body.openid
                 } else {
                   alert('获取用户信息失败，请重新进入！');
                 }
@@ -33,15 +32,18 @@ module.exports = {
     return localStorage.openid
   },
 
-  loggedIn(openid) {
+  loggedIn() {
     var url = "http://closet-api.tallty.com/user_info/check_openid"
-    console.log(url);
+    var state = false
     //获取open
     SuperAgent.post(url)
               .set('Accept', 'application/json')
-              .send({'user': {'openid': openid} })
+              .send({'user': {'openid': sessionStorage.openid} })
               .end( (err, res) => {
                 state = res.ok
+                sessionStorage.setItem('phone',res.body.phone)
+                sessionStorage.setItem('authentication_token',res.body.authentication_token)
+                console.log(sessionStorage.phone);
               })
 
     return state

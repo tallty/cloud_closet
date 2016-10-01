@@ -16,7 +16,7 @@ import { LogIn } from '../components/log_in/LogIn'
 
 // 执行微信jdk功能
 import {WechatConect} from '../components/WechatConect/WechatConect'
-import { GetOpenId } from '../components/WechatConect/GetOpenId'
+import GetOpenId from '../components/WechatConect/GetOpenId'
 // 个人中心
 import { Profile } from '../components/user/Profile/Profile'
 import { FancClub } from '../components/user/FancClub'
@@ -48,7 +48,11 @@ export class Routes extends Component {
   }
 
   requireAuth() {
-    auth.getSkipUrl()
+    if(auth.loggedIn() == true){
+      
+    }else{
+      auth.getSkipUrl()
+    }
   }
 
 	render() {
@@ -101,7 +105,7 @@ export class Routes extends Component {
 
         {/*  添加登陆路由 */}
         <Route path="/login" component={LogIn}/>
-        <Route path="/get_open_id" component={GetOpenId} onLeave={this.checkout}/>
+        <Route path="/get_open_id" component={GetOpenId} />
 
 		  </Router>
 		)
