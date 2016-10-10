@@ -15,21 +15,28 @@ class GetOpenId extends Component {
     var code = this.getQueryString('code')
     var url = "http://wechat-api.tallty.com/cloud_closet_wechat/web_access_token"
     console.log(url);
-    this.props.router.replace('/login')
-    //获取open
+    //获取openId
     SuperAgent.post(url)
               .set('Accept', 'application/json')
               .send({code: code})
               .end( (err, res) => {
                 if (res.ok) {
-                  sessionStorage.openid = res.body.openid
+                  if (res.body.openid != 'undefined') {
+                    sessionStorage.openid = res.body.openid
+                    // alert(res.body.openid)
+                    console.log(res.body.openid);
+                  }else{
+                    alert('获取用户信息失败，请重新进入！')
+                  }
                   var url = "http://closet-api.tallty.com/user_info/check_openid"
-                  //获取open
+                  //验证openId
                   SuperAgent.post(url)
                             .set('Accept', 'application/json')
                             .send({'user': {'openid': sessionStorage.openid} })
-                            .end( (err, res) => {
-                              if (res.ok){
+                            .end( (erro, ress) => {
+                              if (ress.ok){
+                                sessionStorage.state = 'true'
+                                console.log(sessionStorage.openid)
                                 this.props.router.replace('/appointment')
                               }else{
                                 this.props.router.replace('/login')

@@ -48,10 +48,10 @@ export class Routes extends Component {
   }
 
   requireAuth() {
-    if(auth.loggedIn() == true){
-      
-    }else{
-      auth.getSkipUrl()
+    auth.loggedIn()
+    if(sessionStorage.state != 'true'){
+      console.log(sessionStorage.state)
+      {/* auth.getSkipUrl() */}
     }
   }
 

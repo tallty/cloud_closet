@@ -75,6 +75,9 @@ class LogInForm extends Component {
     console.log(codenum);
     console.log(nickname);
     console.log(url);
+    var name = sessionStorage.openid
+    console.log('test');
+    console.log(name);
     //用户注册
     SuperAgent.post(url)
               .set('Accept', 'application/json')
@@ -84,16 +87,34 @@ class LogInForm extends Component {
                 console.log(result)
               })
 
-    var url2 = "http://closet-api.tallty.com/user_info/bind"
-    SuperAgent.post(url2)
+    //用户登录
+    var url1 = 'http://closet-api.tallty.com/users/sign_in'
+    SuperAgent.post(url1)
               .set('Accept', 'application/json')
-              .send({'user': {'openid': sessionStorage.openid}})
+              .send({'user': {'phone': phone, 'password': password}})
               .end( (err, res) => {
                 if (res.ok) {
-                  this.props.router.replace('/appointment')
+                  sessionStorage.authentication_token = res.body.authentication_token
+                  //用户绑定
+                  var url2 = "http://closet-api.tallty.com/user_info/bind"
+                  SuperAgent.post(url2)
+                            .set('Accept', 'application/json')
+                            .set('X-User-Phone', phone)
+                            .set('X-User-Token', sessionStorage.authentication_token)
+                            .send({'user': {'openid': sessionStorage.openid}})
+                            .end( (err, res) => {
+                              if (res.ok) {
+                                sessionStorage.setItem('user_name', res.body.nickname)
+                                sessionStorage.setItem('user_phone', res.body.phone)
+                                this.props.router.replace('/appointment')
+                              }
+                              let result = res.body
+                              console.log(result)
+                            })
+                }else{
+                  alert('用户登录失败！')
                 }
-                let result = res.body
-                console.log(result)
+                
               })
   }
 

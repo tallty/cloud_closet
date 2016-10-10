@@ -34,7 +34,7 @@ export class Home extends Component {
 
   getQueryString(name) { 
     var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i'); 
-    var r = window.location.search.substr(1).match(reg); 
+    var r = window.location.search.substr(1).match(reg);
     if (r != null) { 
       return unescape(r[2]); 
     }
@@ -51,9 +51,6 @@ export class Home extends Component {
           </Col>
           <Col span={24} className={styles.home_order}>
             体验为使命的专业成衣管家
-          </Col>
-          <Col span={24} className={styles.home_order}>
-            {this.state.openid}
           </Col>
           <Col span={24} className={styles.home_order_line}>
             _____

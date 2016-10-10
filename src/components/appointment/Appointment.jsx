@@ -10,10 +10,6 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
 export class Appointment extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { checked: true, };
-  }
   handleSubmit(e) {
     e.preventDefault();
     console.log('收到表单值：', this.props.form.getFieldsValue());
@@ -32,7 +28,7 @@ export class Appointment extends Component {
               <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
             </Col>
             <Col span={22}>
-              <FormItem id="control-input1">
+              <FormItem id="control-input1" >
                 <Input id="control-input1" placeholder="上门服务"/>
               </FormItem>
             </Col>
@@ -60,9 +56,7 @@ export class Appointment extends Component {
             </Col>
             <Col span={24}>
               <FormItem>
-                <Link to="/login" >
-                  <Button className={styles.order_btn} type="primary" htmlType="submit">预 约</Button>
-                </Link>
+                <Button className={styles.order_btn} type="primary" htmlType="submit">预 约</Button>
               </FormItem>
             </Col>
           </Form>

@@ -34,18 +34,21 @@ module.exports = {
 
   loggedIn() {
     var url = "http://closet-api.tallty.com/user_info/check_openid"
-    var state = false
+    if (typeof sessionStorage.openid == 'undefined') {
+      sessionStorage.setItem('openid','123456');//使用方法存储数据,推荐 
+    }
+    console.log(sessionStorage.openid)
     //获取open
     SuperAgent.post(url)
               .set('Accept', 'application/json')
               .send({'user': {'openid': sessionStorage.openid} })
               .end( (err, res) => {
-                state = res.ok
+                // alert(res.ok)
+                sessionStorage.setItem('state', res.ok)
                 sessionStorage.setItem('phone',res.body.phone)
                 sessionStorage.setItem('authentication_token',res.body.authentication_token)
-                console.log(sessionStorage.phone);
               })
-
-    return state
+              // alert(sessionStorage.state)
+              // alert(sessionStorage.openid)
   },
 }
