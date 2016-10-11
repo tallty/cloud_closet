@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { Router, Route, IndexRoute, Link, Redirect } from 'react-router'
+// 微信api相关功能
 import auth from '../components/WechatConect/auth'
+import {WechatConect} from '../components/WechatConect/WechatConect'
+import { GetOpenId } from '../components/WechatConect/GetOpenId'
 // 底部导航
 import Navigation from '../layouts/NavigationLayout/Navigation'
 import { Home } from '../components/home/Home'
@@ -13,10 +16,6 @@ import { ChargeDetail } from '../components/ChargeDetail/ChargeDetail'
 import { Appointment } from '../components/appointment/Appointment'
 import { Success } from '../components/appointment/Success'
 import { LogIn } from '../components/log_in/LogIn'
-
-// 执行微信jdk功能
-import {WechatConect} from '../components/WechatConect/WechatConect'
-import GetOpenId from '../components/WechatConect/GetOpenId'
 // 个人中心
 import { Profile } from '../components/user/Profile/Profile'
 import { FancClub } from '../components/user/FancClub'
@@ -39,8 +38,14 @@ import { NewAddress } from '../components/address/new_address/NewAddress'
 //配送
 import { Dispatching } from '../components/dispatching/Dispatching'
 
-export class Routes extends Component {
+// --------------------------------工作人员控制台------------------------------------
+import { Desk } from '../work/desk/Desk'
+import { AppointList } from '../work/appoint_list/AppointList'
+import { WareHouse } from '../work/warehouse/WareHouse'
+import { AppointOrder } from '../work/appoint_list/AppointOrder'
+import { AppointSuccess } from '../work/appoint_list/AppointSuccess'
 
+export class Routes extends Component {
   checkout(){
     if(auth.loggedIn() == true){
 
@@ -58,6 +63,7 @@ export class Routes extends Component {
 	render() {
 		return (
 			<Router history={this.props.history}>
+        {/* －－－－－－－－－－－－－－－－－－－－－用户端－－－－－－－－－－－－－－－－－－－－－－－ */}
         <Route path="/wechat" component={WechatConect} />
 		    <Route path="/" component={Navigation} >
           {/* 云衣橱品牌主页 */}
@@ -69,9 +75,10 @@ export class Routes extends Component {
           {/* 添加个人中心导航路由 */}
           <Route path="user" component={User} />
         </Route>
-        {/* －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－ */}
+        
       	{/* 收费详情 */}
 		    <Route path="/charge_detail" component={ChargeDetail} />
+
         {/* 个人中心相关 */}
         <Route path="/profile" component={Profile} />
         <Route path="/orders" component={Orders} />
@@ -82,6 +89,7 @@ export class Routes extends Component {
         <Route path="/help" component={Help} />
         <Route path="/receipt" component={Receipt} />
         <Route path="/bills" component={Bills} />
+
         {/* 搜索 */}
         <Route path="/search" component={Search} />
         {/* 添加衣橱详情页 */}
@@ -96,17 +104,26 @@ export class Routes extends Component {
         <Route path="/address" component={Address}/>
         {/* 添加新增地址路由 */}
         <Route path="/add_address" component={AddAddress}/>
-
         <Route path="/address/new" component={NewAddress}/>
         {/* 添加配送路由 */}
         <Route path="/dispatching" component={Dispatching}/>
         {/* 添加续存路由 */}
         <Route path="/dispatching" component={Dispatching}/>
-
-        {/*  添加登陆路由 */}
+        {/* 添加登陆路由 */}
         <Route path="/login" component={LogIn}/>
         <Route path="/get_open_id" component={GetOpenId} />
 
+        {/* －－－－－－－－－－－－－－－－－－－－－工作人员工作台端－－－－－－－－－－－－－－－－－－－－－－－ */}
+        {/* 工作台 */}
+        <Route path="/work_desk" component={Desk}/>
+        {/* 预约清单 */}
+        <Route path="/work_appoint_list" component={AppointList}/>
+        {/* 预约入库 */}
+        <Route path="/work_warehouse" component={WareHouse}/>
+        {/* 预约清单 - 生成订单 */}
+        <Route path="/work_appoint_order" component={AppointOrder}/>
+        {/* 预约清单 - 入库成功 */}
+        <Route path="/work_appoint_success" component={AppointSuccess}/>
 		  </Router>
 		)
 	}
