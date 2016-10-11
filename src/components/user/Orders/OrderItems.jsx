@@ -60,7 +60,7 @@ export class OrderItems extends Component {
 	}
 	
 	render() {
-		let tab_height = document.body.clientHeight - 94
+		let tab_height = document.body.clientHeight - 84
 		let items = this.getItems()
 
 		return (

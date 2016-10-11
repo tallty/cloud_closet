@@ -21,7 +21,7 @@ export class ChargeDetail extends Component {
 				<Row key={index} type="flex" justify="space-around" align="middle" className={styles.item_row}>
 					<Col span={4}>
 						<DemoBox value={100}>
-							<img src={`/src/images/charge_detail_${item[0]}.png`} className={styles.list_img} alt={item[1]}/>
+							<img src={`/src/images/${item[0]}.png`} className={styles.list_img} alt={item[1]}/>
 							<br></br>{item[1]}
 						</DemoBox>
 					</Col>

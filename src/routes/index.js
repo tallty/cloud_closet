@@ -9,7 +9,6 @@ import Navigation from '../layouts/NavigationLayout/Navigation'
 import { Home } from '../components/home/Home'
 import { User } from '../components/user/User'
 import { MyCloset } from '../components/my_closet/MyCloset'
-import { Vip } from '../components/vip/Vip'
 // 收费详情
 import { ChargeDetail } from '../components/ChargeDetail/ChargeDetail'
 // 我的衣橱

@@ -12,46 +12,13 @@
 		padding-left: 16px;
 		background: #fff;
 		border-bottom: 4px solid #f8f8f8;
+		font-weight: 300;
 	}
 	.item {
 		display: block;
 		background: #fff;
 		&:active {
 			background: #f8f8f8;
-		}
-		.item_content {
-			height: 68px;
-			border-bottom: 1px solid #f8f8f8;
-			padding: 9px 16px;
-			color: #919191;
-			position: relative;
-			.content_left {
-				height: 50px;
-				position: absolute;
-				top: 9px;
-				left: 15px;
-				right: 80px;
-				p {
-					height: 25px;
-					line-height: 25px;
-					font-size: 13px;
-					span {
-						font-size: 16px;
-						font-weight: normal;
-					}
-				}
-			}
-			.content_right {
-				position: absolute;
-				top: 9px;
-				right: 15px;
-				img {
-					height: 50px;
-					width: 50px;
-					display: block;
-					border-radius: 50%;
-				}
-			}
 		}
 		.item_footer {
 			height: 45px;
@@ -61,6 +28,9 @@
 			padding: 0 16px;
 			color: #757575;
 			font-size: 14px;
+			overflow: hidden;
+			text-overflow:ellipsis;
+			white-space: nowrap;
 			img {
 				height: 18px;
 				margin-right: 7px;
@@ -71,4 +41,130 @@
 			}
 		}
 	}
+}
+
+// 生成订单
+.appoint_order {
+	height: 100%;
+	padding-top: 50px;
+	background: #fff;
+	overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  .order {
+  	padding: 15px 15px 0;
+  	.order_table_header {
+  		text-align: center;
+  		border-bottom: 1px solid #D6D9E1;
+  	}
+		.order_item {
+			text-align: center;
+			height: 42px;
+			line-height: 42px;
+			.img_div {
+				height: 26px;
+				width: 32px;
+				margin-top: 8px;
+				text-align: center;
+				float: left;
+				img {
+					height: 26px;
+					display: inline-block;
+				}
+			}
+			.kind {
+				height: 42px;
+				width: 50px;
+				font-size: 10px;
+				float: left;
+				line-height: 20px;
+				padding-left: 5px;
+				p {
+					width: 38px;
+					text-align: center;
+				}
+				.tag {
+					font-weight: 100;
+					width: 38px;
+					height: 16px;
+					border: 1px solid #FF9241;
+					border-radius: 8px;
+					color: #FF9241;
+					text-align: center;
+					line-height: 16px;
+				}
+			}
+			
+		}
+  	.total_price {
+  		color: #757575;
+  		font-size: 14px;
+  		margin-bottom: 23px;
+  		span {
+  			color: #FF9241;
+  			font-size: 24px;
+  		}
+  	}
+  }
+	hr {
+		border: none;
+		border-top: 1px dashed #D1C8C0;
+		margin: 15px;
+	}
+}
+.submit_order_btn {
+	width: 210px;
+	height: 44px;
+	text-align: center;
+	line-height: 44px;
+	background-color: #FF9241;
+	color: #fff;
+	font-size: 16px;
+	border-radius: 22px;
+	margin: 48px auto 0;
+	display: block;
+	&:active {
+		background-color: darken(#FF9241, 10%);
+	}
+}
+
+// 成功申请
+.appoint_success {
+	.title {
+		font-size: 19px;
+		text-align: center;
+		color: #FF9241;
+		border-bottom: 1px solid #D1C8C0;
+		padding: 16px 0;
+		margin-top: 74px;
+		margin-bottom: 34px;
+		line-height: 1;
+	}
+	.tips {
+		color: #757575;
+		font-size: 14px;
+		text-align: center;
+	}
+	.help {
+		padding-top: 85px;
+		text-align: center;
+		.border_div {
+			display: inline-block;
+			height: 40px;
+			width: 150px;
+			border: 1px solid #FF9241;
+			border-radius: 4px;
+			color: #ADADAD;
+			font-size: 12px;
+			text-align: center;
+			line-height: 1.2;
+			vertical-align: middle;
+			a {
+				margin-top: 6px;
+				color: #ADADAD;
+				text-decoration: none;
+				display: inline-block;
+			}
+		}
+	}
+
 }

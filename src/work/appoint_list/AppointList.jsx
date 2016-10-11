@@ -7,6 +7,7 @@ import { Toolbar } from '../../components/common/Toolbar'
 import { Spiner } from '../../components/common/Spiner'
 import { Affix } from 'antd'
 import { Link } from 'react-router'
+import { UserInfo } from '../user_info/UserInfo'
 
 export class AppointList extends Component {
 	state = {
@@ -38,15 +39,7 @@ export class AppointList extends Component {
 				<div key={index}>
 					{ header }
 					<Link to={`/work_warehouse?id=${item.id}`} className={css.item}>
-						<div className={css.item_content}>
-							<div className={css.content_left}>
-								<p>用户：<span>{item.name}</span></p>
-								<p>电话：<span>{item.phone}</span></p>
-							</div>
-							<div className={css.content_right}>
-								<img src={item.photo} alt="头像"/>
-							</div>
-						</div>
+						<UserInfo name={item.name} photo={item.photo} phone={item.phone} />
 						<div className={css.item_footer}>
 							<img src="src/images/address_icon.svg" alt="icon"/>
 							<span>{item.address}</span>
@@ -99,11 +92,7 @@ export class AppointList extends Component {
 	render() {
 		let toolbar_style = {
 			background: '#FF9241', 
-			color: '#fff',
-			position: 'fixed',
-			top: 0,
-			left: 0,
-			right: 0
+			color: '#fff'
 		}
 		let back_style = {
 			color: '#fff'
@@ -170,7 +159,7 @@ AppointList.defaultProps = {
 			name: 'J',
 			phone: '18675346566',
 			address: '黄浦区济南路260弄翠湖天地隽荟12栋603号',
-			photo: 'src/images/photo.png',
+			photo: '',
 			date_time: '2016-10-10T14:00:00.000+08:00'
 		},
 		{
@@ -178,7 +167,7 @@ AppointList.defaultProps = {
 			name: 'J',
 			phone: '18675346566',
 			address: '黄浦区济南路260弄翠湖天地隽荟12栋603号',
-			photo: 'src/images/photo.png',
+			photo: '',
 			date_time: '2016-10-10T14:00:00.000+08:00'
 		},
 				{
