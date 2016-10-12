@@ -12,7 +12,7 @@ import { MyCloset } from '../components/my_closet/MyCloset'
 // 收费详情
 import { ChargeDetail } from '../components/ChargeDetail/ChargeDetail'
 // 我的衣橱
-import { Appointment } from '../components/appointment/Appointment'
+import Appointment from '../components/appointment/Appointment'
 import { Success } from '../components/appointment/Success'
 import { LogIn } from '../components/log_in/LogIn'
 // 个人中心
