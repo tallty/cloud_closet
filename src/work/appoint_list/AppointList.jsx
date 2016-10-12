@@ -38,7 +38,7 @@ export class AppointList extends Component {
 			list_view.push(
 				<div key={index}>
 					{ header }
-					<Link to={`/work_warehouse?id=${item.id}`} className={css.item}>
+					<Link to={`/work_warehouse`} className={css.item}>
 						<UserInfo name={item.name} photo={item.photo} phone={item.phone} />
 						<div className={css.item_footer}>
 							<img src="src/images/address_icon.svg" alt="icon"/>
