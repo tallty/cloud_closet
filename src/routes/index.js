@@ -3,7 +3,7 @@ import { Router, Route, IndexRoute, Link, Redirect } from 'react-router'
 // 微信api相关功能
 import auth from '../components/WechatConect/auth'
 import {WechatConect} from '../components/WechatConect/WechatConect'
-import { GetOpenId } from '../components/WechatConect/GetOpenId'
+import GetOpenId from '../components/WechatConect/GetOpenId'
 // 底部导航
 import Navigation from '../layouts/NavigationLayout/Navigation'
 import { Home } from '../components/home/Home'
@@ -55,7 +55,7 @@ export class Routes extends Component {
     auth.loggedIn()
     if(sessionStorage.state != 'true'){
       console.log(sessionStorage.state)
-      {/* auth.getSkipUrl() */}
+      auth.getSkipUrl()
     }
   }
 
@@ -108,9 +108,10 @@ export class Routes extends Component {
         <Route path="/dispatching" component={Dispatching}/>
         {/* 添加续存路由 */}
         <Route path="/dispatching" component={Dispatching}/>
+        {/* 获取用户open */}
+        <Route path="/get_open_id" component={GetOpenId} />
         {/* 添加登陆路由 */}
         <Route path="/login" component={LogIn}/>
-        <Route path="/get_open_id" component={GetOpenId} />
 
         {/* －－－－－－－－－－－－－－－－－－－－－工作人员工作台端－－－－－－－－－－－－－－－－－－－－－－－ */}
         {/* 工作台 */}

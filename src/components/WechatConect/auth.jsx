@@ -3,13 +3,13 @@ import SuperAgent from 'superagent';
 module.exports = {
 
   getSkipUrl(){
+    alert(url);
     var appid = 'wx47b02e6b45bf1dad'
     var secret = 'b78a5266c57391d8bd7bce75e86fc3c0'
     var OAuth = require('wechat-oauth');
     var client = new OAuth(appid, secret);
     var urlt = 'http://closet.tallty.com/'+'get_open_id'
     var url = client.getAuthorizeURL(urlt, '123', 'snsapi_base');
-    console.log(url);
     window.location.href=url;
   },
   

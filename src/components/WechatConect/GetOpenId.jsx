@@ -14,7 +14,7 @@ class GetOpenId extends Component {
   componentWillMount() {
     var code = this.getQueryString('code')
     var url = "http://wechat-api.tallty.com/cloud_closet_wechat/web_access_token"
-    console.log(url);
+    console.log(code);
     //获取openId
     SuperAgent.post(url)
               .set('Accept', 'application/json')
