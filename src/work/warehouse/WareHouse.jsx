@@ -1,42 +1,55 @@
 /**
  * 预约入库
  */
-import React, { Component, PropTypes } from 'react'
-import css from './ware_house.less'
-import { Link } from 'react-router'
-import { UserInfo } from '../user_info/UserInfo'
-import { ClothesTable } from '../clothes_table/ClothesTable'
-import { Row, Col, Button, Radio } from 'antd'
+import React, { Component, PropTypes } from 'react';
+import css from './ware_house.less';
+import { Link } from 'react-router';
+import { UserInfo } from '../user_info/UserInfo';
+import { ClothesTable } from '../clothes_table/ClothesTable';
+import { Spiner } from '../../components/common/Spiner'
+import { Row, Col, Button, Radio } from 'antd';
+import SuperAgent from 'superagent'
 
-const RadioButton = Radio.Button
-const RadioGroup = Radio.Group
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
 
 export class WareHouse extends Component {
 	state = {
-		data: null
+		appointment: null
 	}
+	data = [
+		{
+			kind: '上衣',
+			season: '春夏',
+			time_length: '3个月',
+			count: 10,
+			price: 20.0,
+			total_price: 200.0
+		},
+		{
+			kind: '连衣裙',
+			season: '秋冬',
+			time_length: '3个月',
+			count: 18,
+			price: 38.0,
+			total_price: 684.0
+		}
+	]
 
 	componentDidMount() {
-		let data = [
-			{
-				kind: '上衣',
-				season: '春夏',
-				time_length: '3个月',
-				count: 10,
-				price: 20.0,
-				total_price: 200.0
-			},
-			{
-				kind: '连衣裙',
-				season: '秋冬',
-				time_length: '3个月',
-				count: 18,
-				price: 38.0,
-				total_price: 684.0
-			}
-		]
-
-		this.setState({data: data})
+		let apointment_id = this.props.location.query.appointment_id
+		SuperAgent
+			.get(`http://closet-api.tallty.com/appointments/${apointment_id}`)
+			.set('Accept', 'application/json')
+			.set('X-User-Token', 'tqjqxAi9dLLJUmK9xjr9')
+			.set('X-User-Phone', '18516591232')
+			.end((err, res) => {
+				if (!err || err === null) {
+					this.setState({ appointment: res.body })
+				} else {
+					alert("获取信息失败")
+				}
+			})
 	}
 
 	onChange(e) {
@@ -44,10 +57,16 @@ export class WareHouse extends Component {
 	}
 
 	render() {
+		let appointment = this.state.appointment
 		return (
 			<div className={css.container}>
 				{/* 用户信息 */}
-				<UserInfo name="Snow" photo="src/images/photo.png" phone="18615766890" />
+				{
+					appointment ? 
+						<UserInfo name={appointment.name} photo="src/images/photo.png" phone={appointment.phone} />
+						: <Spiner />
+				}
+				
 				{/* 季款 */}
 				<div className={css.season}>
 					<span>季款：&nbsp;&nbsp;</span>
@@ -108,7 +127,7 @@ export class WareHouse extends Component {
 				<div className={css.pane}>
 					<div className={css.pane_header}>存衣数量</div>
 					<div className={css.pane_body}>
-						<ClothesTable data={this.state.data} />
+						<ClothesTable data={this.data} />
 					</div>
 				</div>
 				{/* price */}

@@ -8,22 +8,35 @@ import { Spiner } from '../../components/common/Spiner'
 import { Affix } from 'antd'
 import { Link } from 'react-router'
 import { UserInfo } from '../user_info/UserInfo'
+import SuperAgent from 'superagent'
 
 export class AppointList extends Component {
 	state = {
-		list: null
+		appointments: null
 	}
 
 	componentDidMount() {
-		// 模拟数据
-		this.setState({ list: this.props.list })
+		SuperAgent
+			.get('http://closet-api.tallty.com/appointments')
+			.set('Accept', 'application/json')
+			.set('X-User-Token', 'tqjqxAi9dLLJUmK9xjr9')
+			.set('X-User-Phone', '18516591232')
+			.end((err, res) => {
+				if (!err || err === null) {
+					let appointments = res.body.appointments
+					this.setState({ appointments: appointments })	
+				} else {
+					alert("获取信息失败")
+					this.setState({ appointments: [] })	
+				}
+			})
 	}
 
 	initList() {
 		let sort = ''
 		let list_view = []
-		this.state.list.forEach((item, index, obj) => {
-			let date_time = this.parseTime(item.date_time)
+		this.state.appointments.forEach((item, index, obj) => {
+			let date_time = this.parseTime(item.date)
 			let header = null
 			// 按照时间归类
 			if (date_time === sort) {
@@ -38,7 +51,7 @@ export class AppointList extends Component {
 			list_view.push(
 				<div key={index}>
 					{ header }
-					<Link to={`/work_warehouse`} className={css.item}>
+					<Link to={`/work_warehouse?appointment_id=${item.id}`} className={css.item}>
 						<UserInfo name={item.name} photo={item.photo} phone={item.phone} />
 						<div className={css.item_footer}>
 							<img src="src/images/address_icon.svg" alt="icon"/>
@@ -105,102 +118,9 @@ export class AppointList extends Component {
 								style={toolbar_style} 
 								back_style={back_style} />
 				<div className={css.list_view}>
-					{ this.state.list ? this.initList() : <Spiner/> }
+					{ this.state.appointments ? this.initList() : <Spiner/> }
 				</div>
 			</div>
 		)
 	}
-}
-
-AppointList.defaultProps = {
-	list: [
-		{
-			id: 1,
-			name: 'Snow',
-			phone: '18675346566',
-			address: '黄浦区济南路260弄翠湖天地隽荟12栋603号',
-			photo: 'src/images/photo.png',
-			date_time: '2016-10-11T14:00:00.000+08:00' 
-		}, 
-		{
-			id: 2,
-			name: 'Jane',
-			phone: '18675346566',
-			address: '黄浦区济南路260弄翠湖天地隽荟12栋603号',
-			photo: 'src/images/photo.png',
-			date_time: '2016-10-11T14:00:00.000+08:00'
-		},
-		{
-			id: 3,
-			name: 'S',
-			phone: '18675346566',
-			address: '黄浦区济南路260弄翠湖天地隽荟12栋603号',
-			photo: 'src/images/photo.png',
-			date_time: '2016-10-11T14:00:00.000+08:00'
-		},
-		{
-			id: 4,
-			name: 'Jane',
-			phone: '18675346566',
-			address: '黄浦区济南路260弄翠湖天地隽荟12栋603号',
-			photo: 'src/images/photo.png',
-			date_time: '2016-10-11T14:00:00.000+08:00'
-		},
-		{
-			id: 5,
-			name: 'S',
-			phone: '18675346566',
-			address: '黄浦区济南路260弄翠湖天地隽荟12栋603号',
-			photo: 'src/images/photo.png',
-			date_time: '2016-10-11T14:00:00.000+08:00'
-		},
-		{
-			id: 6,
-			name: 'J',
-			phone: '18675346566',
-			address: '黄浦区济南路260弄翠湖天地隽荟12栋603号',
-			photo: '',
-			date_time: '2016-10-10T14:00:00.000+08:00'
-		},
-		{
-			id: 7,
-			name: 'J',
-			phone: '18675346566',
-			address: '黄浦区济南路260弄翠湖天地隽荟12栋603号',
-			photo: '',
-			date_time: '2016-10-10T14:00:00.000+08:00'
-		},
-				{
-			id: 8,
-			name: 'J',
-			phone: '18675346566',
-			address: '黄浦区济南路260弄翠湖天地隽荟12栋603号',
-			photo: 'src/images/photo.png',
-			date_time: '2016-10-10T14:00:00.000+08:00'
-		},
-		{
-			id: 9,
-			name: 'J',
-			phone: '18675346566',
-			address: '黄浦区济南路260弄翠湖天地隽荟12栋603号',
-			photo: 'src/images/photo.png',
-			date_time: '2016-10-10T14:00:00.000+08:00'
-		},
-		{
-			id: 10,
-			name: 'J',
-			phone: '18675346566',
-			address: '黄浦区济南路260弄翠湖天地隽荟12栋603号',
-			photo: 'src/images/photo.png',
-			date_time: '2016-10-10T14:00:00.000+08:00'
-		},
-		{
-			id:1,
-			name: 'Sn',
-			phone: '18675346566',
-			address: '黄浦区济南路260弄翠湖天地隽荟12栋603号',
-			photo: 'src/images/photo.png',
-			date_time: '2016-10-09T14:00:00.000+08:00'
-		}
-	]
 }
