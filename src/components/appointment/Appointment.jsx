@@ -24,7 +24,6 @@ class Appointment extends Component {
   
   handleSubmit(e) {
     e.preventDefault();
-    console.log('收到表单值：', this.props.form.getFieldsValue());
     const value = this.props.form.getFieldsValue()
     var address = value.address_city
     var name = sessionStorage.user_name
@@ -44,9 +43,9 @@ class Appointment extends Component {
     var url = "http://closet-api.tallty.com/appointments"
     SuperAgent.post(url)
               .set('Accept', 'application/json')
-              .set('X-User-Phone', sessionStorage.user_phone)
+              .set('X-User-Phone', sessionStorage.phone)
               .set('X-User-Token', sessionStorage.authentication_token)
-              .send({'appointment': {'address': address, 'name': name, 'phone': sessionStorage.user_phone, 'number': number, 'date': date}})
+              .send({'appointment': {'address': address, 'name': name, 'phone': sessionStorage.phone, 'number': number, 'date': date}})
               .end( (err, res) => {
                 if (res.ok) {
                   this.props.router.replace('/success')

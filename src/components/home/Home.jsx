@@ -17,7 +17,6 @@ export class Home extends Component {
   componentWillMount() {
     var code = this.getQueryString('code')
     var url = "http://wechat-api.tallty.com/cloud_closet_wechat/web_access_token"
-    console.log(url);
     //获取open
     // SuperAgent.post(url)
     //           .set('Accept', 'application/json')

@@ -21,7 +21,6 @@ class LogInForm extends Component {
 
   handlePhone(e) {
     var value = e.target.value;
-    console.log(value);
     this.setState({
       phone: value,
     });
@@ -50,9 +49,7 @@ class LogInForm extends Component {
 
   enterIconLoading(){
     var phone = this.state.phone
-    console.log(phone);
     var url = "http://closet-api.tallty.com/sms_tokens/register"
-    console.log(url);
     //获取验证码
     SuperAgent.post(url)
               .set('Accept', 'application/json')
@@ -70,14 +67,7 @@ class LogInForm extends Component {
     var codenum = this.state.codenum;
     var nickname = this.state.nickname
     var url = "http://closet-api.tallty.com/users"
-    console.log(phone);
-    console.log(password);
-    console.log(codenum);
-    console.log(nickname);
-    console.log(url);
     var name = sessionStorage.openid
-    console.log('test');
-    console.log(name);
     //用户注册
     SuperAgent.post(url)
               .set('Accept', 'application/json')
@@ -105,7 +95,7 @@ class LogInForm extends Component {
                             .end( (err, res) => {
                               if (res.ok) {
                                 sessionStorage.setItem('user_name', res.body.nickname)
-                                sessionStorage.setItem('user_phone', res.body.phone)
+                                sessionStorage.setItem('phone', res.body.phone)
                                 this.props.router.replace('/appointment')
                               }
                               let result = res.body

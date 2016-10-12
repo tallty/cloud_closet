@@ -3,7 +3,6 @@ import SuperAgent from 'superagent';
 module.exports = {
 
   getSkipUrl(){
-    alert(url);
     var appid = 'wx47b02e6b45bf1dad'
     var secret = 'b78a5266c57391d8bd7bce75e86fc3c0'
     var OAuth = require('wechat-oauth');
@@ -16,7 +15,6 @@ module.exports = {
   getOpendId() {
     var code = this.getQueryString('code')
     var url = "http://wechat-api.tallty.com/cloud_closet_wechat/web_access_token"
-    console.log(url);
     //获取open
     SuperAgent.post(url)
               .set('Accept', 'application/json')
@@ -37,7 +35,6 @@ module.exports = {
     if (typeof sessionStorage.openid == 'undefined') {
       sessionStorage.setItem('openid','123456');//使用方法存储数据,推荐 
     }
-    console.log(sessionStorage.openid)
     //获取open
     SuperAgent.post(url)
               .set('Accept', 'application/json')
