@@ -27,17 +27,17 @@ export class User extends Component {
 			list.push(
 				index === 4 ?
 					<Col span={8} className={css.item} key={index}>
+						{dot}
 						<Link to={grid.url}>
-							{dot}
 							<div className={css.ticket}>
 								6800<span className={css.ticket_icon}>￥</span>
 							</div>
+							<div>{grid.name}</div>
 						</Link>
-						<div>{grid.name}</div>
 					</Col> : 
 					<Col span={8} className={css.item} key={index}>
+						{dot}
 						<Link to={grid.url}>
-							{dot}
 							<img src={`/src/images/profile_item${index}.png`} alt=""/>
 							<div>{grid.name}</div>
 						</Link>
@@ -48,19 +48,14 @@ export class User extends Component {
 	}
 
   render() {
-  	// 响应式处理
-  	let _grid = 307
-  	let _nav_tab = 60
-
-  	let container_height = document.body.clientHeight - _nav_tab
-  	let info_height = container_height - _grid
-  	let user_info_top = info_height > 194 ? (info_height - 174) / 2 : 10
+  	// 计算栅格部分容器的高度
+  	let grids_height = (document.body.clientHeight - 60) * 0.52 - 80
 		
     return (
-    	<div className={css.personal_center} style={{height: container_height}}>
+    	<div className={css.personal_center}>
     		{/* 头像信息 */}
-				<div className={css.user_info} style={{height: info_height, minHeight: 194}}>
-					<Link to="/profile" className={css.link_profile} style={{paddingTop: user_info_top}}>
+				<div className={css.user_info}>
+					<Link to="/profile" className={css.link_profile}>
 						<img src="/src/images/photo.png" alt="头像"/>
 						<div className={css.user_name}>John Snow</div>
 						<Level level={this.state.level} level_name={this.state.level_name}/>
@@ -76,20 +71,25 @@ export class User extends Component {
 						</Col>
 					</Row>
 					<Row>
-						<Col span={12} className={css.left_col}>
-							<Link to="/recharge">
-								<Button type="primary" className={css.charge_btn}>充值</Button>
-							</Link>
-						</Col>
+					<Link to="/recharge">
+						<Button type="primary" className={css.charge_btn}>充值</Button>
+					</Link>
+						{/*
 						<Col span={12} className={css.right_col}>
 							<Link to="/withdraw">
 								<Button type="primary" className={css.charge_btn}>提现</Button>
 							</Link>
 						</Col>
+						*/}
 					</Row>
-					<Row className={css.grid}>
-						{ this.getGrid() }
-					</Row>
+
+					<div className={css.grid_container} style={{height: grids_height}}>
+						<Row className={css.grid}>
+							{ this.getGrid() }
+						</Row>
+					</div>
+
+					{/* 邀请好友可得礼券 */}
 	      </div>
       </div>
     )

@@ -47,50 +47,48 @@ export default class Navigation extends React.Component {
         {this.props.children || <Home/>}
         </div>
         {/* 底部导航条 */}
-        <div>
-          <Row className={styles.nav_ul}>
-            <NavLink to="/" onlyActiveOnIndex={true}>
-              <Col span={6} className={styles.home_tab_btn}>
-                <Col span={24} className={styles.icon_col}>
-                  <img src="/src/images/home.svg" alt="" className={styles.home_icon}/>
-                </Col>
-                <Col span={24}>
-                  主页
-                </Col>
+        <Row className={styles.nav_ul}>
+          <NavLink to="/" onlyActiveOnIndex={true}>
+            <Col span={6} className={styles.home_tab_btn}>
+              <Col span={24} className={styles.icon_col}>
+                <img src="/src/images/home.svg" alt="" className={styles.home_icon}/>
               </Col>
-            </NavLink>
-            <NavLink to="/vip" >
-              <Col span={6} className={styles.home_tab_btn}>
-                <Col span={24} className={styles.icon_col}>
-                  <img src="/src/images/fc.svg" alt="" className={styles.home_icon}/>
-                </Col>
-                <Col span={24}>
-                  Fanc Club
-                </Col>
+              <Col span={24}>
+                主页
               </Col>
-            </NavLink>
-            <NavLink to="/MyCloset" >
-              <Col span={6} className={styles.home_tab_btn}>
-                <Col span={24} className={styles.icon_col}>
-                  <img src="/src/images/closet.svg" alt="" className={styles.home_icon}/>
-                </Col>
-                <Col span={24}>
-                  我的衣橱
-                </Col>
+            </Col>
+          </NavLink>
+          <NavLink to="/vip" >
+            <Col span={6} className={styles.home_tab_btn}>
+              <Col span={24} className={styles.icon_col}>
+                <img src="/src/images/fc.svg" alt="" className={styles.home_icon}/>
               </Col>
-            </NavLink>
-            <NavLink to="/user" >
-              <Col span={6} className={styles.home_tab_btn}>
-                <Col span={24} className={styles.icon_col}>
-                  <img src="/src/images/my.svg" alt="" className={styles.home_icon}/>
-                </Col>
-                <Col span={24}>
-                  个人中心
-                </Col>
+              <Col span={24}>
+                Fanc Club
               </Col>
-            </NavLink>
-          </Row>
-        </div>
+            </Col>
+          </NavLink>
+          <NavLink to="/MyCloset" >
+            <Col span={6} className={styles.home_tab_btn}>
+              <Col span={24} className={styles.icon_col}>
+                <img src="/src/images/closet.svg" alt="" className={styles.home_icon}/>
+              </Col>
+              <Col span={24}>
+                我的衣橱
+              </Col>
+            </Col>
+          </NavLink>
+          <NavLink to="/user" >
+            <Col span={6} className={styles.home_tab_btn}>
+              <Col span={24} className={styles.icon_col}>
+                <img src="/src/images/my.svg" alt="" className={styles.home_icon}/>
+              </Col>
+              <Col span={24}>
+                个人中心
+              </Col>
+            </Col>
+          </NavLink>
+        </Row>
       </div>
     )
   }  
