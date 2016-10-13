@@ -46,6 +46,7 @@ export class Routes extends Component {
 
   requireAuth() {
     auth.loggedIn()
+    console.log(sessionStorage.route);
     if(sessionStorage.state != 'true'){
       console.log(sessionStorage.state)
       auth.getSkipUrl()
@@ -60,19 +61,19 @@ export class Routes extends Component {
           {/* 云衣橱品牌主页 */}
           <IndexRoute component={Home} />
           {/* 添加Fanc_Club导航路由 */}
-          <Route path="vip" component={FancClub} />
+          <Route path="vip" component={FancClub} onEnter={this.requireAuth}/>
           {/* 添加我的衣橱导航路由 */}
-          <Route path="MyCloset" component={MyCloset} />
+          <Route path="MyCloset" component={MyCloset} onEnter={this.requireAuth}/>
           {/* 添加个人中心导航路由 */}
-          <Route path="user" component={User} />
+          <Route path="user" component={User} onEnter={this.requireAuth}/>
         </Route>
         
       	{/* 收费详情 */}
 		    <Route path="/charge_detail" component={ChargeDetail} />
 
         {/* 个人中心相关 */}
-        <Route path="/profile" component={Profile} />
-        <Route path="/orders" component={Orders} />
+        <Route path="/profile" component={Profile} onEnter={this.requireAuth}/>
+        <Route path="/orders" component={Orders} onEnter={this.requireAuth}/>
         <Route path="/tickets" component={Ticket} />
         <Route path="/notifications" component={Notification} />
         <Route path="/recharge" component={Recharge} />

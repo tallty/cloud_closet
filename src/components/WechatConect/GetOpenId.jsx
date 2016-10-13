@@ -12,6 +12,8 @@ class GetOpenId extends Component {
   }
 
   componentWillMount() {
+    // this.props.router.replace('/user')
+    // this.props.router.replace(sessionStorage.route)
     var code = this.getQueryString('code')
     var url = "http://wechat-api.tallty.com/cloud_closet_wechat/web_access_token"
     //获取openId
@@ -34,7 +36,8 @@ class GetOpenId extends Component {
                             .end( (erro, ress) => {
                               if (ress.ok){
                                 sessionStorage.state = 'true'
-                                this.props.router.replace('/appointment')
+                                this.props.router.replace(sessionStorage.route)
+                                console.log(sessionStorage.route);
                               }else{
                                 this.props.router.replace('/login')
                               }
