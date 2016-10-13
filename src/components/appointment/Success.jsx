@@ -22,8 +22,8 @@ export class Success extends Component {
           <Col span={24}>
             <div className={styles.bitmap_content}>
               <img src="src/images/bitmap.png" alt="" className={styles.bitmap}/><br/>
-              <label>我是在线客服：小林<br/>长按此图识别图中二维码，可关注我询问详情。</label>
             </div>
+            <div><label>我是在线客服：小林<br/>长按此图识别图中二维码，可关注我询问详情。</label></div>
             <a href="tel:4001232345" >
               <Button className={styles.success_online_phone} type="ghost" htmlType="submit">平台客服热线<br/>400-123-2345</Button>
             </a>

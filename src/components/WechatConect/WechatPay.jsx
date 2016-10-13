@@ -1,5 +1,4 @@
 import SuperAgent from 'superagent'
-import React, { Component } from 'react';
 
 module.exports = {
   appid = 'wx47b02e6b45bf1dad'
@@ -66,17 +65,25 @@ module.exports = {
   // ===============================具体事件=============================
   // 微信支付
   chooseWXPay(){
-    wx.chooseWXPay({
-      timestamp: 0, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-      nonceStr: '', // 支付签名随机串，不长于 32 位
-      package: '', // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-      signType: '', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-      paySign: '', // 支付签名
-      success: function (res) {
-          // 支付成功后的回调函数
-          console.log('支付成功');
-      }
-    });
+    var url = "http://wechat-api.tallty.com/cloud_closet_wechat/wx_pay"
+    SuperAgent.post(url)
+                .set('Accept', 'application/json')
+                .send( {'openid': sessionStorage.openid, 'total_fee': 1 } )
+                .end( (err, res) => {
+                  if (res.ok) {
+                    wx.chooseWXPay({
+                      timestamp: res.body.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                      nonceStr: res.body.nonceStr, // 支付签名随机串，不长于 32 位
+                      package: res.body.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                      signType: res.body.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                      paySign: res.body.paySign, // 支付签名
+                      success: function (res) {
+                          // 支付成功后的回调函数
+                          console.log('支付成功');
+                      }
+                    });
+                  }
+                })  
   }
   
   // 分享给朋友
