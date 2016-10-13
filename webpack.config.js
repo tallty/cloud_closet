@@ -11,12 +11,6 @@ module.exports = function(webpackConfig) {
     style: true,  // use less if true
   }]);
 
-  // Enable this if you have to support IE8.
-  // webpackConfig.module.loaders.unshift({
-  //   test: /\.jsx?$/,
-  //   loader: 'es3ify-loader',
-  // });
-
   // less files in "node_modules" folders and files named "global.less" or "*-global.less"
   const globalLessMatch = new RegExp('(?:/node_modules/.+|/global/.+-global)\\.less$');
   // less files in project "src" folder

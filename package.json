@@ -31,7 +31,7 @@
     "atool-test-mocha": "^0.1.4",
     "babel-eslint": "^6.0.0",
     "babel-plugin-antd": "^0.4.1",
-    "dora": "0.3.x",
+    "dora": "0.4.x",
     "dora-plugin-browser-history": "^0.1.1",
     "dora-plugin-hmr": "0.6.x",
     "dora-plugin-livereload": "0.3.x",
