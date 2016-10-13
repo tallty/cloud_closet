@@ -74,7 +74,6 @@ export class User extends Component {
 					<Link to="/recharge">
 						<Button type="primary" className={css.charge_btn}>充值</Button>
 					</Link>
-						{/*
 						<Col span={12} className={css.right_col}>
 							<Link to="/withdraw">
 								<Button type="primary" className={css.charge_btn}>提现</Button>

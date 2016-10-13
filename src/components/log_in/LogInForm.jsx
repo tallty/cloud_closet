@@ -5,6 +5,7 @@ import {Row, Col, Input, Button } from 'antd'
 import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'
 import styles from './LogInForm.less'
+import Countdown from './Countdown';
 
 const InputGroup = Input.Group;
 
@@ -73,18 +74,7 @@ class LogInForm extends Component {
               .set('Accept', 'application/json')
               .send({'user': {'phone': phone, 'password': password, 'sms_token': codenum}})
               .end( (err, res) => {
-                let result = res.body
-                console.log(result)
-              })
-
-    //用户登录
-    var url1 = 'http://closet-api.tallty.com/users/sign_in'
-    SuperAgent.post(url1)
-              .set('Accept', 'application/json')
-              .send({'user': {'phone': phone, 'password': password}})
-              .end( (err, res) => {
                 if (res.ok) {
-                  sessionStorage.authentication_token = res.body.authentication_token
                   //用户绑定
                   var url2 = "http://closet-api.tallty.com/user_info/bind"
                   SuperAgent.post(url2)
@@ -96,15 +86,26 @@ class LogInForm extends Component {
                               if (res.ok) {
                                 sessionStorage.setItem('user_name', res.body.nickname)
                                 sessionStorage.setItem('phone', res.body.phone)
-                                this.props.router.replace('/appointment')
+                                //用户登录
+                                var url1 = 'http://closet-api.tallty.com/users/sign_in'
+                                SuperAgent.post(url1)
+                                          .set('Accept', 'application/json')
+                                          .send({'user': {'phone': phone, 'password': password}})
+                                          .end( (err, res) => {
+                                            if (res.ok) {
+                                              sessionStorage.authentication_token = res.body.authentication_token
+                                              this.props.router.replace(sessionStorage.route)
+                                            }else{
+                                              alert('用户登录失败！')
+                                            }
+                                          })
+                              }else{
+                                alert('用户绑定失败！')
                               }
-                              let result = res.body
-                              console.log(result)
                             })
                 }else{
-                  alert('用户登录失败！')
+                  alert('用户注册失败！')
                 }
-                
               })
   }
 
@@ -152,7 +153,7 @@ class LogInForm extends Component {
         </InputGroup>
         <InputGroup>
           <Row className={styles.login_input_header}>
-            <Col span={6} className={container_classnames3}><Button className={styles.checked_number_btn} onClick={this.enterIconLoading.bind(this)}>获取验证码</Button></Col>
+            <Col span={6} className={container_classnames3}><Countdown {...this.state}/></Col>
             <Col span={18}>
               <Input placeholder="输入验证码" type='text' name='codenum' id='codenum' value={this.state.codenum} onChange={this.handleCodenum.bind(this)} />
             </Col>

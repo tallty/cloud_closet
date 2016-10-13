@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { Router, Route, IndexRoute, Link, Redirect } from 'react-router'
 // 微信api相关功能
 import auth from '../components/WechatConect/auth'
-import {WechatConect} from '../components/WechatConect/WechatConect'
 import GetOpenId from '../components/WechatConect/GetOpenId'
 // 底部导航
 import Navigation from '../layouts/NavigationLayout/Navigation'
@@ -56,7 +55,6 @@ export class Routes extends Component {
 	render() {
 		return (
 			<Router history={this.props.history}>
-        <Route path="/wechat" component={WechatConect} />
 		    <Route path="/" component={Navigation} >
           {/* 云衣橱品牌主页 */}
           <IndexRoute component={Home} />
