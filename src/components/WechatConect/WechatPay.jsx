@@ -1,36 +1,27 @@
 import SuperAgent from 'superagent'
 import React, { Component } from 'react';
 
-export class WechatPay extends Component {
+module.exports = {
   appid = 'wx47b02e6b45bf1dad'
   authorize_url = location.href.split('#')[0]
   share_image_url = 'http://ws.tallty.com/src/image/wechat_share_icon.png'
   share_title = "【上海天气】雨量交通实时查询"
 
-  state = {
-    share_desc: null,
-    config: null
-  }
 
-  componentDidMount() {
+  getConfig() {
     // 调用接口，获取鉴权签名后的config
     SuperAgent
-    .post('http://wechat-api.tallty.com/cloud_closet_wechat/wx_pay')
-    .send({page_url: this.authorize_url})
+    .post('http://wechat-api.tallty.com/cloud_closet_wechat/js_hash')
     .set('Accept', 'application/json')
     .end((err, res) => {
       let config = res.body
       console.log(config);
+      if (res.ok) {
+        this.wechatReady()
+      }
       // 初始化配置
       this.wechartConfig(config)
-      this.setState({ config: config })
     })
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log("2、组件更新成功")
-    // wechat 事件
-    this.wechatReady()
   }
  
   // 实例化jdk功能
@@ -62,16 +53,14 @@ export class WechatPay extends Component {
   // 关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接
   // 调用，不需要放在ready函数中。
   wechatReady() {
-    if (this.state.config) {
-      console.log("3、wechat ready")
-      wx.ready(() => {
-        this.onMenuShareTimeline();
-        this.onMenuShareQQ();
-        this.onMenuShareWeibo();
-        this.onMenuShareAppMessage();
-        this.chooseWXPay();
-      })
-    }
+    console.log("3、wechat ready")
+    wx.ready(() => {
+      this.onMenuShareTimeline();
+      this.onMenuShareQQ();
+      this.onMenuShareWeibo();
+      this.onMenuShareAppMessage();
+      this.chooseWXPay();
+    })
   }
 
   // ===============================具体事件=============================
@@ -181,11 +170,5 @@ export class WechatPay extends Component {
         console.log(JSON.stringify(res));
       }
     });
-  }
-
-  render() {
-    return (
-      <div></div>
-    );
   }
 }
