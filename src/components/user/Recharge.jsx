@@ -2,6 +2,7 @@
  * 个人中心 - 重值
  */
 import React, { Component, PropTypes } from 'react'
+import WechatPay from '../WechatConect/WechatPay'
 import css from './recharge.less'
 import { Link } from 'react-router'
 import { Form, Input, Button } from 'antd'
@@ -13,6 +14,10 @@ export class Recharge extends Component {
 	handleSubmit(e) {
 		e.preventDefault();
     console.log('收到表单值：', this.props.form.getFieldsValue());
+	}
+
+	componentWillMount() {
+		// WechatPay.getConfig()
 	}
 
 	render() {
@@ -42,7 +47,7 @@ export class Recharge extends Component {
 						<Button type="primary" htmlType="submit" className={css.next}>确定</Button>
 					</FormItem>
 					*/}
-
+					<Button type="primary" className={css.next} onClick={WechatPay.chooseWXPay()}>确定</Button>
 					<Link to="/user" className={css.next}>下一步</Link>
 				</Form>
 			</div>

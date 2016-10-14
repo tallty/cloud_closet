@@ -13,8 +13,11 @@ class GetOpenId extends Component {
 
   componentWillMount() {
     // this.props.router.replace('/user')
-    // this.props.router.replace(sessionStorage.route)
+    // this.props.router.replace(localStorage.route)
     var code = this.getQueryString('code')
+    console.log(code)
+    console.log(localStorage.route);
+    console.log(localStorage.openid);
     var url = "http://wechat-api.tallty.com/cloud_closet_wechat/web_access_token"
     //获取openId
     SuperAgent.post(url)
@@ -22,22 +25,25 @@ class GetOpenId extends Component {
               .send({code: code})
               .end( (err, res) => {
                 if (res.ok) {
-                  if (res.body.openid != 'undefined') {
-                    sessionStorage.openid = res.body.openid
-                    // alert(res.body.openid)
-                  }else{
-                    alert('获取用户信息失败，请重新进入！')
-                  }
+                  localStorage.setItem('openid', res.body.openid)
+                  localStorage.openid = res.body.openid
+                  console.log(localStorage.openid);
+                  // if (res.body.openid != 'undefined') {
+                  //   localStorage.openid = res.body.openid
+                  //   // alert(res.body.openid)
+                  // }else{
+                  //   alert('获取用户信息失败，请重新进入！')
+                  // }
                   var url = "http://closet-api.tallty.com/user_info/check_openid"
                   //验证openId
                   SuperAgent.post(url)
                             .set('Accept', 'application/json')
-                            .send({'user': {'openid': sessionStorage.openid} })
+                            .send({'user': {'openid': localStorage.openid} })
                             .end( (erro, ress) => {
                               if (ress.ok){
-                                sessionStorage.state = 'true'
-                                this.props.router.replace(sessionStorage.route)
-                                console.log(sessionStorage.route);
+                                localStorage.state = 'true'
+                                this.props.router.replace(localStorage.route)
+                                console.log(localStorage.route);
                               }else{
                                 this.props.router.replace('/login')
                               }

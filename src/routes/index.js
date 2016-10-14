@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Router, Route, IndexRoute, Link, Redirect } from 'react-router'
 // 微信api相关功能
 import auth from '../components/WechatConect/auth'
+// import WechatPay from '../components/WechatConect/WechatPay'
 import GetOpenId from '../components/WechatConect/GetOpenId'
 // 底部导航
 import Navigation from '../layouts/NavigationLayout/Navigation'
@@ -45,9 +46,9 @@ export class Routes extends Component {
 
   requireAuth() {
     auth.loggedIn()
-    console.log(sessionStorage.route);
-    if(sessionStorage.state != 'true'){
-      console.log(sessionStorage.state)
+    console.log(localStorage.route);
+    if(typeof localStorage.openid == 'undefined'){
+      console.log(localStorage.state)
       auth.getSkipUrl()
     }
   }

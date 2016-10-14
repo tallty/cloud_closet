@@ -26,7 +26,7 @@ class Appointment extends Component {
     e.preventDefault();
     const value = this.props.form.getFieldsValue()
     var address = value.address_city
-    var name = sessionStorage.user_name
+    var name = localStorage.user_name
     var number = value.address_number
     var date = this.date2str(new Date(value.endDate), "yyyy-MM-d")
     this.pushAppoint(address, name, number, date )
@@ -43,9 +43,9 @@ class Appointment extends Component {
     var url = "http://closet-api.tallty.com/appointments"
     SuperAgent.post(url)
               .set('Accept', 'application/json')
-              .set('X-User-Phone', sessionStorage.phone)
-              .set('X-User-Token', sessionStorage.authentication_token)
-              .send({'appointment': {'address': address, 'name': name, 'phone': sessionStorage.phone, 'number': number, 'date': date}})
+              .set('X-User-Phone', localStorage.phone)
+              .set('X-User-Token', localStorage.authentication_token)
+              .send({'appointment': {'address': address, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date}})
               .end( (err, res) => {
                 if (res.ok) {
                   this.props.router.replace('/success')
@@ -55,6 +55,7 @@ class Appointment extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    console.log(localStorage.openid);
     return (
       <div className={styles.order_container}>
         

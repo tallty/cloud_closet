@@ -68,24 +68,29 @@ class LogInForm extends Component {
     var codenum = this.state.codenum;
     var nickname = this.state.nickname
     var url = "http://closet-api.tallty.com/users"
-    var name = sessionStorage.openid
+    var name = localStorage.openid
+
+    console.log(localStorage.authentication_token);
+    console.log(localStorage.openid);
+    alert(localStorage.openid)
     //用户注册
     SuperAgent.post(url)
               .set('Accept', 'application/json')
               .send({'user': {'phone': phone, 'password': password, 'sms_token': codenum}})
               .end( (err, res) => {
                 if (res.ok) {
+                  localStorage.authentication_token = res.body.authentication_token
                   //用户绑定
                   var url2 = "http://closet-api.tallty.com/user_info/bind"
                   SuperAgent.post(url2)
                             .set('Accept', 'application/json')
                             .set('X-User-Phone', phone)
-                            .set('X-User-Token', sessionStorage.authentication_token)
-                            .send({'user': {'openid': sessionStorage.openid}})
+                            .set('X-User-Token', localStorage.authentication_token)
+                            .send({'user': {'openid': localStorage.openid}})
                             .end( (err, res) => {
                               if (res.ok) {
-                                sessionStorage.setItem('user_name', res.body.nickname)
-                                sessionStorage.setItem('phone', res.body.phone)
+                                localStorage.setItem('user_name', res.body.nickname)
+                                localStorage.setItem('phone', res.body.phone)
                                 //用户登录
                                 var url1 = 'http://closet-api.tallty.com/users/sign_in'
                                 SuperAgent.post(url1)
@@ -93,19 +98,22 @@ class LogInForm extends Component {
                                           .send({'user': {'phone': phone, 'password': password}})
                                           .end( (err, res) => {
                                             if (res.ok) {
-                                              sessionStorage.authentication_token = res.body.authentication_token
-                                              this.props.router.replace(sessionStorage.route)
+                                              localStorage.authentication_token = res.body.authentication_token
+                                              this.props.router.replace(localStorage.route)
                                             }else{
                                               alert('用户登录失败！')
                                             }
+                                            console.dir(err);
                                           })
                               }else{
                                 alert('用户绑定失败！')
                               }
+                              console.dir(err);
                             })
                 }else{
                   alert('用户注册失败！')
                 }
+                console.dir(err);
               })
   }
 

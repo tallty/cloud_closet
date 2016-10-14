@@ -25,23 +25,25 @@ module.exports = {
 
   loggedIn() {
     var r = this.GetUrlRelativePath()
+    localStorage.setItem('route', r)
+    localStorage.route = r
     var url = "http://closet-api.tallty.com/user_info/check_openid"
-    if (typeof sessionStorage.openid == 'undefined') {
-      sessionStorage.setItem('openid','123456');//使用方法存储数据,推荐
+    console.log(localStorage.openid);
+    if (typeof localStorage.openid == 'undefined') {
+      localStorage.state = false
+    }else{
+      //获取open
+      SuperAgent.post(url)
+                .set('Accept', 'application/json')
+                .send({'user': {'openid': localStorage.openid} })
+                .end( (err, res) => {
+                  localStorage.setItem('state', res.ok)
+                  localStorage.setItem('phone',res.body.phone)
+                  localStorage.setItem('authentication_token',res.body.authentication_token)
+                })
+                console.log(localStorage.authentication_token)
+                console.log(localStorage.openid)
+                console.log("11111111111")
     }
-    //获取open
-    SuperAgent.post(url)
-              .set('Accept', 'application/json')
-              .send({'user': {'openid': sessionStorage.openid} })
-              .end( (err, res) => {
-                // alert(res.ok)
-                sessionStorage.setItem('route', r)
-                sessionStorage.route = r
-                sessionStorage.setItem('state', res.ok)
-                sessionStorage.setItem('phone',res.body.phone)
-                sessionStorage.setItem('authentication_token',res.body.authentication_token)
-              })
-              console.log(sessionStorage.route)
-              console.log("11111111111")
   },
 }

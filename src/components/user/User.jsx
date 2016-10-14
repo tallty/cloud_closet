@@ -50,7 +50,7 @@ export class User extends Component {
   render() {
   	// 计算栅格部分容器的高度
   	let grids_height = (document.body.clientHeight - 60) * 0.52 - 80
-		
+		console.log(localStorage.openid);
     return (
     	<div className={css.personal_center}>
     		{/* 头像信息 */}
