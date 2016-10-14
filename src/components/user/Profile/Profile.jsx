@@ -3,6 +3,7 @@ import css from './profile.less'
 import { Celler } from '../../common/Celler'
 import WeUI from 'react-weui'
 import 'weui'
+import WechatKit from '../../WechatConect/WechatKit'
 
 const { ActionSheet } = WeUI
 
@@ -44,11 +45,12 @@ export class Profile extends Component {
 	}
 	// 拍照
 	takePhoto() {
-
+		let kit = new WechatKit();
+		kit.chooseImage();
 	}
 	// 相册选择
 	choosePhoto() {
-
+		
 	}
 	// ====================头像处理====================
 
