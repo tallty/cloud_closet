@@ -17,7 +17,7 @@ export class Recharge extends Component {
 	}
 
 	componentWillMount() {
-		// WechatPay.getConfig()
+		WechatPay.getConfig()
 	}
 
 	render() {
@@ -46,8 +46,9 @@ export class Recharge extends Component {
 						<FormItem>
 						<Button type="primary" htmlType="submit" className={css.next}>确定</Button>
 					</FormItem>
-					*/}
 					<Button type="primary" className={css.next} onClick={WechatPay.chooseWXPay()}>确定</Button>
+					*/}
+					
 					<Link to="/user" className={css.next}>下一步</Link>
 				</Form>
 			</div>
