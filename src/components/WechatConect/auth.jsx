@@ -37,12 +37,14 @@ module.exports = {
                 .set('Accept', 'application/json')
                 .send({'user': {'openid': localStorage.openid} })
                 .end( (err, res) => {
-                  localStorage.setItem('state', res.ok)
-                  localStorage.setItem('phone',res.body.phone)
-                  localStorage.setItem('authentication_token',res.body.authentication_token)
+                  localStorage.state = res.ok
+                  localStorage.phone = res.body.phone
+                  localStorage.authentication_token = res.body.authentication_token
                 })
                 console.log(localStorage.authentication_token)
+                console.log(localStorage.state)
                 console.log(localStorage.openid)
+                console.log(localStorage.phone)
                 console.log("11111111111")
     }
   },

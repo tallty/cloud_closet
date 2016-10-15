@@ -47,7 +47,7 @@ export class Routes extends Component {
   requireAuth() {
     auth.loggedIn()
     console.log(localStorage.route);
-    if(typeof localStorage.openid == 'undefined'){
+    if(localStorage.state != 'true'){
       console.log(localStorage.state)
       auth.getSkipUrl()
     }
