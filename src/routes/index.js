@@ -38,19 +38,8 @@ import { NewAddress } from '../components/address/new_address/NewAddress'
 import { Dispatching } from '../components/dispatching/Dispatching'
 
 export class Routes extends Component {
-  checkout(){
-    if(auth.loggedIn() == true){
-
-    }
-  }
-
   requireAuth() {
-    auth.loggedIn()
-    console.log(localStorage.route);
-    if(localStorage.state != 'true'){
-      console.log(localStorage.state)
-      auth.getSkipUrl()
-    }
+    auth.loggedIn();
   }
 
 	render() {

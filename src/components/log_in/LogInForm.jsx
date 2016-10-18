@@ -62,67 +62,84 @@ class LogInForm extends Component {
               })
   }
 
+  /**
+   * [register 用户注册]
+   * 缓存：authentication_token
+   */
   register(){
-    var phone = this.state.phone;
-    var password = this.state.password;
-    var codenum = this.state.codenum;
-    var nickname = this.state.nickname
-    var url = "http://closet-api.tallty.com/users"
-    var name = localStorage.openid
+    let { phone, password, codenum } = this.state
+    
+    SuperAgent
+      .post("http://closet-api.tallty.com/users")
+      .set('Accept', 'application/json')
+      .send({'user': {'phone': phone, 'password': password, 'sms_token': codenum}})
+      .end( (err, res) => {
+        if (res.ok) {
+          // 保存token, phone, 
+          localStorage.setItem('authentication_token', res.body.authentication_token)
+          // 绑定
+          this.userBind();
 
-    console.log(localStorage.authentication_token);
-    console.log(localStorage.openid);
-    alert(localStorage.openid)
-    //用户注册
-    SuperAgent.post(url)
-              .set('Accept', 'application/json')
-              .send({'user': {'phone': phone, 'password': password, 'sms_token': codenum}})
-              .end( (err, res) => {
-                if (res.ok) {
-                  localStorage.authentication_token = res.body.authentication_token
-                  //用户绑定
-                  var url2 = "http://closet-api.tallty.com/user_info/bind"
-                  SuperAgent.post(url2)
-                            .set('Accept', 'application/json')
-                            .set('X-User-Phone', phone)
-                            .set('X-User-Token', localStorage.authentication_token)
-                            .send({'user': {'openid': localStorage.openid}})
-                            .end( (err, res) => {
-                              if (res.ok) {
-                                localStorage.setItem('user_name', res.body.nickname)
-                                localStorage.setItem('phone', res.body.phone)
-                                //用户登录
-                                var url1 = 'http://closet-api.tallty.com/users/sign_in'
-                                SuperAgent.post(url1)
-                                          .set('Accept', 'application/json')
-                                          .send({'user': {'phone': phone, 'password': password}})
-                                          .end( (err, res) => {
-                                            if (res.ok) {
-                                              localStorage.authentication_token = res.body.authentication_token
-                                              this.props.router.replace(localStorage.route)
-                                            }else{
-                                              alert('用户登录失败！')
-                                            }
-                                            console.dir(err);
-                                          })
-                              }else{
-                                alert('用户绑定失败！')
-                              }
-                              console.dir(err);
-                            })
-                }else{
-                  alert('用户注册失败！')
-                }
-                console.dir(err);
-              })
+          console.log('用户注册成功 =>')
+          console.dir(res)
+        }else{
+          console.dir(err);
+          alert('用户注册失败！')
+        }
+      })
   }
 
-  // enterLoading() {
-  //   this.setState({ loading: true });
-  // }
-  // enterIconLoading() {
-  //   this.setState({ iconLoading: true });
-  // }
+  /**
+   * [userBind 用户绑定]
+   * 缓存：nickname、phone
+   */
+  userBind() {
+    let { phone } = this.state
+    SuperAgent
+      .post("http://closet-api.tallty.com/user_info/bind")
+      .set('Accept', 'application/json')
+      .set('X-User-Phone', phone)
+      .set('X-User-Token', localStorage.authentication_token)
+      .send({'user': {'openid': localStorage.openid}})
+      .end( (err, res) => {
+        if (res.ok) {
+          // 保存用户信息
+          localStorage.setItem('user_name', res.body.nickname)
+          localStorage.setItem('phone', res.body.phone)
+          // 用户登录
+          this.signIn();
+
+          console.log('用户绑定成功 =>')
+          console.dir(res)
+        }else{
+          console.dir(err);
+          alert('用户绑定失败！')
+        }
+      })
+  }
+
+  /**
+   * [signIn 登录]
+   * 重定向
+   */
+  signIn() {
+    let { phone, password } = this.state
+    SuperAgent
+      .post('http://closet-api.tallty.com/users/sign_in')
+      .set('Accept', 'application/json')
+      .send({'user': {'phone': phone, 'password': password}})
+      .end( (err, res) => {
+        if (res.ok) {
+          this.props.router.replace(localStorage.route)
+
+          console.log('用户登录成功 =>')
+          console.dir(res)
+        }else{
+          console.dir(err);
+          alert('用户登录失败！')
+        }
+      })
+  }
 
   render() {
     let container_classnames1 = classnames(
