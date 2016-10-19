@@ -1,0 +1,104 @@
+// 生成订单
+.appoint_order {
+	height: 100%;
+	padding-top: 50px;
+	background: #fff;
+	overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  .order {
+  	padding: 15px 15px 0;
+  	.tips {
+  		margin-top: 30px;
+  		span {
+  			color: #FF9241;
+  		}
+  	}
+  	.total_price {
+  		color: #757575;
+  		font-size: 14px;
+  		margin-bottom: 23px;
+  		span {
+  			color: #FF9241;
+  			font-size: 24px;
+  		}
+  	}
+  }
+	hr {
+		border: none;
+		border-top: 1px dashed #D1C8C0;
+		margin: 15px;
+	}
+}
+.recharge_btn {
+	width: 210px;
+	height: 35px;
+	text-align: center;
+	line-height: 35px;
+	background-color: #F9F9F9;
+	border: 1px solid #DDDDDD;
+	color: #4A4A4A;
+	font-size: 14px;
+	border-radius: 4px;
+	margin: 15px auto 0;
+	display: block;
+	&:active {
+		background-color: darken(#FF9241, 10%);
+	}
+}
+.pay_btn {
+	width: 210px;
+	height: 35px;
+	text-align: center;
+	line-height: 35px;
+	background-color: #F9F9F9;
+	border: 1px solid #FF9241;
+	color: #4A4A4A;
+	font-size: 14px;
+	border-radius: 4px;
+	margin: 40px auto 0;
+	display: block;
+	&:active {
+		border-color: darken(#FF9241, 10%);
+	}
+}
+
+// 成功申请
+.appoint_success {
+	.title {
+		font-size: 19px;
+		text-align: center;
+		color: #FF9241;
+		border-bottom: 1px solid #D1C8C0;
+		padding: 16px 0;
+		margin-top: 74px;
+		margin-bottom: 34px;
+		line-height: 1;
+	}
+	.tips {
+		color: #757575;
+		font-size: 14px;
+		text-align: center;
+	}
+	.help {
+		padding-top: 85px;
+		text-align: center;
+		.border_div {
+			display: inline-block;
+			height: 40px;
+			width: 150px;
+			border: 1px solid #FF9241;
+			border-radius: 4px;
+			color: #ADADAD;
+			font-size: 12px;
+			text-align: center;
+			line-height: 1.2;
+			vertical-align: middle;
+			a {
+				margin-top: 6px;
+				color: #ADADAD;
+				text-decoration: none;
+				display: inline-block;
+			}
+		}
+	}
+}

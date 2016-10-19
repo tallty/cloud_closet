@@ -35,6 +35,16 @@ export class OrderItems extends Component {
 		return total
 	}
 
+	// 付款
+	handlePay(appointment) {
+		console.log("付款订单")
+		console.log(appointment)
+		let appointment_str = JSON.stringify(appointment)
+		sessionStorage.setItem('appointment', appointment_str)
+		// 重定向
+		location.href="/order"
+	}
+
 	// 订单列表
 	getItems() {
 		let { type, items } = this.props
@@ -76,7 +86,7 @@ export class OrderItems extends Component {
 									{/*判断是否显示*/}
 									<div className={css.btns}>
 										<Button type="ghost" className={css.show_btn}>取消订单</Button>
-										<Button type="primary" className={css.sure_btn}>付款</Button>
+										<Button type="primary" className={css.sure_btn} onClick={this.handlePay.bind(this, item)}>付款</Button>
 									</div>
 								</Col>
 							</Row>

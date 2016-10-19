@@ -19,6 +19,7 @@ import { LogIn } from '../components/log_in/LogIn'
 import { Profile } from '../components/user/Profile/Profile'
 import { FancClub } from '../components/user/FancClub'
 import { Orders } from '../components/user/Orders/Orders'
+import { Order } from '../components/user/Orders/Order'
 import { Ticket } from '../components/user/Ticket'
 import { Notification } from '../components/user/Notification'
 import { Recharge } from '../components/user/Recharge'
@@ -62,6 +63,7 @@ export class Routes extends Component {
         {/* 个人中心相关 */}
         <Route path="/profile" component={Profile}/>
         <Route path="/orders" component={Orders}/>
+        <Route path="/order" component={Order}/>
         <Route path="/tickets" component={Ticket} />
         <Route path="/notifications" component={Notification} />
         <Route path="/recharge" component={Recharge} />
