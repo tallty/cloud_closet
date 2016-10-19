@@ -49,12 +49,20 @@
     :focus:-moz-placeholder {
       opacity: 0.5;
     }
-
-    .location_icon {
-      width: 20px;
-      height: 22px;
-      margin-right: 8px;
-      margin-top: 2px;
+    .location_icon_content {
+      display: table-cell;/*图片容器以表格的单元格形式显示*/
+      text-align: center; /* 实现水平居中 */
+      vertical-align: middle; /*实现垂直居中*/  
+      .location_icon {
+        width: 20px;
+        height: 22px;
+        margin-top: 2px;
+        // vertical-align: middle; /*图片垂直居中*/
+      }
+    }
+    .address_show {
+      text-align: center;
+      padding-bottom: 10px;
     }
     .address_input {
       height: 40px;

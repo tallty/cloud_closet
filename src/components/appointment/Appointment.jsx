@@ -1,6 +1,7 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
 import SuperAgent from 'superagent'
+import locationPromise from '../Common/locationPromise'
 import { Form, Radio, Button, Checkbox, DatePicker, Row, Col, Input } from 'antd'
 import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'
@@ -21,15 +22,31 @@ class Appointment extends Component {
       date: ''
     }
   }
+
+  componentWillMount() {
+    locationPromise().then((value) => {
+      let poi = {
+        address: value.addr,
+        position: { lng: value.lng, lat: value.lat },
+        province: value.province,
+        city: value.city,
+        district: value.district
+      }
+      // 回调BaiduMap 的 updatePointAndData 方法进行打点，并刷新数据
+      var address = poi.address
+      console.log(`获取到的地址：${address}`);
+      this.setState({ address: address })
+    })
+  }
   
   handleSubmit(e) {
     e.preventDefault();
     const value = this.props.form.getFieldsValue()
-    var address = value.address_city
+    var address_d = value.address_number + this.state.address
     var name = localStorage.user_name
-    var number = value.address_number
+    var number = value.number
     var date = this.date2str(new Date(value.endDate), "yyyy-MM-d")
-    this.pushAppoint(address, name, number, date )
+    this.pushAppoint(address_d, name, number, date )
   }
 
   // 时间格式转换函数
@@ -39,13 +56,13 @@ class Appointment extends Component {
   }
 
   // 预约
-  pushAppoint(address, name, number, date){
+  pushAppoint(address_d, name, number, date){
     var url = "http://closet-api.tallty.com/appointments"
     SuperAgent.post(url)
               .set('Accept', 'application/json')
               .set('X-User-Phone', localStorage.phone)
               .set('X-User-Token', localStorage.authentication_token)
-              .send({'appointment': {'address': address, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date}})
+              .send({'appointment': {'address': address_d, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date}})
               .end( (err, res) => {
                 if (res.ok) {
                   this.props.router.replace('/success')
@@ -55,7 +72,6 @@ class Appointment extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    console.log("appointment openid: "+localStorage.openid);
     return (
       <div className={styles.order_container}>
         
@@ -63,16 +79,19 @@ class Appointment extends Component {
         
         <Row className={styles.order_content}>
           <Form horizontal onSubmit={this.handleSubmit.bind(this)} >
-            <Col span={2}>
-              <img src="src/images/orange_location_icon.svg" alt="" className={styles.location_icon}/>
+            <Col span={2} offset={11} className={styles.location_icon_content}>
+              <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
             </Col>
-            <Col span={22}>
-              <FormItem id="control-input1" >
-                {getFieldDecorator('address_city', { initialValue: '' })(
-                  <Input id="control-input1" placeholder="上门服务"/>
-                )}
-              </FormItem>
+            <Col className={styles.address_show} span={24} >
+              {this.state.address}
             </Col>
+            {/*<Col span={22}>
+                <FormItem id="control-input1" >
+                  {getFieldDecorator('address_city', { initialValue: '' })(
+                    <Input id="control-input1" placeholder="上门服务"/>
+                  )}
+                </FormItem>
+              </Col>*/}
             <Col span={22} offset={2}>
               <FormItem id="control-input2">
               {getFieldDecorator('address_number', { initialValue: '' })(
@@ -82,7 +101,7 @@ class Appointment extends Component {
             </Col>
             <Col span={24} className={styles.line_two}>
               <FormItem className={styles.clo_number_radio}>
-              {getFieldDecorator('gender', { initialValue: '10' })(
+              {getFieldDecorator('number', { initialValue: '10' })(
                 <RadioGroup>
                   <RadioButton className={styles.label_one} value="10">10件</RadioButton>
                   <RadioButton className={styles.label_two} value="30">30件</RadioButton>
