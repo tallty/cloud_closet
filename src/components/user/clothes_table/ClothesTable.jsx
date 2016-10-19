@@ -12,6 +12,10 @@ export class ClothesTable extends Component {
 		this.props.itemClickEvent(index,item)
 	}
 
+	getTotalPrice(item) {
+		return item.store_month * item.count * item.price
+	}
+
 	getOrderList() {
 		let img_map = new Map([
 			['上衣', 'src/images/shangyi.png'],
@@ -30,17 +34,17 @@ export class ClothesTable extends Component {
 				<Row key={index} className={css.order_item} onClick={this.handleClick.bind(this,index,item)}>
 					<Col span={7} style={{textAlign: 'left'}}>
 						<div className={css.img_div}>
-							<img src={img_map.get(item.kind)} alt="icon"/>
+							<img src={"src/images/shangyi.png"} alt="icon"/>
 						</div>
 						<div className={css.kind}>
-							<p>{item.kind}</p>
-							<div className={css.tag}>{item.season}</div>
+							<p>{item.kind} 上衣</p>
+							<div className={css.tag}>{item.season}春夏</div>
 						</div>
 					</Col>
 					<Col span={5}>{this.parseStoreMonth.get(item.store_month)}</Col>
 					<Col span={4}>{item.count}</Col>
 					<Col span={4}>{item.price}</Col>
-					<Col span={4}>{item.total_price}</Col>
+					<Col span={4}>{this.getTotalPrice(item)}</Col>
 				</Row>
 			)
 		})
