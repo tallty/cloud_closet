@@ -92,18 +92,6 @@ export class InClothes extends Component {
 							<Col span={24} className={css.empty_table}>未添加任何衣服</Col>
 						</Row>
 				}
-
-				{/* 所有入库衣服的总价（合计） */}
-				<p className="text-right">运费：XXX</p>
-				<p className="text-right">服务费：XXX</p>
-				<Row>
-					<Col span={12} className={css.nurse}>
-						护理要求： <span>每次护理</span>
-					</Col>
-					<Col span={12} className={css.total_price}>
-						合计： <span>{this.getTotalPrice()}</span>
-					</Col>
-				</Row>
 			</div>
 		)
 	}
@@ -111,7 +99,7 @@ export class InClothes extends Component {
 
 InClothes.defaultProps = {
 	order: {},
-	onTableClickEvent: () => {}
+	itemClickEvent: () => { console.log("响应默认的点击事件") }
 }
 
 InClothes.PropTypes = {
@@ -136,5 +124,5 @@ InClothes.PropTypes = {
 			})
 		)
 	}),
-	onTableClickEvent: PropTypes.func
+	itemClickEvent: PropTypes.func
 }

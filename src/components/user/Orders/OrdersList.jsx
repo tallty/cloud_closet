@@ -26,12 +26,21 @@ export class OrdersList extends Component {
 		}
 	}
 
+	// 获取订单的合计
+	getTotalPrice(order) {
+		let total = 0
+		for(let item of order.appointment_item_groups) {
+			total += item.price
+		}
+		return total
+	}
+
 	// 付款
-	handlePay(appointment) {
+	handlePay(order) {
 		console.log("付款订单")
-		console.log(appointment)
-		let appointment_str = JSON.stringify(appointment)
-		sessionStorage.setItem('appointment', appointment_str)
+		console.log(order)
+		let order_str = JSON.stringify(order)
+		sessionStorage.setItem('order', order_str)
 		// 重定向
 		location.href="/order"
 	}
@@ -116,6 +125,16 @@ export class OrdersList extends Component {
 						<div className={css.content}>
 							{/* 入库衣服列表 */}
 							<InClothes order={order}/>
+							<p className="text-right">运费：XXX</p>
+							<p className="text-right">服务费：XXX</p>
+							<Row>
+								<Col span={12} className={css.nurse}>
+									护理要求： <span>每次护理</span>
+								</Col>
+								<Col span={12} className={css.total_price}>
+									合计： <span>{this.getTotalPrice(order)}</span>
+								</Col>
+							</Row>
 							{/* 取衣服列表 */}
 							{/* <OutClothes order={order}/> */}
 						</div>

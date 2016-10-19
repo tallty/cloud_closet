@@ -16,29 +16,24 @@ const nurseWay = new Map([
 
 export class Order extends Component {
 	state = {
-		appointment: null
+		order: null
 	}
 
 	componentWillMount() {
-		let appointment_str = sessionStorage.appointment
-		let appointment = JSON.parse(appointment_str)
+		let order_str = sessionStorage.order
+		let order = JSON.parse(order_str)
 
 		this.setState({
-			appointment: appointment
+			order: order
 		})
 	}
 
-	/**
-	 * [getTotalPrice 计算本次入库的总价格]
-	 */
+	// 获取订单的合计
 	getTotalPrice() {
-		let { appointment_item_groups } = this.state.appointment
-		// 入库衣服总价格(无运费、服务费)
 		let total = 0
-		appointment_item_groups.forEach((item, i, obj) => {
-			total = total + item.count * item.store_month * item.price
-		})
-
+		for(let item of this.state.order.appointment_item_groups) {
+			total += item.price
+		}
 		return total
 	}
 
@@ -58,7 +53,7 @@ export class Order extends Component {
 			color: '#fff'
 		}
 
-		let { appointment } = this.state
+		let { order } = this.state
 
 		return (
 			<div className={css.appoint_order}>
@@ -68,7 +63,7 @@ export class Order extends Component {
 								back_style={back_style} />
 
 				<div className={css.order}>
-					<SaveClothes groups={appointment.appointment_item_groups} />
+					<InClothes order={order} />
 					<Row className={css.tips}>
 						<Col span={12}>护理要求：&nbsp;&nbsp;<span>每次护理</span></Col>
 						<Col span={12} className="text-right">运费：XXX</Col>
