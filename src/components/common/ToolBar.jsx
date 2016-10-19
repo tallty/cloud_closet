@@ -11,7 +11,9 @@ export class Toolbar extends Component {
 				<Link to={this.props.url} className={css.back} style={this.props.back_style}>
 					<Icon type="left" />
 				</Link>
-				<span>{ this.props.title }</span>
+				<div className={css.title}>
+					<span>{ this.props.title }</span>
+				</div>
 				{
 					this.props.children ? 
 						<Link to={this.props.menuUrl} className={css.menu}>
@@ -28,11 +30,11 @@ Toolbar.defaultProps = {
 	url: "/",
 	menuUrl: "/",
 	style: {
-		color: '#7F7F7F',
-		background: '#ffffff'
+		color: '#FFFFFF',
+		background: '#FF9241'
 	},
 	back_style: {
-		color: '#7f7f7f'
+		color: '#FFFFFF'
 	}
 }
 
@@ -40,5 +42,6 @@ Toolbar.propTypes = {
 	title: PropTypes.string,
 	url: PropTypes.string,
 	menuUrl: PropTypes.string,
-	style: PropTypes.object
+	style: PropTypes.object,
+	back_style: PropTypes.object
 }

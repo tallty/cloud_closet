@@ -77,11 +77,14 @@ export class Orders extends Component {
 	}
 
 	render() {
-		let items = this.state.items
+		let { items } = this.state
+		let style = { color: '#4A4A4A', background: '#fff' }
+		let back_style = { color: '#4A4A4A' }
 
 		return (
 			<div className={css.container}>
-				<Toolbar title="我的订单" url="/user" />
+				<Toolbar title="我的订单" url="/user" style={style} back_style={back_style}/>
+
 				<Tabs defaultActiveKey="1" className={css.tab_bar}>
 			    <TabPane tab="全部" key="1">
 						{ items ? <OrderItems type="all" items={items} /> : <Spiner/> }
@@ -89,11 +92,11 @@ export class Orders extends Component {
 			    <TabPane tab="待付款" key="2">
 						{ items ? <OrderItems type="pay" items={items} /> : <Spiner/> }
 			    </TabPane>
-			    <TabPane tab="待发货" key="3">
-						{ items ? <OrderItems type="transmit" items={items} /> : <Spiner/> }
-			    </TabPane>
-			    <TabPane tab="待收货" key="4">
+			    <TabPane tab="待收货" key="3">
 						{ items ? <OrderItems type="receive" items={items} /> : <Spiner/> }
+			    </TabPane>
+			    <TabPane tab="历史订单" key="4">
+						{ items ? <OrderItems type="transmit" items={items} /> : <Spiner/> }
 			    </TabPane>
 			  </Tabs>
 			</div>

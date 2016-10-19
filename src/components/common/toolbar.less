@@ -13,14 +13,14 @@
 		height: 100%;
 		width: 50px;
 		line-height: 50px;
-		font-size: 16px;
+		font-size: 20px;
 		text-align: center;
 		float: left;
 		// &:active {
 		// 	background-color: #f8f8f8;
 		// }
 		img {
-			height: 20px;
+			height: 24px;
 		}
 	}
 	.menu {
@@ -33,12 +33,18 @@
 		float: right;
 		font-size: 14px;
 	}
-	span {
-		line-height: 50px;
+	.title {
+		display: table;
+		height: 100%;
 		width: 96px;
+		vertical-align: middle;
 		position: absolute;
 		top: 0;
 		left: 50%;
 		margin-left: -48px;
+		span{
+			display: table-cell;
+			vertical-align: middle;
+		}
 	}
 }

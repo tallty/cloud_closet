@@ -55,16 +55,16 @@ class Appointment extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    console.log(localStorage.openid);
+    console.log("appointment openid: "+localStorage.openid);
     return (
       <div className={styles.order_container}>
         
-        <p className={styles.title}>乐存</p>
+        <p className={styles.title}>乐存好衣</p>
         
         <Row className={styles.order_content}>
           <Form horizontal onSubmit={this.handleSubmit.bind(this)} >
             <Col span={2}>
-              <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
+              <img src="src/images/orange_location_icon.svg" alt="" className={styles.location_icon}/>
             </Col>
             <Col span={22}>
               <FormItem id="control-input1" >

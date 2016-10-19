@@ -51,7 +51,7 @@ export class Routes extends Component {
           {/* 添加Fanc_Club导航路由 */}
           <Route path="vip" component={FancClub} onEnter={this.requireAuth}/>
           {/* 添加我的衣橱导航路由 */}
-          <Route path="MyCloset" component={MyCloset} onEnter={this.requireAuth}/>
+          <Route path="MyCloset" component={MyCloset}/>
           {/* 添加个人中心导航路由 */}
           <Route path="user" component={User}/>
         </Route>
@@ -77,7 +77,7 @@ export class Routes extends Component {
         {/* 添加衣橱管理路由 */}
         <Route path="/manage" component={Manage} />
         {/* 添加衣橱预约路由 */}
-        <Route path="/appointment" component={Appointment} onEnter={this.requireAuth}/>
+        <Route path="/appointment" component={Appointment}/>
         {/* 添加衣橱预约成功路由 */}
         <Route path="/success" component={Success}/>
         {/* 添加地址路由 */}
