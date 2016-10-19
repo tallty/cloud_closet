@@ -6,14 +6,12 @@ import css from './order.less'
 import { Toolbar } from '../../common/Toolbar'
 import { Spiner } from '../../common/Spiner'
 import { Link } from 'react-router'
-import { ClothesTable } from '../clothes_table/ClothesTable'
+import { InClothes } from './InClothes'
 import { Row, Col } from 'antd'
 import SuperAgent from 'superagent'
 
 const nurseWay = new Map([
-	['every', '每次护理'],
-	['one', '一次护理'],
-	['no', '不护理']
+	['every', '每次护理'], ['one', '一次护理'], ['no', '不护理']
 ]);
 
 export class Order extends Component {
@@ -70,7 +68,7 @@ export class Order extends Component {
 								back_style={back_style} />
 
 				<div className={css.order}>
-					<ClothesTable groups={appointment.appointment_item_groups} />
+					<SaveClothes groups={appointment.appointment_item_groups} />
 					<Row className={css.tips}>
 						<Col span={12}>护理要求：&nbsp;&nbsp;<span>每次护理</span></Col>
 						<Col span={12} className="text-right">运费：XXX</Col>

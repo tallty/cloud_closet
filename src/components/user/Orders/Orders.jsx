@@ -36,13 +36,12 @@ import css from './orders.less'
 import { Toolbar } from '../../common/Toolbar'
 import { Spiner } from '../../common/Spiner'
 import { Tabs } from 'antd'
-import { OrderItems } from './OrderItems'
+import { OrdersList } from './OrdersList'
 import SuperAgent from 'superagent'
 
 const TabPane = Tabs.TabPane
 
 export class Orders extends Component {
-
 	state = {
 		total_pages: 1,
 		current_page: 1,
@@ -58,12 +57,12 @@ export class Orders extends Component {
       .end((err, res) => {
       	if (res.ok) {
       		let obj = res.body
-      		let _appointments = obj.appointments ? obj.appointments : []
-					console.dir(obj)
+  				console.log("Orders.jsx 获取的订单列表 => ")
+					console.log(obj.appointments)
 					this.setState({
 						total_pages: obj.total_pages,
 						current_page: obj.current_page,
-						appointments: _appointments
+						appointments: obj.appointments
 					})
       	} else {
 					console.log("获取预约列表失败")
@@ -73,8 +72,6 @@ export class Orders extends Component {
 
 	render() {
 		let { appointments } = this.state
-		console.log("获取的订单列表")
-		console.log(appointments)
 
 		let style = { color: '#4A4A4A', background: '#fff' }
 		let back_style = { color: '#4A4A4A' }
@@ -85,22 +82,22 @@ export class Orders extends Component {
 
 				<Tabs defaultActiveKey="1" className={css.tab_bar}>
 			    <TabPane tab="待确认" key="1">
-						{ appointments ? <OrderItems type="all" items={appointments} /> : <Spiner/> }
+						{ appointments ? <OrdersList type="one" orders={appointments} /> : <Spiner/> }
 			    </TabPane>
 			    <TabPane tab="服务中" key="2">
-						{ appointments ? <OrderItems type="pay" items={appointments} /> : <Spiner/> }
+						{ appointments ? <OrdersList type="two" orders={appointments} /> : <Spiner/> }
 			    </TabPane>
 			    <TabPane tab="待付款" key="3">
-						{ appointments ? <OrderItems type="receive" items={appointments} /> : <Spiner/> }
+						{ appointments ? <OrdersList type="three" orders={appointments} /> : <Spiner/> }
 			    </TabPane>
 			    <TabPane tab="入库中" key="4">
-						{ appointments ? <OrderItems type="complete" items={appointments} /> : <Spiner/> }
+						{ appointments ? <OrdersList type="four" orders={appointments} /> : <Spiner/> }
 			    </TabPane>
 			    <TabPane tab="已上架" key="5">
-						{ appointments ? <OrderItems type="complete" items={appointments} /> : <Spiner/> }
+						{ appointments ? <OrdersList type="five" orders={appointments} /> : <Spiner/> }
 			    </TabPane>
 			    <TabPane tab="已取消" key="6">
-						{ appointments ? <OrderItems type="complete" items={appointments} /> : <Spiner/> }
+						{ appointments ? <OrdersList type="six" orders={appointments} /> : <Spiner/> }
 			    </TabPane>
 			  </Tabs>
 			</div>
