@@ -18,17 +18,12 @@ module.exports = {
       let config = res.body
       // 初始化配置
       this.wechartConfig(config)
-      console.log(res.body);
-      // if (res.ok) {
-        this.wechatReady()
-      // }
+      this.wechatReady()
     })
   },
  
   // 实例化jdk功能
   wechartConfig(config) {
-    console.log(config.timestamp);
-    console.log(config.signature);
     // 如果wx 没有初始化过
     if (config) {
       wx.config({
@@ -56,7 +51,6 @@ module.exports = {
   // 调用，不需要放在ready函数中。
   wechatReady() {
     wx.ready(() => {
-      console.log('wechatReady');
       this.onMenuShareTimeline();
       this.onMenuShareQQ();
       this.onMenuShareWeibo();
@@ -72,21 +66,28 @@ module.exports = {
     var url = "http://wechat-api.tallty.com/cloud_closet_wechat/wx_pay"
     SuperAgent.post(url)
               .set('Accept', 'application/json')
-              .send( {'openid': 'olclvwCOMobnRYQRtXLAdhujZbtM', 'total_fee': 1 } )
+              .send( {'openid': 'olclvwCOMobnRYQRtXLAdhujZbtM', 'total_fee': 10 } )
               .end( (err, res) => {
                 if (res.ok) {
-                  console.log(openid)
-                  console.log(res.body.nonceStr.xml.nonceStr)
-                  console.log(res.body)
+                  console.log(appid)
                   wx.chooseWXPay({
-                    timeStamp: res.body.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                    appId: appid,
+                    timestamp: res.body.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
                     nonceStr: res.body.nonceStr.xml.nonce_str, // 支付签名随机串，不长于 32 位
                     package: 'prepay_id='+res.body.nonceStr.xml.prepay_id, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
                     signType: res.body.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
                     paySign: res.body.paySign, // 支付签名
                     success: function (res) {
-                        // 支付成功后的回调函数
-                        console.log('支付成功');
+                      // 支付成功后的回调函数
+                      if(res.errMsg == "chooseWXPay:ok" ) {
+                        console.log('success');
+                      }else{
+                        alert(res.errMsg);
+                      }
+                    },
+                    cancel:function(res){
+                      //支付取消
+                      console.log('cancel');
                     }
                   });
                 }
