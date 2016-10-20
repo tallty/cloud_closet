@@ -7,10 +7,11 @@ import { InClothes } from './InClothes'
 import css from './orders.less'
 import classNames from 'classnames/bind'
 import SuperAgent from 'superagent'
+import { withRouter } from 'react-router'
 
 const cx = classNames.bind(css)
 
-export class OrdersList extends Component {
+class OrdersList extends Component {
 	// 订单类型
 	orderTypes = new Map([
 		['one', '待确认'],['two', '服务中'],['three', '待付款'],
@@ -42,7 +43,7 @@ export class OrdersList extends Component {
 		let order_str = JSON.stringify(order)
 		sessionStorage.setItem('order', order_str)
 		// 重定向
-		location.href="/order"
+		this.props.router.replace('/order')
 	}
 
 	// 设置不同类型订单的处理事件
@@ -208,3 +209,5 @@ OrdersList.propTypes = {
 		})
 	)
 }
+
+export default withRouter(OrdersList);

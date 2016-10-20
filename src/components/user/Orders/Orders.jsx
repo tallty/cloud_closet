@@ -36,7 +36,7 @@ import css from './orders.less'
 import { Toolbar } from '../../common/Toolbar'
 import { Spiner } from '../../common/Spiner'
 import { Tabs } from 'antd'
-import { OrdersList } from './OrdersList'
+import OrdersList from './OrdersList'
 import SuperAgent from 'superagent'
 
 const TabPane = Tabs.TabPane

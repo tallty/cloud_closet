@@ -2,65 +2,76 @@
 .appoint_order {
 	height: 100%;
 	padding-top: 50px;
+	padding-bottom: 115px;
 	background: #fff;
 	overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   .order {
   	padding: 15px 15px 0;
   	.tips {
-  		margin-top: 30px;
+  		margin-top: 10px;
   		span {
   			color: #FF9241;
   		}
   	}
   	.total_price {
   		color: #757575;
-  		font-size: 14px;
-  		margin-bottom: 23px;
+  		font-size: 19px;
+  		margin-bottom: 15px;
+  		padding-bottom: 15px;
+  		border-bottom: 1px dashed #4A4A4A;
   		span {
   			color: #FF9241;
-  			font-size: 24px;
   		}
   	}
   }
-	hr {
-		border: none;
-		border-top: 1px dashed #D1C8C0;
-		margin: 15px;
+
+  .logistics {
+  	padding: 15px 30px 0;
+  }
+
+	.pay_actions {
+		position: fixed;
+		bottom: 0px;
+		left: 0;
+		width: 100%;
+		background: #fff;
+		padding: 10px 0 20px;
+		.recharge_btn {
+			width: 210px;
+			height: 35px;
+			text-align: center;
+			line-height: 35px;
+			background-color: #F9F9F9;
+			border: 1px solid #DDDDDD;
+			color: #4A4A4A;
+			font-size: 14px;
+			border-radius: 4px;
+			margin: 15px auto 0;
+			display: block;
+			&:active {
+				background-color: darken(#FF9241, 10%);
+			}
+		}
+		.pay_btn {
+			width: 210px;
+			height: 35px;
+			text-align: center;
+			line-height: 35px;
+			background-color: #F9F9F9;
+			border: 1px solid #FF9241;
+			color: #4A4A4A;
+			font-size: 14px;
+			border-radius: 4px;
+			margin: 0px auto 0;
+			display: block;
+			&:active {
+				border-color: darken(#FF9241, 10%);
+			}
+		}
 	}
 }
-.recharge_btn {
-	width: 210px;
-	height: 35px;
-	text-align: center;
-	line-height: 35px;
-	background-color: #F9F9F9;
-	border: 1px solid #DDDDDD;
-	color: #4A4A4A;
-	font-size: 14px;
-	border-radius: 4px;
-	margin: 15px auto 0;
-	display: block;
-	&:active {
-		background-color: darken(#FF9241, 10%);
-	}
-}
-.pay_btn {
-	width: 210px;
-	height: 35px;
-	text-align: center;
-	line-height: 35px;
-	background-color: #F9F9F9;
-	border: 1px solid #FF9241;
-	color: #4A4A4A;
-	font-size: 14px;
-	border-radius: 4px;
-	margin: 40px auto 0;
-	display: block;
-	&:active {
-		border-color: darken(#FF9241, 10%);
-	}
-}
+
 
 // 成功申请
 .appoint_success {
