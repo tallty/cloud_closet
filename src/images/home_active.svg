@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="47px" height="43px" viewBox="0 0 47 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>home</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M41.7857143,16.0560397 L41.7857143,38.7666362 C41.7857143,40.5523737 40.344065,42 38.5634787,42 L6.4365213,42 C4.65692973,42 3.21428571,40.5536933 3.21428571,38.7758766 L3.21428571,16.1301833" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="38.5714286" height="25.9439603" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <rect id="path-3" x="11.25" y="19.3846154" width="22.5" height="22.6153846" rx="1.6"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="22.5" height="22.6153846" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="品牌主页" transform="translate(-50.000000, -4181.000000)" stroke="#FFA35E">
+            <g id="底部菜单" transform="translate(0.000000, 4158.000000)">
+                <g id="home" transform="translate(51.000000, 24.000000)">
+                    <g>
+                        <use id="Rectangle-344" mask="url(#mask-2)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" xlink:href="#path-1"></use>
+                        <use id="Rectangle-344" mask="url(#mask-4)" stroke-width="3.2" xlink:href="#path-3"></use>
+                        <path d="M12.0535714,36.3461538 L33.00815,36.3461538" id="Line" stroke-width="1.6" stroke-linecap="square"></path>
+                        <path d="M12.0535714,39.5769231 L33.00815,39.5769231" id="Line" stroke-width="1.6" stroke-linecap="square"></path>
+                        <path d="M12.0535714,26.6538462 L33.00815,26.6538462" id="Line" stroke-width="1.6" stroke-linecap="square"></path>
+                        <path d="M12.0535714,29.8846154 L33.00815,29.8846154" id="Line" stroke-width="1.6" stroke-linecap="square"></path>
+                        <path d="M12.0535714,33.1153846 L33.00815,33.1153846" id="Line" stroke-width="1.6" stroke-linecap="square"></path>
+                        <path d="M12.0535714,23.4230769 L33.00815,23.4230769" id="Line" stroke-width="1.6" stroke-linecap="square"></path>
+                        <polyline id="Path-591" stroke-width="1.6" points="0 19.4057148 22.4964687 0 44.9786159 19.4057148"></polyline>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -7,36 +7,16 @@ import styles from './Navigation.less'
 import { Icon, Row, Col } from 'antd'
 
 export default class Navigation extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      openid:''
-    };
+  /**
+   * 活动状态图标
+   */
+  getIconWithUrl(iconName, url) {
+    if (location.pathname === url) {
+      return <img src={`/src/images/${iconName}_active.svg`} className={styles.home_icon}/>
+    } else {
+      return <img src={`/src/images/${iconName}.svg`} className={styles.home_icon}/>
+    }
   }
-
-  // componentWillMount() {
-  //   var code = this.getQueryString('code')
-  //   var OAuth = require('wechat-oauth');
-  //   var client = new OAuth(this.appid, this.secret);
-  //   console.log('out of token function')
-  //   client.getAccessToken(code, function (err, result) {
-  //     console.log('in token function line 1');
-  //     var accessToken = result.data.access_token;
-  //     var openid = result.data.openid;
-  //     this.setState({ openid: openid  });
-  //     console.log(openid);
-  //     console.log('in token function line the end');
-  //   });  
-  // }
-
-  // getQueryString(name) { 
-  //   var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i'); 
-  //   var r = window.location.search.substr(1).match(reg); 
-  //   if (r != null) { 
-  //     return unescape(r[2]); 
-  //   }
-  //     return null;
-  // }
 
   render() {
     let tab_height = document.body.clientHeight - 60
@@ -51,7 +31,7 @@ export default class Navigation extends React.Component {
           <NavLink to="/" onlyActiveOnIndex={true}>
             <Col span={6} className={styles.home_tab_btn}>
               <Col span={24} className={styles.icon_col}>
-                <img src="/src/images/home.svg" alt="" className={styles.home_icon}/>
+                { this.getIconWithUrl('home', '/') }
               </Col>
               <Col span={24}>
                 主页
@@ -61,7 +41,7 @@ export default class Navigation extends React.Component {
           <NavLink to="/vip" >
             <Col span={6} className={styles.home_tab_btn}>
               <Col span={24} className={styles.icon_col}>
-                <img src="/src/images/fc.svg" alt="" className={styles.home_icon}/>
+                { this.getIconWithUrl('fc', '/vip') }
               </Col>
               <Col span={24}>
                 Fanc Club
@@ -71,7 +51,7 @@ export default class Navigation extends React.Component {
           <NavLink to="/MyCloset" >
             <Col span={6} className={styles.home_tab_btn}>
               <Col span={24} className={styles.icon_col}>
-                <img src="/src/images/closet.svg" alt="" className={styles.home_icon}/>
+                { this.getIconWithUrl('closet', '/MyCloset') }
               </Col>
               <Col span={24}>
                 我的衣橱
@@ -81,7 +61,7 @@ export default class Navigation extends React.Component {
           <NavLink to="/user" >
             <Col span={6} className={styles.home_tab_btn}>
               <Col span={24} className={styles.icon_col}>
-                <img src="/src/images/my.svg" alt="" className={styles.home_icon}/>
+                { this.getIconWithUrl('user', '/user') }
               </Col>
               <Col span={24}>
                 个人中心
