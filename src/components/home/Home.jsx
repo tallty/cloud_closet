@@ -51,8 +51,8 @@ export class Home extends Component {
           <Col span={24} className={styles.home_order}>
             体验为使命的专业成衣管家
           </Col>
-          <Col span={24} className={styles.home_order_line}>
-            _____
+          <Col span={24}>
+            <div className={styles.home_order_line}></div>
           </Col>
           <Col span={24} className={styles.home_order_btn}>
             <Link to="/appointment">马上预约</Link>
