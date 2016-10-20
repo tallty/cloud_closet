@@ -74,7 +74,7 @@ export class Order extends Component {
 	 * 使用余额支付
 	 */
 	handlePay() {
-		
+		window.location.replace('/success?action=pay')
 	}
 
 	render() {

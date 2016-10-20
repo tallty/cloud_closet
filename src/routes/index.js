@@ -13,7 +13,7 @@ import { MyCloset } from '../components/my_closet/MyCloset'
 import { ChargeDetail } from '../components/ChargeDetail/ChargeDetail'
 // 我的衣橱
 import Appointment from '../components/appointment/Appointment'
-import { Success } from '../components/appointment/Success'
+import { Success } from '../components/success/Success'
 import { LogIn } from '../components/log_in/LogIn'
 // 个人中心
 import { Profile } from '../components/user/Profile/Profile'

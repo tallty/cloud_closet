@@ -51,8 +51,20 @@ class Appointment extends Component {
 
   // 时间格式转换函数
   date2str(x,y) { 
-    var z ={y:x.getFullYear(),M:x.getMonth()+1,d:x.getDate(),h:x.getHours(),m:x.getMinutes(),s:x.getSeconds()}; 
-    return y.replace(/(y+|M+|d+|h+|m+|s+)/g,function(v) {return ((v.length>1?"0":"")+eval('z.'+v.slice(-1))).slice(-(v.length>2?v.length:2))}); 
+    let z ={
+      y:x.getFullYear(),
+      M:x.getMonth()+1,
+      d:x.getDate(),
+      h:x.getHours(),
+      m:x.getMinutes(),
+      s:x.getSeconds()
+    }; 
+
+    let value = y.replace(/(y+|M+|d+|h+|m+|s+)/g, (v) => {
+                    return ( (v.length>1?"0":"") + eval('z.'+v.slice(-1))).slice(-(v.length>2?v.length:2) )
+                  }
+                ); 
+    return value
   }
 
   // 预约
@@ -65,7 +77,7 @@ class Appointment extends Component {
               .send({'appointment': {'address': address_d, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date}})
               .end( (err, res) => {
                 if (res.ok) {
-                  this.props.router.replace('/success')
+                  this.props.router.replace('/success?action=appointment')
                 }
               })       
   }

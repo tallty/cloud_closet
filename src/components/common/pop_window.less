@@ -1,0 +1,69 @@
+.pop_bg {
+	background: rgba(0,0,0,.6);
+  position: fixed;
+  z-index: 900;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.toogleBottom {
+  transform: translate(0, 0) !important;
+}
+.bottom_window {
+	position: fixed;
+  left: 0;
+  bottom: 0;
+  transform: translate(0, 100%);
+  backface-visibility: hidden;
+  z-index: 1000;
+  width: 100%;
+  //slide up animation
+  transition: transform .3s;
+}
+
+.toogleLeft {
+  transform: translate(0, 0) !important;
+}
+.left_window {
+	position: fixed;
+	top: 0;
+	left: 0;
+	transform: translate(-100%, 0);
+  backface-visibility: hidden;
+  z-index: 1000;
+  height: 100%;
+  //slide up animation
+  transition: transform .3s;
+}
+
+.toogleTop {
+  transform: translate(0, 0) !important;
+}
+.top_window {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	transform: translate(0, -100%);
+  backface-visibility: hidden;
+  width: 100%;
+  //slide up animation
+  transition: transform .3s;
+}
+
+.toogleRight {
+  transform: translate(0, 0) !important;
+}
+.right_window {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 1000;
+	transform: translate(100%, 0);
+  backface-visibility: hidden;
+  height: 100%;
+  //slide up animation
+  transition: transform .3s;
+}
