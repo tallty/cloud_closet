@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Router, Route, IndexRoute, Link, Redirect } from 'react-router'
 // 微信api相关功能
 import auth from '../components/WechatConect/auth'
-// import WechatPay from '../components/WechatConect/WechatPay'
+import WechatKit from '../components/WechatConect/WechatKit'
 import GetOpenId from '../components/WechatConect/GetOpenId'
 // 底部导航
 import Navigation from '../layouts/NavigationLayout/Navigation'
@@ -39,6 +39,10 @@ import { NewAddress } from '../components/address/new_address/NewAddress'
 import { Dispatching } from '../components/dispatching/Dispatching'
 
 export class Routes extends Component {
+  componentWillMount() {
+    WechatKit.getConfig();
+  }
+
   requireAuth() {
     auth.loggedIn();
   }

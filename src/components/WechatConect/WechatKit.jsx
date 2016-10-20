@@ -16,6 +16,8 @@ module.exports = {
     .send({page_url: authorize_url})
     .end((err, res) => {
       let config = res.body
+      console.log('========获取到的config========')
+      console.dir(config)
       // 初始化配置
       this.wechartConfig(config)
       this.wechatReady()
@@ -27,7 +29,7 @@ module.exports = {
     // 如果wx 没有初始化过
     if (config) {
       wx.config({
-        debug: true,
+        debug: false,
         appId: appid,
         timestamp: config.timestamp,
         nonceStr: config.noncestr,
@@ -39,7 +41,7 @@ module.exports = {
           'onMenuShareQQ',
           'onMenuShareWeibo',
           'chooseWXPay',
-          // 'chooseImage'
+          'chooseImage'
         ]
       })
     }
@@ -51,62 +53,45 @@ module.exports = {
   // 调用，不需要放在ready函数中。
   wechatReady() {
     wx.ready(() => {
-      this.onMenuShareTimeline();
-      this.onMenuShareQQ();
-      this.onMenuShareWeibo();
-      this.onMenuShareAppMessage();
-      this.chooseWXPay();
-      // this.chooseImage();
+      // this.chooseWXPay();
     })
   },
 
   // ===============================具体事件=============================
+
   // 微信支付
   chooseWXPay(){
     var url = "http://wechat-api.tallty.com/cloud_closet_wechat/wx_pay"
-    SuperAgent.post(url)
-              .set('Accept', 'application/json')
-              .send( {'openid': 'olclvwCOMobnRYQRtXLAdhujZbtM', 'total_fee': 10 } )
-              .end( (err, res) => {
-                if (res.ok) {
-                  console.log(appid)
-                  wx.chooseWXPay({
-                    appId: appid,
-                    timestamp: res.body.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                    nonceStr: res.body.nonceStr.xml.nonce_str, // 支付签名随机串，不长于 32 位
-                    package: 'prepay_id='+res.body.nonceStr.xml.prepay_id, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-                    signType: res.body.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                    paySign: res.body.paySign, // 支付签名
-                    success: function (res) {
-                      // 支付成功后的回调函数
-                      if(res.errMsg == "chooseWXPay:ok" ) {
-                        console.log('success');
-                      }else{
-                        alert(res.errMsg);
-                      }
-                    },
-                    cancel:function(res){
-                      //支付取消
-                      console.log('cancel');
-                    }
-                  });
-                }
-              })  
+    SuperAgent
+      .post(url)
+      .set('Accept', 'application/json')
+      .send( {'openid': localStorage.openid, 'total_fee': 10 } )
+      .end( (err, res) => {
+        if (res.ok) {
+          console.log(appid)
+          wx.chooseWXPay({
+            appId: appid,
+            timestamp: res.body.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+            nonceStr: res.body.nonceStr.xml.nonce_str, // 支付签名随机串，不长于 32 位
+            package: 'prepay_id='+res.body.nonceStr.xml.prepay_id, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+            signType: res.body.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+            paySign: res.body.paySign, // 支付签名
+            success: function (res) {
+              // 支付成功后的回调函数
+              if(res.errMsg == "chooseWXPay:ok" ) {
+                console.log('success');
+              }else{
+                alert(res.errMsg);
+              }
+            },
+            cancel:function(res){
+              //支付取消
+              console.log('cancel');
+            }
+          });
+        }
+      })  
   },
-
-  // 选择图片
-  // chooseImage() {
-  //   console.log("==================")
-  //   wx.chooseImage({
-  //     count: 1, // 默认9
-  //     sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-  //     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-  //     success: function (res) {
-  //         var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-  //         console.dir(res)
-  //     }
-  //   });
-  // },
   
   // 分享给朋友
   onMenuShareAppMessage() {

@@ -14,42 +14,31 @@ import { Link } from 'react-router'
 
 export class Celler extends Component {
 
-	valueFormat() {
-		let value = this.props.value
-		if (this.props.type === "password") {
-			return "●●●●●●●●●"
-		} else if (this.props.type === "phone") {
-			return value.substring(0,3)+"****"+value.substring(7,11)
-		} else {
-			return value
-		}
-		return
-	}
-
 	render() {
-		let type = this.props.type
+		let { type, url, name, value, defaultValue, bottom, color, event } = this.props
 		let cell_class = (type === "image") ? css.img_celler : css.celler
-
+		let _value = value ? value : defaultValue
+			
 		return (
 			<div>
 				{
-					this.props.event ? 
-						<div onClick={this.props.event} className={cell_class} style={{marginBottom: this.props.bottom, color: this.props.color}}>
-							<span className="pull-left">{this.props.name}</span>
+					event ? 
+						<div onClick={event} className={cell_class} style={{marginBottom: bottom, color: color}}>
+							<span className="pull-left">{name}</span>
 							{ 
-								type === "image" ? <img src={this.valueFormat()} className={css.photo} alt="头像"/> : this.valueFormat() 
+								type === "image" ? <img src={_value} className={css.photo} alt="头像"/> : _value
 							}
 							{ 
-								type === "logout" ? null : <img src="/src/images/right_icon.svg" className={css.icon} alt="icon"/> 
+								type === "simple" ? null : <img src="/src/images/right_icon.svg" className={css.icon} alt="icon"/> 
 							}
 						</div> :
-						<Link to={this.props.url} className={cell_class} style={{marginBottom: this.props.bottom, color: this.props.color}}>
-							<span className="pull-left">{this.props.name}</span>
+						<Link to={url} className={cell_class} style={{marginBottom: bottom, color: color}}>
+							<span className="pull-left">{name}</span>
 							{ 
-								type === "image" ? <img src={this.valueFormat()} className={css.photo} alt="头像"/> : this.valueFormat() 
+								type === "image" ? <img src={_value} className={css.photo} alt="头像"/> : _value
 							}
 							{ 
-								type === "logout" ? null : <img src="/src/images/right_icon.svg" className={css.icon} alt="icon"/> 
+								type === "simple" ? null : <img src="/src/images/right_icon.svg" className={css.icon} alt="icon"/> 
 							}
 						</Link>
 				}
@@ -60,9 +49,10 @@ export class Celler extends Component {
 }
 
 Celler.defaultProps = {
-	url: "/profile",
+	url: "",
 	name: "",
 	value: "",
+	defaultValue: "",
 	type: "text",
 	bottom: 1,
 	color: "#7F7F7F"
@@ -73,6 +63,7 @@ Celler.propTypes = {
 	event: PropTypes.func,
 	name: PropTypes.string,
 	value: PropTypes.string,
+	defaultValue: PropTypes.string,
 	type: PropTypes.string,
 	color: PropTypes.string,
 	bottom: PropTypes.number
