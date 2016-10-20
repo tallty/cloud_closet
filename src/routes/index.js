@@ -15,7 +15,7 @@ import { ChargeDetail } from '../components/ChargeDetail/ChargeDetail'
 import Appointment from '../components/appointment/Appointment'
 import { MapAddress } from '../components/MapAddress/MapAddress'
 import SetAddress from '../components/MapAddress/SetAddress'
-import { Success } from '../components/appointment/Success'
+import { Success } from '../components/success/Success'
 import { LogIn } from '../components/log_in/LogIn'
 // 个人中心
 import { Profile } from '../components/user/Profile/Profile'
