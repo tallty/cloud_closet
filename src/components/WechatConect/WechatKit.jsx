@@ -53,7 +53,10 @@ module.exports = {
   // 调用，不需要放在ready函数中。
   wechatReady() {
     wx.ready(() => {
-      // this.chooseWXPay();
+      this.onMenuShareTimeline();
+      this.onMenuShareQQ();
+      this.onMenuShareWeibo();
+      this.onMenuShareAppMessage();
     })
   },
 
