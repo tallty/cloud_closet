@@ -13,7 +13,9 @@ import { MyCloset } from '../components/my_closet/MyCloset'
 import { ChargeDetail } from '../components/ChargeDetail/ChargeDetail'
 // 我的衣橱
 import Appointment from '../components/appointment/Appointment'
-import { Success } from '../components/success/Success'
+import { MapAddress } from '../components/MapAddress/MapAddress'
+import SetAddress from '../components/MapAddress/SetAddress'
+import { Success } from '../components/appointment/Success'
 import { LogIn } from '../components/log_in/LogIn'
 // 个人中心
 import { Profile } from '../components/user/Profile/Profile'
@@ -33,7 +35,7 @@ import { Manage } from '../components/my_closet/manage/Manage'
 import { ClosetDetails } from '../components/my_closet/closet_tab/closet_details/ClosetDetails'
 //地址
 import { Address } from '../components/address/Address'
-import { AddAddress } from '../components/address/add_address/AddAddress'
+import AddAddress from '../components/address/add_address/AddAddress'
 import { NewAddress } from '../components/address/new_address/NewAddress'
 //配送
 import { Dispatching } from '../components/dispatching/Dispatching'
@@ -56,9 +58,9 @@ export class Routes extends Component {
           {/* 添加Fanc_Club导航路由 */}
           <Route path="vip" component={FancClub} onEnter={this.requireAuth}/>
           {/* 添加我的衣橱导航路由 */}
-          <Route path="MyCloset" component={MyCloset}/>
+          <Route path="MyCloset" component={MyCloset} onEnter={this.requireAuth}/>
           {/* 添加个人中心导航路由 */}
-          <Route path="user" component={User}/>
+          <Route path="user" component={User} onEnter={this.requireAuth}/>
         </Route>
         
       	{/* 收费详情 */}
@@ -83,7 +85,11 @@ export class Routes extends Component {
         {/* 添加衣橱管理路由 */}
         <Route path="/manage" component={Manage} />
         {/* 添加衣橱预约路由 */}
-        <Route path="/appointment" component={Appointment}/>
+        <Route path="/appointment" component={Appointment} onEnter={this.requireAuth}/>
+        {/* 获取地图成功路由 */}
+        <Route path="/map_address" component={MapAddress}/>
+        {/* 获取地图成功路由 */}
+        <Route path="/set_address" component={SetAddress}/>
         {/* 添加衣橱预约成功路由 */}
         <Route path="/success" component={Success}/>
         {/* 添加地址路由 */}

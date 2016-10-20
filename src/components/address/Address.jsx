@@ -1,7 +1,7 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Icon, Button } from 'antd'
-import { AddAddress } from './add_address/AddAddress'
+import AddAddress from './add_address/AddAddress'
 import NavLink from '../../layouts/NavigationLayout/NavLink'
 import classnames from 'classnames'
 import styles from './Address.less'
@@ -28,7 +28,7 @@ export class Address extends Component {
         </div>
         <Row className={styles.tab_footer}>
           <Col span={24}>
-            <NavLink to="/address/new" style={{color:'#fff'}}>
+            <NavLink to="/set_address" style={{color:'#fff'}}>
               <Button type="primary" className={styles.add_address_btn}>添加新地址</Button>
             </NavLink>
           </Col>

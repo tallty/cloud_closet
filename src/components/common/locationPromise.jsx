@@ -8,8 +8,6 @@ const locationPromise = () => {
     var geolocation = new qq.maps.Geolocation("OZBBZ-ZQLC3-MKF3U-3VCU4-DFWO7-AGFPB", "weather_survey")
     console.log(`获取到de定位对象：${geolocation}`);
     geolocation.getLocation((poi) => { 
-      console.log("定位成功")
-      console.dir(poi)
       let _poi = poi
       // 标准坐标转百度坐标
       // let lng_lat = tencentToBaidu(_poi.lng, _poi.lat)

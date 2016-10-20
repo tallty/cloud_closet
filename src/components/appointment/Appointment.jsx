@@ -2,7 +2,7 @@
 import React, { Component, PropTypes } from 'react'
 import SuperAgent from 'superagent'
 import locationPromise from '../Common/locationPromise'
-import { Form, Radio, Button, Checkbox, DatePicker, Row, Col, Input } from 'antd'
+import { Form, Radio, Button, Checkbox, DatePicker, Row, Col, Input,Icon } from 'antd'
 import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'
 import styles from './appointment.less'
@@ -24,28 +24,38 @@ class Appointment extends Component {
   }
 
   componentWillMount() {
-    locationPromise().then((value) => {
-      let poi = {
-        address: value.addr,
-        position: { lng: value.lng, lat: value.lat },
-        province: value.province,
-        city: value.city,
-        district: value.district
-      }
-      // 回调BaiduMap 的 updatePointAndData 方法进行打点，并刷新数据
-      var address = poi.address
-      console.log(`获取到的地址：${address}`);
-      this.setState({ address: address })
-    })
+    // locationPromise().then((value) => {
+    //   let poi = {
+    //     address: value.addr,
+    //     position: { lng: value.lng, lat: value.lat },
+    //     province: value.province,
+    //     city: value.city,
+    //     district: value.district
+    //   }
+    //   // 回调BaiduMap 的 updatePointAndData 方法进行打点，并刷新数据
+    //   var address = poi.address
+    //   console.log(`获取到的地址：${address}`);
+    //   this.setState({ address: address })
+    // })
+  }
+
+  componentWillUnmount() {
+    localStorage.removeItem('store_address')
+  }
+
+  chouse_address(){
+    this.props.router.replace('/address')
   }
   
   handleSubmit(e) {
+    const store_address = JSON.parse(localStorage.store_address)
     e.preventDefault();
     const value = this.props.form.getFieldsValue()
-    var address_d = value.address_number + this.state.address
+    var address_d = store_address.address
     var name = localStorage.user_name
     var number = value.number
     var date = this.date2str(new Date(value.endDate), "yyyy-MM-d")
+    
     this.pushAppoint(address_d, name, number, date )
   }
 
@@ -84,6 +94,7 @@ class Appointment extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const store_address = JSON.parse(localStorage.store_address)
     return (
       <div className={styles.order_container}>
         
@@ -94,8 +105,11 @@ class Appointment extends Component {
             <Col span={2} offset={11} className={styles.location_icon_content}>
               <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
             </Col>
-            <Col className={styles.address_show} span={24} >
-              {this.state.address}
+            <Col className={styles.address_show} span={22} >
+              {localStorage.store_address?<p>{store_address.address}<br/>{store_address.phone} {store_address.name}</p> : <p>请选择一个地址</p>}
+            </Col>
+            <Col className={styles.address_show} span={2} onClick={this.chouse_address.bind(this)}>
+              <Icon type="double-right" />
             </Col>
             {/*<Col span={22}>
                 <FormItem id="control-input1" >
@@ -104,13 +118,13 @@ class Appointment extends Component {
                   )}
                 </FormItem>
               </Col>*/}
-            <Col span={22} offset={2}>
+            {/*<Col span={22} offset={2}>
               <FormItem id="control-input2">
               {getFieldDecorator('address_number', { initialValue: '' })(
                 <Input id="control-input2" placeholder="输入您的所在楼层或门牌号码" className={styles.address_input}/>
               )}
               </FormItem>
-            </Col>
+            </Col>*/}
             <Col span={24} className={styles.line_two}>
               <FormItem className={styles.clo_number_radio}>
               {getFieldDecorator('number', { initialValue: '10' })(
