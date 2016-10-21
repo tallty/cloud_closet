@@ -51,8 +51,8 @@ class AddAddress extends Component {
     const list_address = []
     for (var i = 0; i < date.length; i++) {
       list_address.push(
-        <Row key={i} className={styles.tab_cell} onClick={this.store_address.bind(this,i)}>
-          <Col span={24}  className={styles.tab_title}>
+        <Row key={i} className={styles.tab_cell} >
+          <Col span={24}  className={styles.tab_title} onClick={this.store_address.bind(this,i)}>
             <Col span={1} className={styles.location_icon_content}>
               <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
             </Col>
@@ -60,7 +60,7 @@ class AddAddress extends Component {
               {date[i].address}
             </Col>
           </Col>
-          <Col span={24}  className={styles.tab_title}>
+          <Col span={24}  className={styles.tab_title} onClick={this.store_address.bind(this,i)}>
             <Col span={10} className={styles.people_name}>
               {date[i].name}收
             </Col>

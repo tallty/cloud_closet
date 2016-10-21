@@ -46,17 +46,35 @@ class Appointment extends Component {
   chouse_address(){
     this.props.router.replace('/address')
   }
+
+  checkOrderTime(rule, value, callback){
+    console.log(Date.now());
+    console.log(value.valueOf());
+    if (value && value.valueOf() < Date.now()) {
+      callback(new Error("请选择一个未来的预约时间!"));
+    } else {
+      callback();
+    }
+  }
   
   handleSubmit(e) {
-    const store_address = JSON.parse(localStorage.store_address)
+    const store_address = localStorage.store_address?JSON.parse(localStorage.store_address):[]
     e.preventDefault();
+
     const value = this.props.form.getFieldsValue()
     var address_d = store_address.address
     var name = localStorage.user_name
     var number = value.number
     var date = this.date2str(new Date(value.endDate), "yyyy-MM-d")
-    
-    this.pushAppoint(address_d, name, number, date )
+
+    this.props.form.validateFieldsAndScroll((errors, values) => {
+      if (errors) {
+        console.log('Errors in form!!!');
+        return;
+      }else{
+        this.pushAppoint(address_d, name, number, date )
+      }
+    });
   }
 
   // 时间格式转换函数
@@ -94,7 +112,7 @@ class Appointment extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const store_address = JSON.parse(localStorage.store_address)
+    const store_address = localStorage.store_address?JSON.parse(localStorage.store_address):[]
     return (
       <div className={styles.order_container}>
         
@@ -127,7 +145,11 @@ class Appointment extends Component {
             </Col>*/}
             <Col span={24} className={styles.line_two}>
               <FormItem className={styles.clo_number_radio}>
-              {getFieldDecorator('number', { initialValue: '10' })(
+              {getFieldDecorator('number', { initialValue: '10' }, {
+                rules: [
+                  { required: true, message: 'Please select your gender' },
+                ],
+              })(
                 <RadioGroup>
                   <RadioButton className={styles.label_one} value="10">10件</RadioButton>
                   <RadioButton className={styles.label_two} value="30">30件</RadioButton>
@@ -138,13 +160,28 @@ class Appointment extends Component {
             </Col>
             <Col span={24}>
               <FormItem className={styles.date_input}>
-              {getFieldDecorator('endDate')(
+              {getFieldDecorator('endDate', {
+                rules: [
+                  {
+                    required: true,
+                    type: 'object',
+                    message: '请选择预约时间?',
+                  }, {
+                    validator: this.checkOrderTime,
+                  },
+                ],
+              })(
                 <DatePicker placeholder="选择启用时间" />
               )}
               </FormItem>
             </Col>
             <Col span={24} className={styles.line_two}>
-              {getFieldDecorator('check', { initialValue: '' })(<Checkbox></Checkbox>)}  <label className={styles.ruls_label}>我已阅读并同意遵守</label><label className={styles.ruls}>《关于云衣橱服装服务条例》</label>
+              {getFieldDecorator('check', { initialValue: '' }, {
+                rules: [
+                  { required: true, message: '请确认已阅读并同意遵守《关于云衣橱服装服务条例》' },
+                ],
+              })(<Checkbox></Checkbox>)}  
+              <label className={styles.ruls_label}>我已阅读并同意遵守</label><label className={styles.ruls}>《关于云衣橱服装服务条例》</label>
             </Col>
             <Col span={24}>
               <FormItem>
