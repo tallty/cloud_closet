@@ -109,14 +109,20 @@
     background-color: #fff;
     .ant-tabs-nav {
       width: 100%;
+      display: -webkit-flex !important; /* Safari */
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      justify-content: space-around !important;
+      align-items: center !important;
       .ant-tabs-tab {
         margin-right: 0 !important;
-        width: 16.66%;
-        padding: 10px 4px !important;
+        padding: 10px 0;
+        flex: auto !important;
         font-size: 12px;
         text-align: center;
         .ant-tabs-tab-inner {
-          padding: 8px 0px;
+          padding: 10px 0px;
           font-size: 12px;
           text-align: center;
           color: #7f7f7f !important;
