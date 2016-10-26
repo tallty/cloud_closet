@@ -40,7 +40,7 @@ export class ClosetRank extends Component {
     return (
       <div className={styles.closet_rank_content}>
         <Row>
-          <Col span={10} className={styles.closet_all}>
+          <Col span={9} className={styles.closet_all}>
             衣橱全部宝贝
           </Col>
           <Col span={6} className={styles.closet_rank}>
@@ -48,10 +48,8 @@ export class ClosetRank extends Component {
               <Button className={styles.rank_btn} onClick={this.onClick}>{this.state.title}<Icon type="caret-down" className={styles.icon_down} /></Button>
             </p>
           </Col>
-          <Col span={3} offset={5} className={styles.closet_control}>
-            <NavLink to="/manage" style={{color:'#7F7F7F'}}>
-              管理
-            </NavLink>
+          <Col span={9} className={styles.closet_control}>
+            <NavLink to="/manage">管理</NavLink>
           </Col>
           <QueueAnim component="ul" type={['right', 'left']}>
             {list}
