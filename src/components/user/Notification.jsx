@@ -1,7 +1,7 @@
 // 个人中心 - 系统通知
 import React, { Component } from 'react'
 import css from './ticket_notification.less'
-import { Toolbar } from '../common/Toolbar'
+import Toolbar from '../common/Toolbar'
 import { Spiner } from '../common/Spiner'
 import { Link } from 'react-router'
 import { Row, Col } from 'antd'

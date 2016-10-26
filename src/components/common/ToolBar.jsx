@@ -1,23 +1,44 @@
 // 通用Toolbar组件
+// title: 标题,
+// url: 返回的链接,
+// menuUrl: 菜单的链接,
+// style: toolbar样式,
+// back_style: 返回按钮的样式
+// 
+// 说明：
+// 1、url存在，返回url, 不存在，使用goBack()
 import React, { Component, PropTypes } from 'react'
 import css from './toolbar.less'
-import { Link } from 'react-router'
+import { Link, withRouter } from 'react-router'
 import { Icon } from 'antd'
 
-export class Toolbar extends Component {
+class Toolbar extends Component {
+
+	handleBack() {
+		this.props.router.goBack();
+	}
+
 	render() {
+		const { title, url, menuUrl, style, back_style, children } = this.props;
+
 		return (
-			<div className={css.toolbar} style={this.props.style}>
-				<Link to={this.props.url} className={css.back} style={this.props.back_style}>
-					<Icon type="left" />
-				</Link>
+			<div className={css.toolbar} style={style}>
+				{
+					url ? 
+						<Link to={url} className={css.back} style={back_style}>
+							<Icon type="left" />
+						</Link> :
+						<div className={css.back} style={back_style} onClick={this.handleBack.bind(this)}>
+							<Icon type="left" />
+						</div>
+				}
 				<div className={css.title}>
-					<span>{ this.props.title }</span>
+					<span>{ title }</span>
 				</div>
 				{
-					this.props.children ? 
-						<Link to={this.props.menuUrl} className={css.menu}>
-							{this.props.children}
+					children ? 
+						<Link to={menuUrl} className={css.menu}>
+							{children}
 						</Link> : null
 				}
 			</div>
@@ -27,7 +48,7 @@ export class Toolbar extends Component {
 
 Toolbar.defaultProps = {
 	title: " ",
-	url: "/",
+	url: null,
 	menuUrl: "/",
 	style: {
 		color: '#FFFFFF',
@@ -45,3 +66,5 @@ Toolbar.propTypes = {
 	style: PropTypes.object,
 	back_style: PropTypes.object
 }
+
+export default withRouter(Toolbar)

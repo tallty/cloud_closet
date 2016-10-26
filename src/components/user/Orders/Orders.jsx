@@ -33,7 +33,7 @@
 
 import React, { Component, PropTypes } from 'react'
 import css from './orders.less'
-import { Toolbar } from '../../common/Toolbar'
+import Toolbar from '../../common/Toolbar'
 import { Spiner } from '../../common/Spiner'
 import { Tabs } from 'antd'
 import OrdersList from './OrdersList'

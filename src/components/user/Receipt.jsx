@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react'
 import css from './receipt.less'
-import { Toolbar } from '../common/Toolbar'
+import Toolbar from '../common/Toolbar'
 
 export class Receipt extends Component {
 	state = {

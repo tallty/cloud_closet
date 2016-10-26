@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react'
 import css from './order.less'
-import { Toolbar } from '../../common/Toolbar'
+import Toolbar from '../../common/Toolbar'
 import { Spiner } from '../../common/Spiner'
 import { Link } from 'react-router'
 import { InClothes } from './InClothes'

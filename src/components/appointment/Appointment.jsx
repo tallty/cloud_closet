@@ -40,10 +40,11 @@ class Appointment extends Component {
   }
 
   componentWillUnmount() {
-    localStorage.removeItem('store_address')
+    // 调用接口，获取默认地址，然后保存在localStorage 中
+    // localStorage.removeItem('store_address')
   }
 
-  chouse_address(){
+  choose_address(){
     this.props.router.replace('/address')
   }
 
@@ -123,12 +124,20 @@ class Appointment extends Component {
             <Col span={2} offset={11} className={styles.location_icon_content}>
               <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
             </Col>
-            <Col className={styles.address_show} span={22} >
-              {localStorage.store_address?<p>{store_address.address}<br/>{store_address.phone} {store_address.name}</p> : <p>请选择一个地址</p>}
-            </Col>
-            <Col className={styles.address_show} span={2} onClick={this.chouse_address.bind(this)}>
-              <Icon type="double-right" />
-            </Col>
+            <Link to="/address">
+              <Col className={styles.address_show} span={22}>
+                {
+                  localStorage.store_address ? 
+                    <p>
+                      {store_address.address}<br/>
+                      <span>{store_address.phone} {store_address.name}</span>
+                    </p> : 
+                    <p>请选择一个地址</p>}
+              </Col>
+              <Col className={styles.address_show} span={2}>
+                <Icon type="double-right" />
+              </Col>
+            </Link>
             {/*<Col span={22}>
                 <FormItem id="control-input1" >
                   {getFieldDecorator('address_city', { initialValue: '' })(

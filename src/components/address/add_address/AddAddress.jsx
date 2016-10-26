@@ -8,7 +8,7 @@ import styles from './AddAddress.less'
 
 const RadioGroup = Radio.Group;
 const date=[{"id": 1,
-      "address": "黄浦区济南路260弄翠湖天地隽荟12栋6",
+      "address": "黄浦区济南路260弄翠湖天地隽荟12栋6号",
       "name": "李先生",
       "phone": "13912345605",
       "default": true},
@@ -40,9 +40,9 @@ class AddAddress extends Component {
 
   store_address(i){
     var addre = JSON.stringify(date[i])
-    console.log(addre);
+    console.log("选择了地址"+addre);
     localStorage.setItem('store_address', addre)
-    this.props.router.replace('/appointment')
+    this.props.router.goBack();
   }
 
   render() {

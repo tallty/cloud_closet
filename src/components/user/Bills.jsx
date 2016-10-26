@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react'
 import css from './bills.less'
-import { Toolbar } from '../common/Toolbar'
+import Toolbar from '../common/Toolbar'
 import classNames from 'classnames/bind'
 
 const cx = classNames.bind(css)

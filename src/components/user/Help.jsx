@@ -3,7 +3,7 @@
  */
 import React, { Component, PropTypes } from 'react'
 import css from './help.less'
-import { Toolbar } from '../common/Toolbar'
+import Toolbar from '../common/Toolbar'
 import { Collapse } from 'antd'
 import { Link } from 'react-router'
 

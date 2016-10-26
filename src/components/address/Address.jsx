@@ -5,6 +5,7 @@ import AddAddress from './add_address/AddAddress'
 import NavLink from '../../layouts/NavigationLayout/NavLink'
 import classnames from 'classnames'
 import styles from './Address.less'
+import Toolbar from '../common/Toolbar'
 
 export class Address extends Component {
   constructor(props) {
@@ -14,14 +15,10 @@ export class Address extends Component {
   }
 
   render() {
-    let tab_height = document.body.clientHeight-50
     return (
       <div className={styles.Address_content}>
-        <Row className={styles.tab_header}>
-          <Col span={2} ><NavLink to="/dispatching" style={{color:'#fff'}}><Icon type="left" /></NavLink></Col>
-          <Col span={20}  className={styles.tab_title}>管理收货地址</Col>
-        </Row>
-        <div className="scrollContainer" style={{height: tab_height}}>
+        <Toolbar title="管理收货地址" />
+        <div className="scrollContainer" style={{paddingTop: 50}}>
           <div className={styles.list_tab_body}>
             <AddAddress />
           </div>
