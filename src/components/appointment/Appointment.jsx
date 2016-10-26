@@ -24,24 +24,27 @@ class Appointment extends Component {
   }
 
   componentWillMount() {
-    // locationPromise().then((value) => {
-    //   let poi = {
-    //     address: value.addr,
-    //     position: { lng: value.lng, lat: value.lat },
-    //     province: value.province,
-    //     city: value.city,
-    //     district: value.district
-    //   }
-    //   // 回调BaiduMap 的 updatePointAndData 方法进行打点，并刷新数据
-    //   var address = poi.address
-    //   console.log(`获取到的地址：${address}`);
-    //   this.setState({ address: address })
-    // })
+    if (!localStorage.user_name) {
+      this.getUserInfo();
+    }
+    // 调用接口，获取默认地址，然后保存在localStorage 中
   }
 
-  componentWillUnmount() {
-    // 调用接口，获取默认地址，然后保存在localStorage 中
-    // localStorage.removeItem('store_address')
+  getUserInfo() {
+    SuperAgent
+      .get("http://closet-api.tallty.com/user_info")
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+        if (res.ok) {
+          // 缓存
+          localStorage.setItem('user_name', res.body.nickname)
+          localStorage.setItem('phone', res.body.phone)
+        } else {
+          alert("获取用户信息失败")
+        }
+      })
   }
 
   choose_address(){
@@ -59,14 +62,14 @@ class Appointment extends Component {
   }
   
   handleSubmit(e) {
-    const store_address = localStorage.store_address?JSON.parse(localStorage.store_address):[]
     e.preventDefault();
+    const store_address = localStorage.store_address ? JSON.parse(localStorage.store_address) : []
+    const value = this.props.form.getFieldsValue();
 
-    const value = this.props.form.getFieldsValue()
-    var address_d = store_address.address
-    var name = localStorage.user_name
-    var number = value.number
-    var date = this.date2str(new Date(value.endDate), "yyyy-MM-d")
+    let address_d = store_address.address
+    let name = localStorage.user_name
+    let number = value.number
+    let date = this.date2str(new Date(value.endDate), "yyyy-MM-d")
 
     this.props.form.validateFieldsAndScroll((errors, values) => {
       if (errors) {
@@ -99,16 +102,17 @@ class Appointment extends Component {
   // 预约
   pushAppoint(address_d, name, number, date){
     var url = "http://closet-api.tallty.com/appointments"
-    SuperAgent.post(url)
-              .set('Accept', 'application/json')
-              .set('X-User-Phone', localStorage.phone)
-              .set('X-User-Token', localStorage.authentication_token)
-              .send({'appointment': {'address': address_d, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date}})
-              .end( (err, res) => {
-                if (res.ok) {
-                  this.props.router.replace('/success?action=appointment')
-                }
-              })       
+    SuperAgent
+      .post(url)
+      .set('Accept', 'application/json')
+      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.authentication_token)
+      .send({'appointment': {'address': address_d, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date}})
+      .end( (err, res) => {
+        if (res.ok) {
+          this.props.router.replace('/success?action=appointment')
+        }
+      })   
   }
 
   render() {

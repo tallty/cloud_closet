@@ -1,16 +1,22 @@
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Button, Card, Icon } from 'antd'
-import NavLink from '../../../layouts/NavigationLayout/NavLink'
+import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'
 import styles from './ClosetTab.less'
 import { Spiner } from '../../common/Spiner'
 
 const { string, number, bool, arrayOf, shape } = PropTypes;
 
-export class ClosetTab extends Component {
+class ClosetTab extends Component {
   constructor(props) {
       super(props);
       this.displayName = 'ClosetTab';
+  }
+
+  handleClick(garment) {
+    let str = JSON.stringify(garment);
+    sessionStorage.setItem('garment', str);
+    this.props.router.replace(`/closet_details?id=${garment.id}`);
   }
 
   initList() {
@@ -19,10 +25,12 @@ export class ClosetTab extends Component {
     this.props.garments.forEach((garment, i, obj) => {
       list.push(
         <Col span={12} className={styles.left_tab} key={garment.id}>
-          <NavLink to="/closet_details" style={{color:'#fff'}}>
+          <div onClick={ this.handleClick.bind(this, garment) } style={{color:'#fff'}}>
             <Card className={styles.card_tab}>
               {/* 添加新增标签*/}
-              {/* <div className={styles.new_tab}>New</div> */}
+              {
+                garment.is_new ? <div className={styles.new_tab}>New</div> : null
+              }
               {/* 添加衣服展示卡片模块*/}
               <div className={styles.card_pic_content}>
                 <img alt="example" src={garment.cover_image} />
@@ -36,7 +44,7 @@ export class ClosetTab extends Component {
               {/* 添加点赞喜欢模块*/}
               { /* <div className={styles.like_tab}><Icon className={styles.heart_icon} type="heart-o" /><br/> <sub>2234</sub></div> */ }
             </Card>
-          </NavLink>
+          </div>
         </Col>
       )
     })
@@ -76,3 +84,5 @@ ClosetTab.propTypes = {
     })
   )
 };
+
+export default withRouter(ClosetTab);

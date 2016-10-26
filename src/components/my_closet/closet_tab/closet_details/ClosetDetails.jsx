@@ -1,7 +1,7 @@
-// 品牌主页
+// 我的衣橱 - 详情
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Input, Icon, Button } from 'antd'
-import NavLink from '../../../../layouts/NavigationLayout/NavLink'
+import { Link } from 'react-router'
 import classnames from 'classnames'
 import styles from './ClosetDetails.less'
 
@@ -9,21 +9,36 @@ export class ClosetDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      garment: null
     }
   }
 
+  componentWillMount() {
+    let str = sessionStorage.garment;
+    let garment = JSON.parse(str);
+    this.setState({ garment: garment });
+  }
+
+  parseTime(time) {
+    let t = new Date(time);
+    return `${t.getYear()}-${t.getMonth()+1}-${t.getDay()}`
+  }
+
   render() {
-    let tab_height = document.body.clientHeight - 50
+    let tab_height = document.body.clientHeight - 50;
+    let { garment } = this.state;
     return (
       <div>
         {/* 返回按钮 */}
-        <NavLink to="/MyCloset" className={styles.left_link}><Button type="ghost" shape="circle-outline" icon="left" /></NavLink>
+        <Link to="/MyCloset" className={styles.left_link}>
+          <Button type="ghost" shape="circle-outline" icon="left" />
+        </Link>
         <div className="scrollContainer" style={{height: tab_height}}>
           <div className={styles.ClosetDetails_content}>
             {/* 主图模块 */}
             <Row className={styles.ClosetDetails_content_header}>
               <Col span={24} className={styles.main_pic_content}>
-                <img src="src/images/detail_pic_one.png" alt=""/>
+                <img src={garment.cover_image} alt=""/>
               </Col>
             </Row>
             {/* 名称标签模块 */}
@@ -31,12 +46,13 @@ export class ClosetDetails extends Component {
               <Col span={24} >
                 <Row className={styles.name_tab_content_row}>
                   <Col span={24} >
-                    <p className={styles.name}>DOLCE&GABBANA<br/>印花包臀短裙</p>
-                    <p className={styles.time_story}>入库时间：2015-12-29<br/>预存1年</p>
+                    <p className={styles.name}>{garment.title}</p>
+                    <p className={styles.time_story}>
+                      入库时间：{ this.parseTime(garment.put_in_time) }<br/>
+                      到期时间：{ this.parseTime(garment.expire_time) }
+                    </p>
                   </Col>
                   <Col span={24} className={styles.tag_tab}>
-                    <Button type="primary" className={styles.tag} >约会</Button>
-                    <Button type="primary" className={styles.tag} >裙装</Button>
                     <Button type="primary" className={styles.tag} >连衣裙</Button>
                   </Col>
                 </Row>
@@ -117,11 +133,11 @@ export class ClosetDetails extends Component {
         </div>
         {/* 加入配送按钮 */}
         <Row>
-          <NavLink to="/dispatching">
+          <Link to="/dispatching">
             <Col span={24} className={styles.dispatching_btn} >
               <Button type="primary" >加入配送</Button>
             </Col>
-          </NavLink>
+          </Link>
         </Row>
       </div>
     );

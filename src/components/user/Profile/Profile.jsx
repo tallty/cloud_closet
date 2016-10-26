@@ -22,6 +22,10 @@ export class Profile extends Component {
       .set('X-User-Phone', localStorage.phone)
       .end((err, res) => {
       	if (res.ok) {
+      		// 缓存
+      		localStorage.setItem('user_name', res.body.nickname)
+          localStorage.setItem('phone', res.body.phone)
+
 					this.setState({ user_info: res.body })
       	} else {
       		alert("获取用户信息失败")
@@ -36,23 +40,26 @@ export class Profile extends Component {
 		let { update_key, update_value } = this.state
 		console.log(update_key +"/"+update_value)
 		SuperAgent
-		.put("http://closet-api.tallty.com/user_info")
-		.set('Accept', 'application/json')
-    .set('X-User-Token', localStorage.authentication_token)
-    .set('X-User-Phone', localStorage.phone)
-    .send(`${update_key}=${update_value}`)
-    .end((err, res) => {
-    	if (res.ok) {
-    		console.log(res.body)
-				this.setState({ 
-					user_info: res.body,
-					pop: false
-				})
-    	} else {
-    		console.dir(err)
-    		alert("更新用户信息失败")
-    	}
-    })
+			.put("http://closet-api.tallty.com/user_info")
+			.set('Accept', 'application/json')
+	    .set('X-User-Token', localStorage.authentication_token)
+	    .set('X-User-Phone', localStorage.phone)
+	    .send(`${update_key}=${update_value}`)
+	    .end((err, res) => {
+	    	if (res.ok) {
+	    		// 缓存
+	    		localStorage.setItem('user_name', res.body.nickname)
+	        localStorage.setItem('phone', res.body.phone)
+	    		console.log(res.body)
+					this.setState({ 
+						user_info: res.body,
+						pop: false
+					})
+	    	} else {
+	    		console.dir(err)
+	    		alert("更新用户信息失败")
+	    	}
+	    })
 	}
 
 	/**
