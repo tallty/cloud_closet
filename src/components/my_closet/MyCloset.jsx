@@ -10,10 +10,22 @@ import styles from './MyCloset.less'
 import SuperAgent from 'superagent'
 
 export class MyCloset extends Component {
+  state = {
+    current_page: 1,
+    total_pages: 1,
+    garments: []
+  }
 
   componentDidMount() {
     this.getGarments(1, 10, (res) => {
+      console.log("=========获取衣橱列表成功==========")
       console.dir(res.body);
+      let obj = res.body;
+      this.setState({
+        current_page: obj.current_page,
+        total_pages: obj.total_pages,
+        garments: obj.garments
+      })
     })
   }
 
@@ -34,14 +46,16 @@ export class MyCloset extends Component {
   }
 
   render() {
+    let { garments } = this.state;
+
     return (
       <div className={styles.my_cliset_content}>
         <MyClosetHeader />
         <ClosetRank />
         <div className={styles.closet_content_down}>
           <ClosetClassify />
-          <p className={styles.tab_name}>裙装<label htmlFor="">（25）</label></p>
-          <ClosetTab />
+          <p className={styles.tab_name}>数量<label htmlFor="">（{this.state.garments.length}）</label></p>
+          <ClosetTab garments={garments}/>
         </div>
       </div>
     );

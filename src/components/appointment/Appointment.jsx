@@ -135,7 +135,7 @@ class Appointment extends Component {
                     <p>请选择一个地址</p>}
               </Col>
               <Col className={styles.address_show} span={2}>
-                <Icon type="double-right" />
+                <Icon type="right" />
               </Col>
             </Link>
             {/*<Col span={22}>

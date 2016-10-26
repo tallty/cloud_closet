@@ -106,8 +106,8 @@ class LogInForm extends Component {
           // 保存用户信息
           localStorage.setItem('user_name', res.body.nickname)
           localStorage.setItem('phone', res.body.phone)
-          // 用户登录
-          this.signIn();
+          // 更新昵称
+          this.updateUserInfo();
 
           console.log('用户绑定成功 =>')
           console.dir(res)
@@ -115,6 +115,21 @@ class LogInForm extends Component {
           console.dir(err);
           alert('用户绑定失败！')
         }
+      })
+  }
+
+  /**
+   * [updateUserInfo 更新用户信息]
+   */
+  updateUserInfo() {
+    SuperAgent
+      .put('http://closet-api.tallty.com/user_info')
+      .set('X-User-Phone', this.state.phone)
+      .set('X-User-Token', localStorage.authentication_token)
+      .send('user_info[nickname]', this.state.nickname)
+      .end((err, res) => {
+        // 用户登录
+        this.signIn();
       })
   }
 
