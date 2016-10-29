@@ -48,7 +48,7 @@ class Appointment extends Component {
   }
 
   choose_address(){
-    this.props.router.replace('/address')
+    this.props.router.replace('/address?from=appointment')
   }
 
   checkOrderTime(rule, value, callback){
@@ -128,7 +128,7 @@ class Appointment extends Component {
             <Col span={2} offset={11} className={styles.location_icon_content}>
               <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
             </Col>
-            <Link to="/address">
+            <div onClick={this.choose_address.bind(this)}>
               <Col className={styles.address_show} span={22}>
                 {
                   localStorage.store_address ? 
@@ -141,7 +141,7 @@ class Appointment extends Component {
               <Col className={styles.address_show} span={2}>
                 <Icon type="right" />
               </Col>
-            </Link>
+            </div>
             {/*<Col span={22}>
                 <FormItem id="control-input1" >
                   {getFieldDecorator('address_city', { initialValue: '' })(

@@ -81,23 +81,11 @@ export class Orders extends Component {
 				<Toolbar title="我的订单" url="/user" style={style} back_style={back_style}/>
 
 				<Tabs defaultActiveKey="1" className={css.tab_bar}>
-			    <TabPane tab="待确认" key="1">
-						{ appointments ? <OrdersList type="one" orders={appointments} /> : <Spiner/> }
+			    <TabPane tab="当前订单" key="1">
+						{ appointments ? <OrdersList type="normal" orders={appointments} /> : <Spiner/> }
 			    </TabPane>
-			    <TabPane tab="服务中" key="2">
-						{ appointments ? <OrdersList type="two" orders={appointments} /> : <Spiner/> }
-			    </TabPane>
-			    <TabPane tab="待付款" key="3">
-						{ appointments ? <OrdersList type="three" orders={appointments} /> : <Spiner/> }
-			    </TabPane>
-			    <TabPane tab="入库中" key="4">
-						{ appointments ? <OrdersList type="four" orders={appointments} /> : <Spiner/> }
-			    </TabPane>
-			    <TabPane tab="已上架" key="5">
-						{ appointments ? <OrdersList type="five" orders={appointments} /> : <Spiner/> }
-			    </TabPane>
-			    <TabPane tab="已取消" key="6">
-						{ appointments ? <OrdersList type="six" orders={appointments} /> : <Spiner/> }
+			    <TabPane tab="历史订单" key="2">
+						{ appointments ? <OrdersList type="history" orders={appointments} /> : <Spiner/> }
 			    </TabPane>
 			  </Tabs>
 			</div>

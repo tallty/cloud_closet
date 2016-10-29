@@ -9,7 +9,8 @@ import classNames from 'classnames/bind'
 import SuperAgent from 'superagent'
 import { withRouter } from 'react-router'
 
-const cx = classNames.bind(css)
+const { string, number, arrayOf, shape } = PropTypes;
+const cx = classNames.bind(css);
 
 class OrdersList extends Component {
 	// 订单类型
@@ -48,61 +49,20 @@ class OrdersList extends Component {
 
 	// 设置不同类型订单的处理事件
 	setOrdersEvent(order) {
-		let actions = null
-		switch(order.type) {
-			case "one":
-				actions = (
-					<div className={css.btns}>
-						<Button type="ghost" className={css.show_btn}>取消订单</Button>
-						<Button type="primary" className={css.sure_btn} onClick={this.handlePay.bind(this, order)}>确认</Button>	
-					</div>
-				)
-				break;
-			case "two":
-				actions = (
-					<div className={css.btns}>
-						<Button type="ghost" className={css.show_btn}>取消订单</Button>
-					</div>
-				)
-				break;
-			case "three":
-				actions = (
-					<div className={css.btns}>
-						<Button type="ghost" className={css.show_btn}>取消订单</Button>
-						<Button type="primary" className={css.sure_btn} onClick={this.handlePay.bind(this, order)}>付款</Button>	
-					</div>
-				)
-				break;
-			case "four":
-				actions = (
-					<div className={css.btns}>
-						<Button type="ghost" className={css.show_btn}>取消订单</Button>
-					</div>
-				)
-				break;
-			case "five":
-				actions = (
-					<div className={css.btns}>
-						<Button type="ghost" className={css.show_btn}>取消订单</Button>
-					</div>
-				)
-				break;
-			case "six":
-				actions = (
-					<div className={css.btns}>
-						<Button type="ghost" className={css.show_btn}>回复订单</Button>
-					</div>
-				)
-				break;
-			default:
-				actions = (
-					<div className={css.btns}>
-						<Button type="ghost" className={css.show_btn}>取消订单</Button>
-						<Button type="primary" className={css.sure_btn} onClick={this.handlePay.bind(this, order)}>付款</Button>
-					</div>
-				)
+		if (order.type === "normal") {
+			return (
+				<div className={css.btns}>
+					<Button type="ghost" className={css.show_btn}>取消订单</Button>
+					<Button type="primary" className={css.sure_btn} onClick={this.handlePay.bind(this, order)}>确认</Button>	
+				</div>
+			)
+		} else if (order.type === "history") {
+			return (
+				<div className={css.btns}>
+					<Button type="ghost" className={css.show_btn}>取消订单</Button>
+				</div>
+			)
 		}
-		return actions;
 	}
 
 	// 订单列表
@@ -111,10 +71,10 @@ class OrdersList extends Component {
     let list = []
 
 		orders.forEach((order, index, obj) => {
-			if (type == "three" || order.type === type) {
+			if (type == "normal" || order.type === type) {
 				let headerColor = cx({
 		      'going': order.type != "complete",
-		      'complete': order.type === "six"
+		      'complete': order.type === "history"
 		    })
 
 				list.push(
@@ -167,7 +127,7 @@ class OrdersList extends Component {
 	}
 	
 	render() {
-		let tab_height = document.body.clientHeight - 84
+		let tab_height = document.body.clientHeight - 88
 		let Orders = this.getOrders()
 
 		return (
@@ -179,31 +139,31 @@ class OrdersList extends Component {
 }
 
 OrdersList.defaultProps = {
-	type: "all",
+	type: "normal",
 	Orders: []
 }
 
 OrdersList.propTypes = {
-	all: PropTypes.string,
-	Orders: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.number,
-			name: PropTypes.string,
-			phone: PropTypes.string,
-			number: PropTypes.number,
-			address: PropTypes.string,
-			seq: PropTypes.string,
-			date: PropTypes.string,
-			created_at: PropTypes.string,
-			appointment_item_groups: PropTypes.arrayOf(
-				PropTypes.shape({
-					id: PropTypes.number,
-		 			count: PropTypes.number,
-		 			store_month: PropTypes.numebr,
-		 			price: PropTypes.number,
-		 			total_price: PropTypes.number,
-		 			kind: PropTypes.string,
-		 			season: PropTypes.string
+	type: string,
+	Orders: arrayOf(
+		shape({
+			id: number,
+			name: string,
+			phone: string,
+			number: number,
+			address: string,
+			seq: string,
+			date: string,
+			created_at: string,
+			appointment_item_groups: arrayOf(
+				shape({
+					id: number,
+		 			count: number,
+		 			store_month: number,
+		 			price: number,
+		 			total_price: number,
+		 			kind: string,
+		 			season: string
 				})
 			)
 		})
