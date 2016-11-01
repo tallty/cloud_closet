@@ -2,9 +2,10 @@
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Icon, Button } from 'antd'
 import Picker from 'react-mobile-picker';
-import NavLink from '../../../layouts/NavigationLayout/NavLink'
+import { Link } from 'react-router';
 import classnames from 'classnames'
 import styles from './NewAddress.less'
+import Toolbar from '../../common/Toolbar';
 
 export class NewAddress extends Component {
   constructor(props) {
@@ -52,15 +53,10 @@ export class NewAddress extends Component {
     );
     return (
       <div className={styles.NewAddress_content} style={{height: tab_height}}>
-        <Row className={styles.new_address_header}>
-          <Col span={2} ><NavLink to="/address" style={{color:'#fff'}}><Icon type="left" /></NavLink></Col>
-          <Col span={16} offset={2}  className={styles.tab_title}>编辑地址</Col>
-          <Col span={4}  className={styles.tab_save}>
-            <NavLink to="/dispatching" style={{color:'#fff'}}>
-              <Button type="primary" className={styles.add_new_address_btn}>保存</Button>
-            </NavLink>
-          </Col>
-        </Row>
+        <Toolbar url="/address" title="编辑地址">
+          <Link to="/dispatching" className={styles.add_new_address_btn}>保存</Link>
+        </Toolbar>
+
         <Row className={styles.new_address_body}>
           <Col span={24} className={styles.new_address_input_col}>
             <Col span={6} className={styles.new_address_input_col_label}>收件人</Col>
@@ -95,9 +91,9 @@ export class NewAddress extends Component {
         </Row>
         <Row className={styles.new_address_footer}>
           <Col span={24}>
-            <NavLink to="/address" style={{color:'#fff'}}>
+            <Link to="/address" style={{color:'#fff'}}>
               <Button type="primary" className={styles.delete_new_address_btn}>取消</Button>
-            </NavLink>
+            </Link>
           </Col>
         </Row>
         <Row className={styles.new_address_footer_modal}>

@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import { Row, Col, Icon, Button, Form, Input, Radio } from 'antd'
 import classnames from 'classnames'
 import { Link, withRouter } from 'react-router'
-import NavLink from '../../layouts/NavigationLayout/NavLink'
+import Toolbar from '../common/Toolbar';
 import styles from '../address/new_address/NewAddress.less'
 
 const FormItem = Form.Item;
@@ -24,7 +24,7 @@ class SetAddress extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log('Received values of form:', this.props.form.getFieldsValue());
-    this.props.router.replace('/address')
+    // this.props.router.replace('/address')
   }
 
   render() {
@@ -32,13 +32,10 @@ class SetAddress extends Component {
     return (
       <div className={styles.NewAddress_content}>
         <Form horizontal >
-          <Row className={styles.new_address_header}>
-            <Col span={2} ><NavLink to="/address" style={{color:'#fff'}}><Icon type="left" /></NavLink></Col>
-            <Col span={16} offset={2}  className={styles.tab_title}>新建地址</Col>
-            <Col span={4}  className={styles.tab_save}>
-              <Button type="primary" className={styles.add_new_address_btn} onClick={this.handleSubmit.bind(this)}>保存</Button>
-            </Col>
-          </Row>
+          <Toolbar url="/address" title="新建地址">
+            <div onClick={this.handleSubmit.bind(this)}>保 存</div>
+          </Toolbar>
+
           <Row className={styles.set_address_form}>
             <Col span={24} className={styles.label_input_title}>
               联系人
@@ -77,7 +74,7 @@ class SetAddress extends Component {
             </Col>
             <Col span={24} className={styles.label_input}>
               <Col span={8} className={styles.label_input_head}>小区/大厦/学校:</Col>
-              <NavLink to="/map_address">
+              <Link to="/map_address">
                 <Col span={12} className={styles.label_input_head}>
                   <Row>
                     <Col span={2} className={styles.location_icon_content}>
@@ -89,7 +86,7 @@ class SetAddress extends Component {
                   </Row>
                 </Col>
                 <Col span={4} className={styles.label_input_head}><Icon type="right" /></Col>
-              </NavLink>
+              </Link>
             </Col>
             <Col span={24} className={styles.label_input}>
               <Col span={8} className={styles.label_input_head}>楼号-门牌号:</Col>

@@ -15,7 +15,18 @@ export class Address extends Component {
   }
 
   componentDidMount() {
-    
+    SuperAgent
+      .get("http://closet-api.tallty.com/addresses")
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+        if (res.ok) {
+          this.setState({ addresses: res.body });
+        } else {
+          alert("获取地址列表失败");
+        }
+      })
   }
 
   render() {
@@ -27,8 +38,7 @@ export class Address extends Component {
         <Toolbar title="管理收货地址" url={back_url} />
         <div className="scrollContainer" style={{paddingTop: 50}}>
           <div className={styles.list_tab_body}>
-            { /*this.state.addresses ? <AddAddress /> : <Spiner/> */}
-            <AddAddress />
+            { this.state.addresses ? <AddAddress addresses={this.state.addresses}/> : <Spiner/> }
           </div>
         </div>
         <Row className={styles.tab_footer}>

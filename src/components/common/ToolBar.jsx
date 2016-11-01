@@ -35,12 +35,8 @@ class Toolbar extends Component {
 				<div className={css.title}>
 					<span>{ title }</span>
 				</div>
-				{
-					children ? 
-						<Link to={menuUrl} className={css.menu}>
-							{children}
-						</Link> : null
-				}
+
+				<div className={css.menu}>{children}</div>
 			</div>
 		)
 	}
@@ -49,7 +45,6 @@ class Toolbar extends Component {
 Toolbar.defaultProps = {
 	title: " ",
 	url: null,
-	menuUrl: "/",
 	style: {
 		color: '#FFFFFF',
 		background: '#FF9241'
@@ -62,7 +57,6 @@ Toolbar.defaultProps = {
 Toolbar.propTypes = {
 	title: PropTypes.string,
 	url: PropTypes.string,
-	menuUrl: PropTypes.string,
 	style: PropTypes.object,
 	back_style: PropTypes.object
 }

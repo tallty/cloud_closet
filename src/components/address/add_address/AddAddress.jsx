@@ -6,29 +6,12 @@ import classnames from 'classnames'
 import { Link, withRouter } from 'react-router'
 import styles from './AddAddress.less'
 
+const { string, number, bool, shape, arrayOf } = PropTypes;
 const RadioGroup = Radio.Group;
-const date=[{"id": 1,
-      "address": "黄浦区济南路260弄翠湖天地隽荟12栋6号",
-      "name": "李先生",
-      "phone": "13912345605",
-      "default": true},
-      {"id": 2,
-      "address": "松江区新桥丽水华庭内(新南路北)",
-      "name": "jhon先生",
-      "phone": "13934764205",
-      "default": true},
-      {"id": 3,
-      "address": "中环时代广场3号楼(万荣路东)",
-      "name": "s先生",
-      "phone": "13918033405",
-      "default": true}]
 
 class AddAddress extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 1,
-    }
+  state = {
+    value: 1,
   }
 
   onChange = (e) => {
@@ -45,27 +28,26 @@ class AddAddress extends Component {
     this.props.router.goBack();
   }
 
-  render() {
-    let tab_height = document.body.clientHeight-80
-
-    const list_address = []
-    for (var i = 0; i < date.length; i++) {
-      list_address.push(
-        <Row key={i} className={styles.tab_cell} >
+  setList() {
+    let list = [];
+    console.log(this.props.addresses)
+    this.props.addresses.forEach((address, i, obj) => {
+      list.push(
+         <Row key={i} className={styles.tab_cell}>
           <Col span={24}  className={styles.tab_title} onClick={this.store_address.bind(this,i)}>
             <Col span={1} className={styles.location_icon_content}>
               <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
             </Col>
             <Col span={23} className={styles.add_name}>
-              {date[i].address}
+              { address.address_detail }
             </Col>
           </Col>
           <Col span={24}  className={styles.tab_title} onClick={this.store_address.bind(this,i)}>
             <Col span={10} className={styles.people_name}>
-              {date[i].name}收
+              { address.name }收
             </Col>
             <Col span={14}>
-              电话：{date[i].phone}
+              电话：{address.phone}
             </Col>
           </Col>
           <Col span={24}  className={styles.tab_title}>
@@ -78,18 +60,46 @@ class AddAddress extends Component {
               <img src="src/images/delete_icon.svg" alt="" className={styles.delete_icon}/>删除地址
             </Col>
             <Col span={5} offset={9}>
-              {this.state.value === i ?<Radio key="a" value={i} checked= {true} onChange={this.onChange} >设为默认</Radio>:<Radio key="a" value={i} checked= {false} onChange={this.onChange} >设为默认</Radio>}
+              {
+                this.state.value === i ? 
+                  <Radio key="a" value={i} checked= {true} onChange={this.onChange} >设为默认</Radio> : 
+                  <Radio key="a" value={i} checked= {false} onChange={this.onChange} >设为默认</Radio>
+              }
             </Col>
           </Col>
         </Row>
       )
-    }
+    })
+    return list;
+  }
+
+  render() {
+    let tab_height = document.body.clientHeight-80;
+
     return (
       <div className={styles.AddAddress_content}>
-        {list_address}
+        { this.setList() }
       </div>
     );
   }
 }
 
+AddAddress.defaultProps = {
+  addresses: []
+}
+
+AddAddress.PropTypes = {
+  addresses: arrayOf(
+    shape({
+      id: number,
+      name: string, 
+      address_detail: string,
+      phone: string,
+      is_default: bool,
+      created_at: string,
+      updated_at: string,
+      url: string
+    })
+  )
+}
 export default withRouter(AddAddress);

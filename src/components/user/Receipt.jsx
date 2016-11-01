@@ -4,6 +4,7 @@
 import React, { Component } from 'react'
 import css from './receipt.less'
 import Toolbar from '../common/Toolbar'
+import {Link} from 'react-router'
 
 export class Receipt extends Component {
 	state = {
@@ -15,7 +16,9 @@ export class Receipt extends Component {
 		let money = this.state.money ? `${this.state.money}元` : "--"
 		return (
 			<div className={css.container}>
-				<Toolbar url="/user" menuUrl="/receipt" title="发票">开票记录</Toolbar>
+				<Toolbar url="/user" title="发票">
+					<Link to="/receipt">开票记录</Link>
+				</Toolbar>
 				<div className={css.money}>{money}</div>
 				<p className={css.tips}>{tips}</p>
 				<div className={css.content}>
