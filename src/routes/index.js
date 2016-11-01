@@ -46,7 +46,7 @@ export class Routes extends Component {
   }
 
   requireAuth() {
-    // auth.loggedIn();
+    auth.loggedIn();
   }
 
 	render() {
