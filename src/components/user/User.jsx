@@ -4,11 +4,17 @@ import { Row, Col, Icon, Button, Progress } from 'antd'
 import { Level } from './share/Level'
 import { Link } from 'react-router'
 import css from './user.less'
+import SuperAgent from 'superagent'
 
 export class User extends Component {
 	state = {
 		level: 80,
 		level_name: "白金级别",
+		user: {
+		  nickname: null,
+		  balance: null,
+		  avatar: null
+		},
 		grids: [
 			{ name: "我的卡券", message: false, url: "/tickets" },
 			{ name: "我的订单", message: true, url: "/orders" },
@@ -17,6 +23,26 @@ export class User extends Component {
 			{ name: "发票", message: false, url: "/receipt" },
 			{ name: "我的小蜜", message: false, url: "/help" }
 		]
+	}
+
+
+	componentDidMount() {
+		SuperAgent
+			.get("http://closet-api.tallty.com/user_info")
+			.set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+      	if (res.ok) {
+      		// 缓存
+      		let user_str = JSON.stringify(res.body);
+          localStorage.setItem('user', user_str);
+
+					this.setState({ user: res.body })
+      	} else {
+      		alert("获取用户信息失败")
+      	}
+      })
 	}
 
 	getGrid() {
@@ -44,45 +70,40 @@ export class User extends Component {
 					</Col>
 			)
 		})
-		return list
+		return list;
 	}
 
   render() {
   	// 计算栅格部分容器的高度
-  	let grids_height = (document.body.clientHeight - 60) * 0.52 - 80
-		console.log(localStorage.openid);
+  	let grids_height = (document.body.clientHeight - 60) * 0.52 - 80;
+		const { user, level, level_name, grids } =  this.state;
+		let avatar = user.avatar ? user.avatar : 'src/images/default_photo.png';
+		let balance = user.balance ? user.balance : 0;
+
     return (
     	<div className={css.personal_center}>
     		{/* 头像信息 */}
 				<div className={css.user_info}>
 					<Link to="/profile" className={css.link_profile}>
-						<img src="/src/images/photo.png" alt="头像"/>
-						<div className={css.user_name}>John Snow</div>
-						<Level level={this.state.level} level_name={this.state.level_name}/>
+						<img src={avatar} alt="头像"/>
+						<div className={css.user_name}>{user.nickname}</div>
+						<Level level={level} level_name={level_name}/>
 					</Link>
 				</div>
 				{/* 业务模块 */}
 	      <div className={css.center_container}>
 					<Row className={css.account}>
-						<Col span={18} className={css.money}>6,430.08</Col>
+						<Col span={18} className={css.money}>{balance}</Col>
 						<Col span={6} className={css.money_link}>
 							<Link to="/bills">账户账单</Link>
 							<Icon type="right" />
 						</Col>
 					</Row>
 					<Row>
-					<Link to="/recharge">
-						<Button type="primary" className={css.charge_btn}>充值</Button>
-					</Link>
-					{/*}
-						<Col span={12} className={css.right_col}>
-							<Link to="/withdraw">
-								<Button type="primary" className={css.charge_btn}>提现</Button>
-							</Link>
-						</Col>
-						*/}
+						<Link to="/recharge">
+							<Button type="primary" className={css.charge_btn}>充值</Button>
+						</Link>
 					</Row>
-
 					<div className={css.grid_container} style={{height: grids_height}}>
 						<Row className={css.grid}>
 							{ this.getGrid() }

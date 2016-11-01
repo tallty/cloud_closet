@@ -24,10 +24,11 @@ class Appointment extends Component {
   }
 
   componentWillMount() {
-    if (!localStorage.user_name) {
+    let user = JSON.parse(localStorage.user);
+    // 如果没有用户的信息，则重新获取
+    if (!user) {
       this.getUserInfo();
     }
-    // 调用接口，获取默认地址，然后保存在localStorage 中
   }
 
   getUserInfo() {
@@ -39,8 +40,8 @@ class Appointment extends Component {
       .end((err, res) => {
         if (res.ok) {
           // 缓存
-          localStorage.setItem('user_name', res.body.nickname)
-          localStorage.setItem('phone', res.body.phone)
+          let str = JSON.stringify(res.body);
+          localStorage.setItem('user', str);
         } else {
           alert("获取用户信息失败")
         }

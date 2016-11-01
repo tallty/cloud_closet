@@ -14,8 +14,17 @@ export class Profile extends Component {
     update_value: ""
   }
 
-	componentDidMount() {
-		SuperAgent
+  componentWillMount() {
+  	let user = JSON.parse(localStorage.user);
+  	if (user) {
+	  	this.setState({ user: user });	
+  	} else {
+  		this.getUserInfo();
+  	}
+  }
+
+  getUserInfo() {
+  	SuperAgent
 			.get("http://closet-api.tallty.com/user_info")
 			.set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
@@ -23,15 +32,15 @@ export class Profile extends Component {
       .end((err, res) => {
       	if (res.ok) {
       		// 缓存
-      		localStorage.setItem('user_name', res.body.nickname)
-          localStorage.setItem('phone', res.body.phone)
+      		let user_str = JSON.stringify(res.body);
+          localStorage.setItem('user', user_str);
 
-					this.setState({ user_info: res.body })
+					this.setState({ user: res.body })
       	} else {
       		alert("获取用户信息失败")
       	}
       })
-	}
+  }
 
 	/**
 	 * 获取数据
@@ -48,11 +57,11 @@ export class Profile extends Component {
 	    .end((err, res) => {
 	    	if (res.ok) {
 	    		// 缓存
-	    		localStorage.setItem('user_name', res.body.nickname)
-	        localStorage.setItem('phone', res.body.phone)
+	    		let user_str = JSON.stringify(res.body);
+	    		localStorage.setItem('user', user_str);
 	    		console.log(res.body)
 					this.setState({ 
-						user_info: res.body,
+						user: res.body,
 						pop: false
 					})
 	    	} else {
@@ -73,9 +82,9 @@ export class Profile extends Component {
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: (res) => {
         let localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-        let user = this.state.user_info
-        user.avatar = localIds[0]
-        this.setState({ user_info: user })
+        let user = this.state.user;
+        user.avatar = localIds[0];
+        this.setState({ user: user });
       }
     });
   }
@@ -106,7 +115,7 @@ export class Profile extends Component {
 			pop: true,
 			popTitle: "修改昵称",
 			update_key: "user_info[nickname]",
-			update_value: this.state.user_info.nickname
+			update_value: this.state.user.nickname
 		})
 	}
 
@@ -116,7 +125,7 @@ export class Profile extends Component {
 			pop: true,
 			popTitle: "修改邮箱",
 			update_key: "user_info[mail]",
-			update_value: this.state.user_info.mail
+			update_value: this.state.user.mail
 		})
 	}
 
@@ -134,13 +143,13 @@ export class Profile extends Component {
 
 
 	render() {
-		let { pop, user_info, popTitle, update_key, update_value } = this.state
-		let { phone, nickname, avatar, mail } = user_info
+		let { pop, user, popTitle, update_key, update_value } = this.state;
+		let { phone, nickname, avatar, mail } = user;
 		let _phone = phone ? phone.substring(0,3)+"****"+phone.substring(7,11) : phone
 
 		return (
 			<div className={css.container}>
-				<Celler name="我的头像" type="image" value={user_info.avatar} 
+				<Celler name="我的头像" type="image" value={user.avatar} 
 								defaultValue="src/images/default_photo.png" 
 								event={this.handlePhoto.bind(this)}/>
 				<Celler name="昵称" value={nickname} event={this.handleNickname.bind(this)}/>

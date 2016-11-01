@@ -6,11 +6,6 @@ import classnames from 'classnames'
 import styles from './LogIn.less'
 
 export class LogIn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    }
-  }
 
   render() {
     return (

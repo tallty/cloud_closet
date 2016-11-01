@@ -101,6 +101,7 @@ class LogInForm extends Component {
       .end((err, res) => {
         // 绑定
         this.userBind();
+        console.log(res);
       })
   }
 
