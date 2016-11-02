@@ -5,10 +5,11 @@ import { Row, Col, Spin } from 'antd'
 import MapTabResult from './MapTabResult'
 import { Link, withRouter } from 'react-router'
 import styles from './MapAddress.less'
+import { Spiner } from '../common/Spiner';
 
-const height = document.body.offsetHeight*0.4
-const map = null
-const timer = null
+const height = document.body.offsetHeight * 0.4;
+const map = null;
+const timer = null;
 
 export class MapAddress extends Component {
   constructor(props) {
@@ -20,22 +21,17 @@ export class MapAddress extends Component {
   }
 
   componentDidMount() {
-    console.log(this.height);
-
-    // this.map = new AMap.Map('map-container',{zoom: 10,center: [121.5059,31.2335]});
     // // 初始化地图
     this.map = new BMap.Map("map-container")
     this.map.centerAndZoom(new BMap.Point(121.5059,31.2335), 15) // 初始化地图,设置中心点坐标和地图级别
     // 获取当前定位
-    this.getCurrentPosition()
+    this.getCurrentPosition();
   }
 
   // 获取当前定位
   getCurrentPosition() {
     locationPromise().then(
       value => {
-        console.log("腾讯地图定位")
-        console.dir(value)
         let poi = {
           address: value.addr,
           position: { lng: value.lng, lat: value.lat },
@@ -56,11 +52,6 @@ export class MapAddress extends Component {
   //初始化定位
   defaultPointAndData(poi) {
     if (!poi) { return ;}
-    console.dir(poi)
-    // 转化：调用接口使用标准坐标
-    let lng_lat = tencentToBaidu(poi.position.lng, poi.position.lat)
-    poi.position.lng = lng_lat.lng
-    poi.position.lat = lng_lat.lat
     // 更新地图标注
     let location_point = new BMap.Point(poi.position.lng, poi.position.lat)
     let location_icon = new BMap.Icon("src/images/loc_icon.svg", new BMap.Size(66, 66))
@@ -69,7 +60,7 @@ export class MapAddress extends Component {
     this.map.addOverlay(marker);
     this.map.panTo(location_point)
 
-    // 更新状态（位置改变了，需要重新后去雨量信息，所以需要重置rainData）
+    // 更新状态（位置改变了）
     this.setState({ 
       poi: poi,
     })
@@ -86,7 +77,7 @@ export class MapAddress extends Component {
     this.map.clearOverlays();
     this.map.addOverlay(marker);
     this.map.panTo(location_point)
-    // 更新状态（位置改变了，需要重新后去雨量信息，所以需要重置rainData）
+    // 更新状态（位置改变了）
     this.setState({
       poi: poi,
     })
@@ -94,9 +85,10 @@ export class MapAddress extends Component {
 
   // 手动选点功能 , 使用【百度地图】选点
   chooseMapPoint() {
-    const geocoder = new BMap.Geocoder()
+    const geocoder = new BMap.Geocoder();
     this.map.addEventListener("click", (e) => {
       let point = e.point
+      console.dir(e);
       geocoder.getLocation(point, (rs) => {
         console.log("百度地图定位")
         console.dir(rs)
@@ -108,7 +100,7 @@ export class MapAddress extends Component {
           district: rs.addressComponents.district
         }
         // 标注并更新数据
-        this.updatePointAndData(poi)
+        this.updatePointAndData(poi);
       })
     })
   }
@@ -117,9 +109,10 @@ export class MapAddress extends Component {
     return (
       <div className={styles.dhContainer} >
         <div id="map-container" className={styles.baidumap} style={{height: height}}></div>
-          {this.state.poi ? <MapTabResult map={this.map} {...this.state} /> : <div className={styles.spin_content}><Spin size="large"/></div>}
-        {console.log('=========================')}
-        {console.log(this.state.poi)}
+          {
+            this.state.poi ? 
+              <MapTabResult map={this.map} {...this.state} {...this.props}/> : <Spiner />
+          }
       </div>
     )
   }

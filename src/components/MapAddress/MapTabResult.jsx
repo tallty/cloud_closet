@@ -5,73 +5,82 @@ import { Link, withRouter } from 'react-router'
 import styles from './MapTabResult.less'
 
 const TabPane = Tabs.TabPane;
-const height = document.body.offsetHeight*0.6-37
+const height = document.body.offsetHeight*0.6-37;
 
 class MapTabResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
       keyword: '上海',
-      poi: this.props.poi,
       list: [],
     }
   }
 
   componentDidMount() {
+    console.log('=========位置信息===========')
+    console.log(this.props.poi)
     this.searchNearby(this.state.keyword)
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    // this.searchNearby(this.state.keyword)
+  componentWillReceiveProps(nextProps) {
+    this.searchNearby(this.state.keyword);
   }
 
-  local_address(title, address){
-    localStorage.setItem('title', title)
+
+
+  local_address(address){
     localStorage.setItem('address', address)
-    console.log(title);
-    this.props.router.replace('/set_address')
+    console.log("选中了============>" + address);
+    // this.props.router.replace('/set_address')
+    this.props.hiddenEvent();
   }
 
   searchNearby(keyword){
-    var poi = this.props.poi
-    var point = new BMap.Point(poi.position.lng, poi.position.lat) // 初始化地图,设置中心点坐标和地图级别  
-    var options = {
+    let { map, poi } = this.props;
+    let point = new BMap.Point(poi.position.lng, poi.position.lat) // 初始化地图,设置中心点坐标和地图级别  
+    let options = {
       onSearchComplete: function(results){      
         if (local.getStatus() == BMAP_STATUS_SUCCESS){
           var list = []
+          // 加入目前定位的地址
+          list.push(
+            <Row key={-1} className={styles.add_col} 
+                         onClick={this.local_address.bind(this, poi.address)}>
+              <Col span={2} className={styles.location_icon_content}>
+                <img src="src/images/location_icon.svg" className={styles.location_icon}/>
+              </Col>
+              <Col span={22} className={styles.add_name}><span>[当前] </span>{poi.address}</Col>
+            </Row>
+          );
           // 判断状态是否正确        
           for (var i = 0; i < results.getCurrentNumPois(); i ++){
+            let title = results.getPoi(i).title;
+            let address = results.getPoi(i).address;
+
             list.push(
-              <Row key={i} className={styles.add_col} onClick={this.local_address.bind(this,results.getPoi(i).title, results.getPoi(i).address)}>
+              <Row key={i} className={styles.add_col} 
+                           onClick={this.local_address.bind(this, address)}>
                 <Col span={2} className={styles.location_icon_content}>
-                  <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
+                  <img src="src/images/location_icon.svg" className={styles.location_icon}/>
                 </Col>
-                <Col span={22} className={styles.add_name}>{results.getPoi(i).title}</Col>
-                <Col span={22} offset={2}>{results.getPoi(i).address}</Col>
+                <Col span={22} className={styles.add_name}>{title}</Col>
+                <Col span={22} offset={2}>{address}</Col>
               </Row>
             )
           }
-          console.log('=========??????============');
-          console.log(list);
           this.setState({list: list, keyword: keyword})
         }
       }.bind(this)
     };      
-    var local = new BMap.LocalSearch(this.props.map, options);
+    let local = new BMap.LocalSearch(map, options);
     local.setPageCapacity = 80;
     local.searchNearby(keyword, point, 2000);
-  }
-
-  callback(key) {
-    this.searchNearby(key)
   }
 
   render() {
     return (
       <div className={styles.container}>
-        {console.log('=========+++++===========')}
-        {console.log(this.props.poi)}
-        <Tabs defaultActiveKey="1" onChange={this.callback.bind(this)}>
+        <Tabs defaultActiveKey="上海" onChange={this.searchNearby.bind(this)}>
           <TabPane tab="全部" key="上海"></TabPane>
           <TabPane tab="小区" key="小区"></TabPane>
           <TabPane tab="写字楼" key="写字楼"></TabPane>

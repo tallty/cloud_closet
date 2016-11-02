@@ -4,16 +4,17 @@ import { Row, Col, Icon, Button, Form, Input, Radio } from 'antd'
 import classnames from 'classnames'
 import { Link, withRouter } from 'react-router'
 import Toolbar from '../common/Toolbar';
+import PopWindow from '../common/PopWindow';
 import styles from '../address/new_address/NewAddress.less'
+import { MapAddress } from '../MapAddress/MapAddress'
+import Agent from 'superagent';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 
 class SetAddress extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    }
+  state = {
+    pop: false
   }
 
   componentWillUnmount() {
@@ -23,12 +24,50 @@ class SetAddress extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('Received values of form:', this.props.form.getFieldsValue());
-    // this.props.router.replace('/address')
+    let { name, phone, address_number } = this.props.form.getFieldsValue();
+    if (name && phone && address_number) {
+      let address = {
+        name: name,
+        phone: phone,
+        address_detail: localStorage.address + address_number
+      }
+
+      this.createAddress(address);
+    } else {
+      alert("请完善地址信息");
+    }
+  }
+
+  createAddress(address) {
+    Agent
+      .post('http://closet-api.tallty.com/addresses')
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .send({address: address})
+      .end((err, res) => {
+        if (!err || err === null) {
+          console.log(res.body);
+          this.props.router.replace('/address');
+        } else {
+          console.log("创建新地址失败")
+          console.dir(err);
+        }
+      })
+
+  }
+
+  showMap() {
+    this.setState({pop: true});
+  }
+
+  onCancel() {
+    this.setState({pop: false});
   }
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { pop } = this.state;
     return (
       <div className={styles.NewAddress_content}>
         <Form horizontal >
@@ -74,19 +113,17 @@ class SetAddress extends Component {
             </Col>
             <Col span={24} className={styles.label_input}>
               <Col span={8} className={styles.label_input_head}>小区/大厦/学校:</Col>
-              <Link to="/map_address">
-                <Col span={12} className={styles.label_input_head}>
-                  <Row>
-                    <Col span={2} className={styles.location_icon_content}>
-                      <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
-                    </Col>
-                    <Col span={22} className={styles.location_icon_content}>
-                      {localStorage.address || localStorage.title ? localStorage.title + localStorage.address:'点击这里'}
-                    </Col>
-                  </Row>
-                </Col>
-                <Col span={4} className={styles.label_input_head}><Icon type="right" /></Col>
-              </Link>
+              <Col span={12} className={styles.label_input_head}>
+                <Row onClick={this.showMap.bind(this)}>
+                  <Col span={2} className={styles.location_icon_content}>
+                    <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
+                  </Col>
+                  <Col span={22} className={styles.location_icon_content}>
+                    {localStorage.address ? localStorage.address : '点击这里'}
+                  </Col>
+                </Row>
+              </Col>
+              <Col span={4} className={styles.label_input_head}><Icon type="right" /></Col>
             </Col>
             <Col span={24} className={styles.label_input}>
               <Col span={8} className={styles.label_input_head}>楼号-门牌号:</Col>
@@ -100,6 +137,13 @@ class SetAddress extends Component {
             </Col>
           </Row>
         </Form>
+        
+        {/* 地图选址 */}
+        <PopWindow show={pop} 
+                   direction='right' 
+                   onCancel={this.onCancel.bind(this)}>
+          <MapAddress hiddenEvent={this.onCancel.bind(this)}/>
+        </PopWindow>
       </div>
     );
   }

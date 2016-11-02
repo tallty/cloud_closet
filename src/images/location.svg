@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="66px" height="66px" viewBox="0 0 66 66" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>loc_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="loc_icon" transform="translate(1.000000, 1.000000)">
+            <g id="Page-1">
+                <g id="衣橱预约－定位">
+                    <g id="Group-8">
+                        <g id="Oval-735" opacity="0.2">
+                            <g id="path-1-link" style="mix-blend-mode: darken;" fill="#FFA35E">
+                                <circle id="path-1" cx="32" cy="32" r="32"></circle>
+                            </g>
+                            <g id="path-1-link" stroke="#FF9241">
+                                <circle id="path-1" cx="32" cy="32" r="32"></circle>
+                            </g>
+                        </g>
+                        <g id="Group-6" transform="translate(24.000000, 13.790009)">
+                            <g id="Group" transform="translate(1.000000, 11.000000)">
+                                <ellipse id="Oval-735" stroke="#919191" fill="#FFFFFF" cx="7.58372727" cy="7.26172855" rx="7.58372727" ry="7.26172855"></ellipse>
+                                <ellipse id="Oval-735" fill="#C9C9C9" cx="7.58372727" cy="7.26172855" rx="3.79186364" ry="3.63086427"></ellipse>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
