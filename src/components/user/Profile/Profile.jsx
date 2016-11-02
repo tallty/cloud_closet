@@ -70,24 +70,6 @@ export class Profile extends Component {
 	    	}
 	    })
 	}
-
-	/**
-	 * [chooseImage 调用微信jdk选择图片]
-	 */
-  chooseImage() {
-    console.log("=========调用微信jdk选择图片=========")
-    wx.chooseImage({
-      count: 1, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: (res) => {
-        let localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-        let user = this.state.user;
-        user.avatar = localIds[0];
-        this.setState({ user: user });
-      }
-    });
-  }
 	
 	/**
 	 * [hidePopWindow 隐藏弹出框]
@@ -106,7 +88,7 @@ export class Profile extends Component {
 	 */
 	handlePhoto() {
 		console.log("=====开始处理头像=====")
-		this.chooseImage();
+		
 	}
 
 	handleNickname() {
@@ -145,7 +127,7 @@ export class Profile extends Component {
 	render() {
 		let { pop, user, popTitle, update_key, update_value } = this.state;
 		let { phone, nickname, avatar, mail } = user;
-		let _phone = phone ? phone.substring(0,3)+"****"+phone.substring(7,11) : phone
+		let _phone = phone ? phone.substring(0,3)+"****"+phone.substring(7,11) : phone;
 
 		return (
 			<div className={css.container}>

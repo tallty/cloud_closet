@@ -14,47 +14,66 @@ const RadioGroup = Radio.Group;
 
 class SetAddress extends Component {
   state = {
-    pop: false
+    action: 'new',
+    pop: false,
+    address: {}
+  }
+
+  componentWillMount() {
+    console.log(localStorage.edit_address)
+    let edit_address = JSON.parse(localStorage.edit_address);
+    if (edit_address) {
+      this.setState({
+        address: edit_address,
+        action: 'edit'
+      })
+    }
   }
 
   componentWillUnmount() {
-    localStorage.removeItem('title');
-    localStorage.removeItem('address');
+    localStorage.removeItem('map_address');
+    localStorage.setItem('edit_address', null);
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    const { address } = this.state;
     let { name, phone, address_number } = this.props.form.getFieldsValue();
-    if (name && phone && address_number) {
-      let address = {
-        name: name,
-        phone: phone,
-        address_detail: localStorage.address + address_number
-      }
 
-      this.createAddress(address);
+    if (name && phone && address_number) {
+      address.name = name;
+      address.phone = phone;
+      address.address_detail = localStorage.map_address + address_number;
+      // 新建或更新地址
+      this.createOrUpdateAddress(address);
     } else {
       alert("请完善地址信息");
     }
   }
 
-  createAddress(address) {
-    Agent
-      .post('http://closet-api.tallty.com/addresses')
+  createOrUpdateAddress(address) {
+    let method = this.state.action === 'new' ? 'POST' : 'PUT';
+    let id = this.state.action === 'new' ? '' : address.id;
+
+    Agent(method, `http://closet-api.tallty.com/addresses/${id}`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
-      .send({address: address})
+      .send({
+        address: {
+          name: address.name,
+          phone: address.phone,
+          address_detail: address.address_detail
+        }
+      })
       .end((err, res) => {
         if (!err || err === null) {
           console.log(res.body);
           this.props.router.replace('/address');
         } else {
-          console.log("创建新地址失败")
-          console.dir(err);
+          console.log("创建或更新地址失败")
         }
       })
-
   }
 
   showMap() {
@@ -67,12 +86,15 @@ class SetAddress extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { pop } = this.state;
+    const { action, pop, address } = this.state;
+    let title = action === 'new' ? '新建地址' : '编辑地址';
+    let menu = action === 'new' ? '保存' : '更新';
+
     return (
       <div className={styles.NewAddress_content}>
         <Form horizontal >
-          <Toolbar url="/address" title="新建地址">
-            <div onClick={this.handleSubmit.bind(this)}>保 存</div>
+          <Toolbar url="/address" title={title}>
+            <div onClick={this.handleSubmit.bind(this)}>{menu}</div>
           </Toolbar>
 
           <Row className={styles.set_address_form}>
@@ -83,26 +105,34 @@ class SetAddress extends Component {
               <Col span={6} className={styles.label_input_head}>姓名:</Col>
               <Col span={18}>
                 <FormItem id="control-input1" >
-                {getFieldDecorator('name', { initialValue: '' })(
-                  <Input id="control-input11" placeholder="请填写寄货/收货人的姓名" className={styles.set_address_input}/>
+                {getFieldDecorator('name', { initialValue: address.name })(
+                  <Input id="control-input11" 
+                         placeholder="请填写寄货/收货人的姓名" 
+                         className={styles.set_address_input}/>
                 )}
                 </FormItem>
               </Col>
             </Col>
-            <Col span={24} className={styles.label_sex_input}>
-              <Col span={6} offset={6}>
-                <Button className={styles.sex_button} type="ghost" icon="search">女士</Button>
+            {
+              /*
+              <Col span={24} className={styles.label_sex_input}>
+                <Col span={6} offset={6}>
+                  <Button className={styles.sex_button} type="ghost" icon="search">女士</Button>
+                </Col>
+                <Col span={6} >
+                  <Button className={styles.sex_button} type="ghost" icon="search">男士</Button>
+                </Col>
               </Col>
-              <Col span={6} >
-                <Button className={styles.sex_button} type="ghost" icon="search">男士</Button>
-              </Col>
-            </Col>
+               */
+            }
             <Col span={24} className={styles.label_input}>
               <Col span={6} className={styles.label_input_head}>电话:</Col>
               <Col span={18}>
                 <FormItem id="control-input2">
-                {getFieldDecorator('phone', { initialValue: '' })(
-                  <Input id="control-input22" placeholder="请填写寄货/收货人的手机号码" className={styles.set_address_input}/>
+                {getFieldDecorator('phone', { initialValue: address.phone })(
+                  <Input id="control-input22" 
+                         placeholder="请填写寄货/收货人的手机号码" 
+                         className={styles.set_address_input}/>
                 )}
               </FormItem>
               </Col>
@@ -119,7 +149,7 @@ class SetAddress extends Component {
                     <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
                   </Col>
                   <Col span={22} className={styles.location_icon_content}>
-                    {localStorage.address ? localStorage.address : '点击这里'}
+                    {localStorage.map_address ? localStorage.map_address : '点击这里'}
                   </Col>
                 </Row>
               </Col>

@@ -134,7 +134,7 @@ class Appointment extends Component {
                 {
                   localStorage.store_address ? 
                     <p>
-                      {store_address.address}<br/>
+                      {store_address.address_detail}<br/>
                       <span>{store_address.phone} {store_address.name}</span>
                     </p> : 
                     <p>请选择一个地址</p>}

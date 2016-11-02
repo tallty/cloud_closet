@@ -29,7 +29,7 @@ class MapTabResult extends Component {
 
 
   local_address(address){
-    localStorage.setItem('address', address)
+    localStorage.setItem('map_address', address);
     console.log("选中了============>" + address);
     // this.props.router.replace('/set_address')
     this.props.hiddenEvent();

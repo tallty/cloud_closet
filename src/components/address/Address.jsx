@@ -25,6 +25,7 @@ export class Address extends Component {
           this.setState({ addresses: res.body });
         } else {
           alert("获取地址列表失败");
+          this.setState({ addresses: [] });
         }
       })
   }
