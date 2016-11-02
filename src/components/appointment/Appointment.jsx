@@ -24,11 +24,11 @@ class Appointment extends Component {
   }
 
   componentWillMount() {
-    let user = JSON.parse(localStorage.user);
-    // 如果没有用户的信息，则重新获取
-    if (!user) {
-      this.getUserInfo();
-    }
+    this.getUserInfo();
+  }
+
+  componentDidMount() {
+    
   }
 
   getUserInfo() {
@@ -38,7 +38,7 @@ class Appointment extends Component {
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
       .end((err, res) => {
-        if (res.ok) {
+        if (!err || err === null) {
           // 缓存
           let str = JSON.stringify(res.body);
           localStorage.setItem('user', str);
@@ -46,6 +46,10 @@ class Appointment extends Component {
           alert("获取用户信息失败")
         }
       })
+  }
+
+  getDefaultAddress() {
+
   }
 
   choose_address(){
@@ -67,7 +71,7 @@ class Appointment extends Component {
     const store_address = localStorage.store_address ? JSON.parse(localStorage.store_address) : []
     const value = this.props.form.getFieldsValue();
 
-    let address_d = store_address.address
+    let address_detail = store_address.address
     let name = localStorage.user_name
     let number = value.number
     let date = this.date2str(new Date(value.endDate), "yyyy-MM-d")
@@ -77,7 +81,7 @@ class Appointment extends Component {
         console.log('Errors in form!!!');
         return;
       }else{
-        this.pushAppoint(address_d, name, number, date )
+        this.pushAppoint(address_detail, name, number, date )
       }
     });
   }
@@ -101,16 +105,17 @@ class Appointment extends Component {
   }
 
   // 预约
-  pushAppoint(address_d, name, number, date){
+  pushAppoint(address_detail, name, number, date){
     var url = "http://closet-api.tallty.com/appointments"
     SuperAgent
       .post(url)
       .set('Accept', 'application/json')
       .set('X-User-Phone', localStorage.phone)
       .set('X-User-Token', localStorage.authentication_token)
-      .send({'appointment': {'address': address_d, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date}})
+      .send({'appointment': {'address': address_detail, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date}})
       .end( (err, res) => {
         if (res.ok) {
+          localStorage.setItem('store_address', null);
           this.props.router.replace('/success?action=appointment')
         }
       })   
@@ -118,7 +123,7 @@ class Appointment extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const store_address = localStorage.store_address?JSON.parse(localStorage.store_address):[]
+    let store_address = localStorage.store_address ? JSON.parse(localStorage.store_address) : null;
     return (
       <div className={styles.order_container}>
         
@@ -126,18 +131,18 @@ class Appointment extends Component {
         
         <Row className={styles.order_content}>
           <Form horizontal onSubmit={this.handleSubmit.bind(this)} >
-            <Col span={2} offset={11} className={styles.location_icon_content}>
-              <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
+            <Col span={20} offset={2} className={styles.location_icon_content}>
+              <img src="src/images/orange_location_icon.svg" alt="" className={styles.location_icon}/>
             </Col>
             <div onClick={this.choose_address.bind(this)}>
-              <Col className={styles.address_show} span={22}>
+              <Col className={styles.address_show} span={20} offset={2}>
                 {
-                  localStorage.store_address ? 
+                  store_address ? 
                     <p>
                       {store_address.address_detail}<br/>
                       <span>{store_address.phone} {store_address.name}</span>
                     </p> : 
-                    <p>请选择一个地址</p>}
+                    <p style={{height: 42, lineHeight: '40px'}}>请选择一个地址</p>}
               </Col>
               <Col className={styles.address_show} span={2}>
                 <Icon type="right" />
