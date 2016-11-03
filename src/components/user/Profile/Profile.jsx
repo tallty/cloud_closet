@@ -44,11 +44,11 @@ export class Profile extends Component {
   }
 
 	/**
-	 * 获取数据
+	 * 处理弹出框表单提交
 	 */
-	updateUserInfo() {
-		let { update_key, update_value } = this.state
-		console.log(update_key +"/"+update_value)
+	handlePopInputUpdate() {
+		let { update_key, update_value } = this.state;
+		console.log(update_key +"/"+update_value);
 		SuperAgent
 			.put("http://closet-api.tallty.com/user_info")
 			.set('Accept', 'application/json')
@@ -71,7 +71,44 @@ export class Profile extends Component {
 	    	}
 	    })
 	}
-	
+
+	/**
+	 * [selectPhoto 处理头像]
+	 */
+	selectPhoto() {
+		console.log("=====开始处理头像=====")
+		this.refs.photo.click();
+	}
+
+	/**
+	 * [handlePhotoChange 获取图片对象，并上传]
+	 * @param  {[type]} e [文件表单对象]
+	 */
+	handlePhotoChange(e) {
+		let file = e.target.files[0];
+		SuperAgent
+			.put("http://closet-api.tallty.com/user_info")
+			.set('Accept', 'application/json')
+	    .set('X-User-Token', localStorage.authentication_token)
+	    .set('X-User-Phone', localStorage.phone)
+	    .field('user_info[avatar_attributes][photo]', file)
+	    .end((err, res) => {
+	    	if (res.ok) {
+	    		// 缓存
+	    		let user_str = JSON.stringify(res.body);
+	    		localStorage.setItem('user', user_str);
+	    		console.log(res.body);
+					this.setState({ 
+						user: res.body,
+						pop: false
+					})
+	    	} else {
+	    		console.dir(err)
+	    		alert("更新用户信息失败")
+	    	}
+	    })
+	}
+
 	/**
 	 * [hidePopWindow 隐藏弹出框]
 	 */
@@ -80,16 +117,11 @@ export class Profile extends Component {
 		this.setState({ pop: false })
 	}
 
+	/**
+	 * [handlePopInputChange 弹出框表单监听]
+	 */
 	handlePopInputChange(e) {
 		this.setState({ update_value: e.target.value })
-	}
-
-	/**
-	 * [handlePhoto 处理头像]
-	 */
-	handlePhoto() {
-		console.log("=====开始处理头像=====")
-		
 	}
 
 	handleNickname() {
@@ -132,9 +164,10 @@ export class Profile extends Component {
 
 		return (
 			<div className={css.container}>
+				<input type="file" multiple={false} accept='image/*' ref="photo" style={{display: 'none'}} onChange={this.handlePhotoChange.bind(this)}/>
 				<Celler name="我的头像" type="image" value={user.avatar} 
 								defaultValue="src/images/default_photo.png" 
-								event={this.handlePhoto.bind(this)}/>
+								event={this.selectPhoto.bind(this)}/>
 				<Celler name="昵称" value={nickname} event={this.handleNickname.bind(this)}/>
 				<Celler name="邮箱" value={mail} event={this.handleMail.bind(this)}/>
 				<Celler name="职业" value="XXXX" bottom={14} event={this.handleWork.bind(this)}/>
@@ -148,7 +181,7 @@ export class Profile extends Component {
 					<div className={css.popContainer}>
 						<p className={css.title}>{popTitle}</p>
 						<Input size="large" value={update_value} onChange={this.handlePopInputChange.bind(this)}/>
-						<Button onClick={this.updateUserInfo.bind(this)} className={css.update}>更新</Button>
+						<Button onClick={this.handlePopInputUpdate.bind(this)} className={css.update}>更新</Button>
 					</div>
 				</PopWindow>
 			</div>

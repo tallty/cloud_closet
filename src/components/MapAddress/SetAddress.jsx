@@ -173,7 +173,7 @@ class SetAddress extends Component {
         <PopWindow show={pop} 
                    direction='right' 
                    onCancel={this.onCancel.bind(this)}>
-          
+          <MapAddress hiddenEvent={this.onCancel.bind(this)}/>
         </PopWindow>
       </div>
     );

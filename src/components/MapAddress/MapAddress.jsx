@@ -105,11 +105,10 @@ export class MapAddress extends Component {
     })
   }
 
-// style={{height: height}}
   render() {
     return (
       <div className={styles.dhContainer} >
-        <div id="map-container" className={styles.baidumap}></div>
+        <div id="map-container" className={styles.baidumap} style={{height: height}}></div>
           {
             this.state.poi ? 
               <MapTabResult map={this.map} {...this.state} {...this.props}/> : <Spiner />

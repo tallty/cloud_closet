@@ -86,7 +86,7 @@ class MapTabResult extends Component {
           <TabPane tab="写字楼" key="写字楼"></TabPane>
           <TabPane tab="学校" key="学校"></TabPane>
         </Tabs>
-        <div className={styles.address_list}>{this.state.list}</div>
+        <div className={styles.address_list} style={{height: height}}>{this.state.list}</div>
       </div>
     )
   }
