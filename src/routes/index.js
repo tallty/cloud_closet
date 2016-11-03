@@ -34,7 +34,7 @@ import { Search } from '../components/my_closet/search/Search'
 import { Manage } from '../components/my_closet/manage/Manage'
 import { ClosetDetails } from '../components/my_closet/closet_tab/closet_details/ClosetDetails'
 //地址
-import { Address } from '../components/address/Address'
+import Address from '../components/address/Address'
 import AddAddress from '../components/address/add_address/AddAddress'
 import { NewAddress } from '../components/address/new_address/NewAddress'
 //配送

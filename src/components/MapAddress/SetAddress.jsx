@@ -21,8 +21,9 @@ class SetAddress extends Component {
 
   componentWillMount() {
     console.log(sessionStorage.edit_address)
-    let edit_address = JSON.parse(sessionStorage.edit_address);
-    if (edit_address) {
+    if (sessionStorage.edit_address) {
+      console.log("==========")
+      let edit_address = JSON.parse(sessionStorage.edit_address);
       this.setState({
         address: edit_address,
         action: 'edit'
@@ -32,7 +33,7 @@ class SetAddress extends Component {
 
   componentWillUnmount() {
     sessionStorage.removeItem('map_address');
-    sessionStorage.setItem('edit_address', null);
+    sessionStorage.setItem('edit_address', undefined);
   }
 
   handleSubmit(e) {
@@ -149,7 +150,7 @@ class SetAddress extends Component {
                     <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
                   </Col>
                   <Col span={22} className={styles.location_icon_content}>
-                    {localStorage.map_address ? localStorage.map_address : '点击这里'}
+                    {sessionStorage.map_address ? sessionStorage.map_address : '点击这里'}
                   </Col>
                 </Row>
               </Col>
@@ -172,7 +173,7 @@ class SetAddress extends Component {
         <PopWindow show={pop} 
                    direction='right' 
                    onCancel={this.onCancel.bind(this)}>
-          <MapAddress hiddenEvent={this.onCancel.bind(this)}/>
+          
         </PopWindow>
       </div>
     );
@@ -181,4 +182,4 @@ class SetAddress extends Component {
 
 SetAddress = Form.create({})(SetAddress);
 
-export default withRouter(SetAddress)
+export default withRouter(SetAddress);

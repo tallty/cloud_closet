@@ -29,7 +29,8 @@ class GetOpenId extends Component {
           console.log("保存的openid: "+ localStorage.openid);
           this.checkOpenid();
         } else {
-          alert('获取用户信息失败，请重新进入！');
+          // alert('获取用户信息失败，请重新进入！');
+          console.log("获取用户信息失败");
         }
       })
   }

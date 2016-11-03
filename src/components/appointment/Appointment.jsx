@@ -45,7 +45,8 @@ class Appointment extends Component {
 
           this.setState({ user: res.body });
         } else {
-          alert("获取用户信息失败");
+          // alert("获取用户信息失败");
+          console.log("获取用户信息失败");
         }
       })
   }

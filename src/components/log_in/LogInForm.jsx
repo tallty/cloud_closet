@@ -148,7 +148,7 @@ class LogInForm extends Component {
       .send({'user': {'phone': phone, 'password': password}})
       .end( (err, res) => {
         if (res.ok) {
-          this.props.router.replace(sessionStorage.route)
+          this.props.router.replace(sessionStorage.redirect_url);
 
           console.log('用户登录成功 =>')
           console.dir(res)

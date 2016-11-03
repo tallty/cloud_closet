@@ -5,7 +5,6 @@ import { Link, withRouter } from 'react-router'
 import styles from './MapTabResult.less'
 
 const TabPane = Tabs.TabPane;
-const height = document.body.offsetHeight*0.6-37;
 
 class MapTabResult extends Component {
   constructor(props) {
@@ -43,7 +42,7 @@ class MapTabResult extends Component {
           var list = []
           // 加入目前定位的地址
           list.push(
-            <Row key={-1} className={styles.add_col} 
+            <Row key={0} className={styles.add_col} 
                          onClick={this.local_address.bind(this, poi.address)}>
               <Col span={2} className={styles.location_icon_content}>
                 <img src="src/images/location_icon.svg" className={styles.location_icon}/>
@@ -57,7 +56,7 @@ class MapTabResult extends Component {
             let address = results.getPoi(i).address;
 
             list.push(
-              <Row key={i} className={styles.add_col} 
+              <Row key={i+1} className={styles.add_col} 
                            onClick={this.local_address.bind(this, address)}>
                 <Col span={2} className={styles.location_icon_content}>
                   <img src="src/images/location_icon.svg" className={styles.location_icon}/>
@@ -77,6 +76,8 @@ class MapTabResult extends Component {
   }
 
   render() {
+    const height = document.body.clientHeight*0.6-37;
+
     return (
       <div className={styles.container}>
         <Tabs defaultActiveKey="上海" onChange={this.searchNearby.bind(this)}>
@@ -85,7 +86,7 @@ class MapTabResult extends Component {
           <TabPane tab="写字楼" key="写字楼"></TabPane>
           <TabPane tab="学校" key="学校"></TabPane>
         </Tabs>
-        <div className={styles.address_list} style={{height: height}}>{this.state.list}</div>
+        <div className={styles.address_list}>{this.state.list}</div>
       </div>
     )
   }

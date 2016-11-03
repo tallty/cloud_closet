@@ -2,7 +2,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Icon, Button } from 'antd'
 import AddAddress from './add_address/AddAddress'
-import { Link } from 'react-router'
+import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'
 import styles from './Address.less'
 import Toolbar from '../common/Toolbar'
@@ -39,6 +39,10 @@ export class Address extends Component {
       })
   }
 
+  addNewAddress() {
+    this.props.router.replace('/set_address');
+  }
+
   render() {
     return (
       <div className={styles.Address_content}>
@@ -50,9 +54,7 @@ export class Address extends Component {
         </div>
         <Row className={styles.tab_footer}>
           <Col span={24}>
-            <Link to="/set_address" style={{color:'#fff'}}>
-              <Button type="primary" className={styles.add_address_btn}>添加新地址</Button>
-            </Link>
+            <button className={styles.add_address_btn} onClick={this.addNewAddress.bind(this)}>添加新地址</button>
           </Col>
         </Row>
       </div>
@@ -65,3 +67,5 @@ Address.defaultProps = {
 
 Address.propTypes = {
 };
+
+export default withRouter(Address);
