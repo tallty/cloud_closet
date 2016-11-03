@@ -79,11 +79,11 @@ class AddAddress extends Component {
   }
   
   // 选中地址返回给预约页面（仅适用于预约页面）
-  store_address(address){
+  select_address(address){
     var addre = JSON.stringify(address)
     console.log("选择了地址"+addre);
     sessionStorage.removeItem('addresses_back_url');
-    sessionStorage.setItem('store_address', addre);
+    sessionStorage.setItem('selected_address', addre);
     this.props.router.replace('/appointment');
   }
 
@@ -91,7 +91,7 @@ class AddAddress extends Component {
     let list = [];
     this.state.addresses.forEach((address, i, obj) => {
       let back_url = sessionStorage.addresses_back_url;
-      let itemEvent = back_url === "/appointment" ? this.store_address.bind(this,address) : null;
+      let itemEvent = back_url === "/appointment" ? this.select_address.bind(this,address) : null;
       
       list.push(
          <Row key={i} className={styles.tab_cell}>

@@ -42,6 +42,8 @@ class Appointment extends Component {
           // 缓存
           let str = JSON.stringify(res.body);
           localStorage.setItem('user', str);
+
+          this.setState({ user: res.body });
         } else {
           alert("获取用户信息失败");
         }
@@ -59,8 +61,8 @@ class Appointment extends Component {
 
   checkOrderTime(rule, value, callback){
     console.log(Date.now());
-    console.log(value.valueOf());
     if (value && value.valueOf() < Date.now()) {
+      console.log(value.valueOf());
       callback(new Error("请选择一个未来的预约时间!"));
     } else {
       callback();
@@ -69,11 +71,11 @@ class Appointment extends Component {
   
   handleSubmit(e) {
     e.preventDefault();
-    const store_address = sessionStorage.store_address ? JSON.parse(sessionStorage.store_address) : {};
+    const selected_address = sessionStorage.selected_address ? JSON.parse(sessionStorage.selected_address) : {};
     const value = this.props.form.getFieldsValue();
 
-    let address_detail = store_address.address;
-    let name = user.nickname;
+    let address_detail = selected_address.address_detail;
+    let name = this.state.user.nickname;
     let number = value.number;
     let date = this.date2str(new Date(value.endDate), "yyyy-MM-d");
 
@@ -107,24 +109,27 @@ class Appointment extends Component {
 
   // 预约
   pushAppoint(address_detail, name, number, date){
-    var url = "http://closet-api.tallty.com/appointments"
-    SuperAgent
-      .post(url)
-      .set('Accept', 'application/json')
-      .set('X-User-Phone', localStorage.phone)
-      .set('X-User-Token', localStorage.authentication_token)
-      .send({'appointment': {'address': address_detail, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date}})
-      .end( (err, res) => {
-        if (res.ok) {
-          localStorage.setItem('store_address', null);
-          this.props.router.replace('/success?action=appointment')
-        }
-      })   
+    if (address_detail && number && date) {
+      SuperAgent
+        .post("http://closet-api.tallty.com/appointments")
+        .set('Accept', 'application/json')
+        .set('X-User-Phone', localStorage.phone)
+        .set('X-User-Token', localStorage.authentication_token)
+        .send({'appointment': {'address': address_detail, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date}})
+        .end( (err, res) => {
+          if (res.ok) {
+            localStorage.setItem('selected_address', null);
+            this.props.router.replace('/success?action=appointment')
+          }
+        }) 
+    } else {
+      alert("请完善预约信息");
+    }
   }
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    let store_address = sessionStorage.store_address ? JSON.parse(sessionStorage.store_address) : null;
+    let selected_address = sessionStorage.selected_address ? JSON.parse(sessionStorage.selected_address) : null;
     return (
       <div className={styles.order_container}>
         
@@ -138,10 +143,10 @@ class Appointment extends Component {
             <div onClick={this.choose_address.bind(this)}>
               <Col className={styles.address_show} span={20} offset={2}>
                 {
-                  store_address ? 
+                  selected_address ? 
                     <p>
-                      {store_address.address_detail}<br/>
-                      <span>{store_address.phone} {store_address.name}</span>
+                      {selected_address.address_detail}<br/>
+                      <span>{selected_address.phone} {selected_address.name}</span>
                     </p> : 
                     <p style={{height: 42, lineHeight: '40px'}}>请选择一个地址</p>}
               </Col>

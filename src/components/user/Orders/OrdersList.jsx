@@ -13,20 +13,6 @@ const { string, number, arrayOf, shape } = PropTypes;
 const cx = classNames.bind(css);
 
 class OrdersList extends Component {
-	// 订单类型
-	orderTypes = new Map([
-		['one', '待确认'],['two', '服务中'],['three', '待付款'],
-		['four', '入库中'],['five', '已上架'],['six', '已取消']
-	]);
-
-	// 显示订单的类型
-	getOrderTitle(type) {
-		if (this.orderTypes.get(type)) {
-			return this.orderTypes.get(type)
-		} else {
-			return '待确认';
-		}
-	}
 
 	// 获取订单的合计
 	getTotalPrice(order) {
@@ -67,20 +53,15 @@ class OrdersList extends Component {
 
 	// 订单列表
 	getOrders() {
-		let { type, orders } = this.props
-    let list = []
+		let { type, orders } = this.props;
+    let list = [];
 
 		orders.forEach((order, index, obj) => {
-			if (type == "normal" || order.type === type) {
-				let headerColor = cx({
-		      'going': order.type != "complete",
-		      'complete': order.type === "history"
-		    })
-
+			if (type == "normal") {
 				list.push(
 					<div className={css.orders} key={index}>
 						<div className={css.header}>
-							<span className={headerColor}>{ this.getOrderTitle() }</span>
+							<span className={css.going}>{ order.state }</span>
 							<span className={css.time}>{ order.date }</span>
 						</div>
 						<div className={css.content}>

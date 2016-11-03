@@ -16,7 +16,7 @@ export class Address extends Component {
   }
 
   componentWillMount() {
-    let back_url = localStorage.addresses_back_url;
+    let back_url = sessionStorage.addresses_back_url;
     if (back_url || back_url === null) {
       this.setState({ back_url: back_url });
     }

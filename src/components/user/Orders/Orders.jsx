@@ -3,11 +3,13 @@
  * 需要的数据类型：
  * appointment: {
  * 	id: 用户id,
+ * 	address: 地址,
+ * 	seq: 订单编号,
  * 	name: 用户姓名,
  * 	phone: 手机号,
- * 	address: 地址,
  * 	number: 预约入库数量,
  * 	date: 预约日期,
+ * 	state: 订单状态【string】,
  * 	_total: 衣服总计,
  * 	【====以下为接口欠缺数据字段，使用假数据===】
  * 	nurse: 护理方式[every|one|no],
