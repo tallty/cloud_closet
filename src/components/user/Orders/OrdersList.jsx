@@ -27,22 +27,20 @@ class OrdersList extends Component {
 	handlePay(order) {
 		console.log("付款订单")
 		console.log(order)
-		let order_str = JSON.stringify(order)
-		sessionStorage.setItem('order', order_str)
 		// 重定向
-		this.props.router.replace('/order')
+		this.props.router.replace(`/order?id=${order.id}`);
 	}
 
 	// 设置不同类型订单的处理事件
 	setOrdersEvent(order) {
-		if (order.type === "normal") {
+		if (order.state === "待确认") {
 			return (
 				<div className={css.btns}>
 					<Button type="ghost" className={css.show_btn}>取消订单</Button>
 					<Button type="primary" className={css.sure_btn} onClick={this.handlePay.bind(this, order)}>确认</Button>	
 				</div>
 			)
-		} else if (order.type === "history") {
+		} else if (order.state === "history") {
 			return (
 				<div className={css.btns}>
 					<Button type="ghost" className={css.show_btn}>取消订单</Button>

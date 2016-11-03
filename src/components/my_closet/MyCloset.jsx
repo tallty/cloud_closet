@@ -8,6 +8,7 @@ import ClosetTab from './closet_tab/ClosetTab'
 import classnames from 'classnames'
 import styles from './MyCloset.less'
 import SuperAgent from 'superagent'
+import auth from '../WechatConect/auth'
 
 export class MyCloset extends Component {
   state = {
@@ -43,6 +44,7 @@ export class MyCloset extends Component {
           this.setState({ user: res.body });
         } else {
           console.log("获取用户信息失败");
+          auth.authLogin();
         }
       })
   }

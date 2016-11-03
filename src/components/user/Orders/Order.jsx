@@ -16,17 +16,51 @@ const nurseWay = new Map([
 
 export class Order extends Component {
 	state = {
-		order: null
+		order: null,
+		user: null
 	}
 
-	componentWillMount() {
-		let order_str = sessionStorage.order
-		let order = JSON.parse(order_str)
+	componentDidMount() {
+		this.getAppointment();
+		this.getUserInfo();
+	}
 
-		this.setState({
-			order: order,
-			balance: null
-		})
+	getUserInfo() {
+		SuperAgent
+			.get(`http://closet-api.tallty.com/user_info`)
+			.set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+      	if (res.ok) {
+      		let obj = res.body;
+  				console.log("Order.jsx 获取用户详情 => ")
+					console.log(obj)
+					this.setState({ user: obj });
+      	} else {
+					console.log("获取用户详情失败")
+      	}
+      })
+	}
+
+	// 获取预约订单信息
+	getAppointment() {
+		let id = this.props.location.query.id;
+		SuperAgent
+			.get(`http://closet-api.tallty.com/appointments/${id}`)
+			.set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+      	if (res.ok) {
+      		let obj = res.body;
+  				console.log("Order.jsx 获取的订单详情 => ")
+					console.log(obj)
+					this.setState({ order: obj });
+      	} else {
+					console.log("获取预约订单详情失败")
+      	}
+      })
 	}
 
 	// 获取订单的合计
@@ -67,7 +101,8 @@ export class Order extends Component {
 	 * 获取余额
 	 */
 	getBalance() {
-		return '3，568'
+		let user = this.state.user;
+		return user ? user.balance : '';
 	}
 
 	/**
@@ -94,16 +129,19 @@ export class Order extends Component {
 									url={`/orders`}
 									style={toolbar_style} 
 									back_style={back_style} />
+					{
+						this.state.order ? 
+							<div className={css.order}>
+								{/* 订单 */}
+								<InClothes order={order} />
+								{/* 费用 */}
+								<p className="text-right">运费：XXX</p>
+								<p className="text-right">服务费：XXX</p>
+								<p className={css.tips}>护理要求：&nbsp;&nbsp;<span>每次护理</span></p>
+								<p className={css.total_price}>合计：<span>{ this.getTotalPrice() }</span></p>
+							</div> : <Spiner/>
+					}
 					
-					<div className={css.order}>
-						{/* 订单 */}
-						<InClothes order={order} />
-						{/* 费用 */}
-						<p className="text-right">运费：XXX</p>
-						<p className="text-right">服务费：XXX</p>
-						<p className={css.tips}>护理要求：&nbsp;&nbsp;<span>每次护理</span></p>
-						<p className={css.total_price}>合计：<span>{ this.getTotalPrice() }</span></p>
-					</div>
 					{/* 物流 */}
 					<div className={css.logistics}>
 						<Timeline>{ this.getLogistics() }</Timeline>
@@ -111,7 +149,7 @@ export class Order extends Component {
 					{/* 支付方式 */}
 					<div className={css.pay_actions}>
 						<button className={css.pay_btn} onClick={this.handlePay.bind(this)}>账户余额（￥{this.getBalance()}）</button>
-						<Link to="/recharge" className={css.recharge_btn}>充值</Link>
+						<Link to={`/recharge?redirect_url=${location.origin}/success?action=pay`} className={css.recharge_btn}>充值</Link>
 					</div>
 				</div>
 				

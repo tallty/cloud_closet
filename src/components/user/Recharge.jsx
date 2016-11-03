@@ -13,8 +13,16 @@ const FormItem = Form.Item
 
 export class Recharge extends Component {
 	state = {
-		money: null
+		money: null,
+		success_url: '/user'
 	}	
+
+	componentWillMount() {
+		console.log(this.props.location);
+		if (this.props.location.query.redirect_url) {
+			this.setState({ success_url: this.props.location.query.redirect_url });
+		}
+	}
 
   getChargeObject(){
     SuperAgent
@@ -22,15 +30,18 @@ export class Recharge extends Component {
       .set('Accept', 'application/json')
       .end( (err, res) => {
         if (!err || err === null) {
-        	console.log(res.body);
+        	console.dir(res.body);
         	let charge = res.body;
         	// 创建付款
         	pingpp.createPayment(charge, (result, err) => {
 						console.log("付款结果："+result);
+						console.dir(result);
 				    console.log("错误信息："+err.msg);
 				    console.log("额外信息："+err.extra);
+				    console.dir(err);
 				    if (result == "success") {
 				        // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
+				        window.location.href = this.state.success_url;
 				    } else if (result == "fail") {
 				        // charge 不正确或者微信公众账号支付失败时会在此处返回
 				    } else if (result == "cancel") {

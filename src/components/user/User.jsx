@@ -1,6 +1,7 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Icon, Button, Progress } from 'antd'
+import auth from '../WechatConect/auth'
 import { Level } from './share/Level'
 import { Link } from 'react-router'
 import css from './user.less'
@@ -40,7 +41,8 @@ export class User extends Component {
 
 					this.setState({ user: res.body })
       	} else {
-      		alert("获取用户信息失败")
+      		console.log("获取用户信息失败");
+      		auth.authLogin();
       	}
       })
 	}
