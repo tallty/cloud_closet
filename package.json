@@ -3,8 +3,6 @@
   "entry": {},
   "dependencies": {
     "antd": "^2.0.1",
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
     "classnames": "^2.2.3",
     "es3ify-loader": "^0.2.0",
     "express": "^4.14.0",
@@ -12,17 +10,21 @@
     "isomorphic-fetch": "^2.2.1",
     "js-cookie": "^2.1.1",
     "normalize.css": "^4.2.0",
+    "pingpp-js": "^2.1.5",
     "rc-form": "^1.0.0",
     "rc-queue-anim": "^0.12.4",
     "rc-tween-one": "^0.8.5",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-mobile-picker": "^0.1.10",
     "react-router": "^2.0.1",
+    "react-weui": "^0.4.0",
     "src": "^1.1.2",
     "superagent": "^2.2.0",
     "wechat-auth": "^1.1.2",
     "wechat-oauth": "^1.1.1",
-    "react-mobile-picker": "^0.1.10",
-    "react-weui": "^0.4.0",
-    "weui": "^0.4.3"
+    "weui": "^0.4.3",
+    "pingpp-js": "^2.1.5"
   },
   "devDependencies": {
     "atool-build": "^0.8.0",

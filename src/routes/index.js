@@ -51,7 +51,7 @@ export class Routes extends Component {
    * 成功：直接重定向到用户访问页；
    */ 
   requireAuth() {
-    // auth.authLogin();
+    auth.authLogin();
   }
 
 	render() {
