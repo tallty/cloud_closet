@@ -59,7 +59,7 @@ export class Profile extends Component {
 	    		// 缓存
 	    		let user_str = JSON.stringify(res.body);
 	    		localStorage.setItem('user', user_str);
-	    		console.log(res.body)
+	    		console.log(res.body);
 					this.setState({ 
 						user: res.body,
 						pop: false

@@ -40,7 +40,7 @@ class AddAddress extends Component {
   // 编辑地址
   editAddress(address) {
     let str = JSON.stringify(address);
-    localStorage.setItem('edit_address', str);
+    sessionStorage.setItem('edit_address', str);
     this.props.router.replace('/set_address');
   }
 
@@ -82,15 +82,15 @@ class AddAddress extends Component {
   store_address(address){
     var addre = JSON.stringify(address)
     console.log("选择了地址"+addre);
-    localStorage.removeItem('addresses_back_url');
-    localStorage.setItem('store_address', addre);
+    sessionStorage.removeItem('addresses_back_url');
+    sessionStorage.setItem('store_address', addre);
     this.props.router.replace('/appointment');
   }
 
   setList() {
     let list = [];
     this.state.addresses.forEach((address, i, obj) => {
-      let back_url = localStorage.addresses_back_url;
+      let back_url = sessionStorage.addresses_back_url;
       let itemEvent = back_url === "/appointment" ? this.store_address.bind(this,address) : null;
       
       list.push(

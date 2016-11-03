@@ -20,8 +20,8 @@ class SetAddress extends Component {
   }
 
   componentWillMount() {
-    console.log(localStorage.edit_address)
-    let edit_address = JSON.parse(localStorage.edit_address);
+    console.log(sessionStorage.edit_address)
+    let edit_address = JSON.parse(sessionStorage.edit_address);
     if (edit_address) {
       this.setState({
         address: edit_address,
@@ -31,8 +31,8 @@ class SetAddress extends Component {
   }
 
   componentWillUnmount() {
-    localStorage.removeItem('map_address');
-    localStorage.setItem('edit_address', null);
+    sessionStorage.removeItem('map_address');
+    sessionStorage.setItem('edit_address', null);
   }
 
   handleSubmit(e) {

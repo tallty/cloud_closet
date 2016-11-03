@@ -15,7 +15,7 @@ class Appointment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: '',
+      user: null,
       name: '',
       phone: '',
       number: '',
@@ -43,7 +43,7 @@ class Appointment extends Component {
           let str = JSON.stringify(res.body);
           localStorage.setItem('user', str);
         } else {
-          alert("获取用户信息失败")
+          alert("获取用户信息失败");
         }
       })
   }
@@ -53,7 +53,7 @@ class Appointment extends Component {
   }
 
   choose_address(){
-    localStorage.setItem('addresses_back_url', '/appointment');
+    sessionStorage.setItem('addresses_back_url', '/appointment');
     this.props.router.replace('/address');
   }
 
@@ -69,13 +69,13 @@ class Appointment extends Component {
   
   handleSubmit(e) {
     e.preventDefault();
-    const store_address = localStorage.store_address ? JSON.parse(localStorage.store_address) : []
+    const store_address = sessionStorage.store_address ? JSON.parse(sessionStorage.store_address) : {};
     const value = this.props.form.getFieldsValue();
 
-    let address_detail = store_address.address
-    let name = localStorage.user_name
-    let number = value.number
-    let date = this.date2str(new Date(value.endDate), "yyyy-MM-d")
+    let address_detail = store_address.address;
+    let name = user.nickname;
+    let number = value.number;
+    let date = this.date2str(new Date(value.endDate), "yyyy-MM-d");
 
     this.props.form.validateFieldsAndScroll((errors, values) => {
       if (errors) {
@@ -124,7 +124,7 @@ class Appointment extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    let store_address = localStorage.store_address ? JSON.parse(localStorage.store_address) : null;
+    let store_address = sessionStorage.store_address ? JSON.parse(sessionStorage.store_address) : null;
     return (
       <div className={styles.order_container}>
         
