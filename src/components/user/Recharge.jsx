@@ -6,7 +6,8 @@ import React, { Component, PropTypes } from 'react'
 import WechatKit from '../WechatConect/WechatKit'
 import css from './recharge.less'
 import { Link } from 'react-router'
-import { Form, Input, Row, Col, Button, message } from 'antd'
+import { Form, Input, Row, Col, Button, message } from 'antd';
+import pingpp from 'pingpp-js';
 
 const FormItem = Form.Item
 
@@ -15,48 +16,27 @@ export class Recharge extends Component {
 		money: null
 	}	
 
-	// 微信支付
-  // chooseWXPay(){
-  //   SuperAgent
-  //     .post("http://wechat-api.tallty.com/cloud_closet_wechat/wx_pay")
-  //     .set('Accept', 'application/json')
-  //     .send( {'openid': localStorage.openid, 'total_fee': 10 } )
-  //     .end( (err, res) => {
-  //       if (res.ok) {
-  //       	console.log(res.body)
-  //         wx.chooseWXPay({
-  //           appId: 'wx47b02e6b45bf1dad',
-  //           timestamp: res.body.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-  //           nonceStr: res.body.nonceStr.xml.nonce_str, // 支付签名随机串，不长于 32 位
-  //           package: 'prepay_id='+res.body.nonceStr.xml.prepay_id, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-  //           signType: res.body.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-  //           paySign: res.body.paySign, // 支付签名
-  //           success: function (res) {
-  //             // 支付成功后的回调函数
-  //             alert(res);
-  //             if(res.errMsg == "chooseWXPay:ok" ) {
-  //               console.log('success');
-  //             }else{
-  //               alert(res.errMsg);
-  //             }
-  //           },
-  //           cancel:function(res){
-  //             //支付取消
-  //             console.log('cancel');
-  //           }
-  //         });
-  //       }
-  //     })  
-  // }
-  
-
-  chooseWXPay(){
+  getChargeObject(){
     SuperAgent
       .get("http://closet-api.tallty.com/test_pingpp")
       .set('Accept', 'application/json')
       .end( (err, res) => {
         if (!err || err === null) {
         	console.log(res.body);
+        	let charge = res.body;
+        	// 创建付款
+        	pingpp.createPayment(charge, (result, err) => {
+						console.log("付款结果："+result);
+				    console.log("错误信息："+err.msg);
+				    console.log("额外信息："+err.extra);
+				    if (result == "success") {
+				        // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
+				    } else if (result == "fail") {
+				        // charge 不正确或者微信公众账号支付失败时会在此处返回
+				    } else if (result == "cancel") {
+				        // 微信公众账号支付取消支付
+				    }
+					});
         }
       })  
   }
@@ -95,12 +75,12 @@ export class Recharge extends Component {
 	}
 
 	/**
-	 * [handlePay 开始微信支付]
+	 * [handlePayment 开始微信支付]
 	 */
-	handlePay() {
+	handlePayment() {
 		if (this.state.money > 0) {
 			console.log("=======开始支付=======")
-			this.chooseWXPay();
+			this.getChargeObject();
 		} else {
 			alert("请填写充值金额");
 		}
@@ -132,7 +112,7 @@ export class Recharge extends Component {
 
 				{/* 操作 */}
 				<div className={css.actions}>
-					<Button className={css.pay_btn} onClick={this.handlePay.bind(this)}>
+					<Button className={css.pay_btn} onClick={this.handlePayment.bind(this)}>
 						<img src="src/images/wechat_pay.svg" alt=""/>微信支付
 					</Button>
 					<Button className={css.other_pay_btn}>找人代付（POS机刷卡）</Button>
