@@ -29,7 +29,7 @@ module.exports = {
     // 如果wx 没有初始化过
     if (config) {
       wx.config({
-        debug: false,
+        debug: true,
         appId: appid,
         timestamp: config.timestamp,
         nonceStr: config.noncestr,
