@@ -53,7 +53,8 @@ class Appointment extends Component {
   }
 
   choose_address(){
-    this.props.router.replace('/address?from=appointment')
+    localStorage.setItem('addresses_back_url', '/appointment');
+    this.props.router.replace('/address');
   }
 
   checkOrderTime(rule, value, callback){

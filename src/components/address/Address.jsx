@@ -11,10 +11,19 @@ import SuperAgent from 'superagent'
 
 export class Address extends Component {
   state = {
-    addresses: null
+    addresses: null,
+    back_url: '/profile'
+  }
+
+  componentWillMount() {
+    let back_url = localStorage.addresses_back_url;
+    if (back_url || back_url === null) {
+      this.setState({ back_url: back_url });
+    }
   }
 
   componentDidMount() {
+    console.log(this.state.back_url)
     SuperAgent
       .get("http://closet-api.tallty.com/addresses")
       .set('Accept', 'application/json')
@@ -31,12 +40,9 @@ export class Address extends Component {
   }
 
   render() {
-    let url_from = this.props.location.query.from;
-    let back_url = url_from ? `/${url_from}` : "/profile";
-
     return (
       <div className={styles.Address_content}>
-        <Toolbar title="管理收货地址" url={back_url} />
+        <Toolbar title="管理收货地址" url={this.state.back_url} />
         <div className="scrollContainer" style={{paddingTop: 50}}>
           <div className={styles.list_tab_body}>
             { this.state.addresses ? <AddAddress addresses={this.state.addresses}/> : <Spiner/> }

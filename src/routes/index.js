@@ -45,8 +45,13 @@ export class Routes extends Component {
     WechatKit.getConfig();
   }
 
+  /**
+   * [requireAuth 对进入的组件进行鉴权，根据本地openid检测用户合法性]
+   * 失败：重新获取openid，然后重定向到用户访问页；
+   * 成功：直接重定向到用户访问页；
+   */ 
   requireAuth() {
-    // auth.loggedIn();
+    auth.authLogin();
   }
 
 	render() {
@@ -72,7 +77,7 @@ export class Routes extends Component {
         <Route path="/order" component={Order}/>
         <Route path="/tickets" component={Ticket} />
         <Route path="/notifications" component={Notification} />
-        <Route path="/recharge" component={Recharge} />
+        <Route path="/recharge" component={Recharge} onEnter={this.requireAuth}/>
         <Route path="/withdraw" component={Withdraw} />
         <Route path="/help" component={Help} />
         <Route path="/receipt" component={Receipt} />

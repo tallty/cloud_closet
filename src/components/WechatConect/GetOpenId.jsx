@@ -24,12 +24,12 @@ class GetOpenId extends Component {
       .send({code: code})
       .end( (err, res) => {
         if (res.ok) {
-          localStorage.setItem('openid', res.body.openid)
-          localStorage.openid = res.body.openid
-          console.log("获取到的openid: "+ res.body.openid)
+          localStorage.setItem('openid', res.body.openid);
+          console.log("获取的openid: "+ res.body.openid);
+          console.log("保存的openid: "+ localStorage.openid);
           this.checkOpenid();
         } else {
-          alert('获取用户信息失败，请重新进入！')
+          alert('获取用户信息失败，请重新进入！');
         }
       })
   }
@@ -44,12 +44,10 @@ class GetOpenId extends Component {
       .send({'user': {'openid': localStorage.openid} })
       .end( (err, res) => {
         if (res.ok){
-          localStorage.setItem('state', res.ok)
-          console.log("鉴权的状态："+localStorage.route);
-          console.log("跳转的路由： "+localStorage.route);
-          this.props.router.replace(localStorage.route)
+          console.log("跳转的路由： "+sessionStorage.redirect_url);
+          this.props.router.replace(sessionStorage.redirect_url);
         }else{
-          this.props.router.replace('/login')
+          this.props.router.replace('/login');
         }
       })
   }
@@ -70,4 +68,4 @@ class GetOpenId extends Component {
   }
 }
 
-export default withRouter(GetOpenId)
+export default withRouter(GetOpenId);

@@ -82,14 +82,16 @@ class AddAddress extends Component {
   store_address(address){
     var addre = JSON.stringify(address)
     console.log("选择了地址"+addre);
-    localStorage.setItem('store_address', addre)
+    localStorage.removeItem('addresses_back_url');
+    localStorage.setItem('store_address', addre);
     this.props.router.replace('/appointment');
   }
 
   setList() {
     let list = [];
     this.state.addresses.forEach((address, i, obj) => {
-      let itemEvent = location.search === "?from=appointment" ? this.store_address.bind(this,address) : null;
+      let back_url = localStorage.addresses_back_url;
+      let itemEvent = back_url === "/appointment" ? this.store_address.bind(this,address) : null;
       
       list.push(
          <Row key={i} className={styles.tab_cell}>

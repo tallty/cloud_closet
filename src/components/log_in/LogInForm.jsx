@@ -21,44 +21,44 @@ class LogInForm extends Component {
   }
 
   handlePhone(e) {
-    var value = e.target.value;
+    let value = e.target.value;
     this.setState({
       phone: value,
     });
   }
 
   handlePassword(e) {
-    var value = e.target.value;
+    let value = e.target.value;
     this.setState({
       password: value,
     });
   }
 
   handleCodenum(e) {
-    var value = e.target.value;
+    let value = e.target.value;
     this.setState({
       codenum: value,
     });
   }
 
   handleNickname(e) {
-    var value = e.target.value;
+    let value = e.target.value;
     this.setState({
       nickname: value,
     });
   }
 
   enterIconLoading(){
-    var phone = this.state.phone
-    var url = "http://closet-api.tallty.com/sms_tokens/register"
+    let phone = this.state.phone;
+    let url = "http://closet-api.tallty.com/sms_tokens/register";
     //获取验证码
     SuperAgent.post(url)
               .set('Accept', 'application/json')
               .send( {'sms_token': {'phone': phone} } )
               .end( (err, res) => {
-                let result = res.body.token
-                console.log(res)
-                console.log(result)
+                let result = res.body.token;
+                console.log(res);
+                console.log(result);
               })
   }
 
@@ -67,7 +67,7 @@ class LogInForm extends Component {
    * 缓存：authentication_token
    */
   register(){
-    let { phone, password, codenum } = this.state
+    let { phone, password, codenum } = this.state;
     
     SuperAgent
       .post("http://closet-api.tallty.com/users")
@@ -97,7 +97,7 @@ class LogInForm extends Component {
       .put('http://closet-api.tallty.com/user_info')
       .set('X-User-Phone', this.state.phone)
       .set('X-User-Token', localStorage.authentication_token)
-      .send('user_info[nickname]', this.state.nickname)
+      .send({user_info: {nickname: this.state.nickname}})
       .end((err, res) => {
         // 绑定
         this.userBind();
@@ -120,8 +120,9 @@ class LogInForm extends Component {
       .end( (err, res) => {
         if (res.ok) {
           // 保存用户信息
-          localStorage.setItem('user_name', res.body.nickname)
-          localStorage.setItem('phone', res.body.phone)
+          localStorage.setItem('phone', res.body.phone);
+          let user_str = JSON.stringify(res.body);
+          localStorage.setItem('user', user_str);
           // 用户登录
           this.signIn();
 
@@ -147,7 +148,7 @@ class LogInForm extends Component {
       .send({'user': {'phone': phone, 'password': password}})
       .end( (err, res) => {
         if (res.ok) {
-          this.props.router.replace(localStorage.route)
+          this.props.router.replace(sessionStorage.route)
 
           console.log('用户登录成功 =>')
           console.dir(res)

@@ -24,12 +24,12 @@ module.exports = {
   },
 
   /**
-   * [loggedIn 对用户进行鉴权]
+   * [authLogin 对用户进行鉴权]
    */
-  loggedIn() {
-    let r = this.GetUrlRelativePath()
-    console.log("访问的路由："+ r)
-    localStorage.setItem('route', r)
+  authLogin() {
+    let redirect_url = this.GetUrlRelativePath();
+    sessionStorage.setItem('redirect_url', redirect_url);
+    console.log("访问的路由："+ redirect_url);
 
     if (localStorage.openid) {
       SuperAgent
@@ -37,24 +37,21 @@ module.exports = {
         .set('Accept', 'application/json')
         .send({'user': {'openid': localStorage.openid} })
         .end( (err, res) => {
-          let obj = res.body
-          localStorage.setItem('state', res.ok)
-          console.log("鉴权state: "+localStorage.state)
           if (res.ok) {
-            localStorage.setItem('phone',obj.phone)
-            localStorage.setItem('authentication_token',obj.authentication_token)
-            console.log("鉴权phone: "+localStorage.phone)
-            console.log("鉴权authentication_token: "+localStorage.authentication_token)
-            console.log("鉴权成功")
+            let obj = res.body;
+            localStorage.setItem('phone',obj.phone);
+            localStorage.setItem('authentication_token',obj.authentication_token);
+            console.log("鉴权phone: "+localStorage.phone);
+            console.log("鉴权authentication_token: "+localStorage.authentication_token);
+            console.log("鉴权成功");
           } else {
-            console.log("鉴权失败")
+            console.log("鉴权失败");
             // 重新获取openid
             this.getSkipUrl();
           }
         })
     } else {
-      console.log("本地openid为空")
-      localStorage.setItem('state', false)
+      console.log("本地openid为空");
       // 重新获取openid
       this.getSkipUrl();
     }

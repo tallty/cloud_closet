@@ -37,6 +37,7 @@ export class User extends Component {
       		// 缓存
       		let user_str = JSON.stringify(res.body);
           localStorage.setItem('user', user_str);
+          localStorage.setItem('user_name', res.body.nickname);
 
 					this.setState({ user: res.body })
       	} else {
