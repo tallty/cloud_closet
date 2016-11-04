@@ -9,29 +9,33 @@ import { Spiner } from '../common/Spiner';
 
 const height = document.body.offsetHeight * 0.4;
 const map = null;
-const timer = null;
 
 export class MapAddress extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      poi: null,
-      keyword: ''
-    }
+  mounted = false;
+  state = {
+    poi: null,
+    keyword: ''
   }
 
   componentDidMount() {
-    // // 初始化地图
-    this.map = new BMap.Map("map-container")
-    this.map.centerAndZoom(new BMap.Point(121.5059,31.2335), 15) // 初始化地图,设置中心点坐标和地图级别
+    // 初始化地图
+    this.map = new BMap.Map("map-container");
+    // 初始化地图,设置中心点坐标和地图级别
+    this.map.centerAndZoom(new BMap.Point(121.5059,31.2335), 15) 
     // 获取当前定位
     this.getCurrentPosition();
+    this.mounted = true;
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   // 获取当前定位
   getCurrentPosition() {
     locationPromise().then(
       value => {
+        if (!this.mounted) return ;
         let poi = {
           address: value.addr,
           position: { lng: value.lng, lat: value.lat },
@@ -39,12 +43,9 @@ export class MapAddress extends Component {
           city: value.city,
           district: value.district
         }
-        this.setState({ 
-          poi: poi,
-        })
-        this.defaultPointAndData(poi)
+        this.defaultPointAndData(poi);
         // 当定位成功后，即可注册手动选点功能
-        this.chooseMapPoint()
+        this.chooseMapPoint();
       }
     )
   }

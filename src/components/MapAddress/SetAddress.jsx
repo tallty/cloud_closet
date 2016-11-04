@@ -20,9 +20,8 @@ class SetAddress extends Component {
   }
 
   componentWillMount() {
-    console.log(sessionStorage.edit_address)
     if (sessionStorage.edit_address) {
-      console.log("==========")
+      console.log(sessionStorage.edit_address)
       let edit_address = JSON.parse(sessionStorage.edit_address);
       this.setState({
         address: edit_address,
@@ -33,7 +32,7 @@ class SetAddress extends Component {
 
   componentWillUnmount() {
     sessionStorage.removeItem('map_address');
-    sessionStorage.setItem('edit_address', undefined);
+    sessionStorage.removeItem('edit_address');
   }
 
   handleSubmit(e) {
@@ -44,7 +43,7 @@ class SetAddress extends Component {
     if (name && phone && address_number) {
       address.name = name;
       address.phone = phone;
-      address.address_detail = localStorage.map_address + address_number;
+      address.address_detail = sessionStorage.map_address + address_number;
       // 新建或更新地址
       this.createOrUpdateAddress(address);
     } else {

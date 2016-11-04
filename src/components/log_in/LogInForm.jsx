@@ -182,7 +182,7 @@ class LogInForm extends Component {
         <Row className={styles.login_input_header}>
           <Col span={6} className={container_classnames1}><img className={styles.login_input_icon1} src="src/images/flag.svg" alt=""/><br/>+86</Col>
           <Col span={18} className={styles.login_input_header_label1}>
-            <Input placeholder="手机号码" type='text' name='phone' id='phone' value={this.state.phone} onChange={this.handlePhone.bind(this)} />
+            <Input placeholder="手机号码" type='number' name='phone' id='phone' value={this.state.phone} onChange={this.handlePhone.bind(this)} />
           </Col>
         </Row>
         </InputGroup>
@@ -190,7 +190,7 @@ class LogInForm extends Component {
           <Row className={styles.login_input_header}>
             <Col span={6} className={container_classnames2}>密码</Col>
             <Col span={18} className={styles.login_input_header_label4}>
-              <Input placeholder="请输入密码" type='text' name='password' id='password' value={this.state.password} onChange={this.handlePassword.bind(this)} />
+              <Input placeholder="请输入密码" type='password' name='password' id='password' value={this.state.password} onChange={this.handlePassword.bind(this)} />
             </Col>
           </Row>
         </InputGroup>
@@ -198,7 +198,7 @@ class LogInForm extends Component {
           <Row className={styles.login_input_header}>
             <Col span={6} className={container_classnames3}><Countdown {...this.state}/></Col>
             <Col span={18}>
-              <Input placeholder="输入验证码" type='text' name='codenum' id='codenum' value={this.state.codenum} onChange={this.handleCodenum.bind(this)} />
+              <Input placeholder="输入验证码" type='number' name='codenum' id='codenum' value={this.state.codenum} onChange={this.handleCodenum.bind(this)} />
             </Col>
           </Row>
         </InputGroup>
