@@ -1,6 +1,26 @@
 .container {
 	background-color: #f8f8f8;
 	height: 100%;
+	.photoInput {
+		position: relative;
+		display: inline-block;
+		overflow: hidden;
+		width: 100%;
+		input {
+			position: absolute;
+      right: 0px;
+      top: 0px;
+      height: 122px;
+      width: 100%;
+      opacity: 0;
+      -ms-filter: 'alpha(opacity=0)';
+      &:hover, &:active, &:focus, &:visited {
+				border: none;
+				box-shadow: none;
+				outline: none;
+			}
+		}	
+	}
 	.popContainer {
 		background: #fff;
 		padding: 0 20px;

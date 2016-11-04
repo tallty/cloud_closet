@@ -1,26 +1,27 @@
 import React, { Component, PropTypes } from 'react'
 import css from './profile.less'
 import { Celler } from '../../common/Celler'
+import { Spiner } from '../../common/Spiner'
 import PopWindow from '../../common/PopWindow'
 import SuperAgent from 'superagent'
 import { Input, Button } from 'antd'
 
+const PHOTO_MAX_SIZE = 1024;
+
 export class Profile extends Component {
 	state = {
     pop: false,
-    user_info: {},
+    user: null,
     popTitle: "",
     update_key: "",
     update_value: ""
   }
 
-  componentWillMount() {
-  	let user = JSON.parse(localStorage.user);
-  	if (user) {
-	  	this.setState({ user: user });	
-  	} else {
-  		this.getUserInfo();
-  	}
+  componentDidMount() {
+ 		localStorage.setItem('authentication_token', 'Q1yizX4Lg_b9yHzgKqDV');
+		localStorage.setItem('phone', '18516512221');
+		localStorage.setItem('openid', 'olclvwNgQ3dpmuw_EZNwkph-J9vM');
+		this.getUserInfo();
   }
 
   getUserInfo() {
@@ -30,12 +31,12 @@ export class Profile extends Component {
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
       .end((err, res) => {
-      	if (res.ok) {
+      	if (!err || err === null) {
+      		console.dir(res.body)
+      		this.setState({ user: res.body })
       		// 缓存
       		let user_str = JSON.stringify(res.body);
           localStorage.setItem('user', user_str);
-
-					this.setState({ user: res.body })
       	} else {
       		// alert("获取用户信息失败")
       		console.log("获取用户信息失败");
@@ -44,19 +45,18 @@ export class Profile extends Component {
   }
 
 	/**
-	 * 处理弹出框表单提交
+	 * 全局更新函数
 	 */
-	handlePopInputUpdate() {
-		let { update_key, update_value } = this.state;
-		console.log(update_key +"/"+update_value);
+	updateUserInfo(formData) {
+		console.dir(formData);
 		SuperAgent
 			.put("http://closet-api.tallty.com/user_info")
 			.set('Accept', 'application/json')
 	    .set('X-User-Token', localStorage.authentication_token)
 	    .set('X-User-Phone', localStorage.phone)
-	    .send(`${update_key}=${update_value}`)
+	    .send(formData)
 	    .end((err, res) => {
-	    	if (res.ok) {
+	    	if (!err || err === null) {
 	    		// 缓存
 	    		let user_str = JSON.stringify(res.body);
 	    		localStorage.setItem('user', user_str);
@@ -70,14 +70,6 @@ export class Profile extends Component {
 	    		alert("更新用户信息失败")
 	    	}
 	    })
-	}
-
-	/**
-	 * [selectPhoto 处理头像]
-	 */
-	selectPhoto() {
-		console.log("=====开始处理头像=====")
-		this.refs.photo.click();
 	}
 
 	/**
@@ -85,28 +77,9 @@ export class Profile extends Component {
 	 * @param  {[type]} e [文件表单对象]
 	 */
 	handlePhotoChange(e) {
-		let file = e.target.files[0];
-		SuperAgent
-			.put("http://closet-api.tallty.com/user_info")
-			.set('Accept', 'application/json')
-	    .set('X-User-Token', localStorage.authentication_token)
-	    .set('X-User-Phone', localStorage.phone)
-	    .field('user_info[avatar_attributes][photo]', file)
-	    .end((err, res) => {
-	    	if (res.ok) {
-	    		// 缓存
-	    		let user_str = JSON.stringify(res.body);
-	    		localStorage.setItem('user', user_str);
-	    		console.log(res.body);
-					this.setState({ 
-						user: res.body,
-						pop: false
-					})
-	    	} else {
-	    		console.dir(err)
-	    		alert("更新用户信息失败")
-	    	}
-	    })
+		let formData = new FormData(this.refs.photo);
+		formData.append('user_info[avatar_attributes][photo]', e.target.files[0]);
+		this.updateUserInfo(formData);
 	}
 
 	/**
@@ -156,34 +129,47 @@ export class Profile extends Component {
 		console.log("点击了celler")
 	}
 
+	formatPhoto() {
+		let phone = this.state.phone;
+		return phone.substring(0,3) + "****" + phone.substring(7,11);
+	}
+
 
 	render() {
 		let { pop, user, popTitle, update_key, update_value } = this.state;
-		let { phone, nickname, avatar, mail } = user;
-		let _phone = phone ? phone.substring(0,3)+"****"+phone.substring(7,11) : phone;
+		let formData = new FormData();
+		formData.append(update_key, update_value);
 
 		return (
-			<div className={css.container}>
-				<input type="file" multiple={false} accept='image/*' ref="photo" style={{display: 'none'}} onChange={this.handlePhotoChange.bind(this)}/>
-				<Celler name="我的头像" type="image" value={user.avatar} 
-								defaultValue="src/images/default_photo.png" 
-								event={this.selectPhoto.bind(this)}/>
-				<Celler name="昵称" value={nickname} event={this.handleNickname.bind(this)}/>
-				<Celler name="邮箱" value={mail} event={this.handleMail.bind(this)}/>
-				<Celler name="职业" value="XXXX" bottom={14} event={this.handleWork.bind(this)}/>
-				<Celler name="账号安全" value={_phone} type="phone" event={this.handleSafe.bind(this)}/>
-				<Celler name="密码" value="●●●●●●●●●" bottom={14} event={this.handlePassword.bind(this)}/>
-				<Celler name="收货地址" url="/address" bottom={14} />
-				<Celler name="退出登录" type="simple" color="#FF9241" />
+			<div>
+				{
+					user ?
+						<div className={css.container}>
+							<span className={css.photoInput}>
+								<input type="file" multiple={false} accept='image/*' capture="camera" ref="photo"
+										   onChange={this.handlePhotoChange.bind(this)}/>
 
-				{/* 弹出框：修改资料 */}
-				<PopWindow show={pop} onCancel={this.hidePopWindow.bind(this)}>
-					<div className={css.popContainer}>
-						<p className={css.title}>{popTitle}</p>
-						<Input size="large" value={update_value} onChange={this.handlePopInputChange.bind(this)}/>
-						<Button onClick={this.handlePopInputUpdate.bind(this)} className={css.update}>更新</Button>
-					</div>
-				</PopWindow>
+								<Celler name="我的头像" type="image" value={user.avatar} 
+												defaultValue="src/images/default_photo.png" 
+												event={() => {}}/>
+							</span>
+							<Celler name="昵称" value={user.nickname} event={this.handleNickname.bind(this)}/>
+							<Celler name="邮箱" value={user.mail} event={this.handleMail.bind(this)}/>
+							<Celler name="职业" value="XXXX" bottom={14} event={this.handleWork.bind(this)}/>
+							<Celler name="账号安全" value={this.formatPhone} type="phone" event={this.handleSafe.bind(this)}/>
+							<Celler name="密码" value="●●●●●●●●●" bottom={14} event={this.handlePassword.bind(this)}/>
+							<Celler name="收货地址" url="/address" bottom={14} />
+							<Celler name="退出登录" type="simple" color="#FF9241" />
+							{/* 弹出框：修改资料 */}
+							<PopWindow show={pop} onCancel={this.hidePopWindow.bind(this)}>
+								<div className={css.popContainer}>
+									<p className={css.title}>{popTitle}</p>
+									<Input size="large" value={update_value} onChange={this.handlePopInputChange.bind(this)}/>
+									<Button onClick={this.updateUserInfo.bind(this, formData)} className={css.update}>更新</Button>
+								</div>
+							</PopWindow>
+						</div> : <Spiner/>
+				}
 			</div>
 		)
 	}
