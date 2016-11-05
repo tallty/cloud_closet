@@ -14,7 +14,7 @@ const FormItem = Form.Item
 export class Recharge extends Component {
 	state = {
 		money: null,
-		success_url: '/user'
+		success_url: null
 	}	
 
 	componentWillMount() {

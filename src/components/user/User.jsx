@@ -102,7 +102,7 @@ export class User extends Component {
 						</Col>
 					</Row>
 					<Row>
-						<Link to="/recharge">
+						<Link to={`/recharge?redirect_url=${location.origin}/user`}>
 							<Button type="primary" className={css.charge_btn}>充值</Button>
 						</Link>
 					</Row>

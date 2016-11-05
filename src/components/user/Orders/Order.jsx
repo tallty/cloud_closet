@@ -149,7 +149,7 @@ export class Order extends Component {
 					{/* 支付方式 */}
 					<div className={css.pay_actions}>
 						<button className={css.pay_btn} onClick={this.handlePay.bind(this)}>账户余额（￥{this.getBalance()}）</button>
-						<Link to={`/recharge?redirect_url=${location.origin}/success?action=pay`} className={css.recharge_btn}>充值</Link>
+						<Link to={`/recharge?redirect_url=${location.origin}/order?id=${this.props.location.query.id}`} className={css.recharge_btn}>充值</Link>
 					</div>
 				</div>
 				
