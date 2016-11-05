@@ -26,7 +26,7 @@ export class Recharge extends Component {
 
   getChargeObject(){
     SuperAgent
-      .post(`http://closet-api.tallty.com/test_pingpp?open_id=${localStorage.openid}&amount=${1}&subject=${'云衣橱个人充值'}&body=${'充值'}`)
+      .post(`http://closet-api.tallty.com/get_pingpp_pay_order?openid=${localStorage.openid}&amount=${1}&subject=${'云衣橱个人充值'}&body=${'充值'}`)
       .set('Accept', 'application/json')
       .end( (err, res) => {
         if (!err || err === null) {
