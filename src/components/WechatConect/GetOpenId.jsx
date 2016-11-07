@@ -25,12 +25,13 @@ class GetOpenId extends Component {
       .end( (err, res) => {
         if (res.ok) {
           localStorage.setItem('openid', res.body.openid);
+          this.checkOpenid();
           console.log("获取的openid: "+ res.body.openid);
           console.log("保存的openid: "+ localStorage.openid);
-          this.checkOpenid();
         } else {
           // alert('获取用户信息失败，请重新进入！');
-          console.log("获取用户信息失败");
+          console.log("无法获取openid");
+          this.props.router.replace('/login');
         }
       })
   }

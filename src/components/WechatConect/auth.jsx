@@ -30,30 +30,8 @@ module.exports = {
     let redirect_url = this.GetUrlRelativePath();
     sessionStorage.setItem('redirect_url', redirect_url);
     console.log("访问的路由："+ redirect_url);
-
-    if (localStorage.openid) {
-      SuperAgent
-        .post("http://closet-api.tallty.com/user_info/check_openid")
-        .set('Accept', 'application/json')
-        .send({'user': {'openid': localStorage.openid} })
-        .end( (err, res) => {
-          if (res.ok) {
-            let obj = res.body;
-            localStorage.setItem('phone',obj.phone);
-            localStorage.setItem('authentication_token',obj.authentication_token);
-            console.log("鉴权phone: "+localStorage.phone);
-            console.log("鉴权authentication_token: "+localStorage.authentication_token);
-            console.log("鉴权成功");
-          } else {
-            console.log("鉴权失败");
-            // 重新获取openid
-            this.getSkipUrl();
-          }
-        })
-    } else {
-      console.log("本地openid为空");
-      // 重新获取openid
-      this.getSkipUrl();
-    }
+    // 无论本地的openid存不存在，都重新获取一次用户的openid
+    // 解决：微信切换账号，云衣橱账号不变的bug
+    this.getSkipUrl();
   }
 }
