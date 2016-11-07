@@ -24,7 +24,8 @@ import { Orders } from '../components/user/Orders/Orders'
 import { Order } from '../components/user/Orders/Order'
 import { Ticket } from '../components/user/Ticket'
 import { Notification } from '../components/user/Notification'
-import { Recharge } from '../components/user/Recharge'
+import Recharge from '../components/user/Recharge/Recharge'
+import RechargeSuccess from '../components/user/Recharge/RechargeSuccess'
 import { Withdraw } from '../components/user/Withdraw'
 import { Help } from '../components/user/Help'
 import { Receipt } from '../components/user/Receipt'
@@ -79,6 +80,7 @@ export class Routes extends Component {
         <Route path="/tickets" component={Ticket} />
         <Route path="/notifications" component={Notification} />
         <Route path="/recharge" component={Recharge} onEnter={this.requireAuth}/>
+        <Route path="/recharge_success" component={RechargeSuccess}/>
         <Route path="/withdraw" component={Withdraw} />
         <Route path="/help" component={Help} />
         <Route path="/receipt" component={Receipt} />

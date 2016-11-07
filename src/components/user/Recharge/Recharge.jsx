@@ -3,15 +3,15 @@
  */
 import SuperAgent from 'superagent'
 import React, { Component, PropTypes } from 'react'
-import WechatKit from '../WechatConect/WechatKit'
+import WechatKit from '../../WechatConect/WechatKit'
 import css from './recharge.less'
-import { Link } from 'react-router'
+import { Link, withRouter } from 'react-router'
 import { Form, Input, Row, Col, Button, message } from 'antd';
 import pingpp from 'pingpp-js';
 
 const FormItem = Form.Item
 
-export class Recharge extends Component {
+class Recharge extends Component {
 	state = {
 		money: null,
 		redirect_url: null
@@ -27,8 +27,10 @@ export class Recharge extends Component {
 	}
 
   getChargeObject(){
+  	let { money } = this.state;
+  	money *= 100;
     SuperAgent
-      .post(`http://closet-api.tallty.com/get_pingpp_pay_order?openid=${localStorage.openid}&amount=${1}&subject=${'云衣橱个人充值'}&body=${'充值'}`)
+      .post(`http://closet-api.tallty.com/get_pingpp_pay_order?openid=${localStorage.openid}&amount=${money}&subject=${'充值'}&body=${'余额充值'}`)
       .set('Accept', 'application/json')
       .end( (err, res) => {
         if (!err || err === null) {
@@ -42,12 +44,13 @@ export class Recharge extends Component {
 				    console.log("额外信息："+err.extra);
 				    console.dir(err);
 				    if (result == "success") {
-				        // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
-				        window.location.href = this.state.redirect_url;
+				    	let { money, redirect_url } = this.state;
+			        // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
+			        this.props.router.replace(`/recharge_success?redirect_url=${redirect_url}&money=${money}`);
 				    } else if (result == "fail") {
-				        // charge 不正确或者微信公众账号支付失败时会在此处返回
+			        // charge 不正确或者微信公众账号支付失败时会在此处返回
 				    } else if (result == "cancel") {
-				        // 微信公众账号支付取消支付
+			        // 微信公众账号支付取消支付
 				    }
 					});
         }
@@ -149,3 +152,5 @@ Recharge.defaultProps = {
 Recharge.propTypes = {
 
 }
+
+export default withRouter(Recharge);
