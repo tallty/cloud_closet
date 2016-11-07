@@ -134,6 +134,13 @@ export class Profile extends Component {
 		return phone.substring(0,3) + "****" + phone.substring(7,11);
 	}
 
+	handleSignout() {
+		localStorage.removeItem('openid');
+		localStorage.removeItem('authentication_token');
+		localStorage.removeItem('phone');
+		window.location.href = "/user";
+	}
+
 
 	render() {
 		let { pop, user, popTitle, update_key, update_value } = this.state;
@@ -159,7 +166,7 @@ export class Profile extends Component {
 							<Celler name="账号安全" value={this.formatPhone} type="phone" event={this.handleSafe.bind(this)}/>
 							<Celler name="密码" value="●●●●●●●●●" bottom={14} event={this.handlePassword.bind(this)}/>
 							<Celler name="收货地址" url="/address" bottom={14} />
-							<Celler name="退出登录" type="simple" color="#FF9241" />
+							<Celler name="退出登录" type="simple" color="#FF9241" event={this.handleSignout} />
 							{/* 弹出框：修改资料 */}
 							<PopWindow show={pop} onCancel={this.hidePopWindow.bind(this)}>
 								<div className={css.popContainer}>

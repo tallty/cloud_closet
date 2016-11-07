@@ -1,11 +1,11 @@
 import SuperAgent from 'superagent';
+import OAuth from 'wechat-oauth';
 
 module.exports = {
 
   getSkipUrl(){
     let appid = 'wx47b02e6b45bf1dad'
     let secret = 'b78a5266c57391d8bd7bce75e86fc3c0'
-    let OAuth = require('wechat-oauth');
     let client = new OAuth(appid, secret);
     let urlt = 'http://closet.tallty.com/'+'get_open_id'
     let url = client.getAuthorizeURL(urlt, '123', 'snsapi_base');

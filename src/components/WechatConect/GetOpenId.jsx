@@ -45,6 +45,9 @@ class GetOpenId extends Component {
       .send({'user': {'openid': localStorage.openid} })
       .end( (err, res) => {
         if (res.ok){
+          let obj = res.body;
+          localStorage.setItem('phone',obj.phone);
+          localStorage.setItem('authentication_token',obj.authentication_token);
           console.log("跳转的路由： "+sessionStorage.redirect_url);
           this.props.router.replace(sessionStorage.redirect_url);
         }else{
