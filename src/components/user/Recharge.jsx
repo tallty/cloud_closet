@@ -14,13 +14,15 @@ const FormItem = Form.Item
 export class Recharge extends Component {
 	state = {
 		money: null,
-		success_url: null
+		redirect_url: null
 	}	
 
 	componentWillMount() {
+		console.log("==========充值页面路由对象=========");
 		console.log(this.props.location);
-		if (this.props.location.query.redirect_url) {
-			this.setState({ success_url: this.props.location.query.redirect_url });
+		let redirect_url = this.props.location.query.redirect_url;
+		if (redirect_url) {
+			this.setState({ redirect_url: redirect_url });
 		}
 	}
 
@@ -41,7 +43,7 @@ export class Recharge extends Component {
 				    console.dir(err);
 				    if (result == "success") {
 				        // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
-				        window.location.href = this.state.success_url;
+				        window.location.href = this.state.redirect_url;
 				    } else if (result == "fail") {
 				        // charge 不正确或者微信公众账号支付失败时会在此处返回
 				    } else if (result == "cancel") {

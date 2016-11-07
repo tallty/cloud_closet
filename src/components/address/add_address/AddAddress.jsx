@@ -55,6 +55,7 @@ class AddAddress extends Component {
       .end((err, res) => {
         if (!err || err === null) {
           this.getAddresses();
+          sessionStorage.removeItem('selected_address');
         } else {
           alert("获取地址列表失败");
         }

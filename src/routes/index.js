@@ -28,7 +28,8 @@ import { Recharge } from '../components/user/Recharge'
 import { Withdraw } from '../components/user/Withdraw'
 import { Help } from '../components/user/Help'
 import { Receipt } from '../components/user/Receipt'
-import { Bills } from '../components/user/Bills'
+import Bills from '../components/user/Bill/Bills'
+import { Bill } from '../components/user/Bill/Bill'
 //搜索
 import { Search } from '../components/my_closet/search/Search'
 import { Manage } from '../components/my_closet/manage/Manage'
@@ -82,6 +83,7 @@ export class Routes extends Component {
         <Route path="/help" component={Help} />
         <Route path="/receipt" component={Receipt} />
         <Route path="/bills" component={Bills} />
+        <Route path="/bill" component={Bill} />
 
         {/* 搜索 */}
         <Route path="/search" component={Search} />

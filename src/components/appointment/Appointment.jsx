@@ -71,6 +71,7 @@ class Appointment extends Component {
           this.setState({ defaultAddress: res.body });
         } else {
           console.log("获取默认地址失败");
+          this.setState({ defaultAddress: {} });
         }
       })
   }
@@ -149,12 +150,12 @@ class Appointment extends Component {
         .send({'appointment': {'address': address_detail, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date}})
         .end( (err, res) => {
           if (res.ok) {
-            localStorage.setItem('selected_address', null);
+            sessionStorage.removeItem('selected_address');
             this.props.router.replace('/success?action=appointment')
           }
         }) 
     } else {
-      alert("请完善预约信息");
+      alert("请选择地址");
     }
   }
 
