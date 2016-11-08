@@ -44,10 +44,10 @@ class MapTabResult extends Component {
           list.push(
             <Row key={0} className={styles.add_col} 
                          onClick={this.local_address.bind(this, poi.address)}>
-              <Col span={2} className={styles.location_icon_content}>
+              <Col span={3} className={styles.location_icon_content}>
                 <img src="src/images/location_icon.svg" className={styles.location_icon}/>
               </Col>
-              <Col span={22} className={styles.add_name}><span>[当前] </span>{poi.address}</Col>
+              <Col span={21} className={styles.add_name}><span>[当前] </span>{poi.address}</Col>
             </Row>
           );
           // 判断状态是否正确        
@@ -58,11 +58,11 @@ class MapTabResult extends Component {
             list.push(
               <Row key={i+1} className={styles.add_col} 
                            onClick={this.local_address.bind(this, address)}>
-                <Col span={2} className={styles.location_icon_content}>
+                <Col span={3} className={styles.location_icon_content}>
                   <img src="src/images/location_icon.svg" className={styles.location_icon}/>
                 </Col>
-                <Col span={22} className={styles.add_name}>{title}</Col>
-                <Col span={22} offset={2}>{address}</Col>
+                <Col span={21} className={styles.add_name}>{title}</Col>
+                <Col span={21} offset={3} className={styles.add_address}>{address}</Col>
               </Row>
             )
           }
