@@ -33,6 +33,7 @@ module.exports = {
     // 无论本地的openid存不存在，都重新获取一次用户的openid
     // 解决：微信切换账号，云衣橱账号不变的bug
     // 部署时： 去掉判断
+    // if (!(sessionStorage.is_authenticated === 'true')) {
     if (!localStorage.openid) {
       this.getSkipUrl();
     }

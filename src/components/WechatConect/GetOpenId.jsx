@@ -49,6 +49,8 @@ class GetOpenId extends Component {
           let obj = res.body;
           localStorage.setItem('phone',obj.phone);
           localStorage.setItem('authentication_token',obj.authentication_token);
+          // 添加标志位，防止进入死循环
+          sessionStorage.setItem('is_authenticated', 'true');
           console.log("跳转的路由： "+sessionStorage.redirect_url);
           this.props.router.replace(sessionStorage.redirect_url);
         }else{

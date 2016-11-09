@@ -3,8 +3,10 @@
  * 问题：1、price 为总价。2、无衣服种类。3、无季别。4、无服务费和运费
  */
 import React, { Component, PropTypes } from 'react'
-import css from './orders.less'
+import css from './layouts.less'
 import { Row, Col } from 'antd'
+
+const { string, number, arrayOf, shape } = PropTypes;
 
 export class InClothes extends Component {
 	// 解析仓储时长
@@ -104,23 +106,25 @@ InClothes.defaultProps = {
 
 InClothes.PropTypes = {
 	order: PropTypes.shape({
-		id: PropTypes.number,
-		name: PropTypes.string,
-		phone: PropTypes.string,
-		number: PropTypes.number,
-		address: PropTypes.string,
-		seq: PropTypes.string,
-		date: PropTypes.string,
-		created_at: PropTypes.string,
-		appointment_item_groups: PropTypes.arrayOf(
-			PropTypes.shape({
-				id: PropTypes.number,
-	 			count: PropTypes.number,
-	 			store_month: PropTypes.numebr,
-	 			price: PropTypes.number,
-	 			total_price: PropTypes.number,
-	 			kind: PropTypes.string,
-	 			season: PropTypes.string
+		id: number,
+		name: string,
+		phone: string,
+		number: number,
+		address: string,
+		state: string,
+		price: number,
+		seq: string,
+		date: string,
+		created_at: string,
+		appointment_item_groups: arrayOf(
+			shape({
+				id: number,
+	 			count: number,
+	 			store_month: number,
+	 			price: number,
+	 			total_price: number,
+	 			kind: string,
+	 			season: string
 			})
 		)
 	}),

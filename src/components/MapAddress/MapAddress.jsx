@@ -21,7 +21,8 @@ export class MapAddress extends Component {
     // 初始化地图
     this.map = new BMap.Map("map-container");
     // 初始化地图,设置中心点坐标和地图级别
-    this.map.centerAndZoom(new BMap.Point(121.5059,31.2335), 15) 
+    this.map.centerAndZoom(new BMap.Point(121.5059,31.2335), 15);
+    this.map.addControl(new BMap.ZoomControl());  
     // 获取当前定位
     this.getCurrentPosition();
     this.mounted = true;

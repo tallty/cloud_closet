@@ -10,6 +10,7 @@
  * 	number: 预约入库数量,
  * 	date: 预约日期,
  * 	state: 订单状态【"待确认"，"服务中"，"待付款"，"入库中"，"已上架"，"已取消"】,
+ * 	price: 订单总价，
  * 	_total: 衣服总计,
  * 	【====以下为接口欠缺数据字段，使用假数据===】
  * 	nurse: 护理方式[every|one|no],
@@ -43,29 +44,35 @@ import SuperAgent from 'superagent'
 
 const TabPane = Tabs.TabPane
 
+let _appointments = []
+
 export class Orders extends Component {
 	state = {
-		total_pages: 1,
-		current_page: 1,
 		appointments: null
 	}
 
 	componentDidMount() {
+		this.getAppointments(1);
+	}
+
+	getAppointments(page) {
+		console.log("获取分页")
+
 		SuperAgent
-			.get(`http://closet-api.tallty.com/appointments`)
+			.get(`http://closet-api.tallty.com/appointments?page=${page}`)
 			.set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
       .end((err, res) => {
       	if (res.ok) {
       		let obj = res.body
-  				console.log("Orders.jsx 获取的订单列表 => ")
-					console.log(obj.appointments)
-					this.setState({
-						total_pages: obj.total_pages,
-						current_page: obj.current_page,
-						appointments: obj.appointments
-					})
+  				console.log("Orders.jsx 获取的订单列表 => ");
+					console.log(obj.appointments);
+					this.setState({ appointments: obj.appointments });
+					// 遍历分页
+					// if (obj.current_page < obj.total_pages) {
+					// 	this.getAppointments(obj.current_page + 1);
+					// }
       	} else {
 					console.log("获取预约列表失败")
       	}
@@ -84,7 +91,7 @@ export class Orders extends Component {
 
 				<Tabs defaultActiveKey="1" className={css.tab_bar}>
 			    <TabPane tab="当前订单" key="1">
-						{ appointments ? <OrdersList type="normal" orders={appointments} /> : <Spiner/> }
+						{ appointments ? <OrdersList type="active" orders={appointments} /> : <Spiner/> }
 			    </TabPane>
 			    <TabPane tab="历史订单" key="2">
 						{ appointments ? <OrdersList type="history" orders={appointments} /> : <Spiner/> }

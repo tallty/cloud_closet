@@ -6,7 +6,7 @@ import css from './order.less'
 import Toolbar from '../../common/Toolbar'
 import { Spiner } from '../../common/Spiner'
 import { Link } from 'react-router'
-import { InClothes } from './InClothes'
+import { InClothes } from './layouts/InClothes'
 import { Row, Col, Timeline, Icon } from 'antd'
 import SuperAgent from 'superagent'
 
@@ -109,7 +109,23 @@ export class Order extends Component {
 	 * 使用余额支付
 	 */
 	handlePay() {
-		window.location.replace('/success?action=pay')
+		let id = this.props.location.query.id;
+		SuperAgent
+			.post(`http://closet-api.tallty.com/appointments/${id}/pay_by_balance`)
+			.set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+      	if (res.ok) {
+      		if (res.body.error) {
+						alert(res.body.error);
+      		} else {
+	      		window.location.replace('/success?action=pay');	
+      		}
+      	} else {
+					alert("付款失败，请稍后重试");
+      	}
+      })
 	}
 
 	render() {
