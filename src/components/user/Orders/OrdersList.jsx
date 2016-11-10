@@ -183,7 +183,7 @@ class OrdersList extends Component {
     let list = [];
 
 		orders.forEach((order, index, obj) => {
-			if (order.state === "已取消") {
+			if (order.state === "已取消"||order.state === "已上架" ) {
 				list.push(
 					<div className={css.orders} key={index}>
 						<div className={css.header}>
