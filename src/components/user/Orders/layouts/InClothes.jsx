@@ -7,6 +7,16 @@ import css from './layouts.less'
 import { Row, Col } from 'antd'
 
 const { string, number, arrayOf, shape } = PropTypes;
+// 解析衣类图片
+const img_map = new Map([
+	['上衣', 'src/images/shangyi.png'],
+	['连衣裙', 'src/images/lianyiqun.png'],
+	['裤装', 'src/images/kuzhuang.png'],
+	['半裙', 'src/images/banqun.png'],
+	['外套', 'src/images/waitao.png'],
+	['羽绒服', 'src/images/yurongfu.png'],
+	['泳装', 'src/images/yongzhuang.png']
+]);
 
 export class InClothes extends Component {
 	// 解析仓储时长
@@ -14,16 +24,6 @@ export class InClothes extends Component {
 		[3, '三个月'],[6, '六个月'],[9, '九个月'],
 		[12, '一年'],[24, '两年']
 	]);
-	// 解析衣类图片
-	imgUrls = new Map([
-		['上衣', 'src/images/shangyi.png'],
-		['连衣裙', 'src/images/lianyiqun.png'],
-		['裤装', 'src/images/kuzhuang.png'],
-		['半裙', 'src/images/banqun.png'],
-		['外套', 'src/images/waitao.png'],
-		['羽绒服', 'src/images/yurongfu.png'],
-		['泳装', 'src/images/yongzhuang.png']
-	])
 
 	// 条目的点击事件
 	handleClick(index,item) {
@@ -42,7 +42,7 @@ export class InClothes extends Component {
 
 	// 获取单条入库记录的单价
 	getUnitPrice(item) {
-		return item.price / item.count / item.store_month
+		return item.price / item.count / item.store_month;
 	}
 
 	// 设置入库衣服列表
@@ -56,11 +56,11 @@ export class InClothes extends Component {
 				<Row key={index} className={css.order_item} onClick={this.handleClick.bind(this,index,item)}>
 					<Col span={7} style={{textAlign: 'left'}}>
 						<div className={css.img_div}>
-							<img src={"src/images/shangyi.png"} alt="icon"/>
+							<img src={img_map.get(item.type_name)} alt="icon"/>
 						</div>
 						<div className={css.kind}>
-							<p>{item.kind} 上衣</p>
-							<div className={css.tag}>{item.season}春夏</div>
+							<p>{item.type_name}</p>
+							<div className={css.tag}>{item.season}</div>
 						</div>
 					</Col>
 					<Col span={5}>{this.parseStoreMonth.get(item.store_month)}</Col>
@@ -122,8 +122,7 @@ InClothes.PropTypes = {
 	 			count: number,
 	 			store_month: number,
 	 			price: number,
-	 			total_price: number,
-	 			kind: string,
+	 			type_name: string,
 	 			season: string
 			})
 		)

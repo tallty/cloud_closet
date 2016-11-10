@@ -1,7 +1,7 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Button, Icon } from 'antd'
-import NavLink from '../../../layouts/NavigationLayout/NavLink'
+import { Link } from 'react-router'
 import QueueAnim from 'rc-queue-anim';
 import classnames from 'classnames'
 import styles from './ClosetRank.less'
@@ -49,7 +49,7 @@ export class ClosetRank extends Component {
             </p>
           </Col>
           <Col span={9} className={styles.closet_control}>
-            <NavLink to="/manage">管理</NavLink>
+            <Link to="/manage">管理</Link>
           </Col>
           <QueueAnim component="ul" type={['right', 'left']}>
             {list}

@@ -27,15 +27,6 @@ class OrdersList extends Component {
 		});
 	}
 
-	// 获取订单的合计
-	getTotalPrice(order) {
-		let total = 0
-		for(let item of order.appointment_item_groups) {
-			total += item.price
-		}
-		return total
-	}
-
 	// 设置不同状态的模板
 	setOrdersLayout(order) {
 		switch(order.state){
@@ -57,14 +48,14 @@ class OrdersList extends Component {
 				return (
 					<div className={css.content}>
 						<InClothes order={order}/>
-						<p className="text-right">运费：XXX</p>
-						<p className="text-right">服务费：XXX</p>
+						<p className="text-right">运费：10</p>
+						<p className="text-right">服务费：50</p>
 						<Row>
 							<Col span={12} className={css.nurse}>
 								护理要求： <span>每次护理</span>
 							</Col>
 							<Col span={12} className={css.total_price}>
-								合计： <span>{this.getTotalPrice(order)}</span>
+								合计： <span>{order.price}</span>
 							</Col>
 						</Row>
 					</div>
@@ -255,8 +246,7 @@ OrdersList.propTypes = {
 		 			count: number,
 		 			store_month: number,
 		 			price: number,
-		 			total_price: number,
-		 			kind: string,
+		 			type_name: string,
 		 			season: string
 				})
 			)

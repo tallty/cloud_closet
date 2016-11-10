@@ -34,8 +34,33 @@ module.exports = {
     // 解决：微信切换账号，云衣橱账号不变的bug
     // 部署时： 使用注释的判断
     // if (!(sessionStorage.is_authenticated === 'true')) {
-    console.log(localStorage.openid);
-    if (!localStorage.openid) {
+    // console.log(localStorage.openid);
+    // // if (!localStorage.openid) {
+    //   this.getSkipUrl();
+    // }
+
+    if (localStorage.openid) {
+      SuperAgent
+        .post("http://closet-api.tallty.com/user_info/check_openid")
+        .set('Accept', 'application/json')
+        .send({'user': {'openid': localStorage.openid} })
+        .end( (err, res) => {
+          if (res.ok) {
+            let obj = res.body;
+            localStorage.setItem('phone',obj.phone);
+            localStorage.setItem('authentication_token',obj.authentication_token);
+            console.log("鉴权phone: "+localStorage.phone);
+            console.log("鉴权authentication_token: "+localStorage.authentication_token)
+            console.log("鉴权成功");
+          } else {
+            console.log("鉴权失败");
+            // 重新获取openid
+            this.getSkipUrl();
+          }
+        })
+    } else {
+      console.log("本地openid为空");
+      // 重新获取openid
       this.getSkipUrl();
     }
   }

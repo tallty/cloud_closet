@@ -12,6 +12,18 @@ export class Bill extends Component {
 		this.setState({ bill: bill });	
 	}
 
+	getDetail(detail) {
+		let list = [];
+		let i = 0;
+		// for (let item of detail) {
+		// 	list.push(
+		// 		<p key={i}>{`${item[0]}x${item[1]}`}</p>
+		// 	);
+		// 	i++;
+		// }
+		return list;
+	}
+
 	render() {
 		let { bill } = this.state;
 		return (
@@ -22,8 +34,9 @@ export class Bill extends Component {
 					<p className={css.top1}>{bill.operation_type}</p>
 					<p className={css.top2}>{bill.change_output}</p>
 					<p className={css.row_p}>付款方式 <span>{bill.payment_method}</span></p>
+					<p className={css.row_p}>账户余额 <span>￥{bill.balance}</span></p>
 					<p className={css.row_p}>交易说明 <span>{bill.operation}</span></p>
-					<p className={css.row_p}><span>{bill.detail}</span></p>
+					<p className={css.row_p}><span>{this.getDetail(bill.detail)}</span></p>
 				</div>
 
 				<div className={css.detail_footer}>
