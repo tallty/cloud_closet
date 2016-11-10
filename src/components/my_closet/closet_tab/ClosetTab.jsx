@@ -38,8 +38,8 @@ class ClosetTab extends Component {
               <div className={styles.card_tab_title}>
                 <p className={styles.brand} ></p>
                 <p className={styles.good_type} >{garment.title}</p>
-                <sub className={styles.time_line}>入库时间：{this.parseTime(garment.put_in_time)}</sub><br/>
-                <sub className={styles.time_line}>到期时间：{this.parseTime(garment.expire_time)}</sub>
+                <sub className={styles.time_line}>入库时间：{this.parseTime(garment.put_in_time, "yyyy-MM-dd")}</sub><br/>
+                <sub className={styles.time_line}>到期时间：{this.parseTime(garment.expire_time, "yyyy-MM-dd")}</sub>
               </div>
               {/* 添加点赞喜欢模块*/}
               { /* <div className={styles.like_tab}><Icon className={styles.heart_icon} type="heart-o" /><br/> <sub>2234</sub></div> */ }
@@ -52,9 +52,18 @@ class ClosetTab extends Component {
     return list;
   }
 
-  parseTime(time) {
-    let t = new Date(time);
-    return `${t.getYear()}-${t.getMonth()+1}-${t.getDay()}`
+  parseTime(x,y) { 
+    var x = new Date(x)
+    var z ={
+        y:x.getFullYear(),
+        M:x.getMonth()+1,
+        d:x.getDate(),
+        h:x.getHours(),
+        m:x.getMinutes(),
+        s:x.getSeconds()}; 
+    return y.replace(/(y+|M+|d+|h+|m+|s+)/g,function(v) {
+        return ((v.length>1?"0":"")+eval('z.'+v.slice(-1))).slice(-(v.length>2?v.length:2))
+     }); 
   }
 
   render() {

@@ -13,7 +13,6 @@ class MyClosetHeader extends React.Component {
   render() {
     let { garments, user } = this.props;
     let photo = user.avatar ? user.avatar : "src/images/default_photo.png";
-
     return (
       <div>
         <Row className={styles.my_cliset_header_part_one_content}>
@@ -39,7 +38,7 @@ class MyClosetHeader extends React.Component {
 
           <Col span={9} className={styles.right_closet_number}>
             <div className={styles.center_item}>
-              <div htmlFor="" className={styles.number_closet}>0</div>
+              <div htmlFor="" className={styles.number_closet}>{this.props.storing_count}</div>
               <div htmlFor="">入库中</div>
             </div>
           </Col>

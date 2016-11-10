@@ -13,6 +13,7 @@ import auth from '../WechatConect/auth'
 export class MyCloset extends Component {
   state = {
     user: {},
+    storing_count: 0,
     current_page: 1,
     total_pages: 1,
     garments: []
@@ -27,7 +28,8 @@ export class MyCloset extends Component {
       this.setState({
         current_page: obj.current_page,
         total_pages: obj.total_pages,
-        garments: obj.garments
+        garments: obj.garments,
+        storing_count: obj.storing_garments_count
       })
     })
   }
@@ -66,11 +68,11 @@ export class MyCloset extends Component {
   }
 
   render() {
-    let { garments, user } = this.state;
-
+    let { garments, user, storing_count } = this.state;
+    console.log(this.state.garments);
     return (
       <div className={styles.my_cliset_content}>
-        <MyClosetHeader garments={garments} user={user}/>
+        <MyClosetHeader garments={garments} user={user} storing_count={storing_count}/>
         <ClosetRank />
         <div className={styles.closet_content_down}>
           <ClosetClassify />
