@@ -18,9 +18,6 @@ export class Profile extends Component {
   }
 
   componentDidMount() {
- 		localStorage.setItem('authentication_token', 'Q1yizX4Lg_b9yHzgKqDV');
-		localStorage.setItem('phone', '18516512221');
-		localStorage.setItem('openid', 'olclvwNgQ3dpmuw_EZNwkph-J9vM');
 		this.getUserInfo();
   }
 

@@ -28,7 +28,8 @@ class Recharge extends Component {
 
   getChargeObject(){
   	let { money } = this.state;
-  	money *= 100;
+  	// money *= 100;
+  	money = 1;
     SuperAgent
       .post(`http://closet-api.tallty.com/get_pingpp_pay_order?openid=${localStorage.openid}&amount=${money}&subject=${'充值'}&body=${'余额充值'}`)
       .set('Accept', 'application/json')

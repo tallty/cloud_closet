@@ -30,7 +30,7 @@ class Bills extends Component {
       	if (!err || err === null) {
 					console.log("获取账单成功");
 					console.dir(res.body);
-					this.setState({ bills: res.body.reverse() });
+					this.setState({ bills: res.body.purchase_logs.reverse() });
       	} else {
       		console.log("获取账单失败");
       	}
