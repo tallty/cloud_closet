@@ -8,7 +8,7 @@ import { AppointClothes } from './layouts/AppointClothes'
 import css from './orders.less'
 import classNames from 'classnames/bind'
 import SuperAgent from 'superagent'
-import { withRouter } from 'react-router'
+import { withRouter, Link } from 'react-router'
 
 const { string, number, arrayOf, shape } = PropTypes;
 const cx = classNames.bind(css);
@@ -87,9 +87,9 @@ class OrdersList extends Component {
 			)
 		} else if (order.state === "已上架") {
 				return (
-					<div className={css.btns}>
+					<Link to="/MyCloset" className={css.btns}>
 						<Button type="primary" className={css.sure_btn}>查看衣橱</Button>
-					</div>
+					</Link>
 				)
 		} else if (order.state === "已取消") {
 			return (
