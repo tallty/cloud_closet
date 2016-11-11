@@ -145,23 +145,26 @@ export class Order extends Component {
 									url={`/orders`}
 									style={toolbar_style} 
 									back_style={back_style} />
-					{
-						this.state.order ? 
-							<div className={css.order}>
-								{/* 订单 */}
-								<InClothes order={order} />
-								{/* 费用 */}
-								<p className="text-right">运费：XXX</p>
-								<p className="text-right">服务费：XXX</p>
-								<p className={css.tips}>护理要求：&nbsp;&nbsp;<span>每次护理</span></p>
-								<p className={css.total_price}>合计：<span>{ this.getTotalPrice() }</span></p>
-							</div> : <Spiner/>
-					}
-					
-					{/* 物流 */}
-					<div className={css.logistics}>
-						<Timeline>{ this.getLogistics() }</Timeline>
+					<div className={css.content}>
+						{
+							this.state.order ? 
+								<div className={css.order}>
+									{/* 订单 */}
+									<InClothes order={order} />
+									{/* 费用 */}
+									<p className="text-right">运费：XXX</p>
+									<p className="text-right">服务费：XXX</p>
+									<p className={css.tips}>护理要求：&nbsp;&nbsp;<span>每次护理</span></p>
+									<p className={css.total_price}>合计：<span>{ this.getTotalPrice() }</span></p>
+								</div> : <Spiner/>
+						}
+						
+						{/* 物流 */}
+						<div className={css.logistics}>
+							<Timeline>{ this.getLogistics() }</Timeline>
+						</div>
 					</div>
+
 					{/* 支付方式 */}
 					<div className={css.pay_actions}>
 						<button className={css.pay_btn} onClick={this.handlePay.bind(this)}>账户余额（￥{this.getBalance()}）</button>

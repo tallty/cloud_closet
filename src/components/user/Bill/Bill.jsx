@@ -15,12 +15,14 @@ export class Bill extends Component {
 	getDetail(detail) {
 		let list = [];
 		let i = 0;
-		// for (let item of detail) {
-		// 	list.push(
-		// 		<p key={i}>{`${item[0]}x${item[1]}`}</p>
-		// 	);
-		// 	i++;
-		// }
+		for (let item of detail) {
+			list.push(
+				<p className={css.row_p} key={i}>
+					<span>{`${item[0]}x${item[1]}`}</span>
+				</p>
+			);
+			i++;
+		}
 		return list;
 	}
 
@@ -36,7 +38,7 @@ export class Bill extends Component {
 					<p className={css.row_p}>付款方式 <span>{bill.payment_method}</span></p>
 					<p className={css.row_p}>账户余额 <span>￥{bill.balance}</span></p>
 					<p className={css.row_p}>交易说明 <span>{bill.operation}</span></p>
-					<p className={css.row_p}><span>{this.getDetail(bill.detail)}</span></p>
+					{this.getDetail(bill.detail)}
 				</div>
 
 				<div className={css.detail_footer}>

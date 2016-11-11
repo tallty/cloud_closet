@@ -11,7 +11,7 @@ export class Level extends Component {
 		return (
 			<div className={css.level}>
 				<div className={css.level_icon}></div>
-				<Progress percent={this.props.level} showInfo={false} strokeWidth={6} className={css.progress} />
+				<Progress percent={this.props.level} showInfo={false} strokeWidth={7} className={css.progress} />
 				<div className={css.level_name}>{this.props.level_name}</div>
 			</div>
 		)

@@ -68,7 +68,7 @@ export class Orders extends Component {
       		let obj = res.body
   				console.log("Orders.jsx 获取的订单列表 => ");
 					console.log(obj.appointments);
-					this.setState({ appointments: obj.appointments });
+					this.setState({ appointments: obj.appointments.reverse() });
 					// 遍历分页
 					// if (obj.current_page < obj.total_pages) {
 					// 	this.getAppointments(obj.current_page + 1);

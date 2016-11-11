@@ -55,7 +55,7 @@ class OrdersList extends Component {
 								护理要求： <span>每次护理</span>
 							</Col>
 							<Col span={12} className={css.total_price}>
-								合计： <span>{order.price}</span>
+								合计： <span>{order.price + 60}</span>
 							</Col>
 						</Row>
 					</div>

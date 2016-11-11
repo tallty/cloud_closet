@@ -1,39 +1,38 @@
 // 生成订单
 .appoint_order {
 	height: 100%;
-	padding-top: 50px;
-	padding-bottom: 115px;
+	display: flex;
+	display: -webkit-flex;
+	flex-flow: column nowrap;
 	background: #fff;
-	overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-  .order {
-  	padding: 15px 15px 0;
-  	.tips {
-  		margin-top: 10px;
-  		span {
-  			color: #FF9241;
-  		}
-  	}
-  	.total_price {
-  		color: #757575;
-  		font-size: 19px;
-  		margin-bottom: 15px;
-  		padding-bottom: 15px;
-  		border-bottom: 1px dashed #4A4A4A;
-  		span {
-  			color: #FF9241;
-  		}
-  	}
+  .content {
+		flex-grow: 1;
+  	overflow-y: scroll;
+  	-webkit-overflow-scrolling: touch;
+	  .order {
+	  	padding: 15px 15px 0;
+	  	.tips {
+	  		margin-top: 10px;
+	  		span {
+	  			color: #FF9241;
+	  		}
+	  	}
+	  	.total_price {
+	  		color: #757575;
+	  		font-size: 19px;
+	  		margin-bottom: 15px;
+	  		padding-bottom: 15px;
+	  		border-bottom: 1px dashed #4A4A4A;
+	  		span {
+	  			color: #FF9241;
+	  		}
+	  	}
+	  }
+	  .logistics {
+	  	padding: 15px 30px 0;
+	  }
   }
-
-  .logistics {
-  	padding: 15px 30px 0;
-  }
-
 	.pay_actions {
-		position: fixed;
-		bottom: 0px;
-		left: 0;
 		width: 100%;
 		background: #fff;
 		padding: 10px 0 20px;
