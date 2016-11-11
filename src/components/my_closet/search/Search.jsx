@@ -42,9 +42,10 @@ export class Search extends Component {
             季节
           </Col>
           <Col span={24} className={styles.Search_content_tab}>
-            <Button type="primary" className={styles.tag} >裙装</Button>
-            <Button type="primary" className={styles.tag} >外套</Button>
-            <Button type="primary" className={styles.tag} >上衣</Button>
+            <Button type="primary" className={styles.tag} >春</Button>
+            <Button type="primary" className={styles.tag} >夏</Button>
+            <Button type="primary" className={styles.tag} >秋</Button>
+            <Button type="primary" className={styles.tag} >冬</Button>
           </Col>
         </Row>
       </div>

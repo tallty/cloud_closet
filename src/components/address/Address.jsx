@@ -45,18 +45,20 @@ export class Address extends Component {
 
   render() {
     return (
-      <div className={styles.Address_content}>
+      <div className={styles.container}>
         <Toolbar title="管理收货地址" url={this.state.back_url} />
-        <div className="scrollContainer" style={{paddingTop: 50}}>
-          <div className={styles.list_tab_body}>
-            { this.state.addresses ? <AddAddress addresses={this.state.addresses}/> : <Spiner/> }
+        <div className={styles.content}>
+          <div className="scrollContainer">
+            <div className={styles.list_tab_body}>
+              { this.state.addresses ? <AddAddress addresses={this.state.addresses}/> : <Spiner/> }
+            </div>
           </div>
+          <Row className={styles.tab_footer}>
+            <Col span={24}>
+              <button className={styles.add_address_btn} onClick={this.addNewAddress.bind(this)}>添加新地址</button>
+            </Col>
+          </Row>
         </div>
-        <Row className={styles.tab_footer}>
-          <Col span={24}>
-            <button className={styles.add_address_btn} onClick={this.addNewAddress.bind(this)}>添加新地址</button>
-          </Col>
-        </Row>
       </div>
     );
   }

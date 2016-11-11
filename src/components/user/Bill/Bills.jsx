@@ -69,7 +69,9 @@ class Bills extends Component {
 		return (
 			<div className={css.container}>
 				<Toolbar title="账户账单" url="/user"/>
-				{bills ? this.getBills() : <Spiner/>}
+				<div className={css.list}>
+					{bills ? this.getBills() : <Spiner/>}
+				</div>
 			</div>
 		)
 	}

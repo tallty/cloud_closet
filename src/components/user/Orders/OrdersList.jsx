@@ -160,7 +160,7 @@ class OrdersList extends Component {
 						<Row className={css.footer}>
 							<Col span={24}>
 								<div className={css.info}>
-									<span>预存时间：{ order.date }</span>
+									<p>预约时间：{ order.date }</p>
 									<p>订单编号：{ order.seq }</p>
 								</div>
 								{/*判断是否显示*/}

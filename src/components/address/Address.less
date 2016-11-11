@@ -1,39 +1,47 @@
-.Address_content {
+.container {
   height: 100%;
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: column nowrap;
   background-color: #fff;
-  .tab_body {
-    background-color: #F9F9F9;
-  }
-  .tab_footer {
-    z-index: 999;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    // background: linear-gradient(to bottom , rgba(255, 255, 255, 0.1) ,rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8), #fff, #fff,#fff, #fff);
-    // /* Webkit: Safari 5.1+, Chrome 10+ */ 
-    // background: -webkit-linear-gradient(to bottom , rgba(255, 255, 255, 0.1) ,rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8), #fff, #fff,#fff, #fff);
-    // /* IE 10 */ 
-    // background: -ms-linear-gradient(to bottom , rgba(255, 255, 255, 0.1) ,rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8), #fff, #fff,#fff, #fff);
-    // /* Firefox 3.6+ */
-    // background: -moz-linear-gradient(to bottom , rgba(255, 255, 255, 0.1) ,rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8), #fff, #fff,#fff, #fff);
-    font-size: 18px;
-    // height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding-bottom: 30px;
-    .add_address_btn {
-      // margin-top: 80px;
+  .content {
+    flex-grow: 1;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    .tab_body {
+      background-color: #F9F9F9;
+    }
+    .tab_footer {
+      z-index: 999;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      // background: linear-gradient(to bottom , rgba(255, 255, 255, 0.1) ,rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8), #fff, #fff,#fff, #fff);
+      // /* Webkit: Safari 5.1+, Chrome 10+ */ 
+      // background: -webkit-linear-gradient(to bottom , rgba(255, 255, 255, 0.1) ,rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8), #fff, #fff,#fff, #fff);
+      // /* IE 10 */ 
+      // background: -ms-linear-gradient(to bottom , rgba(255, 255, 255, 0.1) ,rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8), #fff, #fff,#fff, #fff);
+      // /* Firefox 3.6+ */
+      // background: -moz-linear-gradient(to bottom , rgba(255, 255, 255, 0.1) ,rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8), #fff, #fff,#fff, #fff);
       font-size: 18px;
-      border-radius: 0;
-      width: 75%;
-      height: 50px;
-      border-radius: 50px;
-      border: none;
-      background: #FD924B;
-      color: #fff;
+      // height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-bottom: 30px;
+      .add_address_btn {
+        // margin-top: 80px;
+        font-size: 18px;
+        border-radius: 0;
+        width: 75%;
+        height: 50px;
+        border-radius: 50px;
+        border: none;
+        background: #FD924B;
+        color: #fff;
+      }
     }
   }
 }

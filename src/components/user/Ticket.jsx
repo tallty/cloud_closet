@@ -26,7 +26,7 @@ export class Ticket extends Component {
 		let list = []
 		this.state.cells.forEach((cell, index, array) => {
 			list.push(
-				<Link to="/" className={css.ticket_cell} key={cell.id}>
+				<Link to="/tickets" className={css.ticket_cell} key={cell.id}>
 					<img src={ cell.url } alt="卡券图标"/>
 					<span>{ cell.name }</span>
 					<span className="pull-right">{ cell.count }个</span>
@@ -40,8 +40,10 @@ export class Ticket extends Component {
 		return (
 			<div className={css.container}>
 				<Toolbar title="我的卡券" url="/user"></Toolbar>
-				<div style={{height: 25}}></div>
-				{ this.state.cells ? this.cells() : <Spiner/> }
+				<div className={css.content}>
+					<div style={{height: 25}}></div>
+					{ this.state.cells ? this.cells() : <Spiner/> }
+				</div>
 			</div>
 		)
 	}

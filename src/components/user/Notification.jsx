@@ -27,7 +27,7 @@ export class Notification extends Component {
 		let list = []
 		this.state.cells.forEach((cell, index, array) => {
 			list.push(
-				<Link to="/" className={css.notification_cell} key={cell.id}>
+				<Link to="/notifications" className={css.notification_cell} key={cell.id}>
 					<Row>
 						<Col span={19}>
 							<img src={ cell.url } alt="卡券图标"/>
@@ -48,8 +48,10 @@ export class Notification extends Component {
 		return (
 			<div className={css.container}>
 				<Toolbar title="系统通知" url="/user"/>
-				<div style={{height: 10}}></div>
-				{ this.state.cells ? this.cells() : <Spiner/> }
+				<div className={css.content}>
+					<div style={{height: 10}}></div>
+					{ this.state.cells ? this.cells() : <Spiner/> }
+				</div>
 			</div>
 		)
 	}

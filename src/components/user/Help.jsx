@@ -13,7 +13,7 @@ export class Help extends Component {
 	render() {
 		console.log(Panel.props)
 		return (
-			<div>
+			<div className={css.container}>
 				<Toolbar title="我的小蜜" url="/user"/>
 				<div className={css.help_container}>
 					<p className={css.title}>常见问题</p>

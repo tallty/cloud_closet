@@ -19,17 +19,19 @@ export class Receipt extends Component {
 				<Toolbar url="/user" title="发票">
 					<Link to="/receipt">开票记录</Link>
 				</Toolbar>
-				<div className={css.money}>{money}</div>
-				<p className={css.tips}>{tips}</p>
 				<div className={css.content}>
-					<button>我要开票</button>
-					<ul>
-						<li>最高额度仅限实际充值或信用卡的订单费用，不包含任何优惠券、赠送金额、体验券等优惠活动费用</li>
-						<li>您可开1张或多张，单张发票不得低于50元</li>
-						<li>非钻石卡用户，10个工作日内处理（不含邮寄时间）</li>
-						<li>钻石卡用户，3个工作日内处理（不含邮寄时间）</li>
-						<li>开票金额大于或等于1000元可为您免费邮寄</li>
-					</ul>
+					<div className={css.money}>{money}</div>
+					<p className={css.tips}>{tips}</p>
+					<div className={css.content}>
+						<button>我要开票</button>
+						<ul>
+							<li>最高额度仅限实际充值或信用卡的订单费用，不包含任何优惠券、赠送金额、体验券等优惠活动费用</li>
+							<li>您可开1张或多张，单张发票不得低于50元</li>
+							<li>非钻石卡用户，10个工作日内处理（不含邮寄时间）</li>
+							<li>钻石卡用户，3个工作日内处理（不含邮寄时间）</li>
+							<li>开票金额大于或等于1000元可为您免费邮寄</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		)

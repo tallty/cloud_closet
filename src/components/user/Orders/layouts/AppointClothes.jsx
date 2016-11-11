@@ -9,19 +9,19 @@ export class AppointClothes extends Component {
 	render() {
 		let { order } = this.props;
 		return (
-			<Row className={css.appoint_clothes}>
-				<Col span={8}>
-					<div className={css.left}>
-						<div className={css.left_text}>预约</div>
+			<div className={css.appoint_clothes}>
+				<div className={css.left}>
+					<div className={css.left_text}>预约</div>
+				</div>
+				<div className={css.right}>
+					<div className={css.content}>
+						<p>预约人：{order.name}</p>
+						<p>数量：{order.number}件</p>
+						<p>电话：{order.phone}</p>
+						<p>地址：{order.address}</p>
 					</div>
-				</Col>
-				<Col span={8}>
-					<p>预约衣橱：{order.number}件</p>
-				</Col>
-				<Col span={8}>
-					<p className="text-right">合计：<span>{order.price}</span></p>
-				</Col>
-			</Row>
+				</div>
+			</div>
 		);
 	}
 }
@@ -48,8 +48,7 @@ AppointClothes.propTypes = {
 	 			count: number,
 	 			store_month: number,
 	 			price: number,
-	 			total_price: number,
-	 			kind: string,
+	 			type_name: string,
 	 			season: string
 			})
 		)

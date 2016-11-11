@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import { Link, withRouter } from 'react-router'
 import Toolbar from '../common/Toolbar';
 import PopWindow from '../common/PopWindow';
-import styles from '../address/new_address/NewAddress.less'
+import styles from './set_address.less'
 import { MapAddress } from '../MapAddress/MapAddress'
 import Agent from 'superagent';
 
@@ -91,7 +91,7 @@ class SetAddress extends Component {
     let menu = action === 'new' ? '保存' : '更新';
 
     return (
-      <div className={styles.NewAddress_content}>
+      <div className={styles.new_address}>
         <Form horizontal >
           <Toolbar url="/address" title={title}>
             <div onClick={this.handleSubmit.bind(this)}>{menu}</div>
@@ -113,6 +113,7 @@ class SetAddress extends Component {
                 </FormItem>
               </Col>
             </Col>
+            <hr/>
             {
               /*
               <Col span={24} className={styles.label_sex_input}>
@@ -142,18 +143,14 @@ class SetAddress extends Component {
               上门地址
             </Col>
             <Col span={24} className={styles.label_input}>
-              <Col span={8} className={styles.label_input_head}>小区/大厦/学校:</Col>
-              <Col span={12} className={styles.label_input_head}>
-                <Row onClick={this.showMap.bind(this)}>
-                  <Col span={2} className={styles.location_icon_content}>
-                    <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
-                  </Col>
-                  <Col span={22} className={styles.location_icon_content}>
-                    {sessionStorage.map_address ? sessionStorage.map_address : '点击这里'}
-                  </Col>
-                </Row>
+              <Col span={8} className={styles.address_item}>小区/大厦/学校:</Col>
+              <Col span={15} className={styles.address_item}>
+                <img src="src/images/orange_location_icon.svg" className={styles.location_icon}/>
+                <span onClick={this.showMap.bind(this)}>
+                  &nbsp;{sessionStorage.map_address ? sessionStorage.map_address : '点击这里'}
+                </span>
               </Col>
-              <Col span={4} className={styles.label_input_head}><Icon type="right" /></Col>
+              <Col span={1} className={styles.label_input_head}><Icon type="right" /></Col>
             </Col>
             <Col span={24} className={styles.label_input}>
               <Col span={8} className={styles.label_input_head}>楼号-门牌号:</Col>
