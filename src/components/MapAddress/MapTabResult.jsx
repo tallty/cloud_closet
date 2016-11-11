@@ -16,16 +16,12 @@ class MapTabResult extends Component {
   }
 
   componentDidMount() {
-    console.log('=========位置信息===========')
-    console.log(this.props.poi)
-    this.searchNearby(this.state.keyword)
+    this.searchNearby(this.state.keyword, this.props.poi);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.searchNearby(this.state.keyword);
+    this.searchNearby(this.state.keyword, nextProps.poi);
   }
-
-
 
   local_address(address){
     sessionStorage.setItem('map_address', address);
@@ -33,13 +29,13 @@ class MapTabResult extends Component {
     this.props.hiddenEvent();
   }
 
-  searchNearby(keyword){
-    let { map, poi } = this.props;
-    let point = new BMap.Point(poi.position.lng, poi.position.lat) // 初始化地图,设置中心点坐标和地图级别  
+  searchNearby(keyword, poi){
+    let { map } = this.props;
+    let point = new BMap.Point(poi.position.lng, poi.position.lat); // 初始化地图,设置中心点坐标和地图级别  
     let options = {
-      onSearchComplete: function(results){      
+      onSearchComplete: function(results){    
         if (local.getStatus() == BMAP_STATUS_SUCCESS){
-          var list = []
+          let list = [];
           // 加入目前定位的地址
           list.push(
             <Row key={0} className={styles.add_col} 
@@ -51,7 +47,7 @@ class MapTabResult extends Component {
             </Row>
           );
           // 判断状态是否正确        
-          for (var i = 0; i < results.getCurrentNumPois(); i ++){
+          for (let i = 0; i < results.getCurrentNumPois(); i ++){
             let title = results.getPoi(i).title;
             let address = results.getPoi(i).address;
 

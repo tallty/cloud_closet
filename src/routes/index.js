@@ -53,9 +53,6 @@ export class Routes extends Component {
    * 成功：直接重定向到用户访问页；
    */ 
   requireAuth() {
-    localStorage.setItem('phone', '18516512221');
-    localStorage.setItem('openid', 'olclvwNgQ3dpmuw_EZNwkph-J9vM');
-    localStorage.setItem('authentication_token', 'Q1yizX4Lg_b9yHzgKqDV');
     auth.authLogin();
   }
 

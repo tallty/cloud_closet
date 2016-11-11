@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import tencentToBaidu from '../Common/tencentToBaidu'
 import locationPromise from '../Common/locationPromise'
-import { Row, Col, Spin } from 'antd'
+import { Row, Col, Spin, Button, Icon } from 'antd'
 import MapTabResult from './MapTabResult'
 import { Link, withRouter } from 'react-router'
 import styles from './MapAddress.less'
@@ -13,6 +13,7 @@ const map = null;
 export class MapAddress extends Component {
   mounted = false;
   state = {
+    loading: false,
     poi: null,
     keyword: ''
   }
@@ -107,14 +108,36 @@ export class MapAddress extends Component {
     })
   }
 
+  // 手动定位事件
+  locationEvent() {
+    this.setState({ loading: true });
+
+    locationPromise().then(
+      value => {
+        let poi = {
+          address: value.addr,
+          position: { lng: value.lng, lat: value.lat },
+          province: value.province,
+          city: value.city,
+          district: value.district
+        };
+        this.setState({ loading: false });
+        this.updatePointAndData(poi);
+      }
+    )
+  }
+
   render() {
+    let { poi, loading } = this.state;
+    let locationEvent = loading ? null : this.locationEvent.bind(this);
+
     return (
       <div className={styles.dhContainer} >
         <div id="map-container" className={styles.baidumap} style={{height: height}}></div>
-          {
-            this.state.poi ? 
-              <MapTabResult map={this.map} {...this.state} {...this.props}/> : <Spiner />
-          }
+        <div className={styles.location} style={{top: height-43}} onClick={locationEvent}>
+          {loading ? <Icon type="loading" /> : <img src="src/images/map_location.svg" alt="定位"/>}
+        </div>
+        { poi ? <MapTabResult map={this.map} poi={poi}/> : <Spiner /> }
       </div>
     )
   }

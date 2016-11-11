@@ -35,7 +35,7 @@ export class Order extends Component {
       	if (res.ok) {
       		let obj = res.body;
   				console.log("Order.jsx 获取用户详情 => ")
-					console.log(obj)
+					console.log(obj);
 					this.setState({ user: obj });
       	} else {
 					console.log("获取用户详情失败")
@@ -55,7 +55,7 @@ export class Order extends Component {
       	if (res.ok) {
       		let obj = res.body;
   				console.log("Order.jsx 获取的订单详情 => ")
-					console.log(obj)
+					console.log(obj);
 					this.setState({ order: obj });
       	} else {
 					console.log("获取预约订单详情失败")

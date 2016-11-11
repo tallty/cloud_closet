@@ -132,10 +132,9 @@ export class Profile extends Component {
 	}
 
 	handleSignout() {
-		localStorage.removeItem('openid');
-		localStorage.removeItem('authentication_token');
-		localStorage.removeItem('phone');
-		window.location.href = "/user";
+		localStorage.clear();
+		sessionStorage.clear();
+		window.location.href = "/";
 	}
 
 
