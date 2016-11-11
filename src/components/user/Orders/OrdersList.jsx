@@ -76,19 +76,25 @@ class OrdersList extends Component {
 			return (
 				<div className={css.btns}>
 					<Button type="ghost" className={css.cancel_btn} onClick={this.handleCancel.bind(this, order, index)}>取消订单</Button>
-					<Button type="primary" className={css.sure_btn} onClick={this.handlePay.bind(this, order)}>确认</Button>	
+					<Button type="primary" className={css.sure_btn} onClick={this.handlePay.bind(this, order)}>付款</Button>	
 				</div>
 			)
 		} else if (order.state === "已支付") {
 			return (
 				<div className={css.btns}>
-					<Button type="ghost" disabled>等待入库</Button>
+					<Button type="ghost" className={css.disabled_btn} disabled>等待入库</Button>
 				</div>
 			)
+		} else if (order.state === "已上架") {
+				return (
+					<div className={css.btns}>
+						<Button type="primary" className={css.sure_btn}>查看衣橱</Button>
+					</div>
+				)
 		} else if (order.state === "已取消") {
 			return (
 				<div className={css.btns}>
-					<Button type="ghost" disabled>交易取消</Button>
+					<Button type="ghost" disabled className={css.disabled_btn}>交易取消</Button>
 				</div>
 			)
 		} else {

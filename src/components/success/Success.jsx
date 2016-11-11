@@ -69,8 +69,8 @@ export class Success extends Component {
         <Row>
           <Col span={24} className={styles.success_slogan}>{ description }</Col>
           <Col span={24}>
-            <Link to="/MyCloset" >
-              <Button className={styles.go_closet_btn} type="primary">进入我的衣橱</Button>
+            <Link to="/orders" >
+              <Button className={styles.go_closet_btn} type="primary">进入我的订单</Button>
             </Link>
           </Col>
           <Col span={24}>
