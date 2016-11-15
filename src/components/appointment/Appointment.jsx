@@ -200,7 +200,7 @@ class Appointment extends Component {
                   {
                     selected_address ? 
                       <p>
-                        {selected_address.address_detail}<br/>
+                        {selected_address.address_detail} {selected_address.house_number}<br/>
                         <span>{selected_address.phone} {selected_address.name}</span>
                       </p> : 
                       <p style={{height: 42, lineHeight: '40px'}}>请选择一个地址</p>}
@@ -227,7 +227,7 @@ class Appointment extends Component {
                 <FormItem className={styles.clo_number_radio}>
                 {getFieldDecorator('number', { initialValue: '10' }, {
                   rules: [
-                    { required: true, message: 'Please select your gender' },
+                    { required: true, message: '请选择衣服数量' },
                   ],
                 })(
                   <RadioGroup>

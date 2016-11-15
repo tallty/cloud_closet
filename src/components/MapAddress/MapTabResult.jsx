@@ -26,6 +26,7 @@ class MapTabResult extends Component {
   local_address(address){
     sessionStorage.setItem('map_address', address);
     console.log("选中了============>" + address);
+    console.dir(this.props);
     this.props.hiddenEvent();
   }
 

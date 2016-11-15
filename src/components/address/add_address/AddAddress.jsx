@@ -101,7 +101,7 @@ class AddAddress extends Component {
               <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
             </Col>
             <Col span={23} className={styles.add_name} onClick={itemEvent}>
-              { address.address_detail }
+              { address.address_detail } { address.house_number }
             </Col>
           </Col>
           <Col span={24}  className={styles.tab_title}>

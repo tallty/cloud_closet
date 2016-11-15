@@ -134,10 +134,11 @@ export class MapAddress extends Component {
     return (
       <div className={styles.dhContainer} >
         <div id="map-container" className={styles.baidumap} style={{height: height}}></div>
+        <div className={styles.back_btn} onClick={this.props.hiddenEvent}><Icon type="left" /></div>
         <div className={styles.location} style={{top: height-43}} onClick={locationEvent}>
           {loading ? <Icon type="loading" /> : <img src="src/images/map_location.svg" alt="定位"/>}
         </div>
-        { poi ? <MapTabResult map={this.map} poi={poi}/> : <Spiner /> }
+        { poi ? <MapTabResult map={this.map} poi={poi} hiddenEvent={this.props.hiddenEvent}/> : <Spiner /> }
       </div>
     )
   }

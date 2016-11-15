@@ -5,6 +5,7 @@
   }
 
   body {
+    overflow-x: hidden;
     position: relative;
     * {
       font-weight: normal;
@@ -92,6 +93,17 @@
     }
   }
 
+  // 预约
+  .ant-checkbox-inner {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .ant-checkbox-checked .ant-checkbox-inner:after {
+    left: 6px !important;
+    top: 3px !important;
+    width: 6px !important;
+    height: 10px !important;
+  }
 
   // 我的订单 - tab 样式
   .ant-tabs-bar {

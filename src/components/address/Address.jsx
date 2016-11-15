@@ -31,6 +31,8 @@ export class Address extends Component {
       .set('X-User-Phone', localStorage.phone)
       .end((err, res) => {
         if (res.ok) {
+          console.log('=======地址列表=======');
+          console.dir(res.body);
           this.setState({ addresses: res.body });
         } else {
           alert("获取地址列表失败");
