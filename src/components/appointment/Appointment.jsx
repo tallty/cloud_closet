@@ -241,7 +241,7 @@ class Appointment extends Component {
                     { required: true, message: '请确认已阅读并同意遵守《关于云衣橱服装服务条例》' },
                   ],
                 })(<Checkbox onChange={this.handleCheck.bind(this)}></Checkbox>)}
-                <label className={styles.ruls_label}> 我已阅读并同意遵守</label><label className={styles.ruls}>《关于云衣橱服装服务条例》</label>
+                <label className={styles.ruls_label}>我已阅读并同意遵守</label><Link to="/protocol"><label className={styles.ruls}>《关于云衣橱服装服务条例》</label></Link>
               </Col>
               <Col span={24}>
                 { agree ? null : <p className={styles.hint}>请确认已阅读并同意遵守《关于云衣橱服装服务条例》</p>}

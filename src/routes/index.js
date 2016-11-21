@@ -7,6 +7,7 @@ import GetOpenId from '../components/WechatConect/GetOpenId'
 // 底部导航
 import Navigation from '../layouts/NavigationLayout/Navigation'
 import { Home } from '../components/home/Home'
+import { Protocol } from '../components/Protocol/Protocol'
 import { User } from '../components/user/User'
 import { MyCloset } from '../components/my_closet/MyCloset'
 // 收费详情
@@ -72,6 +73,9 @@ export class Routes extends Component {
         
       	{/* 收费详情 */}
 		    <Route path="/charge_detail" component={ChargeDetail} />
+
+        {/* 服务协议 */}
+        <Route path="/protocol" component={Protocol} />
 
         {/* 个人中心相关 */}
         <Route path="/profile" component={Profile}/>

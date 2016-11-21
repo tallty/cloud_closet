@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Button } from 'antd'
 import classnames from 'classnames'
+import { Link } from 'react-router'
 import styles from './MyCloset.less'
 
 const { string, number, bool, arrayOf, shape } = PropTypes;
@@ -33,7 +34,7 @@ class MyClosetHeader extends React.Component {
           </Col>
 
           <Col span={6} className={styles.addClothesDiv}>
-            <Button type="primary" className={styles.input_closet_btn}>添加新衣</Button>
+            <Link to='/appointment'><Button type="primary" className={styles.input_closet_btn}>添加新衣</Button></Link>
           </Col>
 
           <Col span={9} className={styles.right_closet_number}>
