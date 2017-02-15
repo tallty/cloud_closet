@@ -20,7 +20,7 @@
             <g id="Group-8" transform="translate(372.000000, 286.000000)">
                 <g id="Oval-735" opacity="0.2">
                     <use fill="#FFA35E" fill-rule="evenodd" style="mix-blend-mode: darken;" xlink:href="#path-1"></use>
-                    <use stroke="#FF9241" stroke-width="1" xlink:href="#path-1"></use>
+                    <use stroke="#F2C27F" stroke-width="1" xlink:href="#path-1"></use>
                 </g>
                 <g id="Group-6" transform="translate(24.000000, 13.790009)">
                     <g id="Group" filter="url(#filter-2)" transform="translate(0.505582, 15.975803)">
@@ -28,7 +28,7 @@
                         <ellipse id="Oval-735" fill="#C9C9C9" cx="7.58372727" cy="7.26172855" rx="3.79186364" ry="3.63086427"></ellipse>
                     </g>
                     <g id="Group-7">
-                        <path d="M8.08930909,19.3646095 C8.89508011,19.3646095 16.1786182,12.0237552 16.1786182,7.74584378 C16.1786182,3.46793239 12.5569111,0 8.08930909,0 C3.62170704,0 0,3.46793239 0,7.74584378 C0,12.0237552 7.28353807,19.3646095 8.08930909,19.3646095 Z" id="Oval-162" stroke="#FF9241" fill="#FFA35E"></path>
+                        <path d="M8.08930909,19.3646095 C8.89508011,19.3646095 16.1786182,12.0237552 16.1786182,7.74584378 C16.1786182,3.46793239 12.5569111,0 8.08930909,0 C3.62170704,0 0,3.46793239 0,7.74584378 C0,12.0237552 7.28353807,19.3646095 8.08930909,19.3646095 Z" id="Oval-162" stroke="#F2C27F" fill="#FFA35E"></path>
                         <ellipse id="Oval-162" fill="#FFFFFF" cx="8.08930909" cy="7.74584378" rx="5.05581818" ry="4.84115237"></ellipse>
                     </g>
                 </g>

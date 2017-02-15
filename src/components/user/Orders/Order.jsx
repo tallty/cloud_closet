@@ -130,7 +130,7 @@ export class Order extends Component {
 
 	render() {
 		let toolbar_style = {
-			background: '#FF9241', 
+			background: '#F2C27F', 
 			color: '#fff'
 		}
 		let back_style = {

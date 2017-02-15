@@ -47,7 +47,7 @@ Toolbar.defaultProps = {
 	url: null,
 	style: {
 		color: '#FFFFFF',
-		background: '#FF9241'
+		background: '#F2C27F'
 	},
 	back_style: {
 		color: '#FFFFFF'

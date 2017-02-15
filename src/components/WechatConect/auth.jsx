@@ -38,7 +38,6 @@ module.exports = {
     // // if (!localStorage.openid) {
     //   this.getSkipUrl();
     // }
-
     if (localStorage.openid) {
       SuperAgent
         .post("http://closet-api.tallty.com/user_info/check_openid")

@@ -162,7 +162,7 @@ export class Profile extends Component {
 							<Celler name="账号安全" value={this.formatPhone} type="phone" event={this.handleSafe.bind(this)}/>
 							<Celler name="密码" value="●●●●●●●●●" bottom={14} event={this.handlePassword.bind(this)}/>
 							<Celler name="收货地址" url="/address" bottom={14} />
-							<Celler name="退出登录" type="simple" color="#FF9241" event={this.handleSignout} />
+							<Celler name="退出登录" type="simple" color="#F2C27F" event={this.handleSignout} />
 							{/* 弹出框：修改资料 */}
 							<PopWindow show={pop} onCancel={this.hidePopWindow.bind(this)}>
 								<div className={css.popContainer}>
