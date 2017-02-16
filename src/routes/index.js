@@ -7,6 +7,7 @@ import GetOpenId from '../components/WechatConect/GetOpenId'
 // 底部导航
 import Navigation from '../layouts/NavigationLayout/Navigation'
 import { Home } from '../components/home/Home'
+import { Process } from '../components/Process/Process'
 import { Protocol } from '../components/Protocol/Protocol'
 import { User } from '../components/user/User'
 import { MyCloset } from '../components/my_closet/MyCloset'
@@ -90,7 +91,8 @@ export class Routes extends Component {
         <Route path="/receipt" component={Receipt} />
         <Route path="/bills" component={Bills} />
         <Route path="/bill" component={Bill} />
-
+        {/* 服务流程 */}
+        <Route path="/process" component={Process} />
         {/* 搜索 */}
         <Route path="/search" component={Search} />
         {/* 添加衣橱详情页 */}

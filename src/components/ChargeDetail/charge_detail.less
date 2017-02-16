@@ -1,33 +1,36 @@
 @orange: #F2C27F;
-
+.topbar_bg {
+	width: 100%;
+}
 .topbar {
-	height: 65px;
-	line-height: 65px;
+	position: absolute;
+	top: 0;
+	height: 60px;
+	line-height: 60px;
 	text-align: center;
 	font-size: 18px;
 	color: #fff;
-	background-color: @orange;
 }
 // 详情
 .detail {
-	padding: 5px 17px;
-	text-align: center;
-	color: #919191;
-	font-size: 12px;
-	line-height: 28px;
-	.detail_top {
-		padding: 8px;
-	}
 	.detail_content {
-		padding: 10px 8px 0;
-		border-radius: 12px;
-		border: 1px solid @orange;
+		position: relative;
+		top: -50px;
 		.item_row {
-			padding: 6px 0;
-			margin-bottom: 10px;
-			line-height: 22px;
+			// line-height: 22px;
+			padding: 15px 8px;
+			.list_img_content {
+				min-height: 190px;
+			}
+			.list_cell_center {
+				text-align: center;
+			}
+			.list_cell_price {
+				text-align: right;
+				padding-right: 10px;
+			}
 			.list_img {
-				height: 38px;
+				width: 100%;
 			}
 		}
 	}
@@ -54,7 +57,7 @@
 }
 // join us
 .join {
-	margin: 0px 70px 50px;
+	margin: 0px 40px 50px;
 	color: #000000;
 	font-size: 15px;
 	text-align: center;
@@ -72,12 +75,9 @@
 		background-color: #000000;
 	}
 	.btn {
-		background-color: rgba(255, 163, 94, 0.2);
-		font-size: 10px;
-		color: #747474;
+		border-radius: 22px;
 		display: block;
 		width: 100%;
-		height: 20px;
-		line-height: 20px;
+		height: 44px;
 	}
 }
