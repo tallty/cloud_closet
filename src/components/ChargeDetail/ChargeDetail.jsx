@@ -20,12 +20,12 @@ export class ChargeDetail extends Component {
 			list.push(
 				<Col span={12} key={index}>
 					<Row type="flex" justify="space-around" align="middle" className={styles.item_row}>
-						<Col span={24} className={styles.list_cell_center}>{item[0]}</Col>
+						<Col span={24} className={styles.list_cell_title}>{item[0]}</Col>
 						<Col span={24} className={styles.list_img_content}>
 							<img src={`/src/images/${item[1]}.png`} className={styles.list_img} alt={item[1]}/>
 						</Col>
 						<Col span={24} className={styles.list_cell_center}>{item[2]}</Col>
-						<Col span={24}>{item[3]}</Col>
+						<Col span={24} className={styles.list_cell_dis}>{item[3]}</Col>
 						<Col span={12}>租柜价格：</Col>
 						<Col span={12} className={styles.list_cell_price}>{item[4]}</Col>
 						<Col span={24} className={styles.list_cell_price}>{item[5]}</Col>
@@ -53,11 +53,11 @@ export class ChargeDetail extends Component {
 				</div>
 				{/*服务说明*/}
 				<div className={styles.explain}>
-					<div className={styles.title}>● 注意事项：</div>
-					<div className={styles.content}>除柜体租借费用外，我们将收取以下额外的费用
- 1.  服务费(上门收件免费，送件快递费另算)。
- 2. 护理费：分为普通护理-UCC国际洗衣、 高端护理-嘉里酒店精洗。
- 3. 真空袋：(中号)用于叠放柜(10个)10¥/个；
+					<div className={styles.title}>• 注意事项：</div>
+					<div className={styles.content}>除柜体租借费用外，我们将收取以下额外的费用<br/>	
+ 1.  服务费(上门收件免费，送件快递费另算)。<br/>
+ 2. 护理费：分为普通护理-UCC国际洗衣、 高端护理-嘉里酒店精洗。<br/>
+ 3. 真空袋：(中号)用于叠放柜(10个)10¥/个；<br/>
                 (大号)用于叠放柜(5个)15¥/个。</div>
 				</div>
 				{/*Join Us*/}

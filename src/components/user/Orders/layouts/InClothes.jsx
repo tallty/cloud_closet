@@ -59,8 +59,8 @@ export class InClothes extends Component {
 							<img src={img_map.get(item.type_name)} alt="icon"/>
 						</div>
 						<div className={css.kind}>
-							<p>{item.type_name}</p>
-							<div className={css.tag}>{item.season}</div>
+							<p>&nbsp;</p>
+							<div className={css.tag}>{item.type_name}</div>
 						</div>
 					</Col>
 					<Col span={5}>{this.parseStoreMonth.get(item.store_month)}</Col>
