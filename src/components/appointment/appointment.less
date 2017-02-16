@@ -2,6 +2,32 @@
 .order_container {
   text-align: center;
   background-color: #F9F9F9;
+  .appointment_top_bg {
+    width: 100%;
+  }
+  .appointment_top_sark {
+    background-image: url("../../images/appointment_top_bg.png");
+    background-size: 100% 100%;
+    padding-bottom: 15.5%;
+    .appointment_top_sark_img {
+      text-align: center;
+      p {
+        padding: 0 15vw;
+        color: #fff;
+      }
+      img {
+        position: relative;
+        left: 25%;
+        width: 50%;
+      }
+      h3 {
+        position: relative;
+        bottom: -15px;
+        z-index: 999;
+        color: #8B612A;
+      }
+    }
+  }
   .title {
     padding: 43px 0 60px;
     font-size: 24px;
@@ -11,6 +37,8 @@
     color: #D1C8C0;
   }
   .order_content {
+    position: relative;
+    top: -16vh;
     margin-bottom: 0;
     padding: 35px 20px;
     input {
@@ -95,7 +123,7 @@
     }
     .clo_number_radio {
       label {
-        padding: 0 30px;
+        padding: 0 15px;
         color: #919191;
         font-size: 15px;
         background-color: #F9F9F9;
@@ -128,7 +156,7 @@
       text-align: center;
     }
     .date_input {
-      margin-top: -10px;
+      // margin-top: -10px;
       input {
         height: 30px !important;
         border-radius: 0;

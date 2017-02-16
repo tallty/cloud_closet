@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import SuperAgent from 'superagent'
 import locationPromise from '../Common/locationPromise'
 import { Spiner } from '../common/Spiner'
-import { Form, Radio, Button, Checkbox, DatePicker, Row, Col, Input,Icon } from 'antd'
+import { Form, Radio, Button, Checkbox, DatePicker, Row, Col, Input,Icon, Carousel, Menu, Dropdown } from 'antd'
 import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'
 import styles from './appointment.less'
@@ -91,6 +91,10 @@ class Appointment extends Component {
     }
   }
 
+  handleMenuClick(e) {
+    console.log('click', e);
+  }
+
   handleCheck(e) {
     this.setState({ agree: !e.target.value });
   }
@@ -160,14 +164,53 @@ class Appointment extends Component {
   }
 
   render() {
+    const menu = (
+      <Menu onClick={this.handleMenuClick}>
+        <Menu.Item key="1">3个月</Menu.Item>
+        <Menu.Item key="2">6个月</Menu.Item>
+        <Menu.Item key="3">9个月</Menu.Item>
+        <Menu.Item key="4">1年</Menu.Item>
+        <Menu.Item key="5">2年</Menu.Item>
+      </Menu>
+    );
     const { defaultAddress, agree } = this.state;
     const { getFieldDecorator } = this.props.form;
     let selected_address = sessionStorage.selected_address ? JSON.parse(sessionStorage.selected_address) : null;
     return (
       <div className={styles.order_container}>
         
-        <p className={styles.title}>乐存好衣</p>
-
+        {/*<p className={styles.title}>乐存好衣</p>*/}
+        {/*<img className={styles.appointment_top_bg} src="src/images/appointment_top_bg.png" alt=""/>*/}
+        <Row className={styles.appointment_top_sark}>
+          <Col span={24}>
+            <Carousel dots={false}>
+              <div className={styles.appointment_top_sark_img}>
+                <h3>叠放柜</h3>
+                <img src="src/images/sark_one.png" alt=""/>
+                <p>*叠放柜可存放针织类，卫衣棉服等可折叠衣物60件,也可提供真空袋出售；  收费价格：180¥/月</p>
+                <a href="#">查看价格详情</a>
+              </div>
+              <div className={styles.appointment_top_sark_img}>
+                <h3>挂放柜</h3>
+                <img src="src/images/sark_two.png" alt=""/>
+                <p>*挂放柜可存放20件套装衣物，适合存放外套、大衣；  收费价格：300¥/月</p>
+                <a href="#">查看价格详情</a>
+              </div>
+              <div className={styles.appointment_top_sark_img}>
+                <h3>组合柜</h3>
+                <img src="src/images/sark_three.png" alt=""/>
+                <p>*组合柜可存放60件折叠和20件挂放； 收费价格：400¥/月</p>
+                <a href="#">查看价格详情</a>
+              </div>
+              <div className={styles.appointment_top_sark_img}>
+                <h3>礼服柜</h3>
+                <img src="src/images/sark_four.png" alt=""/>
+                <p>*礼服柜可按需存放贵重礼服，适合存放大件礼服；收费价格：50¥/件</p>
+                <a href="#">查看价格详情</a>
+              </div>
+            </Carousel>
+          </Col>
+        </Row>
         <Row className={styles.order_content}>
           {
             defaultAddress ? 
@@ -211,14 +254,14 @@ class Appointment extends Component {
                   ],
                 })(
                   <RadioGroup>
-                    <RadioButton className={styles.label_one} value="10">10件</RadioButton>
-                    <RadioButton className={styles.label_two} value="30">30件</RadioButton>
-                    <RadioButton className={styles.label_three} value="50">50件</RadioButton>
+                    <RadioButton className={styles.label_one} value="10">5-20件</RadioButton>
+                    <RadioButton className={styles.label_two} value="30">20-50件</RadioButton>
+                    <RadioButton className={styles.label_three} value="50">大于50件</RadioButton>
                   </RadioGroup>
                 )}
                 </FormItem>
               </Col>
-              <Col span={24}>
+              <Col span={12}>
                 <FormItem className={styles.date_input}>
                 {getFieldDecorator('endDate', {
                   rules: [
@@ -234,6 +277,13 @@ class Appointment extends Component {
                   <DatePicker placeholder="选择启用时间" />
                 )}
                 </FormItem>
+              </Col>
+              <Col span={12}>使用&nbsp;&nbsp;
+                <Dropdown overlay={menu}>
+                  <Button>
+                    3个月<Icon type="down" />
+                  </Button>
+                </Dropdown>
               </Col>
               <Col span={24} className={styles.line_two}>
                 {getFieldDecorator('check', { initialValue: false }, {
