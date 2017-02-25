@@ -13,7 +13,7 @@
     "pingpp-js": "^2.1.5",
     "rc-form": "^1.0.0",
     "rc-queue-anim": "^0.12.4",
-    "rc-tween-one": "^0.8.5",
+    "rc-tween-one": "^1.0.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-mobile-picker": "^0.1.10",
@@ -23,8 +23,7 @@
     "superagent": "^2.2.0",
     "wechat-auth": "^1.1.2",
     "wechat-oauth": "^1.1.1",
-    "weui": "^0.4.3",
-    "pingpp-js": "^2.1.5"
+    "weui": "^0.4.3"
   },
   "devDependencies": {
     "atool-build": "^0.8.0",

@@ -15,10 +15,11 @@ export class ChargeDetail extends Component {
 
 	// 收费详情列表
 	getList() {
-		let list = []
+		const list = []
+		const listclass = ['0 1px 1px 0','0 0 1px 0','0 1px 0 0','0 0 0 0']
 		this.props.detail.forEach((item, index, obj) => {
 			list.push(
-				<Col span={12} key={index}>
+				<Col span={12} key={index} style={{borderWidth:listclass[index], borderStyle: 'dotted'}}>
 					<Row type="flex" justify="space-around" align="middle" className={styles.item_row}>
 						<Col span={24} className={styles.list_cell_title}>{item[0]}</Col>
 						<Col span={24} className={styles.list_img_content}>
