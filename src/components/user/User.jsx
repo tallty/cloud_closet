@@ -2,15 +2,15 @@
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Icon, Button, Progress } from 'antd'
 import auth from '../WechatConect/auth'
-import { Level } from './share/Level'
+import Level from './share/Level'
 import { Link } from 'react-router'
 import css from './user.less'
 import SuperAgent from 'superagent'
 
 export class User extends Component {
   state = {
-    level: 80,
-    level_name: '白金级别',
+    level: 5000,
+    level_name: '黄金会员',
     user: {
       nickname: null,
       balance: null,
@@ -80,9 +80,12 @@ export class User extends Component {
         {/* 头像信息 */}
         <div className={css.user_info} style={{ height: '47%' }}>
           <Link to="/profile" className={css.link_profile}>
-            <img src={avatar} alt="头像" />
+            <div className={css.avatar}>
+              <img src={avatar} alt="头像" />
+              <div className={css.level_name}>{level_name}</div>
+            </div>
             <div className={css.user_name}>{user.nickname}</div>
-            <Level level={level} level_name={level_name} />
+            <Level points={level} />
           </Link>
         </div>
         {/* 业务模块 */}

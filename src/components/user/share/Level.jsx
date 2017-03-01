@@ -2,28 +2,25 @@ import React, { Component, PropTypes } from 'react'
 import { Progress } from 'antd'
 import css from './share.less'
 
-export class Level extends Component {
-	constructor(props) {
-		super(props)
-	}
-
+export default class Level extends Component {
 	render() {
 		return (
 			<div className={css.level}>
-				<div className={css.level_icon}></div>
-				<Progress percent={this.props.level} showInfo={false} strokeWidth={7} className={css.progress} />
-				<div className={css.level_name}>{this.props.level_name}</div>
+				<div className={css.title}>会员积分</div>
+        <div className={css.content}>
+					<span className={css.points}>{this.props.points}</span>
+					<span className={css.char}>分</span>
+					<span className={css.tips}> | 查看积分机制</span>
+        </div>
 			</div>
 		)
 	}
 }
 
 Level.defaultProps = {
-	level: 80,
-	level_name: " "
-}	
+  points: 80
+}
 
 Level.propTypes = {
-	level: PropTypes.number,
-	level_name: PropTypes.string
+  points: PropTypes.number
 }

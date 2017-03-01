@@ -8,20 +8,39 @@
 		width: 100%;
 		display: table;
 		.link_profile {
-			height: 75%;
+			height: 60%;
 			display: table-cell;
 			vertical-align: middle;
-			img {
-				width: 100px;
-				height: 100px;
-				border-radius: 50%;
-				border: 2px solid #fff;
+			.avatar {
+				position: relative;
+				display: inline-block;
+				img {
+					width: 100px;
+					height: 100px;
+					border-radius: 50%;
+					border: 2px solid #fff;
+				}
+				.level_name {
+					display: inline-block;
+					position: absolute;
+					bottom: 5px;
+					right: -5px;
+					width: 60px;
+					height: 20px;
+					line-height: 20px;
+					background: url('/src/images/level_name_bg.svg') no-repeat;
+					background-size: 100% 100%;
+					color: #fff;
+					text-align: center;
+					font-size: 10px;
+					font-weight: lighter;
+				}
 			}
 			.user_name {
 				font-size: 24px;
 				color: #c5c5c5;
 				font-weight: 400;
-				margin-bottom: 20px;
+				margin-bottom: 10px;
 			}
 		}
 	}
@@ -82,10 +101,13 @@
 					position: relative;
 					text-align: center;
 					display: table;
-					&:nth-child(1), &:nth-child(2), &:nth-child(3) {
+					&:nth-child(1),
+					&:nth-child(2),
+					&:nth-child(3) {
 						border-bottom: 1px solid #EBEBEB;
 					}
-					&:nth-child(2), &:nth-child(5) {
+					&:nth-child(2),
+					&:nth-child(5) {
 						border-left: 1px solid #EBEBEB;
 						border-right: 1px solid #EBEBEB;
 					}
