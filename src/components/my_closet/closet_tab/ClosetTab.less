@@ -1,13 +1,98 @@
+@orange: #F2C27F;
 .closet_container {
   width: 100%;
-  padding: 18px 18px 9px 18px;
+  padding: 8px 18px 9px 18px;
+  overflow-y: scroll;
 }
+// toolbar样式
+.tool_bar {
+  height: 50px;
+  text-align: center;
+  font-size: 16px;
+  position: relative;
+  color: #8B612A;
+  line-height: 50px;
+  border-bottom: 2px solid #EBBA6C;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .back {
+    padding: 0 20px;
+    font-size: 20px;
+  }
+  .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    p {
+      padding-left: 10px;
+    }
+    img {
+      width: 32px;
+    }
+  }
+  .menu {
+    padding: 0 20px;
+  }
+}
+// 衣服分类标签样式
+.tab_content {
+  padding: 10px 0px 16px 0px;
+  .tag_content {
+    .ellipsis_btn {
+      padding: 0;
+      width: 20px;
+      height: 20px;
+      background-color: #E0E0E0;
+      border-color: #E0E0E0;
+      border-radius: 50%;
+    }
+    .tag {
+      margin: 2px 6px 6px 0;
+      // width: 60px;
+      padding: 6px 15px;
+      line-height: 2px;
+      height: 20px;
+      color: #fff;
+      border: 0;
+      border-radius: 20px;
+      text-align: center;
+      background-color: #E0E0E0;
+    }
+    .tag::after {
+      background-color: @orange;
+    }
+    .search_btn_content {
+      line-height: 20px;
+      text-align: right;
+      padding-top: 3px;
+      .search_btn {
+        padding: 0;
+        background-color: transparent;
+        border-radius: 20px;
+        border: 0;
+        .search_icon {
+          font-size: 20px;
+          color: #E0E0E0;
+        }
+      }
+    }
+  }
+}
+// 衣服数量标签样式
+.cloth_number {
+  font-size: 16px;
+  color: #7F7F7F;
+  padding-bottom: 10px;
+}
+// 衣服列表样式
 .my_colset_tab_content {
   padding-bottom: 9px;
   .card_tab {
     position: relative;
+    padding-bottom: 10px;
     margin-bottom: 9px;
-    height: 270px;
     .new_tab {
       width: 25px;
       height: 25px;
@@ -34,8 +119,9 @@
       }
     }
     .card_pic_content {
-      height: 190px;
+      height: 185px;
       text-align: center;
+      padding: 10px;
       img {
         height: 100%;
         max-width: 100%;

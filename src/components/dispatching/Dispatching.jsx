@@ -1,54 +1,35 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
-import { Row, Col, Input, Icon, Button } from 'antd'
+import { Row, Col, Input, Icon, Button, DatePicker, Radio } from 'antd'
 import NavLink from '../../layouts/NavigationLayout/NavLink'
 import classnames from 'classnames'
-import Picker from 'react-mobile-picker';
 import styles from './Dispatching.less'
 import { DispatchingCard } from './dispatching_card/DispatchingCard';
 
-const InputGroup = Input.Group;
+const RadioGroup = Radio.Group;
 
 export class Dispatching extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPickerShow: false,
-      valueGroups: {
-        title: '普通干洗',
-      }, 
-      optionGroups: {
-        title: ['普通干洗', '精洗', '普通水洗', '特殊护理'],
-      }
+      value: 1,
     }
   }
 
-  // Update the value in response to user picking event 
-  handleChange = (name, value) => {
-    this.setState(({valueGroups}) => ({
-      valueGroups: {
-        ...valueGroups,
-        [name]: value
-      }
-    }));
-  }
-
-  togglePicker = () => {
-    this.setState(({isPickerShow}) => ({
-      isPickerShow: !isPickerShow
-    }));
+  onChange = (e) => {
+    console.log('radio checked', e.target.value);
+    this.setState({
+      value: e.target.value,
+    });
   }
 
   render() {
-
-    const {isPickerShow, optionGroups, valueGroups} = this.state;
-    const maskStyle = {
-      display: isPickerShow ? 'block' : 'none'
+    const radioStyle = {
+      display: 'block',
+      height: '30px',
+      lineHeight: '30px',
+      float: 'right'
     };
-    const pickerModalClass = classnames(
-      styles.picker_modal,
-      isPickerShow ? styles.picker_modal_toggle : ''
-    );
     return (
       <div className={styles.Dispatching_content}>
         <Row className={styles.Dispatching_content_header}>
@@ -83,14 +64,16 @@ export class Dispatching extends Component {
         </Row>
         <Row className={styles.tab_cell}>
           <DispatchingCard />
-          <div className={styles.time_btn}><Button>选择启用时间段</Button></div>
+          <div className={styles.time_btn}><DatePicker placeholder="选择配送时间" /></div>
         </Row>
         <Row className={styles.tab_cell}>
-          <Col span={4} >护理方式</Col>
-          <Col span={18} >
-            <input type="text" className={styles.weui_select} value={valueGroups.title} readOnly onClick={this.togglePicker} />
+          <Col span={4}>配送方式:</Col>
+          <Col span={20}>
+            <RadioGroup onChange={this.onChange} value={this.state.value}>
+              <Radio style={radioStyle} value={1}><span className={styles.span_color}>适用于可以折叠类的衣物</span><span className={styles.span_color_one}>快递配送</span></Radio>
+              <Radio style={radioStyle} value={2}><span className={styles.span_color}>适用于礼服套装类的衣物</span><span className={styles.span_color_one}>官方人员配送</span></Radio>
+            </RadioGroup>
           </Col>
-          <Col span={2} className={styles.icon_down}><Icon type="down" /></Col>
         </Row>
         <Row className={styles.tab_cell}>
           特别备注:对本次交易的特殊备注说明
@@ -102,23 +85,6 @@ export class Dispatching extends Component {
         </Row>
         <Row className={styles.dispatching_btn_div}>
           <Col span={24} className={styles.dispatching_btn_col}><Button className={styles.dispatching_btn}>确认配送</Button></Col>
-        </Row>
-        <Row className={styles.dispatch_footer_modal}>
-          <Col span={24}>
-            <div className={styles.picker_modal_container}>
-              <div className={styles.picker_modal_mask} style={maskStyle} onClick={this.togglePicker}></div>
-              <div className={pickerModalClass}>
-                <header>
-                  <div className={styles.title}>选择你的护理方式</div>
-                  <a href="javascript:;" onClick={this.togglePicker}>完成</a>
-                </header>
-                <Picker
-                 optionGroups={optionGroups}
-                 valueGroups={valueGroups}
-                 onChange={this.handleChange} />
-              </div>
-            </div>
-          </Col>
         </Row>
       </div>
     );

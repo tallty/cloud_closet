@@ -40,7 +40,7 @@ class MyClosetHeader extends React.Component {
           <Col span={9} className={styles.right_closet_number}>
             <div className={styles.center_item}>
               <div htmlFor="" className={styles.number_closet}>{this.props.storing_count}</div>
-              <div htmlFor="">入库中</div>
+              <div htmlFor="">入库中...</div>
             </div>
           </Col>
         </Row>

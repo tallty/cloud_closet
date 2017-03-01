@@ -2,9 +2,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Button } from 'antd'
 import MyClosetHeader from './MyClosetHeader'
-import { ClosetRank } from './closet_rank/ClosetRank'
-import { ClosetClassify } from './closet_classify/ClosetClassify'
-import ClosetTab from './closet_tab/ClosetTab'
+import ClosetType from './closet_type/ClosetType'
 import classnames from 'classnames'
 import styles from './MyCloset.less'
 import SuperAgent from 'superagent'
@@ -22,8 +20,7 @@ export class MyCloset extends Component {
   componentDidMount() {
     this.getUserInfo();
     this.getGarments(1, 10, (res) => {
-      console.log("=========获取衣橱列表成功==========")
-      console.dir(res.body);
+      console.log("=========MyCloset获取衣橱列表成功==========")
       let obj = res.body;
       this.setState({
         current_page: obj.current_page,
@@ -69,16 +66,10 @@ export class MyCloset extends Component {
 
   render() {
     let { garments, user, storing_count } = this.state;
-    console.log(this.state.garments);
     return (
       <div className={styles.my_cliset_content}>
         <MyClosetHeader garments={garments} user={user} storing_count={storing_count}/>
-        <ClosetRank />
-        <div className={styles.closet_content_down}>
-          <ClosetClassify />
-          <p className={styles.tab_name}>数量<label htmlFor="">（{garments.length}）</label></p>
-          <ClosetTab garments={garments}/>
-        </div>
+        <ClosetType />
       </div>
     );
   }

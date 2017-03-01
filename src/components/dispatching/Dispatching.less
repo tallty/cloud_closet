@@ -17,6 +17,12 @@
     a {
       color: #919191;
     }
+    .span_color {
+      color: #ECC17D;
+    }
+    .span_color_one {
+      font-size: 14px;
+    }
     .tab_title {
       padding: 4px 0;
       .location_icon_content {
@@ -51,6 +57,16 @@
     .time_btn {
       text-align: center;
       padding-top: 12px;
+      span {
+        border: 1px solid #ECC17D;
+        border-radius: 5px;
+        span {
+          border: 0;
+          input {
+            text-align: center;
+          }
+        }
+      }
     }
     .pay_one {
       text-align: right;
@@ -74,11 +90,7 @@
     }
   }
   .dispatching_btn_div {
-    z-index: 8;
-    width: 100%;
-    position: fixed;
-    bottom: 25px;
-    left: 0;
+    top: 25px;
     .dispatching_btn_col {
       text-align: center;
       .dispatching_btn {
@@ -88,42 +100,6 @@
         background-color: #F2C27F;
         border-radius: 22px;
         border: none;
-      }
-    }
-  }
-  .dispatch_footer_modal {
-    z-index: 10;
-  }
-
-  .picker_modal {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    z-index: 2;
-    width: 100%;
-    background-color: #efeff4;
-    transform: translate(0, 100%);
-    backface-visibility: hidden;
-    transition: transform .3s;
-    &.picker_modal_toggle {
-      transform: translate(0, 0);
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      height: 40px;
-      padding: 0 15px;
-      background-color: #fbf9fe;
-      .title {
-        flex: 1 1;
-        color: #888;
-      }
-      a {
-        text-decoration: none;
-        color: #0F72E7;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
       }
     }
   }

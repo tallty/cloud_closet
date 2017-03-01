@@ -37,6 +37,7 @@ import { Bill } from '../components/user/Bill/Bill'
 import { Search } from '../components/my_closet/search/Search'
 import { Manage } from '../components/my_closet/manage/Manage'
 import { ClosetDetails } from '../components/my_closet/closet_tab/closet_details/ClosetDetails'
+import ClosetTab from '../components/my_closet/closet_tab/ClosetTab'
 //地址
 import Address from '../components/address/Address'
 import AddAddress from '../components/address/add_address/AddAddress'
@@ -96,9 +97,11 @@ export class Routes extends Component {
         {/* 搜索 */}
         <Route path="/search" component={Search} />
         {/* 添加衣橱详情页 */}
+        <Route path="/closet_tabs" component={ClosetTab} />
+        {/* 添加衣橱详情页 */}
         <Route path="/closet_details" component={ClosetDetails} />
         {/* 添加衣橱管理路由 */}
-        <Route path="/manage" component={Manage} />
+        <Route path="/manage" component={Manage}/>
         {/* 添加衣橱预约路由 */}
         <Route path="/appointment" component={Appointment} onEnter={this.requireAuth}/>
         {/* 获取地图成功路由 */}
