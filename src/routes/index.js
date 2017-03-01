@@ -62,7 +62,7 @@ export class Routes extends Component {
 	render() {
 		return (
 			<Router history={this.props.history}>
-		    <Route path="/" component={Navigation} >
+        <Route path="/" component={Navigation} >
           {/* 云衣橱品牌主页 */}
           <IndexRoute component={Home} />
           {/* 添加Fanc_Club导航路由 */}
@@ -72,9 +72,8 @@ export class Routes extends Component {
           {/* 添加个人中心导航路由 */}
           <Route path="user" component={User} onEnter={this.requireAuth}/>
         </Route>
-        
-      	{/* 收费详情 */}
-		    <Route path="/charge_detail" component={ChargeDetail} />
+        {/* 收费详情 */}
+        <Route path="/charge_detail" component={ChargeDetail} />
 
         {/* 服务协议 */}
         <Route path="/protocol" component={Protocol} />
@@ -123,7 +122,7 @@ export class Routes extends Component {
         <Route path="/get_open_id" component={GetOpenId} />
         {/* 添加登陆路由 */}
         <Route path="/login" component={LogIn}/>
-		  </Router>
+      </Router>
 		)
 	}
 }

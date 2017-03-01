@@ -1,6 +1,6 @@
 .pop_bg {
-	background: rgba(0,0,0,.6);
-  position: absolute;
+  background: rgba(0,0,0,.6);
+  position: fixed;
   z-index: 900;
   width: 100%;
   height: 100%;
@@ -8,62 +8,90 @@
   left: 0;
 }
 
-.toogleBottom {
-  transform: translate(0, 0) !important;
-}
 .bottom_window {
-	position: fixed;
+  position: fixed;
   left: 0;
   bottom: 0;
   transform: translate(0, 100%);
   backface-visibility: hidden;
   z-index: 1000;
   width: 100%;
-  //slide up animation
   transition: transform .3s;
 }
-
-.toogleLeft {
+.bottom_window_show {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  transform: translate(0, 100%);
+  backface-visibility: hidden;
+  z-index: 1000;
+  width: 100%;
+  transition: transform .3s;
   transform: translate(0, 0) !important;
 }
+
 .left_window {
-	position: absolute;
-	top: 0;
-	left: 0;
-	transform: translate(-100%, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-100%, 0);
   backface-visibility: hidden;
   z-index: 1000;
   height: 100%;
-  //slide up animation
   transition: transform .3s;
 }
-
-.toogleTop {
+.left_window_show {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-100%, 0);
+  backface-visibility: hidden;
+  z-index: 1000;
+  height: 100%;
+  transition: transform .3s;
   transform: translate(0, 0) !important;
 }
+
 .top_window {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1000;
-	transform: translate(0, -100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transform: translate(0, -100%);
   backface-visibility: hidden;
   width: 100%;
-  //slide up animation
   transition: transform .3s;
 }
-
-.toogleRight {
+.top_window_show {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transform: translate(0, -100%);
+  backface-visibility: hidden;
+  width: 100%;
+  transition: transform .3s;
   transform: translate(0, 0) !important;
 }
+
 .right_window {
-	position: absolute;
-	top: 0;
-	right: 0;
-	z-index: 1000;
-	transform: translate(100%, 0);
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  transform: translate(100%, 0);
   backface-visibility: hidden;
   height: 100%;
-  //slide up animation
   transition: transform .3s;
+}
+.right_window_show {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  transform: translate(100%, 0);
+  backface-visibility: hidden;
+  height: 100%;
+  transition: transform .3s;
+  transform: translate(0, 0) !important;
 }

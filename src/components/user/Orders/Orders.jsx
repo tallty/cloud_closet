@@ -11,44 +11,38 @@
  * 	price: 订单的合计总价,
  * 	seq: 预约的订单号,
  * 	state: 订单的状态【服务中, ...】
- * 	detail: "[["上衣", "5"], ["裤装", "2"], ["裙装", "3"]]",
  * 	created_at: 订单的创建时间,
+ * 	photo: 用户的头像
  * 	【=============欠缺=================】
- * 	nurse: 护理方式[every|one|no],
- *	freight: 运费,
+ * 	nurse: 护理方式[normal | senior],
  *	service_charge: 服务费,
- *	photo: 头像,
+ *	nurse_charge: 护理费用,
  * 	【==================================】
  * 	appointment_item_groups: [
  * 	  {
  * 			id: 条目id,
  * 			count: 衣服数量,
  * 			store_month: 仓储时长（月）,
- * 			price: 单条记录的总价,
- * 			type_name: 衣服类别,
- * 			【===============欠缺================】
- * 			season: 季别
- * 			【==================================】
+ * 			price: 选择的衣柜的单价（元/月）,
+ * 			type_name: 柜子的类别,
  * 	  }
  * 	]
  * }
  */
 
-import React, { Component, PropTypes } from 'react'
-import css from './orders.less'
-import Toolbar from '../../common/Toolbar'
-import { Spiner } from '../../common/Spiner'
-import { Tabs } from 'antd'
-import OrdersList from './OrdersList'
-import SuperAgent from 'superagent'
+import React, { Component, PropTypes } from 'react';
+import css from './orders.less';
+import Toolbar from '../../common/Toolbar';
+import { Spiner } from '../../common/Spiner';
+import { Tabs } from 'antd';
+import OrdersList from './OrdersList';
+import SuperAgent from 'superagent';
 
-const TabPane = Tabs.TabPane
-
-let _appointments = []
+const TabPane = Tabs.TabPane;
 
 export class Orders extends Component {
 	state = {
-		appointments: null
+		appointments: null,
 	}
 
 	componentDidMount() {

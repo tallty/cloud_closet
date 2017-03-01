@@ -9,64 +9,25 @@
  * 			弹框 z-index: 1000
  */
 import React, { Component, PropTypes } from 'react'
-import css from './pop_window.less'
-import classNames from 'classnames/bind'
-import QueueAnim from 'rc-queue-anim'
-
-let cx = classNames.bind(css)
+import css from './pop_window.less';
 
 export default class PopWindow extends Component {
 
-	popStyle() {
-		let className = null
-		switch(this.props.direction) {
-			case 'top':
-				className = cx({
-					top_window: true,
-					toogleTop: this.props.show
-				})
-				break;
-			case 'left':
-				className = cx({
-					left_window: true,
-					toogleLeft: this.props.show
-				})
-				break;
-			case 'right':
-				className = cx({
-					right_window: true,
-					toogleRight: this.props.show
-				})
-				break;
-			case 'bottom':
-				className = cx({
-					bottom_window: true,
-					toogleBottom: this.props.show
-				})
-				break;
-			default:
-				className = cx({
-					bottom_window: true,
-					toogleBottom: this.props.show
-				})
-		}
-		return className
-	}
-
 	render() {
-		const { show, onCancel } = this.props
+		const { show, direction, onCancel } = this.props;
+		let wnd = css[`${direction}_window`];
+		let wnd_show = css[`${direction}_window_show`];
+		let cls = show ? wnd_show : wnd;
 
 		return (
 			<div>
 				{/* 透明蒙层 */}
-				<div className={css.pop_bg} 
-						 style={{display: show ? 'block' : 'none'}}
-						 onClick={onCancel}>
+				<div className={css.pop_bg}
+					style={{ display: show ? 'block' : 'none' }}
+					onClick={onCancel}>
 				</div>
 				{/* 弹出框 */}
-				<div className={this.popStyle()}>
-					{this.props.children}
-				</div>
+				<div className={cls}>{this.props.children}</div>
 			</div>
 		)
 	}
@@ -75,7 +36,7 @@ export default class PopWindow extends Component {
 PopWindow.defaultProps = {
 	show: false,
 	direction: 'bottom',
-	onCancel: () => { console.log("默认的取消事件") }
+	onCancel: () => {}
 }
 
 PopWindow.PropTypes = {
