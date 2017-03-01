@@ -4,17 +4,16 @@
 // menuUrl: 菜单的链接,
 // style: toolbar样式,
 // back_style: 返回按钮的样式
-// 
 // 说明：
 // 1、url存在，返回url, 不存在，使用goBack()
 import React, { Component, PropTypes } from 'react'
-import css from './toolbar.less'
 import { Link, withRouter } from 'react-router'
 import { Icon } from 'antd'
+import css from './toolbar.less'
 
 class Toolbar extends Component {
 
-	handleBack() {
+  handleBack() {
 		this.props.router.goBack();
 	}
 
@@ -61,4 +60,4 @@ Toolbar.propTypes = {
 	back_style: PropTypes.object
 }
 
-export default withRouter(Toolbar)
+export default withRouter(Toolbar);

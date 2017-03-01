@@ -16,26 +16,31 @@
 	background-color: #fff;
 	margin: 5px 0 10px;
 	.header {
-		height: 50px;
-		line-height: 50px;
-		padding: 0px 15px;
+		height: 30px;
+		line-height: 30px;
+		padding: 0px 0px;
 		font-size: 14px;
-		.going {
-			color: #EC1C1C;
-		}
-		.complete {
-			color: #C9C9C9;
+		position: relative;
+		margin-top: 18px;
+		.state {
+			position: absolute;
+			left: 0;
+			bottom: -13px;
 		}
 		.time {
 			font-size: 12px;
 			color: #757575;
 			float: right;
+			margin-right: 15px;
 		}
 	}
 	.content {
 		border-top: 1px solid #ebebeb;
 		border-bottom: 1px solid #ebebeb;
 		padding: 5px 15px;
+		background-color: #fff;
+		position: relative;
+    z-index: 999;
 		* {
 			color: #7f7f7f;
 		}

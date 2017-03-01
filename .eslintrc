@@ -14,7 +14,7 @@
     "react/prefer-stateless-function": [0],
     "semi": [0],
     "no-var": 0,
-    comma-dangle: ["error", "never"]
+    "comma-dangle": ["error", "never"]
   },
   "ecmaFeatures": {
     "experimentalObjectRestSpread": true

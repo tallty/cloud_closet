@@ -50,8 +50,6 @@ export class Orders extends Component {
 	}
 
 	getAppointments(page) {
-		console.log("获取分页")
-
 		SuperAgent
 			.get(`http://closet-api.tallty.com/appointments?page=${page}`)
 			.set('Accept', 'application/json')
@@ -74,25 +72,23 @@ export class Orders extends Component {
 	}
 
 	render() {
-		let { appointments } = this.state
-
-		let style = { color: '#4A4A4A', background: '#fff' }
-		let back_style = { color: '#4A4A4A' }
+    const { appointments } = this.state;
+    const style = { color: '#4A4A4A', background: '#fff' };
+    const backStyle = { color: '#4A4A4A' };
 
 		return (
 			<div className={css.container}>
-				<Toolbar title="我的订单" url="/user" style={style} back_style={back_style}/>
+				<Toolbar title="我的订单" url="/user" style={style} backStyle={backStyle} />
 
 				<Tabs defaultActiveKey="1" className={css.tab_bar}>
 			    <TabPane tab="当前订单" key="1">
-						{ appointments ? <OrdersList type="active" orders={appointments} /> : <Spiner/> }
+						{appointments ? <OrdersList type="active" orders={appointments} /> : <Spiner />}
 			    </TabPane>
 			    <TabPane tab="历史订单" key="2">
-						{ appointments ? <OrdersList type="history" orders={appointments} /> : <Spiner/> }
+						{appointments ? <OrdersList type="history" orders={appointments} /> : <Spiner />}
 			    </TabPane>
 			  </Tabs>
 			</div>
-
 		)
 	}
 }

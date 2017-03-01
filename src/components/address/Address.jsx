@@ -1,13 +1,13 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Icon, Button } from 'antd'
-import AddAddress from './add_address/AddAddress'
-import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'
-import styles from './Address.less'
-import Toolbar from '../common/Toolbar'
-import { Spiner } from '../common/Spiner'
+import { Link, withRouter } from 'react-router'
 import SuperAgent from 'superagent'
+import AddAddress from './add_address/AddAddress'
+import styles from './Address.less'
+import { Spiner } from '../common/Spiner';
+import Toolbar from '../common/Toolbar';
 
 export class Address extends Component {
   state = {
@@ -16,26 +16,22 @@ export class Address extends Component {
   }
 
   componentWillMount() {
-    let back_url = sessionStorage.addresses_back_url;
-    if (back_url || back_url === null) {
-      this.setState({ back_url: back_url });
+    const backUrl = sessionStorage.addresses_back_url;
+    if (backUrl) {
+      this.setState({ back_url: backUrl });
     }
   }
 
   componentDidMount() {
-    console.log(this.state.back_url)
     SuperAgent
-      .get("http://closet-api.tallty.com/addresses")
+      .get('http://closet-api.tallty.com/addresses')
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
       .end((err, res) => {
         if (res.ok) {
-          console.log('=======地址列表=======');
-          console.dir(res.body);
           this.setState({ addresses: res.body });
         } else {
-          alert("获取地址列表失败");
           this.setState({ addresses: [] });
         }
       })
@@ -52,12 +48,14 @@ export class Address extends Component {
         <div className={styles.content}>
           <div className="scrollContainer">
             <div className={styles.list_tab_body}>
-              { this.state.addresses ? <AddAddress addresses={this.state.addresses}/> : <Spiner/> }
+              {this.state.addresses ? <AddAddress addresses={this.state.addresses} /> : <Spiner />}
             </div>
           </div>
           <Row className={styles.tab_footer}>
             <Col span={24}>
-              <button className={styles.add_address_btn} onClick={this.addNewAddress.bind(this)}>添加新地址</button>
+              <button className={styles.add_address_btn} onClick={this.addNewAddress.bind(this)}>
+              添加新地址
+              </button>
             </Col>
           </Row>
         </div>

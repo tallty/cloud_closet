@@ -1,16 +1,16 @@
 // 品牌主页
-import React, { Component, PropTypes } from 'react'
-import { Row, Col, Icon, Button, Progress } from 'antd'
-import auth from '../WechatConect/auth'
-import Level from './share/Level'
-import { Link } from 'react-router'
-import css from './user.less'
-import SuperAgent from 'superagent'
+import React, { Component, PropTypes } from 'react';
+import { Row, Col, Icon, Button, Progress } from 'antd';
+import { Link } from 'react-router';
+import SuperAgent from 'superagent';
+import auth from '../WechatConect/auth';
+import Level from './share/Level';
+import css from './user.less';
 
 export class User extends Component {
   state = {
     level: 5000,
-    level_name: '黄金会员',
+    levelName: '黄金会员',
     user: {
       nickname: null,
       balance: null,
@@ -46,7 +46,7 @@ export class User extends Component {
   getGrid() {
     const list = [];
     this.state.grids.forEach((grid, index, obj) => {
-      let dot = grid.message ? <div className={css.dot}></div> : null;
+      const dot = grid.message ? <div className={css.dot}></div> : null;
       list.push(
         index === 4 ?
           <Col span={8} className={css.item} key={index}>
@@ -59,7 +59,7 @@ export class User extends Component {
           <Col span={8} className={css.item} key={index}>
             {dot}
             <Link to={grid.url}>
-              <img src={`/src/images/profile_item${index}.png`} alt=""/>
+              <img src={`/src/images/profile_item${index}.png`} alt="" />
               <div>{grid.name}</div>
             </Link>
           </Col>
@@ -70,8 +70,8 @@ export class User extends Component {
 
   render() {
     // 计算栅格部分容器的高度
-    const { user, level, level_name, grids } =  this.state;
-    const grids_height = (document.body.clientHeight - 60) * 0.53 - 80;
+    const { user, level, levelName, grids } = this.state;
+    const gridsHeight = (document.body.clientHeight - 60) * 0.53 - 80;
     let avatar = user.avatar ? user.avatar : 'src/images/default_photo.png';
     let balance = user.balance ? user.balance : 0;
 
@@ -82,7 +82,7 @@ export class User extends Component {
           <Link to="/profile" className={css.link_profile}>
             <div className={css.avatar}>
               <img src={avatar} alt="头像" />
-              <div className={css.level_name}>{level_name}</div>
+              <div className={css.level_name}>{levelName}</div>
             </div>
             <div className={css.user_name}>{user.nickname}</div>
             <Level points={level} />
@@ -102,7 +102,7 @@ export class User extends Component {
               <Button type="primary" className={css.charge_btn}>充值</Button>
             </Link>
           </Row>
-          <div className={css.grid_container} style={{ height: grids_height }}>
+          <div className={css.grid_container} style={{ height: gridsHeight }}>
             <Row className={css.grid}>
               {this.getGrid()}
             </Row>

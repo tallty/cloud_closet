@@ -1,0 +1,61 @@
+@height: 55px;
+@width: 108px;
+
+@first_line_w: 8px;
+@first_w: 55px;
+@last_line_w: 20px;
+@last_w: 25px;
+@line_h: 2px;
+
+.center_vertical (@height) {
+	position: absolute;
+	top: 50%;
+	margin-top: -(@height / 2);
+}
+.state_badge {
+	height: @height;
+	width: @width;
+	position: relative;
+	background: transparent;
+	z-index: 1;
+	color: #fff;
+	.first {
+		height: @height;
+		width: @height;
+		border-radius: 50%;
+		background-color: #ECC17D;
+		position: absolute;
+		top: 0;
+		left: @first_line_w;
+		text-align: center;
+		line-height: @height;
+		font-size: 14px;
+	}
+	.first_line {
+		.center_vertical(@line_h);
+		left: 0;
+		z-index: 1;
+		height: @line_h;
+		width: @first_line_w;
+		background: #ECC17D;
+	}
+	.last {
+		.center_vertical(@last_w);
+		right: 0;
+		height: @last_w;
+		width: @last_w;
+		border-radius: 50%;
+		background-color: #E0E0E0;
+		text-align: center;
+		line-height: @last_w;
+		font-size: 10px;
+	}
+	.last_line {
+		.center_vertical(@line_h);
+		right: @last_w;
+		height: @line_h;
+		width: @last_line_w;
+		background: #E0E0E0;
+		z-index: 1;
+	}
+}

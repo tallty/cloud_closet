@@ -11,10 +11,7 @@ const tencentToBaidu = (lng, lat) => {
   let _lng = z * Math.cos(theta) + 0.0065;
   let _lat = z * Math.sin(theta) + 0.006;
 
-  console.log("========标准坐标转百度地图坐标=========")
-  console.dir({ lng: _lng, lat: _lat })
-
-  return { lng: _lng, lat: _lat }
+  return { lng: _lng, lat: _lat };
 }
 
-export default tencentToBaidu
+export default tencentToBaidu;
