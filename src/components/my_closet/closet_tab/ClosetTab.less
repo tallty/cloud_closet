@@ -16,8 +16,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  background: #fff;
   .back {
-    padding: 0 20px;
+    padding: 0 14px;
     font-size: 20px;
   }
   .title {
@@ -34,11 +35,14 @@
   }
   .menu {
     padding: 0 20px;
+    a {
+      color: #8B612A;
+    }
   }
 }
 // 衣服分类标签样式
 .tab_content {
-  padding: 10px 0px 16px 0px;
+  padding: 10px 0px 0px;
   .tag_content {
     .ellipsis_btn {
       padding: 0;
@@ -84,7 +88,27 @@
 .cloth_number {
   font-size: 16px;
   color: #7F7F7F;
-  padding-bottom: 10px;
+  height: 30px;
+  line-height: 30px;
+  margin: 10px 5px;
+  .cart {
+    float: right;
+    position: relative;
+    img {
+      display: inline-block;
+      height: 30px;
+      width: 30px;
+    }
+    .dot {
+      height: 8px;
+      width: 8px;
+      background-color: #EC1C1C;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
 }
 // 衣服列表样式
 .my_colset_tab_content {

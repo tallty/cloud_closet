@@ -2,12 +2,14 @@
 import React, { Component, PropTypes } from 'react'
 import { Affix, Row, Col, Icon, Button, Card, Input } from 'antd'
 import { Link } from 'react-router'
+import SuperAgent from 'superagent'
+import classnames from 'classnames'
 import PopWindow from '../../common/PopWindow'
 import Picker from 'react-mobile-picker';
-import classnames from 'classnames'
 import styles from '../closet_tab/ClosetTab.less'
 import css from './Manage.less'
-import SuperAgent from 'superagent'
+import Toolbar from '../../common/Toolbar';
+
 
 export class Manage extends Component {
   state = {
@@ -22,7 +24,7 @@ export class Manage extends Component {
       title: '移动至',
     }, 
     optionGroups: {
-      title: ['移动至','叠放柜一', '叠放柜二', '挂柜一', '礼服柜'],
+      title: ['移动至','叠放柜一', '叠放柜二', '挂柜一', '礼服柜']
     }
   }
 
@@ -155,6 +157,7 @@ export class Manage extends Component {
           </div>
           <div className={styles.menu} onClick={this.changename.bind(this)} >重命名</div>
         </div>
+        
         <div className={styles.closet_container} style={{height: tab_height}}>
           <div className={styles.tab_content}>
             <Row className={styles.tag_content}>
@@ -212,9 +215,3 @@ export class Manage extends Component {
     );
   }
 }
-
-Manage.defaultProps = {
-}
-
-Manage.propTypes = {
-};

@@ -119,7 +119,13 @@ class ClosetTab extends Component {
               </Col>
             </Row>
           </div>
-          <p className={styles.cloth_number}>{`数量（${garments.length})`}</p>
+          <div className={styles.cloth_number}>
+            {`数量（${garments.length})`}
+            <div className={styles.cart}>
+              <img src="/src/images/icon_cart.svg" alt="cart" />
+              <div className={styles.dot}></div>
+            </div>
+          </div>
           <Row gutter={9} className={styles.my_colset_tab_content}>
             { garments?this.initList():<Spin size="large" /> }
           </Row>

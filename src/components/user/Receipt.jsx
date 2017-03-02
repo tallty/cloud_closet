@@ -16,7 +16,7 @@ export class Receipt extends Component {
     let money = this.state.money ? `${this.state.money}元` : '--';
     return (
       <div className={css.container}>
-        <Toolbar url="/user" title="发票">
+        <Toolbar url="/user" title="发票" theme="dark">
           <Link to="/receipt">开票记录</Link>
         </Toolbar>
         <div className={css.content}>
