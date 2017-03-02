@@ -1,0 +1,74 @@
+.container {
+  background: #fff;
+  height: 100%;
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: column nowrap;
+  flex-grow: row nowrap;
+  .content {
+    flex-grow: 1;
+		overflow-y: scroll;
+	  -webkit-overflow-scrolling: touch;
+    ul {
+      padding: 22px 0;
+      li {
+        padding: 8px 20px;
+        .item {
+          position: relative;
+          border: 1px solid #EBBA6C;
+          border-radius: 6px;
+          height: 95px;
+          padding: 5px;
+          display: flex;
+          display: -webkit-flex;
+          img {
+            height: 100%;
+          }
+          .text {
+            flex-grow: 1;
+            font-size: 13px;
+            color: #7F7F7F;
+            display: flex;
+            flex-grow: column nowrap;
+            align-items: center;
+            justify-content: center;
+          }
+          .close {
+            height: 20px;
+            width: 20px;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+          }
+        }
+      }
+    }
+  }
+  .footActions {
+    height: 50px;
+    line-height: 50px;
+    border-top: 1px solid #E0E0E0;
+    background: #fff;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    .left {
+      flex-grow: 1;
+      padding-left: 18px;
+      line-height: 50px;
+      font-size: 14px;
+      color: #757575;
+      span {
+        color: #EBBA6C;
+      }
+    }
+    .right {
+      background: #EBBA6C;
+      width: 100px;
+      line-height: 50px;
+      text-align: center;
+      color: #fff;
+      font-size: 18px;
+    }
+  }
+}

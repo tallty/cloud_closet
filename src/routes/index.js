@@ -19,6 +19,7 @@ import { MapAddress } from '../components/MapAddress/MapAddress'
 import SetAddress from '../components/MapAddress/SetAddress'
 import { Success } from '../components/success/Success'
 import { LogIn } from '../components/log_in/LogIn'
+import Cart from '../components/cart/Cart';
 // 个人中心
 import { Profile } from '../components/user/Profile/Profile'
 import { FancClub } from '../components/user/FancClub'
@@ -97,6 +98,7 @@ export class Routes extends Component {
         <Route path="/search" component={Search} />
         {/* 添加衣橱详情页 */}
         <Route path="/closet_tabs" component={ClosetTab} />
+        <Route path="/cart" component={Cart} />
         {/* 添加衣橱详情页 */}
         <Route path="/closet_details" component={ClosetDetails} />
         {/* 添加衣橱管理路由 */}
