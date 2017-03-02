@@ -36,14 +36,14 @@ export class NewAddress extends Component {
   }
 
   togglePicker = () => {
-    this.setState(({isPickerShow}) => ({
+    this.setState(({ isPickerShow }) => ({
       isPickerShow: !isPickerShow
     }));
   }
 
   render() {
-    let tab_height = document.body.clientHeight;
-    const {isPickerShow, optionGroups, valueGroups} = this.state;
+    const tabHright = document.body.clientHeight;
+    const { isPickerShow, optionGroups, valueGroups } = this.state;
     const maskStyle = {
       display: isPickerShow ? 'block' : 'none'
     };
@@ -52,7 +52,7 @@ export class NewAddress extends Component {
       isPickerShow ? styles.picker_modal_toggle : ''
     );
     return (
-      <div className={styles.NewAddress_content} style={{height: tab_height}}>
+      <div className={styles.NewAddress_content} style={{ height: tabHright }}>
         <Toolbar url="/address" title="编辑地址">
           <Link to="/dispatching" className={styles.add_new_address_btn}>保存</Link>
         </Toolbar>
@@ -75,10 +75,10 @@ export class NewAddress extends Component {
             <Col span={18} className={styles.new_address_input_col_input}>
               <Col span={22} >
                 <input
-                type="text"
-                value={valueGroups.title + '-' + valueGroups.firstName + '-' + valueGroups.secondName}
-                readOnly
-                onClick={this.togglePicker} />
+                  type="text"
+                  value={valueGroups.title + '-' + valueGroups.firstName + '-' + valueGroups.secondName}
+                  readOnly
+                  onClick={this.togglePicker} />
               </Col>
               <Col span={2} className={styles.icon_down}><Icon type="down" /></Col>
             </Col>

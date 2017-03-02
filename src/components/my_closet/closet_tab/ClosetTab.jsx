@@ -7,23 +7,17 @@ import SuperAgent from 'superagent'
 import { Spiner } from '../../common/Spiner'
 
 const { string, number, bool, arrayOf, shape } = PropTypes;
-const height = window.innerHeight-52
+const height = window.innerHeight - 52;
+
 class ClosetTab extends Component {
-  constructor(props) {
-      super(props);
-      this.state = {
-        garments: []
-      }
+  state = {
+    garments: []
   }
 
   componentDidMount() {
     this.getGarments(1, 10, (res) => {
-      console.log("=========ClosetTab获取衣橱列表成功==========")
-      let obj = res.body;
-
-      let appointment_str = JSON.stringify(obj.garments)
-      sessionStorage.setItem('garments', appointment_str)
-      
+      const obj = res.body;
+      sessionStorage.setItem('garments', JSON.stringify(obj.garments))
       this.setState({
         current_page: obj.current_page,
         total_pages: obj.total_pages,
@@ -55,12 +49,10 @@ class ClosetTab extends Component {
       list.push(
         <Col span={12} className={styles.left_tab} key={garment.id}>
         <Link to={`/closet_details?id=${garment.id}`}>
-          <div style={{color:'#fff'}}>
+          <div style={{ color: '#fff' }}>
             <Card className={styles.card_tab}>
               {/* 添加新增标签*/}
-              {
-                garment.is_new ? <div className={styles.new_tab}>New</div> : null
-              }
+              {garment.is_new ? <div className={styles.new_tab}>New</div> : null}
               {/* 添加衣服展示卡片模块*/}
               <div className={styles.card_pic_content}>
                 <img alt="example" src={garment.cover_image} />
@@ -68,11 +60,11 @@ class ClosetTab extends Component {
               <div className={styles.card_tab_title}>
                 <p className={styles.brand} ></p>
                 <p className={styles.good_type} >{garment.title}</p>
-                <sub className={styles.time_line}>入库时间：{this.parseTime(garment.put_in_time, "yyyy-MM-dd")}</sub><br/>
+                <sub className={styles.time_line}>入库时间：{this.parseTime(garment.put_in_time, 'yyyy-MM-dd')}</sub><br />
                 {/*<sub className={styles.time_line}>到期时间：{this.parseTime(garment.expire_time, "yyyy-MM-dd")}</sub>*/}
               </div>
               {/* 添加点赞喜欢模块*/}
-              { /* <div className={styles.like_tab}><Icon className={styles.heart_icon} type="heart-o" /><br/> <sub>2234</sub></div> */ }
+              {/* <div className={styles.like_tab}><Icon className={styles.heart_icon} type="heart-o" /><br/> <sub>2234</sub></div> */}
             </Card>
           </div>
         </Link>

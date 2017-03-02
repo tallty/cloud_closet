@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 27</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="54" height="54" rx="8"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="54" height="54" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="预约入库" transform="translate(-45.000000, -1287.000000)">
+            <g id="Group-6" transform="translate(6.000000, 793.000000)">
+                <g id="存衣数量">
+                    <g id="Group-8" transform="translate(20.000000, 350.000000)">
+                        <g id="Group-20" transform="translate(19.000000, 60.000000)">
+                            <g id="Group-13" transform="translate(0.000000, 84.000000)">
+                                <g id="Group-27">
+                                    <use id="Rectangle-6" stroke="#FC9421" mask="url(#mask-2)" stroke-width="3.2" fill="#F0F0F2" xlink:href="#path-1"></use>
+                                    <path d="M27.466601,45.9749644 L27.4668215,46 C24.911588,46.0000017 19.2605908,45.7926267 19.2605908,45.7926267 C19.2605908,45.7926267 17,42.5161298 17,33.4744924 C17,24.4328549 20.783903,23.9354834 21.177016,21.281106 C21.5701289,18.6267286 19.8502601,18.0460832 18.9659481,14.5207373 C18.0816361,10.9953914 18.7691998,9.83410138 22.3561625,10.0413126 C25.1779971,10.2043241 26.5404402,11.6510366 26.9932861,12.2608105 C27.4322195,11.6621597 28.793536,10.1877719 31.6438375,10.0231161 C35.2308002,9.81590479 35.9183639,10.9771948 35.0340519,14.5025407 C34.1497399,18.0278866 32.4298711,18.608532 32.822984,21.2629094 C33.216097,23.9172868 37,24.4146583 37,33.4562958 C37,42.4979332 34.7394092,45.7744301 34.7394092,45.7744301 C34.7394092,45.7744301 30.2519507,45.9391067 27.466601,45.9749644 Z" id="Combined-Shape" stroke="#979797" stroke-width="1.536" fill="#FFFFFF"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

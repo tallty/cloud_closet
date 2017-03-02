@@ -59,9 +59,9 @@ export class Routes extends Component {
     auth.authLogin();
   }
 
-	render() {
-		return (
-			<Router history={this.props.history}>
+  render() {
+    return (
+      <Router history={this.props.history}>
         <Route path="/" component={Navigation} >
           {/* 云衣橱品牌主页 */}
           <IndexRoute component={Home} />
@@ -123,12 +123,12 @@ export class Routes extends Component {
         {/* 添加登陆路由 */}
         <Route path="/login" component={LogIn}/>
       </Router>
-		)
-	}
+    )
+  }
 }
 
 Routes.defaultProps = {
-	
+  
 }
 
 Routes.propTypes = {

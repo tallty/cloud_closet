@@ -40,9 +40,9 @@ export class Home extends Component {
       return null;
   }
 
-	render() {
-		return (
-			<div className={styles.home_content}>
+  render() {
+    return (
+      <div className={styles.home_content}>
         <img src="src/images/home_one.png" alt="" className={styles.home_pic}/>
         <Row className={styles.home_order_content}>
           <Col span={24} className={styles.home_order}>
@@ -66,8 +66,8 @@ export class Home extends Component {
           </Col>
         </Row>
       </div>
-		);
-	}
+    );
+  }
 }
 
 Home.defaultProps = {

@@ -4,25 +4,25 @@
 	font-size: 20px;
 	z-index: 1000;
 	position: relative;
+	background: #ECC17D;
 	.back {
 		display: block;
-		vertical-align: middle;
 		height: 100%;
+		padding-top: 13px;
 		width: 50px;
-		line-height: 50px;
 		font-size: 20px;
 		text-align: center;
 		float: left;
 		img {
-			height: 24px;
+			height: 20px;
+			display: inline_block;
 		}
 	}
 	.menu {
 		display: block;
-		vertical-align: middle;
 		height: 50px;
-		padding-right: 12px;
 		line-height: 50px;
+		padding-right: 12px;
 		text-align: right;
 		float: right;
 		font-size: 14px;
@@ -37,9 +37,20 @@
 		top: 0;
 		left: 50%;
 		margin-left: -72px;
+		color: #fff;
 		span{
 			display: table-cell;
 			vertical-align: middle;
 		}
+	}
+}
+.toolbarDark {
+	.toolbar;
+	background: #fff;
+	.menu {
+		color: #8B612A;
+	}
+	.title {
+		color: #8B612A;
 	}
 }
