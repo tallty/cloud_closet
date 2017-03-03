@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import SuperAgent from 'superagent'
 import locationPromise from '../Common/locationPromise'
 import { Spiner } from '../common/Spiner'
-import { Form, Radio, Button, Checkbox, DatePicker, Row, Col, Input,Icon, Menu, Dropdown } from 'antd'
+import { Form, Radio, Button, Checkbox, DatePicker, Row, Col, Input, Icon, Menu, Dropdown } from 'antd'
 import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'
 import styles from './appointment.less'
@@ -12,7 +12,7 @@ import Carousel from './Carousel.jsx'
 const FormItem = Form.Item;
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
-const height = window.innerHeight*0.305
+const height = window.innerHeight * 0.305
 
 class Appointment extends Component {
   state = {
