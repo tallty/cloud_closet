@@ -17,8 +17,8 @@ export class OutClothes extends Component {
     console.log("OutClothes.jsx 出库衣服列表：")
     console.log(order)
 
-    order.appointment_item_groups.forEach((item, i, array) => {
-      let price = (i === array.length - 1) ? 
+    order.appointment_price_groups.forEach((item, i, array) => {
+      let price = (i === array.length - 1) ?
                   <div className={css.price}>
                     合计：<span>888</span>
                   </div> : null
@@ -62,7 +62,7 @@ OutClothes.propTypes = {
     seq: string,
     date: string,
     created_at: string,
-    appointment_item_groups: arrayOf(
+    appointment_price_groups: arrayOf(
       shape({
         id: number,
          count: number,

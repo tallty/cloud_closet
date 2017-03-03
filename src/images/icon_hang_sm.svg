@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>存衣数量</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="57" width="740" height="510"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="740" height="510" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="预约入库" transform="translate(-43.000000, -921.000000)">
+            <rect id="Rectangle-641" fill="#FFFFFF" x="1" y="0" width="750" height="1336"></rect>
+            <text id="种类" font-family="PingFangSC-Regular, PingFang SC" font-size="20" font-weight="normal" letter-spacing="-0.87500006" fill="#919191">
+                <tspan x="51.3750001" y="917">种类</tspan>
+            </text>
+            <text id="种类" font-family="PingFangSC-Regular, PingFang SC" font-size="20" font-weight="normal" letter-spacing="-0.87500006" fill="#919191">
+                <tspan x="51.3750001" y="917">种类</tspan>
+            </text>
+            <g id="Group-6" transform="translate(6.000000, 793.000000)">
+                <g id="存衣数量" stroke="#CCCCCC" stroke-width="2" fill="#FFFFFF">
+                    <use id="Rectangle-641" mask="url(#mask-2)" xlink:href="#path-1"></use>
+                </g>
+                <g id="Group-15" transform="translate(42.000000, 139.000000)" stroke="#FC9421" stroke-width="1.6">
+                    <path d="M3.44896546,22.847602 C10.9037624,18.5110981 21.9489082,13 21.9489082,13 C21.9489082,13 36.8290436,20.2242364 41.8169342,22.847602 C46.8048248,25.4709676 44.9579498,29.0985243 44.9579498,29.0985243 L0.339395222,29.0985243 C0.339395222,29.0985243 -1.51587827,25.7356839 3.44896546,22.847602 Z" id="Triangle-1"></path>
+                    <path d="M26,4.02777778 C26,1.80329754 24.209139,0 22,0 C19.790861,0 18,1.80329754 18,4.02777778 C18,6.25225802 19.790861,8.05555556 22,8.05555556 L22,12.8768921" id="Oval-111"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

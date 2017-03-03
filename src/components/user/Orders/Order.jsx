@@ -63,33 +63,24 @@ export class Order extends Component {
       })
   }
 
-  // 获取订单的合计
-  getTotalPrice() {
-    let total = 0
-    for(let item of this.state.order.appointment_item_groups) {
-      total += item.price
-    }
-    return total
-  }
-
   /**
    * 获取物流信息
    */
   getLogistics() {
-    let logistics = []
+    const logistics = []
     logistics.push(
       <Timeline.Item
-        key={0} 
-        dot={<Icon type="clock-circle-o" style={{ fontSize: '20px' }} />} 
+        key={0}
+        dot={<Icon type="clock-circle-o" style={{ fontSize: '20px' }} />}
         color="red">
           当前物流状态信息
           <p>2015-09-01</p>
       </Timeline.Item>
     )
-    for (let i=1; i<10; i++) {
+    for (let i=1; i<6; i++) {
       logistics.push(
         <Timeline.Item key={i}>
-          物流状态信息{i} 
+          物流状态信息{i}
           <p>2015-09-01</p>
         </Timeline.Item>
       )
@@ -98,10 +89,10 @@ export class Order extends Component {
   }
 
   /**
-   * 获取余额
-   */
+ * 获取余额
+ */
   getBalance() {
-    let user = this.state.user;
+    const user = this.state.user;
     return user ? user.balance : '';
   }
 
@@ -120,7 +111,7 @@ export class Order extends Component {
           if (res.body.error) {
             alert(res.body.error);
           } else {
-            window.location.replace('/success?action=pay');  
+            window.location.replace('/success?action=pay');
           }
         } else {
           alert("付款失败，请稍后重试");
@@ -141,24 +132,29 @@ export class Order extends Component {
                 {/* 订单 */}
                 <InClothes order={order} />
                 {/* 费用 */}
-                <p className="text-right">运费：XXX</p>
-                <p className="text-right">服务费：XXX</p>
-                <p className={css.tips}>护理要求：&nbsp;&nbsp;<span>每次护理</span></p>
-                <p className={css.total_price}>合计：<span>{this.getTotalPrice()}</span></p>
+                <p className={css.tips}>
+                  护理要求：&nbsp;&nbsp;<span>{order.care_type}</span>
+                  <span style={{ float: 'right' }}>护理费：{order.care_cost}</span>
+                </p>
+                <p className="text-right">服务费：{order.service_cost}</p>
+                <p className={css.total_price}>合计：<span>{order.price}</span></p>
               </div> : <Spiner />
           }
           {/* 物流 */}
           <div className={css.logistics}>
-            <Timeline>{this.getLogistics()}</Timeline>
+            {/*<Timeline>{this.getLogistics()}</Timeline>*/}
           </div>
         </div>
+
+        {/*TODO 处理按钮样式和功能*/}
+
         {/* 支付方式 */}
         <div className={css.pay_actions}>
           <button className={css.pay_btn} onClick={this.handlePay.bind(this)}>
-            账户余额（￥{this.getBalance()}
+            账户余额（￥{this.getBalance()}）
           </button>
           <Link
-            to={`/recharge?redirect_url=/order?id=${this.props.location.query.id}`} 
+            to={`/recharge?redirect_url=/order?id=${this.props.location.query.id}`}
             className={css.recharge_btn}>
             充值
           </Link>

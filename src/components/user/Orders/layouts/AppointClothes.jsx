@@ -39,7 +39,7 @@ AppointClothes.propTypes = {
     seq: string,
     date: string,
     created_at: string,
-    appointment_item_groups: arrayOf(
+    appointment_price_groups: arrayOf(
       shape({
         id: number,
         count: number,

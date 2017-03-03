@@ -28,6 +28,21 @@ class OrdersList extends Component {
     });
   }
 
+  /**
+   * 获取当期订单的状态
+   */
+  getStates(state) {
+    const nextStates = new Map([
+      ['待确认', '录入'],
+      ['服务中', '付款'],
+      ['待付款', '入库'],
+      ['已支付', '入库'],
+      ['入库中', '上架'],
+      ['已上架', '']
+    ])
+    return [state, nextStates.get(state)];
+  }
+
   // 订单列表
   getOrders() {
     const { type, orders } = this.state;
@@ -35,11 +50,12 @@ class OrdersList extends Component {
 
     orders.forEach((order, index, obj) => {
       if (order.state !== '已取消' && order.state !== '已上架') {
+        const states = this.getStates(order.state);
         list.push(
           <div className={css.orders} key={index}>
             <div className={css.header}>
               <div className={css.state}>
-                <StateBadge now={order.state} next="支付" />
+                <StateBadge now={states[0]} next={states[1]} />
               </div>
               <span className={css.time}>{order.date}</span>
             </div>
@@ -125,28 +141,14 @@ class OrdersList extends Component {
         return (
           <div className={css.content}>
             <InClothes order={order} />
-            <div className={css.clothes_numebr}>
-              <p className={css.title}>种类件数</p>
-              <Row>
-                <Col span={8}>
-                  <img src="/src/images/icon_fold.svg" alt="icon" /> 叠放 <span>100</span> 件
-                </Col>
-                <Col span={8}>
-                  <img src="/src/images/icon_hang.svg" alt="icon" /> 挂放 <span>100</span> 件
-                </Col>
-                <Col span={8}>
-                  <img src="/src/images/icon_dress.svg" alt="icon" /> 礼服 <span>100</span> 件
-                </Col>
-              </Row>
-            </div>
-            <p className="text-right">运费：10</p>
-            <p className="text-right">服务费：50</p>
+            <p className="text-right">护理费：{order.care_cost}</p>
+            <p className="text-right">服务费：{order.service_cost}</p>
             <Row>
               <Col span={12} className={css.nurse}>
-                护理要求： <span>每次护理</span>
+                护理要求： <span>{order.care_type}</span>
               </Col>
               <Col span={12} className={css.total_price}>
-                合计： <span>{order.price + 60}</span>
+                合计： <span>{order.price}</span>
               </Col>
             </Row>
           </div>
@@ -236,11 +238,10 @@ class OrdersList extends Component {
           array.splice(index, 1, res.body);
           this.setState({ orders: array });
         } else {
-          console.log("取消订单失败");
+          console.log('取消订单失败');
         }
       })
   }
-
 
   render() {
     const tabHeight = document.body.clientHeight - 88;
@@ -273,7 +274,7 @@ OrdersList.propTypes = {
       seq: string,
       date: string,
       created_at: string,
-      appointment_item_groups: arrayOf(
+      appointment_price_groups: arrayOf(
         shape({
           id: number,
           count: number,

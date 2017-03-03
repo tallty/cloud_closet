@@ -17,7 +17,7 @@ export class User extends Component {
       avatar: null
     },
     grids: [
-      { name: '配送篮', message: false, url: '/tickets' },
+      { name: '配送篮', message: false, url: '/cart' },
       { name: '我的订单', message: true, url: '/orders' },
       { name: '系统通知', message: false, url: '/notifications' },
       { name: 'VIP会员', message: false, url: '/vip' },
@@ -33,9 +33,10 @@ export class User extends Component {
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
       .end((err, res) => {
-        if (res.ok) {
+        if (!err || err === null) {
           // 缓存
           localStorage.setItem('user', JSON.stringify(res.body));
+          console.log(res.body);
           this.setState({ user: res.body });
         } else {
           auth.authLogin();
@@ -88,6 +89,7 @@ export class User extends Component {
             <Level points={level} />
           </Link>
         </div>
+
         {/* 业务模块 */}
         <div className={css.center_container}>
           <Row className={css.account}>
@@ -111,12 +113,4 @@ export class User extends Component {
       </div>
     )
   }
-}
-
-User.defaultProps = {
-
-}
-
-User.propTypes = {
-
 }

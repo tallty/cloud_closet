@@ -1,11 +1,11 @@
 import SuperAgent from 'superagent'
 
-var appid = 'wx47b02e6b45bf1dad';
-var authorize_url = location.href.split('#')[0];
-var share_image_url = 'http://ws.tallty.com/src/image/wechat_share_icon.png';
-var share_title = "【上海天气】雨量交通实时查询"
-var share_desc = "【上海天气】雨量交通实时查询"
-var openid = localStorage.openid
+const appid = 'wx47b02e6b45bf1dad';
+const authorize_url = location.href.split('#')[0];
+const share_image_url = 'http://ws.tallty.com/src/image/wechat_share_icon.png';
+const share_title = "【上海天气】雨量交通实时查询"
+const share_desc = "【上海天气】雨量交通实时查询"
+const openid = localStorage.openid
 
 module.exports = {
   getConfig() {
@@ -13,17 +13,14 @@ module.exports = {
     SuperAgent
     .post('http://wechat-api.tallty.com/cloud_closet_wechat/js_hash')
     .set('Accept', 'application/json')
-    .send({page_url: authorize_url})
+    .send({ page_url: authorize_url })
     .end((err, res) => {
-      let config = res.body
-      console.log('========获取到的config========')
-      console.dir(config)
       // 初始化配置
-      this.wechartConfig(config)
+      this.wechartConfig(res.body)
       this.wechatReady()
     })
   },
- 
+
   // 实例化jdk功能
   wechartConfig(config) {
     // 如果wx 没有初始化过
@@ -71,7 +68,6 @@ module.exports = {
       .send( {'openid': localStorage.openid, 'total_fee': 10 } )
       .end( (err, res) => {
         if (res.ok) {
-          console.log(appid)
           wx.chooseWXPay({
             appId: appid,
             timestamp: res.body.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
@@ -93,9 +89,9 @@ module.exports = {
             }
           });
         }
-      })  
+      })
   },
-  
+
   // 分享给朋友
   onMenuShareAppMessage() {
     wx.onMenuShareAppMessage({
