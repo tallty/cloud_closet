@@ -18,19 +18,24 @@ class ClosetTab extends Component {
     this.getGarments(1, 10, (res) => {
       const obj = res.body;
       sessionStorage.setItem('garments', JSON.stringify(obj.garments))
+
       this.setState({
-        current_page: obj.current_page,
-        total_pages: obj.total_pages,
         garments: obj.garments,
-        storing_count: obj.storing_garments_count
       })
     })
+  }
+  getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
   }
 
   // 获取列表
   getGarments(page, per_page, func) {
+    const id = this.getQueryString('id')
     SuperAgent
-      .get(`http://closet-api.tallty.com/garments?page=${page}&per_page=${per_page}`)
+      .get(`http://closet-api.tallty.com/exhibition_chests/${id}`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)

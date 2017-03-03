@@ -5,6 +5,7 @@
  */
 import React, { Component, PropTypes } from 'react'
 import css from './ClosetType.less'
+import SuperAgent from 'superagent'
 import { Link, withRouter } from 'react-router'
 import classNames from 'classnames/bind'
 import { Row, Col, Button } from 'antd'
@@ -13,13 +14,29 @@ class ClosetType extends Component {
 
   constructor(props) {
     super(props);
-    this.state={
-      
+    this.state = {
+      types: []
     }
   }
 
+  componentWillMount() {
+    SuperAgent
+      .get(`http://closet-api.tallty.com/exhibition_chests`)
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+        if (!err || err === null) {
+          this.setState({ types: res.body });
+        } else {
+          console.log("获取列表失败");
+        }
+      })
+  }
+
   getCarouselList() {
-    const { types, titles, pics, numbers } = this.props
+    const { types } = this.state
+    console.log(types)
     const list = []
     const that = this
     types.forEach((item, index, obj) => {
@@ -27,9 +44,9 @@ class ClosetType extends Component {
       <div key={index} >
         <Link to={`/closet_tabs?id=${item.id}`} >
           <Row className={css.closet_type_img_row}>
-            <Col span={4} className={css.closet_type_img_row_cell_one}><img src={item.pic} width="100%" alt={item.title}/></Col>
+            <Col span={4} className={css.closet_type_img_row_cell_one}><img src="src/images/sark_one_icon.png" width="100%" alt={item.title}/></Col>
             <Col span={8} className={css.closet_type_img_row_cell_two}>{item.title}</Col>
-            <Col span={12} className={css.closet_type_img_row_cell_three}>{item.number}</Col>
+            <Col span={12} className={css.closet_type_img_row_cell_three}>{item.remain_space_count}/{item.max_count}</Col>
           </Row>
         </Link>
       </div>
@@ -38,8 +55,22 @@ class ClosetType extends Component {
     return list
   }
 
+  showList() {
+    SuperAgent
+      .get(`http://closet-api.tallty.com/exhibition_chests`)
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+        if (!err || err === null) {
+          this.setState({ types: res.body });
+        } else {
+          console.log("获取列表失败");
+        }
+      })
+  }
+
   render() {
-    const { titles, pics, directions, urls } = this.props
     return (
       <div className={css.closet_type_container}>
         {this.getCarouselList()}
