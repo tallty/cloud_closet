@@ -15,10 +15,9 @@ class ClosetTab extends Component {
   }
 
   componentDidMount() {
-    this.getGarments(1, 10, (res) => {
+    this.getGarments(1, 100, (res) => {
       const obj = res.body;
       sessionStorage.setItem('garments', JSON.stringify(obj.garments))
-
       this.setState({
         garments: obj.garments,
       })
@@ -53,7 +52,7 @@ class ClosetTab extends Component {
     this.state.garments.forEach((garment, i, obj) => {
       list.push(
         <Col span={12} className={styles.left_tab} key={garment.id}>
-        <Link to={`/closet_details?id=${garment.id}`}>
+        <Link to={`/closet_details?id=${i}`}>
           <div style={{ color: '#fff' }}>
             <Card className={styles.card_tab}>
               {/* 添加新增标签*/}

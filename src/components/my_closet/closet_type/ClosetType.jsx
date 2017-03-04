@@ -46,7 +46,7 @@ class ClosetType extends Component {
           <Row className={css.closet_type_img_row}>
             <Col span={4} className={css.closet_type_img_row_cell_one}><img src="src/images/sark_one_icon.png" width="100%" alt={item.title}/></Col>
             <Col span={8} className={css.closet_type_img_row_cell_two}>{item.title}</Col>
-            <Col span={12} className={css.closet_type_img_row_cell_three}>{item.remain_space_count}/{item.max_count}</Col>
+            <Col span={12} className={css.closet_type_img_row_cell_three}>{item.max_count - item.remain_space_count}/{item.max_count}</Col>
           </Row>
         </Link>
       </div>

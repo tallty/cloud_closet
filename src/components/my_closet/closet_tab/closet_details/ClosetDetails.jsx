@@ -9,14 +9,15 @@ export class ClosetDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      garment: null,
+      garment: {},
       tags: ['Tag 1', 'Tag 2'],
     }
   }
 
   componentWillMount() {
-    let str = sessionStorage.garment;
-    let garment = JSON.parse(str);
+    const str = sessionStorage.garments;
+    const garments = JSON.parse(str);
+    const garment = garments[this.getQueryString('id')]
     this.setState({ garment: garment });
   }
 
@@ -27,6 +28,13 @@ export class ClosetDetails extends Component {
   parseTime(time) {
     let t = new Date(time);
     return `${t.getYear()}-${t.getMonth()+1}-${t.getDay()}`
+  }
+
+  getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
   }
 
   handleClose = (removedTag) => {
