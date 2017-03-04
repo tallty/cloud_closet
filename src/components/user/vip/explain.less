@@ -1,0 +1,31 @@
+.container {
+  background: #fff;
+  height: 100%;
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: column nowrap;
+  flex-grow: row nowrap;
+  .content {
+    flex-grow: 1;
+		overflow-y: scroll;
+	  -webkit-overflow-scrolling: touch;
+    .des {
+      line-height: 48px;
+      height: 48px;
+      background: #fff;
+      padding: 0 25px;
+      border-bottom: 4px solid #F8F8F8;
+      font-size: 14px;
+      color: #7F7F7F;
+    }
+    .text {
+      padding: 14px 25px;
+      line-height: 30px;
+      font-size: 13px;
+      color: #9B9B9B;
+      h3 {
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -1,13 +1,13 @@
 // Fanc Club
 import React, { Component, PropTypes } from 'react'
 import css from './fanc_club.less'
-import Level from './share/Level'
+import Level from '../share/Level'
 import { Icon } from 'antd'
 import { Link } from 'react-router'
-import auth from '../WechatConect/auth'
+import auth from '../../WechatConect/auth'
 import SuperAgent from 'superagent'
 
-export class FancClub extends Component {
+export default class FancClub extends Component {
   state = {
     points: 5000,
     powers: [{
@@ -65,7 +65,7 @@ export class FancClub extends Component {
         <div className={css.slider}>
           {this.getPowerImges()}
         </div>
-        <Link to="/vip" className={css.title_two}>
+        <Link to="/vip_explain" className={css.title_two}>
           乐存好衣会员权益说明
           <span><Icon type="right" /></span>
         </Link>
