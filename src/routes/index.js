@@ -67,11 +67,11 @@ export class Routes extends Component {
           {/* 云衣橱品牌主页 */}
           <IndexRoute component={Home} />
           {/* 添加Fanc_Club导航路由 */}
-          <Route path="vip" component={FancClub} onEnter={this.requireAuth}/>
+          <Route path="vip" component={FancClub} onEnter={this.requireAuth} />
           {/* 添加我的衣橱导航路由 */}
-          <Route path="MyCloset" component={MyCloset} onEnter={this.requireAuth}/>
+          <Route path="MyCloset" component={MyCloset} onEnter={this.requireAuth} />
           {/* 添加个人中心导航路由 */}
-          <Route path="user" component={User} onEnter={this.requireAuth}/>
+          <Route path="user" component={User} onEnter={this.requireAuth} />
         </Route>
         {/* 收费详情 */}
         <Route path="/charge_detail" component={ChargeDetail} />
@@ -85,8 +85,8 @@ export class Routes extends Component {
         <Route path="/order" component={Order}/>
         <Route path="/tickets" component={Ticket} />
         <Route path="/notifications" component={Notification} />
-        <Route path="/recharge" component={Recharge} onEnter={this.requireAuth}/>
-        <Route path="/recharge_success" component={RechargeSuccess}/>
+        <Route path="/recharge" component={Recharge} onEnter={this.requireAuth} />
+        <Route path="/recharge_success" component={RechargeSuccess} />
         <Route path="/withdraw" component={Withdraw} />
         <Route path="/help" component={Help} />
         <Route path="/receipt" component={Receipt} />
@@ -104,22 +104,22 @@ export class Routes extends Component {
         {/* 添加衣橱管理路由 */}
         <Route path="/manage" component={Manage}/>
         {/* 添加衣橱预约路由 */}
-        <Route path="/appointment" component={Appointment} onEnter={this.requireAuth}/>
+        <Route path="/appointment" component={Appointment} onEnter={this.requireAuth} />
         {/* 获取地图成功路由 */}
-        <Route path="/map_address" component={MapAddress}/>
+        <Route path="/map_address" component={MapAddress} />
         {/* 获取地图成功路由 */}
-        <Route path="/set_address" component={SetAddress}/>
+        <Route path="/set_address" component={SetAddress} />
         {/* 添加衣橱预约成功路由 */}
-        <Route path="/success" component={Success}/>
+        <Route path="/success" component={Success} />
         {/* 添加地址路由 */}
-        <Route path="/address" component={Address}/>
+        <Route path="/address" component={Address} />
         {/* 添加新增地址路由 */}
-        <Route path="/add_address" component={AddAddress}/>
-        <Route path="/address/new" component={NewAddress}/>
+        <Route path="/add_address" component={AddAddress} />
+        <Route path="/address/new" component={NewAddress} />
         {/* 添加配送路由 */}
-        <Route path="/dispatching" component={Dispatching}/>
+        <Route path="/dispatching" component={Dispatching} />
         {/* 添加续存路由 */}
-        <Route path="/dispatching" component={Dispatching}/>
+        <Route path="/dispatching" component={Dispatching} />
         {/* 获取用户open */}
         <Route path="/get_open_id" component={GetOpenId} />
         {/* 添加登陆路由 */}
@@ -134,5 +134,5 @@ Routes.defaultProps = {
 }
 
 Routes.propTypes = {
-  history: PropTypes.any,
+  history: PropTypes.any
 }
