@@ -227,7 +227,6 @@ class OrdersList extends Component {
   // 待确认 - 取消事件
   handleCancel(order, index) {
     const array = this.state.orders;
-
     SuperAgent
       .post(`http://closet-api.tallty.com/appointments/${order.id}/cancel`)
       .set('Accept', 'application/json')

@@ -5,19 +5,21 @@ import React, { Component } from 'react'
 import css from './order.less'
 import Toolbar from '../../common/Toolbar'
 import { Spiner } from '../../common/Spiner'
-import { Link } from 'react-router'
+import { Link, withRouter } from 'react-router'
 import { InClothes } from './layouts/InClothes'
-import { Row, Col, Timeline, Icon } from 'antd'
+import { Row, Col, Timeline, Icon, Modal, Button } from 'antd'
 import SuperAgent from 'superagent'
 
+const confirm = Modal.confirm;
 const nurseWay = new Map([
   ['every', '每次护理'], ['one', '一次护理'], ['no', '不护理']
 ]);
 
-export class Order extends Component {
+class Order extends Component {
   state = {
     order: null,
-    user: null
+    user: null,
+    cancelLoading: false
   }
 
   componentDidMount() {
@@ -27,7 +29,7 @@ export class Order extends Component {
 
   getUserInfo() {
     SuperAgent
-      .get(`http://closet-api.tallty.com/user_info`)
+      .get('http://closet-api.tallty.com/user_info')
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
@@ -89,18 +91,22 @@ export class Order extends Component {
   }
 
   /**
- * 获取余额
- */
-  getBalance() {
-    const user = this.state.user;
-    return user ? user.balance : '';
-  }
-
-  /**
    * 使用余额支付
    */
   handlePay() {
-    let id = this.props.location.query.id;
+    const { user, order } = this.state;
+    const id = this.props.location.query.id;
+    if (user.balance < order.price) {
+      confirm({
+        title: '支付提示',
+        content: '余额不足，是否立即进行充值？',
+        onOk() {
+          location.replace(`/recharge?redirect_url=/order?id=${id}`);
+        },
+        onCancel() { }
+      });
+      return;
+    }
     SuperAgent
       .post(`http://closet-api.tallty.com/appointments/${id}/pay_by_balance`)
       .set('Accept', 'application/json')
@@ -114,9 +120,33 @@ export class Order extends Component {
             window.location.replace('/success?action=pay');
           }
         } else {
-          alert("付款失败，请稍后重试");
+          alert('付款失败，请稍后重试');
         }
       })
+  }
+
+  // 待确认 - 取消事件
+  handleCancel() {
+    const id = this.props.location.query.id;
+    confirm({
+      title: '提醒',
+      content: '您确定要取消本次订单吗？',
+      onOk() {
+        SuperAgent
+          .post(`http://closet-api.tallty.com/appointments/${id}/cancel`)
+          .set('Accept', 'application/json')
+          .set('X-User-Token', localStorage.authentication_token)
+          .set('X-User-Phone', localStorage.phone)
+          .end((err, res) => {
+            if (res.ok) {
+              window.location.replace('/orders');
+            } else {
+              alert('取消失败，请稍后重试');
+            }
+          })
+      },
+      onCancel() { }
+    });
   }
 
   render() {
@@ -150,16 +180,19 @@ export class Order extends Component {
 
         {/* 支付方式 */}
         <div className={css.pay_actions}>
+          <Button
+            className={css.recharge_btn}
+            onClick={this.handleCancel.bind(this)}
+            loading={this.state.cancelLoading}
+          >取消订单</Button>
           <button className={css.pay_btn} onClick={this.handlePay.bind(this)}>
-            账户余额（￥{this.getBalance()}）
+            确认付款
           </button>
-          <Link
-            to={`/recharge?redirect_url=/order?id=${this.props.location.query.id}`}
-            className={css.recharge_btn}>
-            充值
-          </Link>
         </div>
       </div>
     )
   }
 }
+
+export default withRouter(Order);
+

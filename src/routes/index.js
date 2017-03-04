@@ -24,7 +24,7 @@ import Cart from '../components/cart/Cart';
 import { Profile } from '../components/user/Profile/Profile'
 import { FancClub } from '../components/user/FancClub'
 import { Orders } from '../components/user/Orders/Orders'
-import { Order } from '../components/user/Orders/Order'
+import Order from '../components/user/Orders/Order'
 import { Ticket } from '../components/user/Ticket'
 import { Notification } from '../components/user/Notification'
 import Recharge from '../components/user/Recharge/Recharge'
@@ -55,7 +55,7 @@ export class Routes extends Component {
    * [requireAuth 对进入的组件进行鉴权，根据本地openid检测用户合法性]
    * 失败：重新获取openid，然后重定向到用户访问页；
    * 成功：直接重定向到用户访问页；
-   */ 
+   */
   requireAuth() {
     auth.authLogin();
   }
@@ -130,7 +130,7 @@ export class Routes extends Component {
 }
 
 Routes.defaultProps = {
-  
+
 }
 
 Routes.propTypes = {

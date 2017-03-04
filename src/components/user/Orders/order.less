@@ -33,37 +33,45 @@
 		width: 100%;
 		background: #fff;
 		padding: 10px 0 20px;
-		.recharge_btn {
-			width: 210px;
-			height: 35px;
+		.commonBtn (@border, @bg, @color, @active) {
+			width: 85%;
+			height: 44px;
+			border: 1px solid @border;
 			text-align: center;
-			line-height: 35px;
-			background-color: #F9F9F9;
-			border: 1px solid #DDDDDD;
-			color: #4A4A4A;
-			font-size: 14px;
-			border-radius: 4px;
-			margin: 15px auto 0;
+			line-height: 44px;
+			background-color: @bg;
+			color: @color;
+			font-size: 18px;
+			border-radius: 22px;
+			margin: 10px auto;
 			display: block;
+			padding: 0;
 			&:active {
-				background-color: darken(#F2C27F, 10%);
+				background-color: darken(@active, 10%);
 			}
 		}
+		.recharge_btn {
+			.commonBtn(#757575, #757575, #fff, #757575);
+		}
 		.pay_btn {
-			width: 210px;
-			height: 35px;
-			text-align: center;
-			line-height: 35px;
-			background-color: #F9F9F9;
-			border: 1px solid #F2C27F;
-			color: #4A4A4A;
-			font-size: 14px;
-			border-radius: 4px;
-			margin: 0px auto 0;
-			display: block;
-			&:active {
-				border-color: darken(#F2C27F, 10%);
-			}
+			.commonBtn(#ECC17D, #ECC17D, #fff, #ECC17D);
+		}
+	}
+	.vertical_center_modal {
+		text-align: center;
+		white-space: nowrap;
+		&:before {
+			content: '';
+			display: inline-block;
+			height: 100%;
+			vertical-align: middle;
+			width: 0;
+		}
+		.ant-modal {
+			display: inline-block;
+			vertical-align: middle;
+			top: 0;
+			text-align: left;
 		}
 	}
 }

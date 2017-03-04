@@ -28,7 +28,7 @@ export class User extends Component {
 
   componentDidMount() {
     SuperAgent
-      .get('http://closet-api.tallty.com/user_info')
+      .get(`http://closet-api.tallty.com/user_info?random=${Math.random()}`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
