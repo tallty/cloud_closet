@@ -31,7 +31,35 @@ export class Manage extends Component {
   componentWillMount() {
     let garments = JSON.parse(sessionStorage.garments)
     const selectes = new Array(garments.length).fill(false)
+    this.getMoveList()
     this.setState({ garments: garments, selectes: selectes })
+  }
+
+  getMoveList() {
+    const id = this.getQueryString('id')
+    SuperAgent
+      .get(`http://closet-api.tallty.com/exhibition_chests/${this.getQueryString('id')}/the_same_store_method`)
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+        if (!err || err === null) {
+          const obj = res.body;
+          const opg = []
+          obj.forEach((o, i, ob) => {
+            opg.push(o.title)
+          })
+        } else {
+          console.log('获取衣橱列表失败');
+        }
+      })
+  }
+
+  getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
   }
 
   // Update the value in response to user picking event 

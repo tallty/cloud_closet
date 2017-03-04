@@ -11,7 +11,8 @@ const height = window.innerHeight - 52;
 
 class ClosetTab extends Component {
   state = {
-    garments: []
+    garments: [],
+    title: ''
   }
 
   componentDidMount() {
@@ -19,7 +20,7 @@ class ClosetTab extends Component {
       const obj = res.body;
       sessionStorage.setItem('garments', JSON.stringify(obj.garments))
       this.setState({
-        garments: obj.garments,
+        garments: obj.garments, title: obj.title
       })
     })
   }
@@ -97,7 +98,7 @@ class ClosetTab extends Component {
   }
 
   render() {
-    const {garments} = this.state
+    const { garments, title } = this.state
     return (
       <div>
         <div className={styles.tool_bar}>
@@ -105,9 +106,9 @@ class ClosetTab extends Component {
             <Icon type="left" />
           </div>
           <div className={styles.title}>
-            <img src="src/images/sark_one_icon.png" alt=""/><p>柜子一</p>
+            <img src="src/images/sark_one_icon.png" alt="" /><p>{title}</p>
           </div>
-          <div className={styles.menu} ><Link to="/manage">管理</Link></div>
+          <div className={styles.menu} ><Link to={`/manage?id=${this.getQueryString('id')}`}>管理</Link></div>
         </div>
         <div className={styles.closet_container} style={{height: height}}>
           <div className={styles.tab_content}>

@@ -39,7 +39,7 @@ export default class FancClub extends Component {
     const { powers } = this.state;
     return powers.map((item, index) => {
       return (
-        <div className={css.power}>
+        <div key={index} className={css.power}>
           <img src={item.url} alt="特权" key={index} />
           <p>{item.title}</p>
         </div>
