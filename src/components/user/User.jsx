@@ -80,14 +80,16 @@ export class User extends Component {
       <div className={css.personal_center}>
         {/* 头像信息 */}
         <div className={css.user_info} style={{ height: '47%' }}>
-          <Link to="/profile" className={css.link_profile}>
-            <div className={css.avatar}>
-              <img src={avatar} alt="头像" />
-              <div className={css.level_name}>{levelName}</div>
-            </div>
-            <div className={css.user_name}>{user.nickname}</div>
+          <div className={css.link_profile}>
+            <Link to="/profile">
+              <div className={css.avatar}>
+                <img src={avatar} alt="头像" />
+                <div className={css.level_name}>{levelName}</div>
+              </div>
+              <div className={css.user_name}>{user.nickname}</div>
+            </Link>
             <Level points={level} />
-          </Link>
+          </div>
         </div>
 
         {/* 业务模块 */}

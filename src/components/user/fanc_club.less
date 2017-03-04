@@ -2,11 +2,13 @@
 	height: 100%;
 	background-color: #F5F5F5;
 	.user_info {
-		background: linear-gradient(to bottom, #FBE8C8, #F8DF8D);
-		height: 135px;
+		background: radial-gradient(#EDD6AA, #E6C48E, #DEAF6C);
+		height: 150px;
 		.back {
 			height: 48px;
 			line-height: 48px;
+			overflow: hidden;
+			margin-bottom: 15px;
 			.back_link, .back_link:hover {
 				display: block;
 				width: 48px;
@@ -15,9 +17,19 @@
 				font-size: 20px;
 				font-weight: bolder;
 				color: #fff;
+				float: left;
 				&:active {
 					background-color: #F8DF8D;
 				}
+			}
+			.title {
+				float: left;
+				width: 100%;
+				margin-right: -48px;
+				padding-right: 96px;
+				text-align: center;
+				color: #fff;
+				font-size: 20px;
 			}
 		}
 		.name {
@@ -43,11 +55,17 @@
 		color: #919191;
 		font-size: 16px;
 		padding: 0 23px;
+		display: block;
 		background-color: #fff;
+		overflow: hidden;
+		span {
+			float: right;
+			line-height: 54px;
+			font-size: 20px;
+		}
 	}
 
 	.slider {
-		height: 110px;
 		width: 100%;
 		padding: 20px 0;
 		background-color: #fff;
@@ -55,10 +73,19 @@
 		white-space: nowrap;
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
-		img {
+		.power {
 			margin: 0 20px;
-			width: 70px;
-			height: 70px;
+			width: 60px;
+			height: 60px;
+			display: inline-block;
+			img {
+				width: 100%;
+			}
+			p {
+				color: #757575;
+				font-size: 12px;
+				text-align: center;
+			}
 		}
 	}
 }
