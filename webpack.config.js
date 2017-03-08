@@ -6,9 +6,9 @@ const escapeRegExp = require('lodash/escapeRegExp');
 
 module.exports = function(webpackConfig) {
   webpackConfig.babel.plugins.push('transform-runtime');
-
-  webpackConfig.babel.plugins.push(['antd', {
-    style: true,  // use less if true
+  webpackConfig.babel.plugins.push(['import', {
+    libraryName: 'antd',
+    style: true
   }]);
 
   // less files in "node_modules" folders and files named "global.less" or "*-global.less"
