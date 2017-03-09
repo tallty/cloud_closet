@@ -95,18 +95,18 @@ class AddAddress extends Component {
       let itemEvent = back_url === "/appointment" ? this.select_address.bind(this,address) : null;
       
       list.push(
-         <Row key={i} className={styles.tab_cell}>
+        <Row key={i} className={styles.tab_cell}>
           <Col span={24}  className={styles.tab_title} onClick={itemEvent}>
             <Col span={1} className={styles.location_icon_content}>
-              <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
+              <img src="src/images/location_icon.svg" alt="" className={styles.location_icon} />
             </Col>
             <Col span={23} className={styles.add_name} onClick={itemEvent}>
-              { address.address_detail } { address.house_number }
+              {address.address_detail} {address.house_number}
             </Col>
           </Col>
           <Col span={24}  className={styles.tab_title}>
             <Col span={10} className={styles.people_name}>
-              { address.name } 收
+              {address.name}
             </Col>
             <Col span={14}>
               电话：{address.phone}

@@ -2,6 +2,21 @@
 .order_container {
   text-align: center;
   background-color: #F9F9F9;
+  .calendarTip {
+    background-color: #F1C184;
+    padding: 5px 8px;
+    line-height: 25px;
+    border-radius: 15px;
+    color: #fff;
+    width: 60%;
+    position: absolute;
+    top: 70px;
+    left: 20%;
+    z-index: 1051;
+    label {
+      font-size: 14px;
+    }
+  }
   .appointment_top_bg {
     width: 100%;
   }
@@ -159,9 +174,10 @@
       display: inline-block;
       vertical-align: middle;
       line-height: 22px;
+      // color: #f15c5c;
     }
     .hint {
-      color: red;
+      color: #f15c5c;;
       text-align: center;
     }
     .date_input {

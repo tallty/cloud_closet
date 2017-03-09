@@ -18,13 +18,15 @@ const Option = Select.Option;
 class Appointment extends Component {
   state = {
     defaultAddress: null,
-    agree: true
+    agree: true,
+    storeTime: '3个月',
+    showDateTips: false
   }
 
   componentWillMount() {
     // 如果是手动选择地址，显示选择的地址
     if (sessionStorage.selected_address) {
-      let address = JSON.parse(sessionStorage.selected_address);
+      const address = JSON.parse(sessionStorage.selected_address);
       this.setState({ defaultAddress: address });
     }
   }
@@ -88,14 +90,15 @@ class Appointment extends Component {
     console.log(Date.now());
     if (value && value.valueOf() < Date.now()) {
       console.log(value.valueOf());
-      callback(new Error("请选择一个未来的预约时间!"));
+      callback(new Error('我们的服务需提前三日预约!'));
     } else {
       callback();
     }
   }
 
-  handleMenuClick(value) {
-    console.log('click', value);
+  handleMenuClick(e) {
+    this.setState({ storeTime: e.key })
+    console.log('click', e.key);
   }
 
   handleCheck(e) {
@@ -113,7 +116,6 @@ class Appointment extends Component {
       this.props.form.validateFieldsAndScroll((errors, values) => {
         if (errors) {
           console.log('Errors in form!!!');
-          return;
         } else {
           this.pushAppoint(selected_address, value);
         }
@@ -125,7 +127,7 @@ class Appointment extends Component {
 
   // 时间格式转换函数
   date2str(x, y) {
-    let z = {
+    const z = {
       y: x.getFullYear(),
       M: x.getMonth() + 1,
       d: x.getDate(),
@@ -134,10 +136,9 @@ class Appointment extends Component {
       s: x.getSeconds()
     };
 
-    let value = y.replace(/(y+|M+|d+|h+|m+|s+)/g, (v) => {
-      return ((v.length > 1 ? "0" : "") + eval('z.' + v.slice(-1))).slice(-(v.length > 2 ? v.length : 2))
-    }
-    );
+    const value = y.replace(/(y+|M+|d+|h+|m+|s+)/g, (v) => {
+      return ((v.length > 1 ? '0' : '') + eval('z.' + v.slice(-1))).slice(-(v.length > 2 ? v.length : 2))
+    });
     return value
   }
 
@@ -154,20 +155,41 @@ class Appointment extends Component {
         .set('Accept', 'application/json')
         .set('X-User-Phone', localStorage.phone)
         .set('X-User-Token', localStorage.authentication_token)
-        .send({ 'appointment': { 'address': address_detail, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date } })
-        .end((err, res) => {
+        .send({ 'appointment': { 'address': address_detail, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date}})
+        .end( (err, res) => {
           if (res.ok) {
             sessionStorage.removeItem('selected_address');
             this.props.router.replace('/success?action=appointment')
           }
         })
     } else {
-      alert("请选择地址");
+      alert('请选择地址');
     }
   }
 
+  disabledDate(current) {
+    var d = new Date();
+    // 将日期向后推2天
+    d.setDate(d.getDate() + 2);
+    return current && current.valueOf() < d;
+  }
+
+  show_tips() {
+    const sta = this.state.showDateTips
+    this.setState({ showDateTips: !sta })
+  }
+
   render() {
-    const { defaultAddress, agree } = this.state;
+    const menu = (
+      <Menu onClick={this.handleMenuClick.bind(this)}>
+        <Menu.Item key="3个月">3个月</Menu.Item>
+        <Menu.Item key="6个月">6个月</Menu.Item>
+        <Menu.Item key="9个月">9个月</Menu.Item>
+        <Menu.Item key="1年">1年</Menu.Item>
+        <Menu.Item key="2年">2年</Menu.Item>
+      </Menu>
+    );
+    const { defaultAddress, agree, showDateTips } = this.state;
     const { getFieldDecorator } = this.props.form;
     const selected_address = sessionStorage.selected_address ? JSON.parse(sessionStorage.selected_address) : null;
     return (
@@ -175,6 +197,7 @@ class Appointment extends Component {
 
         {/*<p className={styles.title}>乐存好衣</p>autoplay*/}
         {/*<img className={styles.appointment_top_bg} src="src/images/appointment_top_bg.png" alt=""/>*/}
+        <div style={showDateTips ? {} : { display: 'none' }} className={styles.calendarTip}><label>我们的服务需提前三日预约</label></div>
         <Row className={styles.appointment_top_sark}>
           <Col span={24} style={{ height: height }}>
             <Carousel />
@@ -258,7 +281,6 @@ class Appointment extends Component {
                     </Select>
                   </Col>
                 </div>
-
                 <Col span={24} className={styles.line_tips}>*选择预计存衣数量与使用时间，我们将更效率的完成收取工作。</Col>
                 <Col span={24} className={styles.line_two}>
                   {getFieldDecorator('check', { initialValue: false }, {

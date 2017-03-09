@@ -202,8 +202,8 @@ export class Manage extends Component {
           </Row>
         </div>
         <Row className={css.tab_footer}>
-          <Col span={5} >
-            <input type="text" className={styles.weui_select} value={valueGroups.title} readOnly onClick={this.togglePicker} />
+          <Col span={5} className={css.weui_select}>
+            <input type="text" value={valueGroups.title} readOnly onClick={this.togglePicker} />
           </Col>
           <Col span={1}>
             <Icon type="down" />

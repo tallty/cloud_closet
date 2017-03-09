@@ -60,9 +60,9 @@ export class Home extends Component {
         </Row>
         <Row>
           <Col span={24}>
-            <img src="src/images/home_two.png" alt="" className={styles.home_pic}/>
-            <img src="src/images/home_three.png" alt="" className={styles.home_pic}/>
-            <img src="src/images/home_fore.png" alt="" className={styles.home_pic}/>
+            <img src="src/images/home_two.png" alt="" className={styles.home_pic} />
+            <img src="src/images/home_three.png" alt="" className={styles.home_pic} />
+            <img src="src/images/server_more.png" alt="" className={styles.home_pic} />
           </Col>
         </Row>
       </div>

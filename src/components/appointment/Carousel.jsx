@@ -59,7 +59,7 @@ export default class Carousel extends Component {
         </div>
         <div className={css.carouse_direction}>
           <p>{this.state.direction}</p>
-          <a href={this.state.url}>查看详情</a>
+          <a href={this.state.url}>收费详情</a>
         </div>      
       </div>
     )
