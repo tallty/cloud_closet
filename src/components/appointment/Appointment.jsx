@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import SuperAgent from 'superagent'
 import locationPromise from '../Common/locationPromise'
 import { Spiner } from '../common/Spiner'
-import { Form, Radio, Button, Checkbox, DatePicker, Row, Col, Input, Icon, Menu, Dropdown } from 'antd'
+import { Form, Radio, Button, Checkbox, DatePicker, Row, Col, Input, Icon, Menu, Dropdown, Select } from 'antd'
 import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'
 import styles from './appointment.less'
@@ -12,7 +12,8 @@ import Carousel from './Carousel.jsx'
 const FormItem = Form.Item;
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
-const height = window.innerHeight * 0.305
+const height = window.innerHeight * 0.305;
+const Option = Select.Option;
 
 class Appointment extends Component {
   state = {
@@ -52,7 +53,7 @@ class Appointment extends Component {
           // 如果没有手动选择地址，显示默认地址
           if (!sessionStorage.selected_address) {
             this.getDefaultAddress(user.default_address_id);
-          } 
+          }
         } else {
           // alert("获取用户信息失败");
           console.log("获取用户信息失败");
@@ -93,21 +94,21 @@ class Appointment extends Component {
     }
   }
 
-  handleMenuClick(e) {
-    console.log('click', e);
+  handleMenuClick(value) {
+    console.log('click', value);
   }
 
   handleCheck(e) {
     this.setState({ agree: !e.target.value });
   }
-  
+
   handleSubmit(e) {
     e.preventDefault();
     const selected_address = sessionStorage.selected_address ? JSON.parse(sessionStorage.selected_address) : {};
     const value = this.props.form.getFieldsValue();
 
     console.log(value);
-    
+
     if (value.check) {
       this.props.form.validateFieldsAndScroll((errors, values) => {
         if (errors) {
@@ -123,7 +124,7 @@ class Appointment extends Component {
   }
 
   // 时间格式转换函数
-  date2str(x,y) { 
+  date2str(x,y) {
     let z ={
       y:x.getFullYear(),
       M:x.getMonth()+1,
@@ -131,12 +132,12 @@ class Appointment extends Component {
       h:x.getHours(),
       m:x.getMinutes(),
       s:x.getSeconds()
-    }; 
+    };
 
     let value = y.replace(/(y+|M+|d+|h+|m+|s+)/g, (v) => {
                     return ( (v.length>1?"0":"") + eval('z.'+v.slice(-1))).slice(-(v.length>2?v.length:2) )
                   }
-                ); 
+                );
     return value
   }
 
@@ -159,28 +160,19 @@ class Appointment extends Component {
             sessionStorage.removeItem('selected_address');
             this.props.router.replace('/success?action=appointment')
           }
-        }) 
+        })
     } else {
       alert("请选择地址");
     }
   }
 
   render() {
-    const menu = (
-      <Menu onClick={this.handleMenuClick}>
-        <Menu.Item key="1">3个月</Menu.Item>
-        <Menu.Item key="2">6个月</Menu.Item>
-        <Menu.Item key="3">9个月</Menu.Item>
-        <Menu.Item key="4">1年</Menu.Item>
-        <Menu.Item key="5">2年</Menu.Item>
-      </Menu>
-    );
     const { defaultAddress, agree } = this.state;
     const { getFieldDecorator } = this.props.form;
-    let selected_address = sessionStorage.selected_address ? JSON.parse(sessionStorage.selected_address) : null;
+    const selected_address = sessionStorage.selected_address ? JSON.parse(sessionStorage.selected_address) : null;
     return (
       <div className={styles.order_container}>
-        
+
         {/*<p className={styles.title}>乐存好衣</p>autoplay*/}
         {/*<img className={styles.appointment_top_bg} src="src/images/appointment_top_bg.png" alt=""/>*/}
         <Row className={styles.appointment_top_sark}>
@@ -190,7 +182,7 @@ class Appointment extends Component {
         </Row>
         <Row className={styles.order_content}>
           {
-            defaultAddress ? 
+            defaultAddress ?
             <Form horizontal onSubmit={this.handleSubmit.bind(this)} >
               <Col span={20} offset={2} className={styles.location_icon_content}>
                 <img src="src/images/orange_location_icon.svg" alt="" className={styles.location_icon}/>
@@ -198,11 +190,11 @@ class Appointment extends Component {
               <div onClick={this.choose_address.bind(this)}>
                 <Col className={styles.address_show} span={20} offset={2}>
                   {
-                    selected_address ? 
+                    selected_address ?
                       <p>
                         {selected_address.address_detail} {selected_address.house_number}<br/>
                         <span>{selected_address.phone} {selected_address.name}</span>
-                      </p> : 
+                      </p> :
                       <p style={{height: 42, lineHeight: '40px'}}>请选择一个地址</p>}
                 </Col>
                 <Col className={styles.address_show} span={2}>
@@ -238,30 +230,35 @@ class Appointment extends Component {
                 )}
                 </FormItem>
               </Col>
-              <Col span={12}>
-                <FormItem className={styles.date_input}>
-                {getFieldDecorator('endDate', {
-                  rules: [
-                    {
-                      required: true,
-                      type: 'object',
-                      message: '请选择预约时间?',
-                    }, {
-                      validator: this.checkOrderTime,
-                    },
-                  ],
-                })(
-                  <DatePicker placeholder="选择启用时间" />
-                )}
-                </FormItem>
-              </Col>
-              <Col span={12}>使用&nbsp;&nbsp;
-                <Dropdown overlay={menu}>
-                  <Button>
-                    3个月<Icon type="down" />
-                  </Button>
-                </Dropdown>
-              </Col>
+              <div style={{ width: 320, margin: '0px auto' }}>
+                <Col span={12}>
+                  <FormItem className={styles.date_input}>
+                    {getFieldDecorator('endDate', {
+                      rules: [
+                        {
+                          required: true,
+                          type: 'object',
+                          message: '请选择预约时间?'
+                        }, {
+                          validator: this.checkOrderTime,
+                        },
+                      ],
+                    })(
+                      <DatePicker placeholder="选择启用时间" />
+                      )}
+                  </FormItem>
+                </Col>
+                <Col span={12}>使用&nbsp;&nbsp;
+                  <Select defaultValue="3" style={{ width: 90 }} onChange={this.handleMenuClick.bind(this)}>
+                    <Option value="3">三个月</Option>
+                    <Option value="6">六个月</Option>
+                    <Option value="9">九个月</Option>
+                    <Option value="12">一年</Option>
+                    <Option value="24">两年</Option>
+                  </Select>
+                </Col>
+              </div>
+
               <Col span={24} className={styles.line_tips}>*选择预计存衣数量与使用时间，我们将更效率的完成收取工作。</Col>
               <Col span={24} className={styles.line_two}>
                 {getFieldDecorator('check', { initialValue: false }, {
