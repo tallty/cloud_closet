@@ -1,119 +1,124 @@
 // 生成订单
-.appoint_order {
-	height: 100%;
-	display: flex;
-	display: -webkit-flex;
-	flex-flow: column nowrap;
-	background: #fff;
-  .content {
-		flex-grow: 1;
-  	overflow-y: scroll;
-  	-webkit-overflow-scrolling: touch;
-	  .order {
-	  	padding: 15px 15px 0;
-	  	.tips {
-	  		margin-top: 30px;
-	  	}
-	  	.total_price {
-	  		color: #757575;
-	  		font-size: 19px;
-	  		margin-top: 15px;
-				padding-bottom: 15px;
-	  		border-bottom: 1px dashed #4A4A4A;
-	  		span {
-	  			color: #F2C27F;
-	  		}
-	  	}
-	  }
-	  .logistics {
-	  	padding: 15px 30px 0;
-	  }
-  }
-	.pay_actions {
-		width: 100%;
-		background: #fff;
-		padding: 10px 0 20px;
-		.commonBtn (@border, @bg, @color, @active) {
-			width: 85%;
-			height: 44px;
-			border: 1px solid @border;
-			text-align: center;
-			line-height: 44px;
-			background-color: @bg;
-			color: @color;
-			font-size: 18px;
-			border-radius: 22px;
-			margin: 10px auto;
-			display: block;
-			padding: 0;
-			&:active {
-				background-color: darken(@active, 10%);
-			}
-		}
-		.recharge_btn {
-			.commonBtn(#757575, #757575, #fff, #757575);
-		}
-		.pay_btn {
-			.commonBtn(#ECC17D, #ECC17D, #fff, #ECC17D);
-		}
-	}
-	.vertical_center_modal {
-		text-align: center;
-		white-space: nowrap;
-		&:before {
-			content: '';
-			display: inline-block;
-			height: 100%;
-			vertical-align: middle;
-			width: 0;
-		}
-		.ant-modal {
-			display: inline-block;
-			vertical-align: middle;
-			top: 0;
-			text-align: left;
-		}
-	}
-}
-
-
-// 成功申请
-.appoint_success {
-	.title {
-		font-size: 19px;
-		text-align: center;
-		color: #F2C27F;
-		border-bottom: 1px solid #D1C8C0;
-		padding: 16px 0;
-		margin-top: 74px;
-		margin-bottom: 34px;
-		line-height: 1;
-	}
-	.tips {
-		color: #757575;
-		font-size: 14px;
-		text-align: center;
-	}
-	.help {
-		padding-top: 85px;
-		text-align: center;
-		.border_div {
-			display: inline-block;
-			height: 40px;
-			width: 150px;
-			border: 1px solid #F2C27F;
-			border-radius: 4px;
-			color: #ADADAD;
-			font-size: 12px;
-			text-align: center;
-			line-height: 1.2;
-			vertical-align: middle;
-			a {
-				margin-top: 6px;
-				color: #ADADAD;
-				text-decoration: none;
-				display: inline-block;
-			}
-		}
-	}
-}
+ .appoint_order {
+   height: 100%;
+   display: flex;
+   display: -webkit-flex;
+   flex-flow: column nowrap;
+   background: #fff;
+   .content {
+     flex-grow: 1;
+     overflow-y: scroll;
+     -webkit-overflow-scrolling: touch;
+     .order {
+       padding: 15px 15px 0;
+       .tips {
+         margin-top: 30px;
+       }
+       .total_price {
+         color: #757575;
+         font-size: 19px;
+         margin-top: 15px;
+         padding-bottom: 15px;
+         border-bottom: 1px dashed #4A4A4A;
+         span {
+           color: #F2C27F;
+         }
+       }
+     }
+     .logistics {
+       padding: 15px 30px 0;
+     }
+   }
+   .pay_actions {
+     width: 100%;
+     background: #fff;
+     padding: 10px 0 20px;
+     a {
+       display: block;
+     }
+     .commonBtn (@border, @bg, @color, @active) {
+       width: 85%;
+       height: 44px;
+       border: 1px solid @border;
+       text-align: center;
+       line-height: 44px;
+       background-color: @bg;
+       color: @color;
+       font-size: 18px;
+       border-radius: 22px;
+       margin: 10px auto;
+       display: block;
+       padding: 0;
+       &:active {
+         background-color: darken(@active, 10%);
+       }
+     }
+     .gray_btn {
+       .commonBtn(#757575, #757575, #fff, #757575);
+     }
+     .orange_btn {
+       .commonBtn(#ECC17D, #ECC17D, #fff, #ECC17D);
+     }
+     .disabled_btn {
+       .commonBtn(#d9d9d9, #f7f7f7, rgba(0, 0, 0, 0.25), #f7f7f7);
+     }
+   }
+   .vertical_center_modal {
+     text-align: center;
+     white-space: nowrap;
+     &:before {
+       content: '';
+       display: inline-block;
+       height: 100%;
+       vertical-align: middle;
+       width: 0;
+     }
+     .ant-modal {
+       display: inline-block;
+       vertical-align: middle;
+       top: 0;
+       text-align: left;
+     }
+   }
+ }
+ 
+ // 成功申请
+ .appoint_success {
+   .title {
+     font-size: 19px;
+     text-align: center;
+     color: #F2C27F;
+     border-bottom: 1px solid #D1C8C0;
+     padding: 16px 0;
+     margin-top: 74px;
+     margin-bottom: 34px;
+     line-height: 1;
+   }
+   .tips {
+     color: #757575;
+     font-size: 14px;
+     text-align: center;
+   }
+   .help {
+     padding-top: 85px;
+     text-align: center;
+     .border_div {
+       display: inline-block;
+       height: 40px;
+       width: 150px;
+       border: 1px solid #F2C27F;
+       border-radius: 4px;
+       color: #ADADAD;
+       font-size: 12px;
+       text-align: center;
+       line-height: 1.2;
+       vertical-align: middle;
+       a {
+         margin-top: 6px;
+         color: #ADADAD;
+         text-decoration: none;
+         display: inline-block;
+       }
+     }
+   }
+ }

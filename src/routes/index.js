@@ -26,6 +26,7 @@ import FancClub from '../components/user/vip/FancClub'
 import VipExplain from '../components/user/vip/VipExplain';
 import { Orders } from '../components/user/Orders/Orders'
 import Order from '../components/user/Orders/Order'
+import PaySuccess from '../components/user/Orders/PaySuccess';
 import { Ticket } from '../components/user/Ticket'
 import { Notification } from '../components/user/Notification'
 import Recharge from '../components/user/Recharge/Recharge'
@@ -81,9 +82,10 @@ export class Routes extends Component {
         <Route path="/protocol" component={Protocol} />
 
         {/* 个人中心相关 */}
-        <Route path="/profile" component={Profile}/>
-        <Route path="/orders" component={Orders}/>
-        <Route path="/order" component={Order}/>
+        <Route path="/profile" component={Profile} />
+        <Route path="/orders" component={Orders} />
+        <Route path="/order" component={Order} />
+        <Route path="/pay_success" component={PaySuccess} />
         <Route path="/tickets" component={Ticket} />
         <Route path="/notifications" component={Notification} />
         <Route path="/recharge" component={Recharge} onEnter={this.requireAuth} />
@@ -105,7 +107,7 @@ export class Routes extends Component {
         {/* 添加衣橱详情页 */}
         <Route path="/closet_details" component={ClosetDetails} />
         {/* 添加衣橱管理路由 */}
-        <Route path="/manage" component={Manage}/>
+        <Route path="/manage" component={Manage} />
         {/* 添加衣橱预约路由 */}
         <Route path="/appointment" component={Appointment} onEnter={this.requireAuth} />
         {/* 获取地图成功路由 */}
@@ -126,7 +128,7 @@ export class Routes extends Component {
         {/* 获取用户open */}
         <Route path="/get_open_id" component={GetOpenId} />
         {/* 添加登陆路由 */}
-        <Route path="/login" component={LogIn}/>
+        <Route path="/login" component={LogIn} />
       </Router>
     )
   }

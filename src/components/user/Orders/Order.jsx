@@ -75,11 +75,11 @@ class Order extends Component {
         key={0}
         dot={<Icon type="clock-circle-o" style={{ fontSize: '20px' }} />}
         color="red">
-          当前物流状态信息
+        当前物流状态信息
           <p>2015-09-01</p>
       </Timeline.Item>
     )
-    for (let i=1; i<6; i++) {
+    for (let i = 1; i < 6; i++) {
       logistics.push(
         <Timeline.Item key={i}>
           物流状态信息{i}
@@ -117,7 +117,8 @@ class Order extends Component {
           if (res.body.error) {
             alert(res.body.error);
           } else {
-            window.location.replace('/success?action=pay');
+            sessionStorage.setItem('pay_order', JSON.stringify(this.state.order));
+            this.props.router.replace('/pay_success');
           }
         } else {
           alert('付款失败，请稍后重试');
@@ -149,6 +150,57 @@ class Order extends Component {
     });
   }
 
+  // 设置不同类型订单的处理事件
+  getOrdersEvent(order) {
+    let value = <div className={css.btns}></div>;
+    if (!order) return;
+    if (order.state === '待确认' || order.state === '服务中') {
+      value = (
+        <div className={css.btns}>
+          <Button
+            type="ghost"
+            className={css.gray_btn}
+            onClick={this.handleCancel.bind(this, order)}
+          >取消订单</Button>
+        </div>
+      )
+    } else if (order.state === '待付款') {
+      value = (
+        <div className={css.btns}>
+          <Button
+            type="ghost"
+            className={css.gray_btn}
+            onClick={this.handleCancel.bind(this, order)}
+          >取消订单</Button>
+          <Button
+            type="primary"
+            className={css.orange_btn}
+            onClick={this.handlePay.bind(this, order)}
+          >确认付款</Button>
+        </div>
+      )
+    } else if (order.state === '已支付') {
+      value = (
+        <div className={css.btns}>
+          <Button type="ghost" className={css.disabled_btn} disabled>等待入库</Button>
+        </div>
+      )
+    } else if (order.state === '已上架' || order.state === '入库中') {
+      value = (
+        <Link to="/MyCloset" className={css.btns}>
+          <Button type="primary" className={css.orange_btn}>查看衣橱</Button>
+        </Link>
+      )
+    } else if (order.state === '已取消') {
+      value = (
+        <Link to="/orders" className={css.btns}>
+          <Button type="ghost" className={css.gray_btn}>返回列表</Button>
+        </Link>
+      )
+    }
+    return value;
+  }
+
   render() {
     const { order } = this.state
 
@@ -176,18 +228,9 @@ class Order extends Component {
           </div>
         </div>
 
-        {/*TODO 处理按钮样式和功能*/}
-
         {/* 支付方式 */}
         <div className={css.pay_actions}>
-          <Button
-            className={css.recharge_btn}
-            onClick={this.handleCancel.bind(this)}
-            loading={this.state.cancelLoading}
-          >取消订单</Button>
-          <button className={css.pay_btn} onClick={this.handlePay.bind(this)}>
-            确认付款
-          </button>
+          {this.getOrdersEvent(order)}
         </div>
       </div>
     )

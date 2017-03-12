@@ -53,15 +53,16 @@ class OrdersList extends Component {
         const states = this.getStates(order.state);
         list.push(
           <div className={css.orders} key={index}>
-            <div className={css.header}>
-              <div className={css.state}>
-                <StateBadge now={states[0]} next={states[1]} />
+            <Link to={`/order?id=${order.id}`}>
+              <div className={css.header}>
+                <div className={css.state}>
+                  <StateBadge now={states[0]} next={states[1]} />
+                </div>
+                <span className={css.time}>{order.date}</span>
               </div>
-              <span className={css.time}>{order.date}</span>
-            </div>
 
-            {this.setOrdersLayout(order)}
-
+              {this.setOrdersLayout(order)}
+            </Link>
             <Row className={css.footer}>
               <Col span={24}>
                 <div className={css.info}>
@@ -88,13 +89,15 @@ class OrdersList extends Component {
       if (order.state === '已取消' || order.state === '已上架') {
         list.push(
           <div className={css.orders} key={index}>
-            <div className={css.header}>
-              <div className={css.state}>
-                <StateBadge now={order.state} next="" />
+            <Link to={`/order?id=${order.id}`}>
+              <div className={css.header}>
+                <div className={css.state}>
+                  <StateBadge now={order.state} bg="#9B9B9B" next="" />
+                </div>
+                <span className={css.time}>{order.date}</span>
               </div>
-              <span className={css.time}>{order.date}</span>
-            </div>
-            {this.setOrdersLayout(order)}
+              {this.setOrdersLayout(order)}
+            </Link>
             <Row className={css.footer}>
               <Col span={24}>
                 <div className={css.info}>
@@ -208,8 +211,6 @@ class OrdersList extends Component {
 
   // 付款
   handlePay(order) {
-    console.log("付款订单")
-    console.log(order);
     // 重定向
     this.props.router.replace(`/order?id=${order.id}`);
   }

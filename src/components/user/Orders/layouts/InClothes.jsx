@@ -72,7 +72,7 @@ export class InClothes extends Component {
       <div>
         {/* 表格header */}
         <Row className={css.order_table_header}>
-          <Col span={7} style={{ textAlign: 'left' }}>种类</Col>
+          <Col span={7} style={{ textAlign: 'left', paddingLeft: 15 }}>种类</Col>
           <Col span={5}>仓储时长</Col>
           <Col span={4}>数量</Col>
           <Col span={4}>单价</Col>

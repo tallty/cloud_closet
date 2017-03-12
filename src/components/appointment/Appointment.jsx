@@ -2,7 +2,7 @@
 import React, { Component, PropTypes } from 'react'
 import SuperAgent from 'superagent'
 import locationPromise from '../Common/locationPromise'
-import { Spiner } from '../common/Spiner'
+import { Spiner } from '../common/Spiner';
 import { Form, Radio, Button, Checkbox, DatePicker, Row, Col, Input, Icon, Menu, Dropdown, Select } from 'antd'
 import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'

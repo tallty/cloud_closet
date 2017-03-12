@@ -11,16 +11,17 @@ const cx = classNames.bind(css);
 export default class StateBadge extends React.Component {
   static propTypes = {
     now: string,
-    next: string
+    next: string,
+    bg: string
   };
 
   render() {
-    const { now, next } = this.props;
+    const { now, next, bg } = this.props;
 
     return (
       <div className={css.state_badge}>
-        <div className={css.first_line}></div>
-        <div className={css.first}>{now}</div>
+        <div className={css.first_line} style={{ background: bg }}></div>
+        <div className={css.first} style={{ background: bg }}>{now}</div>
         {
           next ? [
             <div key="1" className={css.last_line}></div>,
