@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="515px" height="314px" viewBox="0 0 515 314" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 6</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="38.576779%" cy="26.6666681%" fx="38.576779%" fy="26.6666681%" r="47.6298039%" id="radialGradient-1">
+            <stop stop-color="#FFE4A6" offset="0%"></stop>
+            <stop stop-color="#FFC271" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="38.576779%" cy="26.6666681%" fx="38.576779%" fy="26.6666681%" r="81.2734082%" id="radialGradient-2">
+            <stop stop-color="#FFE4A6" offset="0%"></stop>
+            <stop stop-color="#FFC271" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="38.576779%" cy="26.6666681%" fx="38.576779%" fy="26.6666681%" r="124.326447%" id="radialGradient-3">
+            <stop stop-color="#FFE4A6" offset="0%"></stop>
+            <stop stop-color="#FFC271" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="38.576779%" cy="26.6666681%" fx="38.576779%" fy="26.6666681%" r="190.959798%" id="radialGradient-4">
+            <stop stop-color="#FFE4A6" offset="0%"></stop>
+            <stop stop-color="#FFC271" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="38.576779%" cy="26.6666681%" fx="38.576779%" fy="26.6666681%" r="155.683688%" id="radialGradient-5">
+            <stop stop-color="#FFE4A6" offset="0%"></stop>
+            <stop stop-color="#FFC271" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="38.576779%" cy="26.6666681%" fx="38.576779%" fy="26.6666681%" r="107.577067%" id="radialGradient-6">
+            <stop stop-color="#FFE4A6" offset="0%"></stop>
+            <stop stop-color="#FFC271" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="38.576779%" cy="26.6666681%" fx="38.576779%" fy="26.6666681%" r="333.52278%" id="radialGradient-7">
+            <stop stop-color="#FFE4A6" offset="0%"></stop>
+            <stop stop-color="#FFC271" offset="100%"></stop>
+        </radialGradient>
+        <path d="M168.723159,123.49429 C168.723159,108.033471 181.251092,95.5 196.722901,95.5 L344.061801,95.5 C366.152433,95.5 384.060428,113.405743 384.060428,135.4907 L384.060428,262.659711 C384.060428,278.673892 372.428554,297.42267 357.814657,303.963278 C357.814657,303.963278 342,313.852545 323.048202,313.852545 C242.822741,313.852545 195.84564,298.553625 195.84564,298.553625 C180.866308,294.744145 168.723159,279.124241 168.723159,263.653223 L168.723159,153.04848 C168.723159,134.51721 168.723159,123.49429 168.723159,123.49429 Z" id="path-8"></path>
+        <mask id="mask-9" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="215.337269" height="218.352545" fill="white">
+            <use xlink:href="#path-8"></use>
+        </mask>
+        <rect id="path-10" x="150" y="123" width="204.719269" height="190" rx="28"></rect>
+        <mask id="mask-11" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="204.719269" height="190" fill="white">
+            <use xlink:href="#path-10"></use>
+        </mask>
+        <rect id="path-12" x="149" y="123" width="210" height="190" rx="28"></rect>
+        <mask id="mask-13" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="210" height="190" fill="white">
+            <use xlink:href="#path-12"></use>
+        </mask>
+        <rect id="path-14" x="149" y="123" width="210" height="190" rx="28"></rect>
+        <mask id="mask-15" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="210" height="190" fill="white">
+            <use xlink:href="#path-14"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="充值选择" transform="translate(-105.000000, -335.000000)">
+            <g id="Group-6" transform="translate(105.000000, 335.000000)">
+                <path d="M116.49533,152 L294.288337,152 C302.572913,152 309.288889,158.713907 309.288889,167 C309.288889,175.284271 302.565367,182 294.288337,182 L116.49533,182 L116.990109,182 C125.279471,182 132,175.284271 132,167 C132,158.713907 125.279843,152 116.990109,152 L116.49533,152 Z M0,197 C0,188.715729 6.72352162,182 15.0005518,182 L193.288337,182 C201.572913,182 208.288889,188.713907 208.288889,197 C208.288889,205.284271 201.565367,212 193.288337,212 L15.0005518,212 C6.71597582,212 0,205.286093 0,197 Z M71,137 C71,128.715729 77.7235216,122 86.0005518,122 L264.288337,122 C272.572913,122 279.288889,128.713907 279.288889,137 C279.288889,145.284271 272.565367,152 264.288337,152 L86.0005518,152 C77.7159758,152 71,145.286093 71,137 Z" id="Combined-Shape" fill="url(#radialGradient-1)"></path>
+                <path d="M407.000165,101.133303 C399.660965,102.114796 394,108.396776 394,116 C394,123.604808 399.660521,129.885334 406.999835,130.866697 C406.342437,130.954612 405.671574,131 404.990109,131 L253.009891,131 C244.720157,131 238,124.286093 238,116 C238,107.715729 244.720529,101 253.009891,101 L404.990109,101 C405.671693,101 406.342666,101.045387 407.000165,101.133303 Z M281,86 C281,77.7157288 287.720529,71 296.009891,71 L447.990109,71 C456.279843,71 463,77.7139073 463,86 C463,94.2842712 456.279471,101 447.990109,101 L296.009891,101 C287.720157,101 281,94.2860927 281,86 Z M323,146 C323,137.715729 329.720529,131 338.009891,131 L489.990109,131 C498.279843,131 505,137.713907 505,146 C505,154.284271 498.279471,161 489.990109,161 L338.009891,161 C329.720157,161 323,154.286093 323,146 Z" id="Combined-Shape" fill="url(#radialGradient-2)"></path>
+                <rect id="Rectangle-4-Copy-9" fill="url(#radialGradient-3)" x="453" y="172" width="62" height="30" rx="15"></rect>
+                <rect id="Rectangle-4-Copy-10" fill="url(#radialGradient-4)" x="128" y="71" width="44" height="30" rx="15"></rect>
+                <rect id="Rectangle-4-Copy-11" fill="url(#radialGradient-5)" x="20.3" y="123" width="34.3333333" height="30" rx="15"></rect>
+                <rect id="Rectangle-4-Copy-6" fill="url(#radialGradient-6)" x="251" y="202" width="182" height="30" rx="15"></rect>
+                <rect id="Rectangle-4-Copy-7" fill="url(#radialGradient-6)" x="103" y="268.499023" width="98" height="30" rx="15"></rect>
+                <rect id="Rectangle-4-Copy-8" fill="url(#radialGradient-6)" x="264" y="272" width="182" height="30" rx="15"></rect>
+                <use id="Rectangle-23-Copy-2" stroke="#EBBA6C" mask="url(#mask-9)" stroke-width="8" fill="url(#radialGradient-7)" xlink:href="#path-8"></use>
+                <g id="Group-3-Copy" transform="translate(273.000000, 31.000000)">
+                    <ellipse id="Oval-343" fill="#FFE376" cx="31" cy="31.2827586" rx="31" ry="31.2827586"></ellipse>
+                    <ellipse id="Oval-343-Copy" stroke="#FFA848" stroke-width="0.72" cx="31" cy="31.2524459" rx="24.5116279" ry="24.7352045"></ellipse>
+                    <text id="" font-family="PingFangSC-Medium, PingFang SC" font-size="36" font-weight="400" letter-spacing="0.750000036" fill="#FC9421">
+                        <tspan x="13.1416666" y="44.3434483">￥</tspan>
+                    </text>
+                </g>
+                <g id="Group-3-Copy-2" transform="translate(155.000000, 0.000000)">
+                    <ellipse id="Oval-343" fill="#FFE88C" cx="31" cy="31.2827586" rx="31" ry="31.2827586"></ellipse>
+                    <ellipse id="Oval-343-Copy" stroke="#FFB460" stroke-width="0.72" cx="31" cy="31.2524459" rx="24.5116279" ry="24.7352045"></ellipse>
+                    <text id="" font-family="PingFangSC-Medium, PingFang SC" font-size="36" font-weight="400" letter-spacing="0.750000036" fill="#FC9421">
+                        <tspan x="13.1416666" y="44.3434483">￥</tspan>
+                    </text>
+                </g>
+                <g id="Group-3" transform="translate(227.000000, 52.000000)">
+                    <ellipse id="Oval-343" fill="#FFD947" cx="43" cy="43.2" rx="43" ry="43.2"></ellipse>
+                    <ellipse id="Oval-343-Copy" stroke="#FC9421" cx="43" cy="43.1581395" rx="34" ry="34.1581395"></ellipse>
+                    <text id="" font-family="PingFangSC-Medium, PingFang SC" font-size="50" font-weight="400" letter-spacing="1.04166675" fill="#FC9421">
+                        <tspan x="18.1958333" y="61.76">￥</tspan>
+                    </text>
+                </g>
+                <rect id="Rectangle-5" fill="#FFE0A0" x="206" y="110" width="134" height="15"></rect>
+                <path d="M182.998047,101.401721 C176,104.75 154.75,138.5 154.75,138.5 L182.998047,137.057644" id="Path-20" stroke="#EBBA6C" stroke-width="4" fill="#FFE1A1"></path>
+                <use id="Rectangle-23" stroke="#EBBA6C" mask="url(#mask-11)" stroke-width="8" fill="#FFE9C5" xlink:href="#path-10"></use>
+                <path d="M150,151.995774 C150,137.08642 162.090412,125 177.005885,125 L248,125 L248,276 L150,276 L150,151.995774 Z" id="Rectangle-3" fill="#FFDA9F"></path>
+                <polygon id="Rectangle-25-Copy" fill="#FFF6E7" points="270.5 193 357 193 357 290 251 287.5 270.5 268"></polygon>
+                <polygon id="Rectangle-25-Copy-3" fill="#FFF6E7" points="270.5 143 357 143 357 194 251 192.685567 270.5 182.43299"></polygon>
+                <rect id="Rectangle-25" fill="#ECC17D" x="270" y="194" width="85.1872559" height="75"></rect>
+                <path d="M270,125.533347 L334.184387,125.533347 C345.783951,125.533347 355.187256,134.929766 355.187256,146.535426 L355.187256,182.533347 L270,182.533347 L270,125.533347 Z" id="Rectangle-25-Copy-2" fill="#ECC17D"></path>
+                <path d="M151.499023,278.499023 L199.750977,270.75 L248.499023,268.499023 L248.5,287.5 L358.499023,286.749023 C358.499023,286.749023 359.500977,296.750977 352,303.5 C344.499023,310.249023 332.5,310.5 332.5,310.5 L170.250977,310.75 C170.250977,310.75 158.5,309.5 152.75,296.75 C147,284 151.499023,278.499023 151.499023,278.499023 Z" id="Path-19" fill="#FFF6E7"></path>
+                <path d="M150,279 C150,279 189.784826,269 251,269" id="Path-24" stroke="#ECC17D" stroke-width="6"></path>
+                <rect id="Rectangle-2" fill="#ECC17D" x="245" y="191" width="112" height="6" rx="3"></rect>
+                <rect id="Rectangle-2-Copy" fill="#ECC17D" x="245" y="284" width="112" height="6" rx="3"></rect>
+                <rect id="Rectangle-2-Copy" fill="#ECC17D" transform="translate(248.000000, 206.000000) rotate(-90.000000) translate(-248.000000, -206.000000) " x="167" y="203" width="162" height="6" rx="3"></rect>
+                <use id="Rectangle-23-Copy" stroke="#EBBA6C" mask="url(#mask-13)" stroke-width="8" xlink:href="#path-12"></use>
+                <use id="Rectangle-23-Copy" stroke="#EBBA6C" mask="url(#mask-15)" stroke-width="8" fill-opacity="0.3" fill="#FFF6E7" xlink:href="#path-14"></use>
+                <path d="M313.125,105 C315.609068,105 319,107.023649 319,109.502685 L319,110.497315 C319,112.984079 316.975626,115 314.502198,115 L225.497802,115 C223.013735,115 221,112.976351 221,110.497315 L221,109.502685 C221,107.015921 224.276572,105 226.75,105" id="Rectangle-24" stroke="#EBBA6C" stroke-width="4"></path>
+                <path d="M301.5,125.5 L153.498047,225 L153,271.5 L353,137 C353,137 343.5,125.5 335.5,125.5 C327.5,125.5 301.5,125.5 301.5,125.5 Z" id="Path-21" fill-opacity="0.8" fill="#FFF6E7" style="mix-blend-mode: multiply;"></path>
+                <polygon id="Path-22" fill-opacity="0.8" fill="#FFF6E7" style="mix-blend-mode: multiply;" points="259.001953 126 151.5 201 151.5 196 251 126"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

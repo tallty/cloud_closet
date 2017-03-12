@@ -85,7 +85,7 @@ export class Routes extends Component {
         <Route path="/profile" component={Profile} />
         <Route path="/orders" component={Orders} />
         <Route path="/order" component={Order} />
-        <Route path="/pay_success" component={PaySuccess} />
+        <Route path="/pay_success" component={PaySuccess} onEnter={this.requireAuth} />
         <Route path="/tickets" component={Ticket} />
         <Route path="/notifications" component={Notification} />
         <Route path="/recharge" component={Recharge} onEnter={this.requireAuth} />

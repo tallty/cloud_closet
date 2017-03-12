@@ -15,7 +15,7 @@ class RechargeSuccess extends Component {
     let redirect_url = this.props.location.query.redirect_url;
     let money = this.props.location.query.money;
     if (redirect_url && money) {
-      this.setState({ 
+      this.setState({
         redirect_url: redirect_url,
         money: money
       });
@@ -29,8 +29,8 @@ class RechargeSuccess extends Component {
   render() {
     return (
       <div className={css.success}>
-        <img src="src/images/recharge_ok_icon.svg" alt="success"/>
-        <p className={css.title}>成功充值</p>
+        <img src="src/images/recharge_ok_icon.svg" alt="success" />
+        <p className={css.title}>充值成功</p>
 
         <div className={css.content}>
           <p>支付方式<span className={css.orange}>微信支付</span></p>

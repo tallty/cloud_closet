@@ -1,22 +1,24 @@
 :global {
-  html, body, #root {
+  html,
+  body,
+  #root {
     height: 100%;
-    font-family: PingFang SC, pingfontweb,-apple-system,BlinkMacSystemFont,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Sans GB,Microsoft Yahei,Microsoft Jhenghei,sans-serif;
+    font-family: PingFang SC, pingfontweb, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Roboto, Arial, Hiragino Sans GB, Microsoft Yahei, Microsoft Jhenghei, sans-serif;
   }
-
   body {
     position: relative;
     * {
       font-weight: normal;
     }
   }
-  
-  input,input:focus,input:active{user-select: text;}
-  
+  input,
+  input:focus,
+  input:active {
+    user-select: text;
+  }
   .active {
     color: #F2C27F !important;
   }
-
   // 全局通用类
   .text-left {
     text-align: left;
@@ -36,7 +38,6 @@
   .pull-left {
     float: left;
   }
-
   // 满屏
   .full_height {
     height: 100%;
@@ -47,25 +48,22 @@
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
   }
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 0px;
     height: 1px;
   }
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     border-radius: 5px;
     -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
     background: rgba(0, 0, 0, 0.2);
-  } 
-
+  }
   // 个人中心相关
   .ant-progress-bg {
     background-color: #F4C87B !important;
   }
-
   .ant-upload {
     display: block !important;
   }
-
   // 我的小蜜 - 问题
   .ant-collapse {
     border: none !important;
@@ -91,26 +89,25 @@
       }
     }
   }
-
   // 预约
   .ant-checkbox-inner {
-    width: 20px !important;
-    height: 20px !important;
+    width: 18px !important;
+    height: 18px !important;
   }
   .ant-checkbox-checked .ant-checkbox-inner:after {
-    left: 6px !important;
-    top: 3px !important;
+    left: 5px !important;
+    top: 2px !important;
     width: 6px !important;
     height: 10px !important;
   }
-
   // 我的订单 - tab 样式
   .ant-tabs-bar {
     margin-bottom: 0 !important;
     background-color: #fff;
     .ant-tabs-nav {
       width: 100%;
-      display: -webkit-flex !important; /* Safari */
+      display: -webkit-flex !important;
+      /* Safari */
       display: flex !important;
       flex-direction: row !important;
       flex-wrap: nowrap !important;
@@ -140,7 +137,6 @@
       margin-bottom: 0 !important;
     }
   }
-
   label.ant-radio-button-wrapper-checked {
     border-color: #F2C27F !important;
     background-color: #F2C27F !important;
@@ -149,11 +145,12 @@
   }
   .ant-calendar-header {
     background-color: #FFB075 !important;
-    a , span {
+    a,
+    span {
       color: #fff !important;
     }
   }
-  .ant-input:focus{
+  .ant-input:focus {
     box-shadow: none !important;
   }
   .ant-calendar-cell {
@@ -166,7 +163,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(189,189,189,0.8);
+    background-color: rgba(189, 189, 189, 0.8);
     // 添加毛玻璃效果
     // background: inherit;
     // -webkit-filter: blur(5px);
@@ -179,9 +176,8 @@
       width: 80%;
     }
   }
-  
   .ant-calendar-picker-icon {
-    display:none !important;
+    display: none !important;
   }
   .ant-calendar-selected-day .ant-calendar-date {
     border-radius: 50% !important;
@@ -199,5 +195,3 @@
     min-height: 0px !important;
   }
 }
-
-
