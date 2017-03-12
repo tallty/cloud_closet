@@ -10,6 +10,7 @@ import SuperAgent from 'superagent'
 export default class FancClub extends Component {
   state = {
     points: 5000,
+    percent: 60,
     powers: [{
       id: 1,
       url: '/src/images/icon_vip_birth.png',
@@ -48,7 +49,7 @@ export default class FancClub extends Component {
   }
 
   render() {
-    const { points, user } = this.state;
+    const { points, user, percent } = this.state;
     return (
       <div className={css.container}>
         <div className={css.user_info}>
@@ -58,7 +59,7 @@ export default class FancClub extends Component {
             </Link>
             <div className={css.title}>VIP特权</div>
           </div>
-          <Level points={points} color="#fff" />
+          <Level points={points} percent={percent} />
         </div>
 
         <div className={css.title_one}>尊享特权</div>

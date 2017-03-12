@@ -10,6 +10,7 @@ import css from './user.less';
 export class User extends Component {
   state = {
     level: 5000,
+    percent: 60,
     levelName: '黄金会员',
     user: {
       nickname: null,
@@ -71,7 +72,7 @@ export class User extends Component {
 
   render() {
     // 计算栅格部分容器的高度
-    const { user, level, levelName, grids } = this.state;
+    const { user, level, levelName, grids, percent } = this.state;
     const gridsHeight = (document.body.clientHeight - 60) * 0.53 - 80;
     let avatar = user.avatar ? user.avatar : 'src/images/default_photo.png';
     let balance = user.balance ? user.balance : 0;
@@ -88,7 +89,7 @@ export class User extends Component {
               </div>
               <div className={css.user_name}>{user.nickname}</div>
             </Link>
-            <Level points={level} />
+            <Level points={level} percent={percent} />
           </div>
         </div>
 
