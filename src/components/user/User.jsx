@@ -93,16 +93,15 @@ export class User extends Component {
     const { user, level, levelName, grids, percent, loadingText } = this.state;
     const gridsHeight = (document.body.clientHeight - 60) * 0.53 - 80;
     let avatar = user.avatar ? user.avatar : 'src/images/default_photo.svg';
-    const photoBg = user.user_info_cover ? user.user_info_cover : null;
+    const photoBg = user.user_info_cover ? user.user_info_cover : '#d8d8d8';
     let balance = user.balance ? user.balance : 0;
 
-    console.log(photoBg);
     return (
       <div className={css.personal_center}>
         {/* 头像信息 */}
         <div
           className={css.user_info}
-          style={{ height: '47%', backgroundImage: `url(${photoBg})` }}
+          style={{ height: '47%', background: `url(${photoBg})` }}
         >
           <input
             type="file"
