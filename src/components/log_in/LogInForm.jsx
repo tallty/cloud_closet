@@ -1,7 +1,7 @@
 // 登陆页
 import SuperAgent from 'superagent'
 import React, { Component, PropTypes } from 'react'
-import {Row, Col, Input, Button } from 'antd'
+import { Row, Col, Input, Button } from 'antd'
 import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'
 import styles from './LogInForm.less'
@@ -16,7 +16,7 @@ class LogInForm extends Component {
       phone: '',
       password: '',
       codenum: '',
-      nickname: '',
+      nickname: ''
     }
   }
 
@@ -48,42 +48,38 @@ class LogInForm extends Component {
     });
   }
 
-  enterIconLoading(){
+  enterIconLoading() {
     let phone = this.state.phone;
     let url = "http://closet-api.tallty.com/sms_tokens/register";
     //获取验证码
     SuperAgent.post(url)
-              .set('Accept', 'application/json')
-              .send( {'sms_token': {'phone': phone} } )
-              .end( (err, res) => {
-                let result = res.body.token;
-                console.log(res);
-                console.log(result);
-              })
+      .set('Accept', 'application/json')
+      .send({ 'sms_token': { 'phone': phone } })
+      .end((err, res) => {
+        let result = res.body.token;
+        console.log(res);
+        console.log(result);
+      })
   }
 
   /**
    * [register 用户注册]
    * 缓存：authentication_token
    */
-  register(){
-    let { phone, password, codenum } = this.state;
-    
+  register() {
+    const { phone, password, codenum } = this.state;
+
     SuperAgent
-      .post("http://closet-api.tallty.com/users")
+      .post('http://closet-api.tallty.com/users')
       .set('Accept', 'application/json')
-      .send({'user': {'phone': phone, 'password': password, 'sms_token': codenum}})
-      .end( (err, res) => {
+      .send({ user: { phone: phone, password: password, sms_token: codenum } })
+      .end((err, res) => {
         if (res.ok) {
-          // 保存token, phone, 
+          // 保存token, phone,
           localStorage.setItem('authentication_token', res.body.authentication_token)
           // 更新用户信息
           this.updateUserInfo();
-
-          console.log('用户注册成功 =>')
-          console.dir(res)
-        }else{
-          console.dir(err);
+        } else {
           alert('用户注册失败！')
         }
       })
@@ -97,7 +93,7 @@ class LogInForm extends Component {
       .put('http://closet-api.tallty.com/user_info')
       .set('X-User-Phone', this.state.phone)
       .set('X-User-Token', localStorage.authentication_token)
-      .send({user_info: {nickname: this.state.nickname}})
+      .send({ user_info: { nickname: this.state.nickname } })
       .end((err, res) => {
         // 绑定
         this.userBind();
@@ -116,8 +112,8 @@ class LogInForm extends Component {
       .set('Accept', 'application/json')
       .set('X-User-Phone', phone)
       .set('X-User-Token', localStorage.authentication_token)
-      .send({'user': {'openid': localStorage.openid}})
-      .end( (err, res) => {
+      .send({ 'user': { 'openid': localStorage.openid } })
+      .end((err, res) => {
         if (res.ok) {
           // 保存用户信息
           localStorage.setItem('phone', res.body.phone);
@@ -128,7 +124,7 @@ class LogInForm extends Component {
 
           console.log('用户绑定成功 =>')
           console.dir(res)
-        }else{
+        } else {
           console.dir(err);
           alert('用户绑定失败！')
         }
@@ -145,14 +141,14 @@ class LogInForm extends Component {
     SuperAgent
       .post('http://closet-api.tallty.com/users/sign_in')
       .set('Accept', 'application/json')
-      .send({'user': {'phone': phone, 'password': password}})
-      .end( (err, res) => {
+      .send({ 'user': { 'phone': phone, 'password': password } })
+      .end((err, res) => {
         if (res.ok) {
           this.props.router.replace(sessionStorage.redirect_url);
 
           console.log('用户登录成功 =>')
           console.dir(res)
-        }else{
+        } else {
           console.dir(err);
           alert('用户登录失败！')
         }
@@ -160,35 +156,35 @@ class LogInForm extends Component {
   }
 
   render() {
-    let container_classnames1 = classnames(
-        styles.login_input_header_label1,
-        styles.login_input_header_label,
-      )
-    let container_classnames2 = classnames(
+    const containerClassnames1 = classnames(
+      styles.login_input_header_label1,
+      styles.login_input_header_label,
+    )
+    const containerClassnames2 = classnames(
       styles.login_input_header_label2,
       styles.login_input_header_label,
     )
-    let container_classnames3 = classnames(
+    const containerClassnames3 = classnames(
       styles.login_input_header_label3,
       styles.login_input_header_label31,
     )
-    let container_classnames4 = classnames(
+    const containerClassnames4 = classnames(
       styles.login_input_header_label4,
       styles.login_input_header_label,
     )
     return (
       <div className={styles.login_body_content}>
         <InputGroup>
-        <Row className={styles.login_input_header}>
-          <Col span={6} className={container_classnames1}><img className={styles.login_input_icon1} src="src/images/flag.svg" alt=""/><br/>+86</Col>
-          <Col span={18} className={styles.login_input_header_label1}>
-            <Input placeholder="手机号码" type='number' name='phone' id='phone' value={this.state.phone} onChange={this.handlePhone.bind(this)} />
-          </Col>
-        </Row>
+          <Row className={styles.login_input_header}>
+            <Col span={6} className={containerClassnames1}><img className={styles.login_input_icon1} src="src/images/flag.svg" alt="" /><br />+86</Col>
+            <Col span={18} className={styles.login_input_header_label1}>
+              <Input placeholder="手机号码" type='number' name='phone' id='phone' value={this.state.phone} onChange={this.handlePhone.bind(this)} />
+            </Col>
+          </Row>
         </InputGroup>
         <InputGroup>
           <Row className={styles.login_input_header}>
-            <Col span={6} className={container_classnames2}>密码</Col>
+            <Col span={6} className={containerClassnames2}>密码</Col>
             <Col span={18} className={styles.login_input_header_label4}>
               <Input placeholder="请输入密码" type='password' name='password' id='password' value={this.state.password} onChange={this.handlePassword.bind(this)} />
             </Col>
@@ -196,7 +192,7 @@ class LogInForm extends Component {
         </InputGroup>
         <InputGroup>
           <Row className={styles.login_input_header}>
-            <Col span={6} className={container_classnames3}><Countdown {...this.state}/></Col>
+            <Col span={6} className={containerClassnames3}><Countdown {...this.state} /></Col>
             <Col span={18}>
               <Input placeholder="输入验证码" type='number' name='codenum' id='codenum' value={this.state.codenum} onChange={this.handleCodenum.bind(this)} />
             </Col>
@@ -204,16 +200,16 @@ class LogInForm extends Component {
         </InputGroup>
         <InputGroup>
           <Row className={styles.login_input_header}>
-            <Col span={6} className={container_classnames4}>昵称</Col>
+            <Col span={6} className={containerClassnames4}>昵称</Col>
             <Col span={18} className={styles.login_input_header_label4}>
-              <Input placeholder="请输入昵称" type='text' name='nickname' id='nickname' value={this.state.nickname} onChange={this.handleNickname.bind(this)}/>
+              <Input placeholder="请输入昵称" type='text' name='nickname' id='nickname' value={this.state.nickname} onChange={this.handleNickname.bind(this)} />
             </Col>
           </Row>
         </InputGroup>
         <Row className={styles.login_btn_content}>
           <Col span={24}>
             {/* <Link to="/Success" > */}
-              <Button className={styles.login_btn} type="primary" htmlType="submit" onClick={this.register.bind(this)}>注册绑定</Button>
+            <Button className={styles.login_btn} type="primary" htmlType="submit" onClick={this.register.bind(this)}>注册绑定</Button>
             {/* </Link> */}
           </Col>
         </Row>

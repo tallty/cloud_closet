@@ -8,19 +8,19 @@ const { string, number, bool, arrayOf, shape } = PropTypes;
 
 class MyClosetHeader extends React.Component {
   constructor(props) {
-      super(props);
-      this.displayName = 'MyClosetHeader';
+    super(props);
+    this.displayName = 'MyClosetHeader';
   }
   render() {
     let { garments, user } = this.props;
-    let photo = user.avatar ? user.avatar : "src/images/default_photo.png";
+    let photo = user.avatar ? user.avatar : 'src/images/default_photo_dark.svg';
     return (
       <div>
         <Row className={styles.my_cliset_header_part_one_content}>
           <Col span={12} className={styles.user_name}>{user.nickname}</Col>
           <Col span={11} offset={1} className={styles.user_pic_content}>
             <div className={styles.user_pic_position}>
-              <img className={styles.user_pic} src={photo} alt=""/>
+              <img className={styles.user_pic} src={photo} alt="" />
               <div className={styles.empty_cicle}></div>
             </div>
           </Col>

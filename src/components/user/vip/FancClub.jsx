@@ -59,7 +59,9 @@ export default class FancClub extends Component {
             </Link>
             <div className={css.title}>VIP特权</div>
           </div>
-          <Level points={points} percent={percent} />
+          <div style={{ textAlign: 'center' }}>
+            <Level points={points} percent={percent} />
+          </div>
         </div>
 
         <div className={css.title_one}>尊享特权</div>

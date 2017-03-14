@@ -125,10 +125,6 @@ class MyProfile extends Component {
     })
   }
 
-  handleWork() {
-
-  }
-
   handleSafe() {
     console.log("点击了celler")
   }
@@ -171,15 +167,14 @@ class MyProfile extends Component {
                   name="我的头像"
                   type="image"
                   value={user.avatar}
-                  defaultValue="src/images/default_photo.png"
+                  defaultValue="src/images/default_photo.svg"
                   event={() => { }}
                 />
               </span>
               <Celler name="昵称" value={user.nickname} event={this.handleNickname.bind(this)} />
-              <Celler name="邮箱" value={user.mail} event={this.handleMail.bind(this)} />
-              <Celler name="职业" value="XXXX" bottom={14} event={this.handleWork.bind(this)} />
-              <Celler name="账号安全" value={this.formatPhone} type="phone" event={this.handleSafe.bind(this)} />
-              <Celler name="密码" value="●●●●●●●●●" bottom={14} event={this.handlePassword.bind(this)} />
+              <Celler name="邮箱" value={user.mail} bottom={14} event={this.handleMail.bind(this)} />
+              {/*<Celler name="账号安全" value={this.formatPhone} type="phone" event={this.handleSafe.bind(this)} />
+              <Celler name="密码" value="●●●●●●●●●" bottom={14} event={this.handlePassword.bind(this)} />*/}
               <Celler name="收货地址" url="/address" bottom={14} />
               <Celler name="退出登录" type="simple" color="#F2C27F" event={this.handleSignout} />
               {/* 弹出框：修改资料 */}

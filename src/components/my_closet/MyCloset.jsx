@@ -20,8 +20,7 @@ export class MyCloset extends Component {
   componentDidMount() {
     this.getUserInfo();
     this.getGarments(1, 10, (res) => {
-      console.log("=========MyCloset获取衣橱列表成功==========")
-      let obj = res.body;
+      const obj = res.body;
       this.setState({
         current_page: obj.current_page,
         total_pages: obj.total_pages,
@@ -34,7 +33,7 @@ export class MyCloset extends Component {
   // 获取用户信息
   getUserInfo() {
     SuperAgent
-      .get(`http://closet-api.tallty.com/user_info`)
+      .get('http://closet-api.tallty.com/user_info')
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
@@ -42,7 +41,7 @@ export class MyCloset extends Component {
         if (!err || err === null) {
           this.setState({ user: res.body });
         } else {
-          console.log("获取用户信息失败");
+          console.log('获取用户信息失败');
           auth.authLogin();
         }
       })
@@ -59,7 +58,7 @@ export class MyCloset extends Component {
         if (!err || err === null) {
           func(res);
         } else {
-          console.log("获取衣橱列表失败");
+          console.log('获取衣橱列表失败');
         }
       })
   }
@@ -68,7 +67,7 @@ export class MyCloset extends Component {
     let { garments, user, storing_count } = this.state;
     return (
       <div className={styles.my_cliset_content}>
-        <MyClosetHeader garments={garments} user={user} storing_count={storing_count}/>
+        <MyClosetHeader garments={garments} user={user} storing_count={storing_count} />
         <ClosetType />
       </div>
     );

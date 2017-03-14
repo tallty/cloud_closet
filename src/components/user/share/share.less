@@ -1,6 +1,7 @@
-// level
+ // level
 .level {
   text-align: center;
+  display: inline-block;
   .title {
     color: #8B612A;
     font-size: 12px;
@@ -12,17 +13,20 @@
   .content {
     line-height: 1.4;
     .progress_div {
-      margin: 15px 25%;
+      margin: 10px auto 0;
+      width: 180px;
       background-color: #FFF6E7;
-      padding: 2px 4px 2px 4px;
+      padding: 0px 4px 2px 4px;
       border-radius: 12px;
-    }
-    .points {
-      font-weight: normal;
-      color: #EBBA6C;
       position: relative;
-      top: -32px;
-      right: -18%;
+      .points {
+        font-weight: normal;
+        color: #EBBA6C;
+        position: absolute;
+        font-size: 11px;
+        top: 2px;
+        right: 5px;
+      }
     }
     .char {
       font-size: 11px;

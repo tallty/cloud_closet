@@ -15,30 +15,30 @@ import { Link } from 'react-router'
 export class Celler extends Component {
 
   render() {
-    let { type, url, name, value, defaultValue, bottom, color, event } = this.props
-    let cell_class = (type === "image") ? css.img_celler : css.celler
-    let _value = value ? value : defaultValue
-      
+    const { type, url, name, value, defaultValue, bottom, color, event } = this.props
+    const cellClass = (type === 'image') ? css.img_celler : css.celler
+    const vlu = value ? value : defaultValue
+
     return (
       <div>
         {
-          event ? 
-            <div onClick={event} className={cell_class} style={{marginBottom: bottom, color: color}}>
+          event ?
+            <div onClick={event} className={cellClass} style={{ marginBottom: bottom, color: color }}>
               <span className="pull-left">{name}</span>
-              { 
-                type === "image" ? <img src={_value} className={css.photo} alt="头像"/> : _value
+              {
+                type === 'image' ? <img src={vlu} className={css.photo} alt="头像" /> : vlu
               }
-              { 
-                type === "simple" ? null : <img src="/src/images/right_icon.svg" className={css.icon} alt="icon"/> 
+              {
+                type === 'simple' ? null : <img src="/src/images/right_icon.svg" className={css.icon} alt="icon" />
               }
             </div> :
-            <Link to={url} className={cell_class} style={{marginBottom: bottom, color: color}}>
+            <Link to={url} className={cellClass} style={{ marginBottom: bottom, color: color }}>
               <span className="pull-left">{name}</span>
-              { 
-                type === "image" ? <img src={_value} className={css.photo} alt="头像"/> : _value
+              {
+                type === 'image' ? <img src={vlu} className={css.photo} alt="头像" /> : vlu
               }
-              { 
-                type === "simple" ? null : <img src="/src/images/right_icon.svg" className={css.icon} alt="icon"/> 
+              {
+                type === 'simple' ? null : <img src="/src/images/right_icon.svg" className={css.icon} alt="icon" />
               }
             </Link>
         }
