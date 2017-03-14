@@ -101,7 +101,7 @@ export class User extends Component {
         {/* 头像信息 */}
         <div
           className={css.user_info}
-          style={{ height: '47%', background: `url(${photoBg})` }}
+          style={{ height: '47%', background: `url(${photoBg}) no-repeat` }}
         >
           <input
             type="file"
