@@ -21,7 +21,7 @@ import { Success } from '../components/success/Success'
 import { LogIn } from '../components/log_in/LogIn'
 import Cart from '../components/cart/Cart';
 // 个人中心
-import { Profile } from '../components/user/Profile/Profile'
+import Profile from '../components/user/Profile/Profile'
 import FancClub from '../components/user/vip/FancClub'
 import VipExplain from '../components/user/vip/VipExplain';
 import { Orders } from '../components/user/Orders/Orders'
