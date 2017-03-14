@@ -98,7 +98,7 @@ class Appointment extends Component {
 
   handleMenuClick(e) {
     this.setState({ storeTime: e.key })
-    console.log('click', e.key);
+    console.log('click', e);
   }
 
   handleCheck(e) {
@@ -271,7 +271,7 @@ class Appointment extends Component {
                   </FormItem>
                 </Col>
                 <Col span={12}>使用&nbsp;&nbsp;
-                  <Dropdown overlay={menu}>
+                  <Dropdown overlay={menu} trigger={['click']}>
                     <Button>
                       {this.state.storeTime}<Icon type="down" />
                     </Button>

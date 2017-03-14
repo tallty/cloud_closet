@@ -84,8 +84,8 @@ export class ClosetDetails extends Component {
                   <Col span={24} >
                     <p className={styles.name}>{garment.title}</p>
                     <p className={styles.time_story}>
-                      入库时间：{ this.parseTime(garment.put_in_time) }<br/>
-                      到期时间：{ this.parseTime(garment.expire_time) }
+                      入库时间：{this.parseTime(garment.put_in_time)}<br />
+                      到期时间：{this.parseTime(garment.expire_time)}
                     </p>
                   </Col>
                   <Col span={24} className={styles.tag_tab}>
@@ -99,7 +99,7 @@ export class ClosetDetails extends Component {
                         );
                         return isLongTag ? <Tooltip title={tag}>{tagElem}</Tooltip> : tagElem;
                       })}
-                      <Dropdown overlay={menu}>
+                      <Dropdown overlay={menu} trigger={['click']}>
                         <Button className={styles.tag} size="small" type="dashed" >+</Button>
                       </Dropdown>
                     </div>
@@ -116,7 +116,7 @@ export class ClosetDetails extends Component {
                     </Col>
                   </Col>
                   <Col span={24} className={styles.detail_pic_content_image} >
-                    <img src="src/images/detail_pic_two.png" alt=""/>
+                    <img src="src/images/detail_pic_two.png" alt="" />
                   </Col>
                 </Row>
               </Col>
