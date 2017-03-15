@@ -11,21 +11,31 @@ import pingpp from 'pingpp-js';
 
 class Recharge extends Component {
   state = {
-    money: null,
-    redirect_url: null
+    selected: {},
+    redirect_url: null,
+    rules: []
   }
 
   componentWillMount() {
-    const redirect_url = this.props.location.query.redirect_url;
-    if (redirect_url) {
-      this.setState({ redirect_url: redirect_url });
-    }
+    const redirectUrl = this.props.location.query.redirect_url;
+    SuperAgent
+      .get('http://closet-api.tallty.com/recharge_rules')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        if (!err || err === null) {
+          this.setState({
+            rules: res.body.recharge_rules,
+            selected: res.body.recharge_rules[0],
+            redirect_url: redirectUrl
+          })
+        }
+      })
   }
 
   getChargeObject() {
-    const { money } = this.state;
+    const { selected } = this.state;
     SuperAgent
-      .post(`http://closet-api.tallty.com/get_pingpp_pay_order?openid=${localStorage.openid}&amount=${money}&subject=${'充值'}&body=${'余额充值'}`)
+      .post(`http://closet-api.tallty.com/get_pingpp_pay_order?openid=${localStorage.openid}&amount=${selected.amount}&subject=${'充值'}&body=${'余额充值'}`)
       .set('Accept', 'application/json')
       .end((err, res) => {
         if (!err || err === null) {
@@ -35,7 +45,7 @@ class Recharge extends Component {
             if (result === 'success') {
               const { redirect_url } = this.state;
               // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
-              this.props.router.replace(`/recharge_success?redirect_url=${redirect_url}&money=${money}`);
+              this.props.router.replace(`/recharge_success?redirect_url=${redirect_url}&money=${selected.amount}`);
             } else if (result === 'fail') {
               // charge 不正确或者微信公众账号支付失败时会在此处返回
             } else if (result === 'cancel') {
@@ -50,16 +60,16 @@ class Recharge extends Component {
    * 充值面额
    */
   getMoneyCard() {
-    const cards = [1000, 2000, 3000, 5000, 10000, 20000, 50000, 100000];
+    const { rules } = this.state;
     const list = []
-    cards.forEach((item, i, obj) => {
-      const klass = this.state.money !== item ? css.card : css.card_active;
+    rules.forEach((item, i, obj) => {
+      const klass = this.state.selected.amount !== item.amount ? css.card : css.card_active;
       list.push(
-        <Col span={8} className={css.col} key={item}>
+        <Col span={8} className={css.col} key={item.amount}>
           <Button
             className={klass}
             onClick={this.handleChooseMoney.bind(this, item)}
-          >{item}<span>元</span></Button>
+          >{item.amount}<span>元</span></Button>
         </Col>
       )
     });
@@ -75,8 +85,7 @@ class Recharge extends Component {
    * 选择充值面额点击事件
    */
   handleChooseMoney(item) {
-    console.log("你选择了" + item + "元");
-    this.setState({ money: item });
+    this.setState({ selected: item });
   }
 
   /**
@@ -86,17 +95,17 @@ class Recharge extends Component {
     if (this.state.money > 0) {
       this.getChargeObject();
     } else {
-      alert("请选择充值金额");
+      alert('请选择充值金额');
     }
   }
 
   render() {
-    const { money } = this.state
+    const { selected } = this.state
 
     return (
       <div className={css.container}>
-        <p className={css.title}>充<span>10000</span>元</p>
-        <p className={css.title}>升级银卡会员，获得800积分</p>
+        <p className={css.title}>充<span>{selected.amount}</span>元</p>
+        <p className={css.title}>获得{selected.credits}积分</p>
         <img src="/src/images/recharge_icon.svg" className={css.mainIcon} alt="充值" />
         {/* 充值面额 */}
         <div className={css.kinds}>
