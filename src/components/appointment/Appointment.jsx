@@ -155,8 +155,8 @@ class Appointment extends Component {
         .set('Accept', 'application/json')
         .set('X-User-Phone', localStorage.phone)
         .set('X-User-Token', localStorage.authentication_token)
-        .send({ 'appointment': { 'address': address_detail, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date}})
-        .end( (err, res) => {
+        .send({ 'appointment': { 'address': address_detail, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date } })
+        .end((err, res) => {
           if (res.ok) {
             sessionStorage.removeItem('selected_address');
             this.props.router.replace('/success?action=appointment')
@@ -240,34 +240,34 @@ class Appointment extends Component {
                 </Col>*/}
                 <Col span={24} className={styles.line_no_two}>
                   <FormItem className={styles.clo_number_radio}>
-                  {getFieldDecorator('number', { initialValue: '10' }, {
-                    rules: [
-                      { required: true, message: '请选择衣服数量' },
-                    ]
-                  })(
-                    <RadioGroup>
-                      <RadioButton className={styles.label_one} value="10">5-20件</RadioButton>
-                      <RadioButton className={styles.label_two} value="30">20-50件</RadioButton>
-                      <RadioButton className={styles.label_three} value="50">大于50件</RadioButton>
-                    </RadioGroup>
-                  )}
+                    {getFieldDecorator('number', { initialValue: '10' }, {
+                      rules: [
+                        { required: true, message: '请选择衣服数量' },
+                      ]
+                    })(
+                      <RadioGroup>
+                        <RadioButton className={styles.label_one} value="10">5-20件</RadioButton>
+                        <RadioButton className={styles.label_two} value="30">20-50件</RadioButton>
+                        <RadioButton className={styles.label_three} value="50">大于50件</RadioButton>
+                      </RadioGroup>
+                      )}
                   </FormItem>
                 </Col>
                 <Col span={12}>
                   <FormItem className={styles.date_input}>
-                  {getFieldDecorator('endDate', {
-                    rules: [
-                      {
-                        required: true,
-                        type: 'object',
-                        message: '请选择预约时间?'
-                      }, {
-                        validator: this.checkOrderTime
-                      }
-                    ]
-                  })(
-                    <DatePicker disabledDate={this.disabledDate} showToday={false} onOpenChange={this.show_tips.bind(this)} placeholder="选择启用时间" />
-                  )}
+                    {getFieldDecorator('endDate', {
+                      rules: [
+                        {
+                          required: true,
+                          type: 'object',
+                          message: '请选择预约时间?'
+                        }, {
+                          validator: this.checkOrderTime
+                        }
+                      ]
+                    })(
+                      <DatePicker disabledDate={this.disabledDate} showToday={false} onOpenChange={this.show_tips.bind(this)} placeholder="选择启用时间" />
+                      )}
                   </FormItem>
                 </Col>
                 <Col span={12}>使用&nbsp;&nbsp;

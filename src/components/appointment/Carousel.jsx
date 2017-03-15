@@ -12,7 +12,7 @@ export default class Carousel extends Component {
 
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       replay: this.props.replay,
       title: this.props.titles[1],
       direction: this.props.directions[1],
@@ -22,28 +22,28 @@ export default class Carousel extends Component {
     }
   }
 
-  changePic(index){
+  changePic(index) {
     const { titles, pics, directions, urls } = this.props
     const show_number = index
-    const num = `${-100*(index)+50}%`
-    this.setState({replay: !this.state.replay, title: titles[index], direction: directions[index], url: urls[index], show_number: show_number, num: num })
+    const num = `${-100 * (index) + 50}%`
+    this.setState({ replay: !this.state.replay, title: titles[index], direction: directions[index], url: urls[index], show_number: show_number, num: num })
   }
 
   getCarouselList() {
     const { titles, pics } = this.props
-    const {show_number, num} = this.state
+    const { show_number, num } = this.state
     const list = []
     pics.forEach((item, index, obj) => {
-    list.push(
-      <div key={index} className={css.cell_container} >
-        <TweenOne
-          animation={{left: num, scale: show_number==index?1.06:0.9, yoyo: false, repeat: 0, duration: 500}}
-          style={{left: '-50%' }}
-          className={css.carouse_container_animation}
-        >
-          <img onClick={this.changePic.bind(this, index)} src={item} alt={titles[index]}/>
-        </TweenOne>
-      </div>
+      list.push(
+        <div key={index} className={css.cell_container} >
+          <TweenOne
+            animation={{ left: num, scale: show_number == index ? 1.06 : 0.9, yoyo: false, repeat: 0, duration: 500 }}
+            style={{ left: '-50%' }}
+            className={css.carouse_container_animation}
+          >
+            <img onClick={this.changePic.bind(this, index)} src={item} alt={titles[index]} />
+          </TweenOne>
+        </div>
       )
     })
     return list
@@ -60,18 +60,18 @@ export default class Carousel extends Component {
         <div className={css.carouse_direction}>
           <p>{this.state.direction}</p>
           <a href={this.state.url}>收费详情</a>
-        </div>      
+        </div>
       </div>
     )
   }
 }
 
 Carousel.defaultProps = {
-  titles:['叠放柜', '挂放柜', '组合柜', '礼服柜'],
-  pics:['src/images/sark_one.png', 'src/images/sark_two.png', 'src/images/sark_three.png', 'src/images/sark_four.png'],
-  directions:['*叠放柜可存放针织类，卫衣棉服等可折叠衣物60件,也可提供真空袋出售；  收费价格：180¥/月', '*挂放柜可存放20件套装衣物，适合存放外套、大衣；  收费价格：300¥/月', '*组合柜可存放60件折叠和20件挂放； 收费价格：400¥/月', '*礼服柜可按需存放贵重礼服，适合存放大件礼服；收费价格：50¥/件'],
-  urls:['/charge_detail', '/charge_detail', '/charge_detail', '/charge_detail'],
-  replay: false, 
+  titles: ['叠放柜', '挂放柜', '组合柜', '礼服柜'],
+  pics: ['src/images/sark_one.png', 'src/images/sark_two.png', 'src/images/sark_three.png', 'src/images/sark_four.png'],
+  directions: ['*叠放柜可存放针织类，卫衣棉服等可折叠衣物60件,也可提供真空袋出售；  收费价格：180¥/月', '*挂放柜可存放20件套装衣物，适合存放外套、大衣；  收费价格：300¥/月', '*组合柜可存放60件折叠和20件挂放； 收费价格：400¥/月', '*礼服柜可按需存放贵重礼服，适合存放大件礼服；收费价格：50¥/件'],
+  urls: ['/charge_detail', '/charge_detail', '/charge_detail', '/charge_detail'],
+  replay: false,
   show_number: 1
 }
 
@@ -81,5 +81,5 @@ Carousel.PropTypes = {
   directions: PropTypes.array,
   urls: PropTypes.array,
   replay: PropTypes.bool,
-  show_number: PropTypes.interval,
+  show_number: PropTypes.number,
 }
