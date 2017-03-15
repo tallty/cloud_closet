@@ -6,7 +6,7 @@ class VipExplain extends Component {
   render() {
     return (
       <div className={css.container}>
-        <Toolbar url="/vip" title="我的小蜜" />
+        // <Toolbar url="/vip" title="我的小蜜" />
         <div className={css.content}>
           <div className={css.des}>乐存好衣会员权益说明</div>
           <div className={css.text}>

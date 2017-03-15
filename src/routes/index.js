@@ -23,7 +23,7 @@ import Cart from '../components/cart/Cart';
 // 个人中心
 import Profile from '../components/user/Profile/Profile'
 import FancClub from '../components/user/vip/FancClub'
-import VipExplain from '../components/user/vip/VipExplain';
+// import VipExplain from '../components/user/vip/VipExplain';
 import { Orders } from '../components/user/Orders/Orders'
 import Order from '../components/user/Orders/Order'
 import PaySuccess from '../components/user/Orders/PaySuccess';
@@ -96,7 +96,7 @@ export class Routes extends Component {
         <Route path="/bills" component={Bills} />
         <Route path="/bill" component={Bill} />
         {/* 会员权益说明 */}
-        <Route path="/vip_explain" component={VipExplain} onEnter={this.requireAuth} />
+        {/* <Route path="/vip_explain" component={VipExplain} onEnter={this.requireAuth} /> */}
         {/* 服务流程 */}
         <Route path="/process" component={Process} />
         {/* 搜索 */}
