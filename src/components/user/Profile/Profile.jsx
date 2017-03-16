@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import css from './profile.less'
 import { Celler } from '../../common/Celler'
-import { Spiner } from '../../common/Spiner'
 import PopWindow from '../../common/PopWindow'
 import SuperAgent from 'superagent'
-import { Input, Button, Form } from 'antd';
+import { Input, Button, Form, Spin } from 'antd';
 
 const FormItem = Form.Item;
 const PHOTO_MAX_SIZE = 1024;
@@ -12,11 +11,12 @@ const PHOTO_MAX_SIZE = 1024;
 class MyProfile extends Component {
   state = {
     pop: false,
-    user: null,
+    user: {},
     popTitle: '',
     update_key: '',
     update_value: '',
-    upadte_type: 'string'
+    upadte_type: 'string',
+    loading: true
   }
 
   componentWillMount() {
@@ -31,14 +31,13 @@ class MyProfile extends Component {
       .set('X-User-Phone', localStorage.phone)
       .end((err, res) => {
         if (!err || err === null) {
-          console.dir(res.body)
-          this.setState({ user: res.body });
+          this.setState({ user: res.body, loading: false });
           // 缓存
           const userStr = JSON.stringify(res.body);
           localStorage.setItem('user', userStr);
         } else {
           // alert("获取用户信息失败")
-          console.log("获取用户信息失败");
+          this.setState({ loading: false });
         }
       })
   }
@@ -52,27 +51,34 @@ class MyProfile extends Component {
       if (!err) {
         const formData = new FormData();
         formData.append(this.state.update_key, values.value);
-        SuperAgent
-          .put('http://closet-api.tallty.com/user_info')
-          .set('Accept', 'application/json')
-          .set('X-User-Token', localStorage.authentication_token)
-          .set('X-User-Phone', localStorage.phone)
-          .send(formData)
-          .end((er, res) => {
-            if (!er || er === null) {
-              // 缓存
-              const userStr = JSON.stringify(res.body);
-              localStorage.setItem('user', userStr);
-              this.setState({
-                user: res.body,
-                pop: false
-              })
-            } else {
-              alert('更新用户信息失败');
-            }
-          })
+        this.updateUserInfo(formData);
       }
     });
+  }
+
+  updateUserInfo(formData) {
+    this.setState({ loading: true });
+    SuperAgent
+      .put('http://closet-api.tallty.com/user_info')
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .send(formData)
+      .end((er, res) => {
+        if (!er || er === null) {
+          // 缓存
+          const userStr = JSON.stringify(res.body);
+          localStorage.setItem('user', userStr);
+          this.setState({
+            user: res.body,
+            pop: false,
+            loading: false
+          })
+        } else {
+          this.setState({ loading: false });
+          alert('更新用户信息失败');
+        }
+      })
   }
 
   /**
@@ -146,59 +152,58 @@ class MyProfile extends Component {
 
 
   render() {
-    const { pop, user, popTitle, update_key, update_value, update_type } = this.state;
+    const { pop, user, popTitle, update_key, update_value, update_type, loading } = this.state;
     const { getFieldDecorator } = this.props.form;
 
     return (
       <div>
-        {
-          user ?
-            <div className={css.container}>
-              <span className={css.photoInput}>
-                <input
-                  type="file"
-                  multiple={false}
-                  accept="image/*"
-                  capture="camera"
-                  ref="photo"
-                  onChange={this.handlePhotoChange.bind(this)}
-                />
-                <Celler
-                  name="我的头像"
-                  type="image"
-                  value={user.avatar}
-                  defaultValue="src/images/default_photo.svg"
-                  event={() => { }}
-                />
-              </span>
-              <Celler name="昵称" value={user.nickname} event={this.handleNickname.bind(this)} />
-              <Celler name="邮箱" value={user.mail} bottom={14} event={this.handleMail.bind(this)} />
-              {/*<Celler name="账号安全" value={this.formatPhone} type="phone" event={this.handleSafe.bind(this)} />
+        {loading ? <div className={css.spinContainer}><Spin /></div> : null}
+        <div className={css.container}>
+          <span className={css.photoInput}>
+            <input
+              type="file"
+              multiple={false}
+              accept="image/*"
+              capture="camera"
+              ref="photo"
+              onChange={this.handlePhotoChange.bind(this)}
+            />
+            <Celler
+              name="我的头像"
+              type="image"
+              value={user.avatar}
+              defaultValue="src/images/default_photo.svg"
+              event={() => { }}
+            />
+          </span>
+          <Celler name="昵称" value={user.nickname} event={this.handleNickname.bind(this)} />
+          <Celler name="邮箱" value={user.mail} bottom={14} event={this.handleMail.bind(this)} />
+          {/*<Celler name="账号安全" value={this.formatPhone} type="phone" event={this.handleSafe.bind(this)} />
               <Celler name="密码" value="●●●●●●●●●" bottom={14} event={this.handlePassword.bind(this)} />*/}
-              <Celler name="收货地址" url="/address" bottom={14} />
-              <Celler name="退出登录" type="simple" color="#F2C27F" event={this.handleSignout} />
-              {/* 弹出框：修改资料 */}
-              <PopWindow show={pop} onCancel={this.hidePopWindow.bind(this)}>
-                <div className={css.popContainer}>
-                  <p className={css.title}>{popTitle}</p>
-                  <Form onSubmit={this.handleSubmit.bind(this)}>
-                    <FormItem hasFeedback>
-                      {getFieldDecorator('value', {
-                        rules: [{
-                          type: `${update_type}`, message: '格式不正确'
-                        }, {
-                          required: true, message: '请输入正确格式的信息'
-                        }]
-                      })(
-                        <Input size="large" />
-                        )}
-                    </FormItem>
-                    <Button htmlType="submit" className={css.update}>更新</Button>
-                  </Form>
-                </div>
-              </PopWindow>
-            </div> : <Spiner />
-        }
+          <Celler name="收货地址" url="/address" bottom={14} />
+          <Celler name="退出登录" type="simple" color="#F2C27F" event={this.handleSignout} />
+
+          {/* 弹出框：修改资料 */}
+          <PopWindow show={pop} onCancel={this.hidePopWindow.bind(this)}>
+            <div className={css.popContainer}>
+              <p className={css.title}>{popTitle}</p>
+              <Form onSubmit={this.handleSubmit.bind(this)}>
+                <FormItem hasFeedback>
+                  {getFieldDecorator('value', {
+                    rules: [{
+                      type: `${update_type}`, message: '格式不正确'
+                    }, {
+                      required: true, message: '请输入正确格式的信息'
+                    }]
+                  })(
+                    <Input size="large" />
+                    )}
+                </FormItem>
+                <Button htmlType="submit" className={css.update}>更新</Button>
+              </Form>
+            </div>
+          </PopWindow>
+        </div>
       </div>
     )
   }
