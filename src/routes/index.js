@@ -35,6 +35,10 @@ import { Withdraw } from '../components/user/Withdraw'
 import { Help } from '../components/user/Help'
 // 用户发票
 import { Receipt } from '../components/user/receipt/Receipt'
+import { ReceiptRecord } from '../components/user/receipt/ReceiptRecord';
+import { ReceiptInfo } from '../components/user/receipt/ReceiptInfo';
+import { ReceiptSuccess } from '../components/user/receipt/ReceiptSuccess';
+
 // 用户账单
 import Bills from '../components/user/Bill/Bills'
 import { Bill } from '../components/user/Bill/Bill'
