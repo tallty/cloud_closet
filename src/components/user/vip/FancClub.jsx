@@ -10,8 +10,6 @@ import VipExplain from './VipExplain'
 
 export default class FancClub extends Component {
   state = {
-    points: 5000,
-    percent: 60,
     powers: [{
       id: 1,
       url: '/src/images/icon_vip_birth.png',
@@ -61,7 +59,7 @@ export default class FancClub extends Component {
             <div className={css.title}>VIP特权</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <Level points={points} percent={percent} />
+            <Level info={user.vip_level_info} />
           </div>
         </div>
 
