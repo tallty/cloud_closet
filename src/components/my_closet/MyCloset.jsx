@@ -1,6 +1,6 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
-import { Row, Col, Button } from 'antd'
+import { Row, Col, Button, message } from 'antd'
 import MyClosetHeader from './MyClosetHeader'
 import ClosetType from './closet_type/ClosetType'
 import classnames from 'classnames'
@@ -11,21 +11,20 @@ import auth from '../WechatConect/auth'
 export class MyCloset extends Component {
   state = {
     user: {},
-    storing_count: 0,
-    current_page: 1,
-    total_pages: 1,
-    garments: []
+    storingCount: 0,
+    storedCount: 0,
+    closets: []
   }
 
   componentDidMount() {
     this.getUserInfo();
-    this.getGarments(1, 10, (res) => {
-      const obj = res.body;
+    this.getGarments((res) => {
+      const closetsArray = res.body.exhibition_chests;
+      const countInfo = res.body.chest_other_info;
       this.setState({
-        current_page: obj.current_page,
-        total_pages: obj.total_pages,
-        garments: obj.garments,
-        storing_count: obj.storing_garments_count
+        storingCount: countInfo.storing_garments_count,
+        storiedCount: countInfo.graments_count,
+        closets: closetsArray
       })
     })
   }
@@ -41,16 +40,15 @@ export class MyCloset extends Component {
         if (!err || err === null) {
           this.setState({ user: res.body });
         } else {
-          console.log('获取用户信息失败');
           auth.authLogin();
         }
       })
   }
 
   // 获取列表
-  getGarments(page, per_page, func) {
+  getGarments(func) {
     SuperAgent
-      .get(`http://closet-api.tallty.com/garments?page=${page}&per_page=${per_page}`)
+      .get('http://closet-api.tallty.com/exhibition_chests')
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
@@ -58,24 +56,18 @@ export class MyCloset extends Component {
         if (!err || err === null) {
           func(res);
         } else {
-          console.log('获取衣橱列表失败');
+          message.warning('获取衣橱列表失败, 稍后重试');
         }
       })
   }
 
   render() {
-    let { garments, user, storing_count } = this.state;
+    let { user, closets, storingCount, storiedCount } = this.state;
     return (
       <div className={styles.my_cliset_content}>
-        <MyClosetHeader garments={garments} user={user} storing_count={storing_count} />
-        <ClosetType />
+        <MyClosetHeader storiedCount={storiedCount} user={user} storingCount={storingCount} />
+        <ClosetType closets={closets} />
       </div>
     );
   }
 }
-
-MyCloset.defaultProps = {
-}
-
-MyCloset.propTypes = {
-};

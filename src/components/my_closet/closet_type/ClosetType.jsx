@@ -13,7 +13,7 @@ import { Row, Col, Button } from 'antd'
 // 解析衣类图片
 const imageMap = new Map([
   ['叠放柜', '/src/images/icon_stack_sm.svg'],
-  ['挂柜', '/src/images/icon_hang_sm.svg'],
+  ['挂放柜', '/src/images/icon_hang_sm.svg'],
   ['组合柜', '/src/images/icon_hang_sm.svg'],
   ['单件礼服', '/src/images/icon_full_dress_sm.svg'],
   ['礼服柜', '/src/images/icon_full_dress_sm.svg'],
@@ -22,63 +22,27 @@ const imageMap = new Map([
 ]);
 
 class ClosetType extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      types: []
-    }
-  }
-
-  componentWillMount() {
-    SuperAgent
-      .get(`http://closet-api.tallty.com/exhibition_chests`)
-      .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
-      .end((err, res) => {
-        if (!err || err === null) {
-          this.setState({ types: res.body });
-        } else {
-          console.log("获取列表失败");
-        }
-      })
-  }
-
   getCarouselList() {
-    const { types } = this.state
-    console.log(types)
-    const list = []
-    const that = this
-    types.forEach((item, index, obj) => {
-    list.push(
-      <div key={index} >
-        <Link to={`/closet_tabs?id=${item.id}`} >
-          <Row className={css.closet_type_img_row}>
-            <Col span={4} className={css.closet_type_img_row_cell_one}><img src={imageMap.get(item.title)} alt="icon" /></Col>
-            <Col span={8} className={css.closet_type_img_row_cell_two}>{item.title}</Col>
-            <Col span={12} className={css.closet_type_img_row_cell_three}>{item.max_count - item.remain_space_count}/{item.max_count}</Col>
-          </Row>
-        </Link>
-      </div>
+    const { closets } = this.props;
+    const list = [];
+    closets.forEach((item, index, obj) => {
+      list.push(
+        <div key={index} >
+          <Link to={`/closet_tabs?id=${item.id}`} >
+            <Row className={css.closet_type_img_row}>
+              <Col span={4} className={css.closet_type_img_row_cell_one}>
+                <img src={imageMap.get(item.title)} alt="icon" />
+              </Col>
+              <Col span={8} className={css.closet_type_img_row_cell_two}>{item.title}</Col>
+              <Col span={12} className={css.closet_type_img_row_cell_three}>
+                {item.max_count - item.remain_space_count}/{item.max_count}
+              </Col>
+            </Row>
+          </Link>
+        </div>
       )
     })
     return list
-  }
-
-  showList() {
-    SuperAgent
-      .get(`http://closet-api.tallty.com/exhibition_chests`)
-      .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
-      .end((err, res) => {
-        if (!err || err === null) {
-          this.setState({ types: res.body });
-        } else {
-          console.log("获取列表失败");
-        }
-      })
   }
 
   render() {
@@ -91,15 +55,10 @@ class ClosetType extends Component {
 }
 
 ClosetType.defaultProps = {
-  types:[{id: 1, title: '叠放柜', pic: 'src/images/sark_one_icon.png', number: '12/34'},
-  {id: 2, title: '挂放柜', pic: 'src/images/sark_two_icon.png', number: '12/34'},
-  {id: 3, title: '组合柜', pic: 'src/images/sark_three_icon.png', number: '12/34'},
-  {id: 4, title: '礼服柜', pic: 'src/images/sark_four_icon.png', number: '12/34'},
-  {id: 5, title: '礼服柜', pic: 'src/images/sark_one_icon.png', number: '12/34'}
-  ],
+  closets: []
 }
 
 ClosetType.PropTypes = {
-  types: PropTypes.array,
+  closets: PropTypes.array
 }
 export default withRouter(ClosetType);

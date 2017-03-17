@@ -12,7 +12,7 @@ class MyClosetHeader extends React.Component {
     this.displayName = 'MyClosetHeader';
   }
   render() {
-    let { garments, user } = this.props;
+    const { user, storingCount, storiedCount } = this.props;
     let photo = user.avatar ? user.avatar : 'src/images/default_photo_dark.svg';
     return (
       <div>
@@ -28,7 +28,7 @@ class MyClosetHeader extends React.Component {
         <Row className={styles.my_cliset_header_part_two_content}>
           <Col span={9} className={styles.left_closet_number}>
             <div className={styles.center_item}>
-              <div htmlFor="" className={styles.number_closet}>{garments.length}</div>
+              <div htmlFor="" className={styles.number_closet}>{storiedCount}</div>
               <div htmlFor="">衣橱存数</div>
             </div>
           </Col>
@@ -39,7 +39,7 @@ class MyClosetHeader extends React.Component {
 
           <Col span={9} className={styles.right_closet_number}>
             <div className={styles.center_item}>
-              <div htmlFor="" className={styles.number_closet}>{this.props.storing_count}</div>
+              <div htmlFor="" className={styles.number_closet}>{storingCount}</div>
               <div htmlFor="">入库中...</div>
             </div>
           </Col>
@@ -51,21 +51,14 @@ class MyClosetHeader extends React.Component {
 
 
 MyClosetHeader.defaultProps = {
-  garments: [],
+  storiedCount: 0,
+  storingCount: 0,
   user: {}
 }
 
 MyClosetHeader.propTypes = {
-  garments: arrayOf(
-    shape({
-      id: number,
-      title: string,
-      put_in_time: string,
-      expire_time: string,
-      is_new: bool,
-      cover_image: string
-    })
-  ),
+  storiedCount: number,
+  storingCount: number,
   user: shape({
     phone: string,
     mail: string,
