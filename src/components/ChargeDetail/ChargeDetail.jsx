@@ -1,6 +1,7 @@
 // 收费详情
 import React, { Component, PropTypes } from 'react'
-import { Row, Col, Button } from 'antd'
+import { Row, Col, Button, message } from 'antd'
+import agent from 'superagent';
 import styles from './charge_detail.less'
 import classNames from 'classnames'
 import classBind from 'classnames/bind'
@@ -9,6 +10,24 @@ import classBind from 'classnames/bind'
 const DemoBox = props => <p className={`height-${props.value}`}>{props.children}</p>;
 
 export class ChargeDetail extends Component {
+  state = {
+    rules: []
+  }
+
+  componentWillMount() {
+    agent
+      .get('http://closet-api.tallty.com/price_systems')
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+        if (!err || err === null) {
+          this.setState({ rules: res.body.price_systems });
+        } else {
+          message.warning('获取收费详情信息失败，稍后重试。');
+        }
+      });
+  }
 
   // 收费详情列表
   getList() {
