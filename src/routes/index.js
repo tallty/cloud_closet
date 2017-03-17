@@ -100,6 +100,10 @@ export class Routes extends Component {
         <Route path="/help" component={Help} />
         {/* 用户发票 */}
         <Route path="/receipt" component={Receipt} />
+        <Route path="/receipt_info" component = { ReceiptInfo }/> 
+        <Route path="/receipt_success" component = { ReceiptSuccess }/>
+        <Route path="/receipt_record" component = { ReceiptRecord }/>
+
 
         {/* 用户账单 */}
         <Route path="/bills" component={Bills} />
