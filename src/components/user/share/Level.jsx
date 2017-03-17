@@ -5,16 +5,19 @@ import css from './share.less'
 
 export default class Level extends Component {
   render() {
+    const { info } = this.props;
+    const percent = ((Math.abs(info.exp_now) / Math.abs(info.need_exp)) * 100) || 0;
+
     return (
       <div className={css.level}>
         <div className={css.title}>
-          <span>会员级别</span>
-          <span className={css.title_level}>{this.props.level}</span>
+          <span>{info.level_now}</span>
+          <span className={css.title_level}>{info.credit_total}</span>
         </div>
         <div className={css.content}>
           <div className={css.progress_div}>
-            <Progress percent={this.props.percent} status="active" strokeWidth={10} showInfo={false} />
-            <span className={css.points} style={{ color: this.props.color }}>{this.props.points}分</span>
+            <Progress percent={percent} status="active" strokeWidth={10} showInfo={false} />
+            <span className={css.points}>{info.level_next}</span>
           </div>
           {/*<span className={css.tips}> | <Link to="/user">查看积分机制</Link></span>*/}
         </div>
@@ -24,15 +27,9 @@ export default class Level extends Component {
 }
 
 Level.defaultProps = {
-  points: 0,
-  color: '#EBBA6C',
-  percent: 50,
-  level: ''
+  info: {}
 }
 
 Level.propTypes = {
-  points: PropTypes.number,
-  color: PropTypes.string,
-  percent: PropTypes.number,
-  level: PropTypes.string
+  info: PropTypes.object
 }

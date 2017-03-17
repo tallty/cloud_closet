@@ -9,9 +9,6 @@ import css from './user.less';
 
 export class User extends Component {
   state = {
-    level: 5000,
-    percent: 60,
-    levelName: '黄金会员',
     user: {},
     loadingText: '',
     grids: [
@@ -33,6 +30,7 @@ export class User extends Component {
       .end((err, res) => {
         if (!err || err === null) {
           // 缓存
+          console.log(res.body);
           localStorage.setItem('user', JSON.stringify(res.body));
           this.setState({ user: res.body });
         } else {
@@ -90,7 +88,7 @@ export class User extends Component {
 
   render() {
     // 计算栅格部分容器的高度
-    const { user, level, levelName, grids, percent, loadingText } = this.state;
+    const { user, grids, loadingText } = this.state;
     const gridsHeight = (document.body.clientHeight - 60) * 0.53 - 80;
     let avatar = user.avatar ? user.avatar : 'src/images/default_photo.svg';
     const photoBg = user.user_info_cover ? user.user_info_cover : '#d8d8d8';
@@ -119,7 +117,7 @@ export class User extends Component {
                 {/*<div className={css.level_name}>{levelName}</div>*/}
               </div>
               <div className={css.user_name}>{user.nickname}</div>
-              <Level points={level} percent={percent} level="V3级别" />
+              <Level info={user.vip_level_info} />
             </Link>
           </div>
         </div>
