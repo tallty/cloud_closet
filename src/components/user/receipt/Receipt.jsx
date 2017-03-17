@@ -1,10 +1,10 @@
 /**
  * 个人中心 - 发票
  */
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import css from './receipt.less'
-import Toolbar from '../common/Toolbar';
-import {Link} from 'react-router'
+import Toolbar from '../../common/Toolbar';
+import { Link } from 'react-router'
 
 export class Receipt extends Component {
   state = {

@@ -33,7 +33,9 @@ import Recharge from '../components/user/Recharge/Recharge'
 import RechargeSuccess from '../components/user/Recharge/RechargeSuccess'
 import { Withdraw } from '../components/user/Withdraw'
 import { Help } from '../components/user/Help'
-import { Receipt } from '../components/user/Receipt'
+// 用户发票
+import { Receipt } from '../components/user/receipt/Receipt'
+// 用户账单
 import Bills from '../components/user/Bill/Bills'
 import { Bill } from '../components/user/Bill/Bill'
 //搜索
@@ -92,7 +94,10 @@ export class Routes extends Component {
         <Route path="/recharge_success" component={RechargeSuccess} />
         <Route path="/withdraw" component={Withdraw} />
         <Route path="/help" component={Help} />
+        {/* 用户发票 */}
         <Route path="/receipt" component={Receipt} />
+
+        {/* 用户账单 */}
         <Route path="/bills" component={Bills} />
         <Route path="/bill" component={Bill} />
         {/* 会员权益说明 */}
