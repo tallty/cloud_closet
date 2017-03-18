@@ -7,6 +7,7 @@ import css from './ReceiptRecord.less';
 import Toolbar from '../../common/ToolBar';
 import {Link} from 'react-router';
 import { Spiner } from '../../common/Spiner';
+import { Row, Col } from 'antd';
 
 const { string, number, arrayOf, shape } = PropTypes;
 
@@ -44,22 +45,18 @@ export class ReceiptRecord extends Component {
     receipts.forEach((receipt, index, obj) => {
       list.push(
         <div className={css.content_detail} key={index}>
-          <div>
-            <ul>
-                <li><span className={css.money}>{this.state.money}元</span></li>
-                <li><span className={css.types}>{this.state.type}</span></li>
-            </ul>
-          </div>
-          <div>
-            <ul>
-                <li>
-                  <p className={css.balances}>开票额度剩余{this.state.balance}元
-                  </p>
-                  <p className={css.dates}>开票日期：{this.state.date}</p>
-                </li>
-                <li><img src="src/images/receipt_success.png" alt="" className={css.img_style}/></li>
-            </ul>
-          </div>
+          <Row className={css.row_top}>
+              <Col span={12} className={css.money}>{receipt.money}元</Col>
+              <Col span={12} className={css.types}>{receipt.type}</Col>
+          </Row>
+          <Row className={css.row_bottom}>
+            <Col span={14}>
+              <p className={css.balances}>开票额度剩余 {receipt.balance} 元
+              </p>
+              <p className={css.dates}>开票日期：{receipt.date}</p>
+            </Col>
+            <Col span={10}><img src="src/images/receipt_success.png" alt="" className={css.img_style}/></Col>
+          </Row>
         </div>
       )
     })
