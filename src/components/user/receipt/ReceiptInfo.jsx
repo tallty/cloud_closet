@@ -1,96 +1,87 @@
 /**
  * 个人中心 - 发票 - 填写开票信息
  */
-import React, { Component, propTypes } from 'react';
-import SuperAgent from 'superagent'
-// import locationPromise from '../Common/locationPromise';
-// import { Spiner } from '../common/Spiner';
-import { Form, Radio, Button, Checkbox, DatePicker, Row, Col, Input, Icon, Menu, Dropdown, Select } from 'antd';
-import { Link, withRouter } from 'react-router';
-import classnames from 'classnames';
+import React, { Component } from 'react';
 import css from './ReceiptInfo.less';
-// import Carousel from './Carousel.jsx';
+import { Form, Button, Checkbox, Row, Col, Input, Icon, Menu, Dropdown, Select } from 'antd';
+import Toolbar from '../../common/Toolbar';
+import { Link } from 'react-router'
 
-const FormItem = Form.Item;
-// const RadioButton = Radio.Button;a
-// const RadioGroup = Radio.Group;
-// const height = window.innerHeight * 0.305;
-// const Option = Select.Option;
+export class ReceiptInfo extends Component {
 
-export default class ReceiptInfo extends Component {
-	state = {
-		money: null,
-		nickname: null,
-		types: null,
-		cel_name: null,
-		cel_phone: null,
-		address: null
-	}
-
-	componentWillMount() {
-		
-	}
-
-	componentDidMount() {
-		this.getUserInfo();
-	}
-
-	componentWillUnmount() {
-		 
-	}
-
-	getUserInfo() {
-		SuperAgent
-	        .get("http://closet-api.tallty.com/user_info")
-	        .set('Accept', 'application/json')
-	        .set('X-User-Token', localStorage.authentication_token)
-	        .set('X-User-Phone', localStorage.phone)
-	        .end((err, res) => {
-		        if (!err || err === null) {
-		          // 缓存
-		          let user = res.body;
-		          let str = JSON.stringify(user);
-		          localStorage.setItem('user', str);
-		          // // 如果没有手动选择地址，显示默认地址
-		          // if (!sessionStorage.selected_address) {
-		          //   this.getDefaultAddress(user.default_address_id);
-		          // }
-		        } else {
-		          // alert("获取用户信息失败");
-		          console.log("获取用户信息失败");
-		        }
-	      })
-	}
-
-	handleSubmit(e) {
-
-	}	
 
 	render() {
 		return (
-			<div>
-				<Toolbar url="/user" title="发票" theme="dark">
-	          		<Link to="/receipt">信息填写</Link>
-	        	</Toolbar>
-	        	<div>
-	        		<p>新添预设信息</p>
-	        		<Link></Link>	
-	        	</div>
-				<Form onSubmit={this.handleSubmit}>
-					<p>发票信息</p>
-					<FormItem></FormItem>
-					<FormItem></FormItem>
-					<FormItem></FormItem>
-					<p>邮寄信息</p>
-					<FormItem></FormItem>
-					<FormItem></FormItem>
-					<FormItem></FormItem>
-					<FormItem></FormItem>
-					<FormItem></FormItem>
-				</Form>	
+			<div className={css.container}>
+				<Toolbar url="/user" title="信息填写" theme="dark" />
+
+				<div className={css.content_top}>
+					<Row>
+						<Col span={12} className={css.lf}>新添预设信息</Col>
+						<Col span={12} className={css.rt}>
+							<Link to="/receipt_info" className={css.icon_col}>
+								<Icon type="right" />
+							</Link>
+						</Col>
+					</Row>	
+				</div>
+					
+				<p>发票信息</p>
+
+				<div className={css.content_body_top}>
+					<Row className={css.cell}>
+						<Col span={12} className={css.lf}>发票金额</Col>
+						<Col span={12} className={css.rt}>{}元</Col>
+					</Row>	
+					<Row className={css.cell}>
+						<Col span={12} className={css.lf}>发票抬头</Col>
+						<Col span={12} className={css.rt}>{}</Col>
+					</Row>	
+					<Row className={css.cell}>
+						<Col span={12} className={css.lf}>发票类型 </Col>
+						<Col span={12} className={css.rt}>{}
+							<Link to="/receipt_info" className={css.icon_col}>
+								<Icon type="right" />
+							</Link>
+						</Col>
+					</Row>	
+				</div>
+
+				<p>邮寄信息</p>
+
+				<div className={css.content_body_bottom}>
+					<Row className={css.cell}>
+						<Col span={12} className={css.lf}>联系人</Col>
+						<Col span={12} className={css.rt}>
+							<Link to="/receipt_info" className={css.icon_col}>
+								<Icon type="right" />
+							</Link>
+						</Col>
+					</Row>	
+					<Row className={css.cell}>
+						<Col span={12} className={css.lf}>联系电话</Col>
+						<Col span={12} className={css.rt}>{}</Col>
+					</Row>	
+					<Row className={css.cell}>
+						<Col span={12} className={css.lf}>邮政编码</Col>
+						<Col span={12} className={css.rt}>{}</Col>
+					</Row>	
+					<Row className={css.cell}>
+						<Col span={12} className={css.lf}>详细地址</Col>
+						<Col span={12} className={css.rt}>{}</Col>
+					</Row>	
+				</div>
+
+				<div className={css.content_bottom}>
+					<div className={css.box_position}>
+						<Checkbox><span>保存为预设发票</span></Checkbox>
+						<h4>行程信息提交后不可更改，请仔细填写 ！</h4>
+					</div>
+					<div className={css.btn_position}>
+						<Link to="/receipt"><button>提交</button></Link>
+					</div>
+				</div>
 			</div>
-		);
+		)
 	}
 }
-
-ReceiptInfo = Form.create({})(ReceiptInfo);
