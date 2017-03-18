@@ -55,7 +55,7 @@ export class ReceiptSuccess extends Component {
 					</Row>	
 				</div>	
 				<div className={css.content_bottom}>
-					<Link to="/receipt"><button>完成</button></Link>
+					<Link to="/receipt_record"><button>完成</button></Link>
 				</div>		
 			</div>
 		)

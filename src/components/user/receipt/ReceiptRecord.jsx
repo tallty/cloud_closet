@@ -79,7 +79,7 @@ export class ReceiptRecord extends Component {
     const Receipts = this.getReceiptList();
     return (
       <div className={css.container}>
-        <Toolbar url="/#" title="开票记录" theme="dark" className={css.tops} />
+        <Toolbar url="/user" title="开票记录" theme="dark" className={css.tops} />
         <div className={css.content}>
           { Receipts.length > 0 ? Receipts : this.getReceiptsNone()}
         </div>
