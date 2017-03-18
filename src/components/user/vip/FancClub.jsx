@@ -12,11 +12,11 @@ export default class FancClub extends Component {
   state = {
     points: 5000,
     percent: 60,
-    powers: [{
-      id: 1,
-      url: '/src/images/icon_vip_birth.png',
-      title: '生日积分'
-    }],
+    // powers: [{
+    //   id: 1,
+    //   url: '/src/images/icon_vip_birth.png',
+    //   title: '生日积分'
+    // }],
     user: {}
   }
 
@@ -37,17 +37,17 @@ export default class FancClub extends Component {
       })
   }
 
-  getPowerImges() {
-    const { powers } = this.state;
-    return powers.map((item, index) => {
-      return (
-        <div key={index} className={css.power}>
-          <img src={item.url} alt="特权" key={index} />
-          <p>{item.title}</p>
-        </div>
-      );
-    })
-  }
+  // getPowerImges() {
+  //   const { powers } = this.state;
+  //   return powers.map((item, index) => {
+  //     return (
+  //       <div key={index} className={css.power}>
+  //         <img src={item.url} alt="特权" key={index} />
+  //         <p>{item.title}</p>
+  //       </div>
+  //     );
+  //   })
+  // }
 
   render() {
     const { points, user, percent } = this.state;
@@ -65,16 +65,15 @@ export default class FancClub extends Component {
           </div>
         </div>
 
-        {/*<div className={css.title_one}>尊享特权</div>
+        <div className={css.title_one}>尊享特权</div>
         <div className={css.slider}>
           {this.getPowerImges()}
         </div>
-        <Link to="/vip_explain" className={css.title_two}>
-          乐存好衣会员权益说明
-          <span><Icon type="right" /></span>
-        </Link>*/}
-
         <VipExplain />
+        // <Link to="/vip_explain" className={css.title_two}>
+        //   乐存好衣会员权益说明
+        //   <span><Icon type="right" /></span>
+        // </Link>
       </div>
     )
   }
