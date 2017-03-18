@@ -1,7 +1,7 @@
 /**
 * 个人中心 - 发票 - 开票记录
 */
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import SuperAgent from 'superagent';
 import css from './ReceiptRecord.less';
 import Toolbar from '../../common/ToolBar';
@@ -12,12 +12,12 @@ const { string, number, arrayOf, shape } = PropTypes;
 
 export class ReceiptRecord extends Component {
   state = {
-    receipts: null,
-    
-    money: '200',
-    date: '2017-03-15',
-    type: '普通发票',
-    balance: '300'
+    receipts: {
+      money: '200',
+      date: '2017-03-15',
+      type: '普通发票',
+      balance: '300'
+    }
   }
 
   //开票记录列表
