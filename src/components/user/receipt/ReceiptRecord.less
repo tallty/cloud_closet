@@ -13,51 +13,70 @@
 		-webkit-overflow-scrolling: touch;
 		width: 100%;
 		background-color: #F8F8F8;
-		
-
-		.content {
-			height:145px;
-			margin: 12.5px 13px;
-			background: image-url("receipt_record_bg.png");
-			background-color: #fff;
-			/*receipt_record_bg*/
-			/*receipt_success*/
-			border:1px solid #F8F8F8;
-
-			.money {
-			 	text-align: left;
-			 	margin: 15px 0px 0px 14px;
-			 	padding: 0px;
-			 	color: #FFA867;
-			 	font-size: 24px;
-			}
-			 .types {
-				color: #C9C9C9;
-				font-size: 13;
-				text-align: right;
-				margin: -30px 18px 0px 0px;
-				padding: 0px;
-		    }
-			 .balances {
-				color: #8B612A;
-				font-size: 13;
-				text-align: left;
-				margin: 15px 0px 0px 14px;
-				padding: 0px;
-			}
-			 .dates { 
-				color: #919191;
-				font-size: 14;
-				text-align: left;
-				margin: 30px 0px 0px 14px;
-				padding: 0px;
-			}
-			.img_style {
-				width: 150px;
-				height: 100px;
-				float: right;
-				margin: -80px 0px auto auto;
-			}
-		}	
 	}
+}	
+
+.content_detail {
+	height:145px;
+	margin: 12.5px 13px;
+	background: image-url("receipt_record_bg.png");
+	background-color: #fff;
+	/*receipt_record_bg*/
+	/*receipt_success*/
+	border:1px solid #F8F8F8;
+
+	.money {
+	 	text-align: left;
+	 	margin: 15px 0px 0px 14px;
+	 	padding: 0px;
+	 	color: #FFA867;
+	 	font-size: 24px;
+	 	float: left;
+	}
+	 .types {
+		color: #C9C9C9;
+		font-size: 13;
+		text-align: right;
+		margin: -30px 18px 0px 0px;
+		padding: 0px;
+		float: right;
+    }
+	 .balances {
+		color: #8B612A;
+		font-size: 13;
+		text-align: left;
+		margin: 15px 0px 0px 14px;
+		padding: 0px;
+		float: left;
+	}
+	 .dates { 
+		color: #919191;
+		font-size: 14;
+		text-align: left;
+		margin: 30px 0px 0px 14px;
+		padding: 0px;
+		float: left;
+	}
+	.img_style {
+		width: 150px;
+		height: 100px;
+		float: right;
+		margin: -80px 0px auto auto;
+	}
+}	
+
+
+// 空列表样式
+.receipts_none {
+  text-align: center;
+  padding-top: 80px;
+  img {
+    width: 28%;
+    height: auto;
+  }
+  p {
+    color: #4A4A4A;
+    font-size: 14px;
+    padding-top: 20px;
+  }
 }
