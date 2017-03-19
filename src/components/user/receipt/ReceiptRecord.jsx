@@ -18,6 +18,21 @@ export class ReceiptRecord extends Component {
       date: '2017-03-15',
       type: '普通发票',
       balance: '300'
+    },{
+      money: '200',
+      date: '2017-03-15',
+      type: '增值税专用发票',
+      balance: '300'
+    },{
+      money: '200',
+      date: '2017-03-15',
+      type: '普通发票',
+      balance: '300'
+    },{
+      money: '200',
+      date: '2017-03-15',
+      type: '增值税专用发票',
+      balance: '300'
     }]
   }
 

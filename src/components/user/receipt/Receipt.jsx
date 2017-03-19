@@ -14,7 +14,7 @@ export class Receipt extends Component {
   render() {
     let tips = this.state.money
       ? '可开发票额度'
-      : '（暂不可开，单张发票需大于50元）';
+      : '（暂不可开，单张发票需大于1000元）';
     let money = this.state.money
       ? `${this.state.money}元`
       : '--';
@@ -28,8 +28,8 @@ export class Receipt extends Component {
           <p className={css.tips}>{tips}</p>
           <div className={css.content}>
             <button>
-              <Link to="/receipt_info">我要开票</Link>
-              </button>
+              <Link to="/receipt_info" className={css.link_col}>我要开票</Link>
+            </button>
             <ul>
               <li>最高额度仅限实际充值或信用卡的订单费用，不包含任何优惠券、赠送金额、体验券等优惠活动费用</li>
               <li>您可开1张或多张，单张发票不得低于1000元</li>
