@@ -1,77 +1,75 @@
 .container {
-	height: 100%;
-	display: flex;
-	display: -webkit-flex;
-	flex-flow: column nowrap;
-	background-color: #F8F8F8;
-	.tops {
-		color: #7F7F7F;
-	}
-	.content {
-		flex-grow: 1;
-		overflow-y: scroll;
-		-webkit-overflow-scrolling: touch;
-		width: 100%;
-		background-color: #F8F8F8;
-	}
-}	
+  height: 100%;
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: column nowrap;
+  background-color: #F8F8F8;
+  .tops {
+    color: #7F7F7F;
+  }
+  .content {
+    flex-grow: 1;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    background-color: #F8F8F8;
+  }
+}
 
 .content_detail {
-	margin: 12.5px 13px;
-	background: image-url("receipt_record_bg.png");
-	background-color: #fff;
-	/*receipt_record_bg*/
-	/*receipt_success*/
-	border:1px solid #F8F8F8;
-
-    .row_top {
-    	margin-top: 10px;
-    }
-  
-	.money {
-	 	text-align: left;
-	 	margin: 0px 0px 0px 20px;
-	 	padding: 0px;
-	 	color: #FFA867;
-	 	font-size: 20px;
-	 	float: left;
-	}
-	.types {
-		color: #C9C9C9;
-		font-size: 13;
-		text-align: right;
-		margin: -25px 18px 0px auto;
-		padding: 0px;
-		float: right;
-    }
-
-    .row_bottom {
-    	margin-top: 2px;
-    }
-	.balances {
-		color: #8B612A;
-		font-size: 13;
-		text-align: left;
-		margin: 0px 0px 0px 20px;
-		padding: 0px;
-		float: left;
-	}
-	.dates { 
-		color: #919191;
-		font-size: 14;
-		text-align: left;
-		margin: 25px 0px 0px 20px;
-		padding: 0px;
-		float: left;
-	}
-	.img_style {
-		width: 95px;
-		height: 65px;
-		float: right;
-		margin: 0px 7px 8px auto;
-	}
-}	
-
+  margin: 12.5px 13px;
+  background: url('/src/images/receipt_record_bg.png') repeat-y;
+  background-size: 8px 22px;
+  background-color: #fff;
+  /*receipt_record_bg*/
+  /*receipt_success*/
+  border: 1px solid #F8F8F8;
+  border-radius: 5px;
+  .row_top {
+    margin-top: 10px;
+  }
+  .money {
+    text-align: left;
+    margin: 0px 0px 0px 20px;
+    padding: 0px;
+    color: #FFA867;
+    font-size: 20px;
+    float: left;
+  }
+  .types {
+    color: #C9C9C9;
+    font-size: 13;
+    text-align: right;
+    margin: -25px 18px 0px auto;
+    padding: 0px;
+    float: right;
+  }
+  .row_bottom {
+    margin-top: 2px;
+  }
+  .balances {
+    color: #8B612A;
+    font-size: 13;
+    text-align: left;
+    margin: 0px 0px 0px 20px;
+    padding: 0px;
+    float: left;
+  }
+  .dates {
+    color: #919191;
+    font-size: 14;
+    text-align: left;
+    margin: 25px 0px 0px 20px;
+    padding: 0px;
+    float: left;
+  }
+  .img_style {
+    width: 95px;
+    height: 65px;
+    float: right;
+    margin: 0px 7px 8px auto;
+  }
+}
 
 // 空列表样式
 .receipts_none {
