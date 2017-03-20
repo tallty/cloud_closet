@@ -166,10 +166,12 @@ export class ReceiptInfo extends Component {
             <h4>发票信息提交后不可更改，请仔细填写 ！</h4>
           </div>
           <div className={css.btn_position}>
-            <Link to="/receipt_success"><button>提交</button></Link>
+            <Link to="/receipt_success">
+              <Button type="primary" htmlType="submit" onClick={this.submit.bind(this)}>提交</Button>
+            </Link>
           </div>
         </div>
-      </div>
+      </div >
     )
   }
 }
