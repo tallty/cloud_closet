@@ -16,22 +16,22 @@ export class ReceiptRecord extends Component {
     receipts: [{
       money: '200',
       date: '2017-03-15',
-      type: '普通发票',
+      types: '普通发票',
       balance: '300'
     }, {
       money: '200',
       date: '2017-03-15',
-      type: '增值税专用发票',
+      types: '增值税专用发票',
       balance: '300'
     }, {
       money: '200',
       date: '2017-03-15',
-      type: '普通发票',
+      types: '普通发票',
       balance: '300'
     }, {
       money: '200',
       date: '2017-03-15',
-      type: '增值税专用发票',
+      types: '增值税专用发票',
       balance: '300'
     }]
   }
@@ -62,7 +62,7 @@ export class ReceiptRecord extends Component {
         <div className={css.content_detail} key={index}>
           <Row className={css.row_top}>
             <Col span={12} className={css.money}>{receipt.money}元</Col>
-            <Col span={12} className={css.types}>{receipt.type}</Col>
+            <Col span={12} className={css.types}>{receipt.types}</Col>
           </Row>
           <Row className={css.row_bottom}>
             <Col span={14}>
