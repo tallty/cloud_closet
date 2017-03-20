@@ -45,8 +45,8 @@ export class ReceiptSuccess extends Component {
         </div>
         <div className={css.content_body_top}>
           <Row>
-            <Col span={8} className={css.lf}>发票抬头</Col>
-            <Col span={16} className={css.rt}>
+            <Col span={6} className={css.lf}>发票抬头</Col>
+            <Col span={18} className={css.rt}>
               <span>{receipt.nickname}</span>
             </Col>
           </Row>
@@ -70,8 +70,8 @@ export class ReceiptSuccess extends Component {
           </Row>
 
           <Row>
-            <Col span={12} className={css.lf}>地址</Col>
-            <Col span={12} className={css.rt}>{receipt.address}</Col>
+            <Col span={6} className={css.lf}>地址</Col>
+            <Col span={18} className={css.rt}>{receipt.address}</Col>
           </Row>
 
           <Row>
