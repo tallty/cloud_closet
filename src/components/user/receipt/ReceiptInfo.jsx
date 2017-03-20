@@ -5,9 +5,11 @@ import React, { Component } from 'react';
 import css from './ReceiptInfo.less';
 import { Form, Button, Checkbox, Row, Col, Input, Icon, Menu, Dropdown, Select } from 'antd';
 import Toolbar from '../../common/Toolbar';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
+import SuperAgent from 'superagent';
 
 const InputGroup = Input.Group;
+const Option = Select.Option;
 
 export class ReceiptInfo extends Component {
   constructor(props) {
@@ -44,8 +46,7 @@ export class ReceiptInfo extends Component {
     });
   }
   // 联系人
-  handleCelName(e) {
-    let value = e.target.value;
+  handleCelName(value) {
     this.setState({
       cel_name: value,
     });
@@ -73,7 +74,12 @@ export class ReceiptInfo extends Component {
   }
   // 提交
   submit() {
+    // SuperAgent.post()
+    //           .set('Accept', 'application/json')
+    //           .send({recceipt: {}})
+    //           .end((err, res) => {
 
+    //           })
   }
   render() {
     return (
@@ -111,10 +117,14 @@ export class ReceiptInfo extends Component {
           <InputGroup>
             <Row className={css.cell}>
               <Col span={12} className={css.lf}>发票类型 </Col>
-              <Col span={12} className={css.rt}>{}
-                <Link to="/receipt_info" className={css.icon_col}>
+              <Col span={12} className={css.rt}>
+                <Select defaultValue="1" onChange={this.handleTypes.bind(this)}>
+                  <Option value="1">普通发票</Option>
+                  <Option value="2">增值税专用发票</Option>
+                </Select>
+                {/*<Link to="/receipt_info" className={css.icon_col}>
                   <Icon type="right" />
-                </Link>
+                </Link>*/}
               </Col>
             </Row>
           </InputGroup>
