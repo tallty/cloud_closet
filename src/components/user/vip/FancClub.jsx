@@ -66,14 +66,14 @@ export default class FancClub extends Component {
         </div>
 
         <div className={css.title_one}>尊享特权</div>
-        <div className={css.slider}>
+        {/*<div className={css.slider}>
           {this.getPowerImges()}
-        </div>
+        </div>*/}
         <VipExplain />
-        // <Link to="/vip_explain" className={css.title_two}>
-        //   乐存好衣会员权益说明
-        //   <span><Icon type="right" /></span>
-        // </Link>
+        {/*<Link to="/vip_explain" className={css.title_two}>*/}
+        {/*乐存好衣会员权益说明*/}
+        {/*<span><Icon type="right" /></span>*/}
+        {/*</Link>*/}
       </div>
     )
   }
