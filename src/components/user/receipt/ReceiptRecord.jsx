@@ -13,40 +13,46 @@ const { string, number, arrayOf, shape } = PropTypes;
 
 export class ReceiptRecord extends Component {
   state = {
-    receipts: [{
-      money: '200',
-      date: '2017-03-15',
-      types: '普通发票',
-      balance: '300'
-    }, {
-      money: '200',
-      date: '2017-03-15',
-      types: '增值税专用发票',
-      balance: '300'
-    }, {
-      money: '200',
-      date: '2017-03-15',
-      types: '普通发票',
-      balance: '300'
-    }, {
-      money: '200',
-      date: '2017-03-15',
-      types: '增值税专用发票',
-      balance: '300'
-    }]
+    receipts: [
+      // {
+      //   amount: '200',
+      //   date: '2017-03-15',
+      //   invoice_type: '普通发票',
+      //   remaining_limit: '300'
+      // }, {
+      //   amount: '200',
+      //   date: '2017-03-15',
+      //   invoice_type: '增值税专用发票',
+      //   remaining_limit: '300'
+      // }, {
+      //   amount: '200',
+      //   date: '2017-03-15',
+      //   invoice_type: '普通发票',
+      //   remaining_limit: '300'
+      // }, {
+      //   amount: '200',
+      //   date: '2017-03-15',
+      //   invoice_type: '增值税专用发票',
+      //   remaining_limit: '300'
+      // }
+    ]
+  }
+  //加载数据
+  componentDidMount() {
+    this.getReceipts();
   }
 
   //开票记录列表
   getReceipts(page) {
     SuperAgent
-      .get('http://closet-api.tallty.com/receipts?page=${page}')
+      .get('http://closet-api.tallty.com/invoices?page=${page}')
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
       .end((err, resualt) => {
         if (resualt.ok) {
           const obj = resualt.body;
-          this.setState({ receipts: obj.receipts.reverse() });
+          this.setState({ receipts: obj.invoices.reverse() });
         } else {
 
         }
@@ -61,12 +67,12 @@ export class ReceiptRecord extends Component {
       list.push(
         <div className={css.content_detail} key={index}>
           <Row className={css.row_top}>
-            <Col span={12} className={css.money}>{receipt.money}元</Col>
-            <Col span={12} className={css.types}>{receipt.types}</Col>
+            <Col span={12} className={css.money}>{receipt.amount}元</Col>
+            <Col span={12} className={css.types}>{receipt.invoice_type}</Col>
           </Row>
           <Row className={css.row_bottom}>
             <Col span={14}>
-              <p className={css.balances}>开票额度剩余 {receipt.balance} 元
+              <p className={css.balances}>开票额度剩余 {receipt.remaining_limit} 元
               </p>
               <p className={css.dates}>开票日期：{receipt.date}</p>
             </Col>
