@@ -42,7 +42,7 @@ export class ReceiptRecord extends Component {
     this.getReceipts();
   }
 
-  //开票记录列表
+  //获取数据
   getReceipts(page) {
     SuperAgent
       .get('http://closet-api.tallty.com/invoices?page=${page}')
@@ -58,7 +58,7 @@ export class ReceiptRecord extends Component {
         }
       })
   }
-
+  //开票记录列表
   getReceiptList() {
     const { receipts } = this.state
     const list = [];
@@ -106,17 +106,5 @@ export class ReceiptRecord extends Component {
   }
 }
 
-ReceiptRecord.defaultProps = {
-  Receipts: []
-}
-ReceiptRecord.propTypes = {
-  Receipts: arrayOf(
-    shape({
-      id: number,
-      money: number,
-      balance: number,
-      date: string,
-      type: string
-    })
-  )
-}
+ReceiptRecord.defaultProps = {}
+ReceiptRecord.propTypes = {}
