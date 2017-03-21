@@ -34,8 +34,9 @@ class Recharge extends Component {
 
   getChargeObject() {
     const { selected } = this.state;
+    const money = selected.amount * 100;
     SuperAgent
-      .post(`http://closet-api.tallty.com/get_pingpp_pay_order?openid=${localStorage.openid}&amount=${selected.amount}&subject=${'充值'}&body=${'余额充值'}`)
+      .post(`http://closet-api.tallty.com/get_pingpp_pay_order?openid=${localStorage.openid}&amount=${money}&credit=${selected.credits}&subject=${'充值'}&body=${'余额充值'}`)
       .set('Accept', 'application/json')
       .end((err, res) => {
         if (!err || err === null) {
