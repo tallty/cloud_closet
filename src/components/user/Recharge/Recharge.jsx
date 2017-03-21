@@ -92,7 +92,7 @@ class Recharge extends Component {
    * [handlePayment 开始微信支付]
    */
   handlePayment() {
-    if (this.state.money > 0) {
+    if (this.state.selected.amount > 0) {
       this.getChargeObject();
     } else {
       alert('请选择充值金额');
