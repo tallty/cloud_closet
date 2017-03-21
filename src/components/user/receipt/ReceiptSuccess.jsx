@@ -10,28 +10,35 @@ import { Row, Col } from 'antd';
 export class ReceiptSuccess extends Component {
   state = {
     receipt: {
-      nickname: '上海拓体信息科技有限公司',
-      money: '1000',
-      types: '普通发票',
+      title: '上海拓体信息科技有限公司',
+      amount: '1000',
+      invoice_type: '普通发票',
       cel_name: '公司总经理',
       cel_phone: '13813813811',
-      post_code: '123456',
+      postcode: '123456',
       address: '上海拓体信息科技有限公司地址'
     }
   }
+  //加载数据
+  componentDidMount() {
+    this.getReceipt();
+  }
   //开票详情
-  getReceipts(id) {
+  getReceipt() {
+    let id = this.props.location.query.id;
     SuperAgent
-      .get('http://closet-api.tallty.com/receipts/id')
+      .get('http://closet-api.tallty.com/invoices/${id}')
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
       .end((err, resualt) => {
         if (resualt.ok) {
-          const obj = resualt.body;
-          // this.setState({ receipt: obj.receipts.reverse() });
+          let obj = resualt.body;
+          console.log("ReceiptSuccess.jsx 获取的发票详情 => ")
+          console.log(obj);
+          this.setState({ receipt: obj });
         } else {
-
+          console.log("获取发票详情失败")
         }
       })
   }
@@ -47,15 +54,15 @@ export class ReceiptSuccess extends Component {
           <Row>
             <Col span={6} className={css.lf}>发票抬头</Col>
             <Col span={18} className={css.rt}>
-              <span>{receipt.nickname}</span>
+              <span>{receipt.title}</span>
             </Col>
           </Row>
           <Row>
             <Col span={12} className={css.lf}>发票金额</Col>
-            <Col span={12} className={css.rt}>￥{receipt.money}</Col>
+            <Col span={12} className={css.rt}>￥{receipt.amount}</Col>
           </Row>
           <Row>
-            <Col span={24} className={css.rt}>{receipt.types}</Col>
+            <Col span={24} className={css.rt}>{receipt.invoice_type}</Col>
           </Row>
         </div>
         <div className={css.content_body_bottom}>
@@ -75,7 +82,7 @@ export class ReceiptSuccess extends Component {
           </Row>
 
           <Row>
-            <Col span={24} className={css.rt}>邮编 {receipt.post_code}</Col>
+            <Col span={24} className={css.rt}>邮编 {receipt.postcode}</Col>
           </Row>
         </div>
         <div className={css.content_bottom}>
