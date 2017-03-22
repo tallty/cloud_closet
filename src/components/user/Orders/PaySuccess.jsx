@@ -10,12 +10,16 @@ class PaySuccess extends Component {
 
   componentWillMount() {
     const obj = JSON.parse(sessionStorage.getItem('pay_order'));
+    if (obj === null) {
+      location.href = '/user';
+      return;
+    }
     this.setState({ order: obj });
   }
 
   render() {
     const { order } = this.state;
-
+    if (!order.appointment_price_groups) return <div></div>;
     return (
       <div className={css.container}>
         <div className={css.state}>支付成功</div>

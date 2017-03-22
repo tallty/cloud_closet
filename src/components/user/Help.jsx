@@ -47,11 +47,11 @@ export class Help extends Component {
               </Panel>
             </Collapse>
 
-            <div style={{height: 28}}></div>
+            <div style={{ height: 28 }}></div>
 
             {/*<div className={css.border_div} style={{paddingTop: 14}}>
               平台在线客服
-              <Link to="/help"><img width="100%" src="src/images/service.png" alt="" /></Link> 
+              <Link to="/help"><img width="100%" src="src/images/service.png" alt="" /></Link>
             </div>*/}
             <div className={css.border_div}>
               <Link to="/help"><img width="100%" src="src/images/service.png" alt="" /></Link>

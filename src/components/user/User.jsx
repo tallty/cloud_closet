@@ -14,7 +14,7 @@ export class User extends Component {
     grids: [
       { name: '配送篮', message: false, url: '/cart' },
       { name: '我的订单', message: true, url: '/orders' },
-      { name: '系统通知', message: false, url: '/notifications' },
+      { name: '消息中心', message: false, url: '/notifications' },
       { name: 'VIP会员', message: false, url: '/vip' },
       { name: '发票', message: false, url: '/receipt' },
       { name: '我的小蜜', message: false, url: '/help' }
@@ -30,7 +30,6 @@ export class User extends Component {
       .end((err, res) => {
         if (!err || err === null) {
           // 缓存
-          console.log(res.body);
           localStorage.setItem('user', JSON.stringify(res.body));
           this.setState({ user: res.body });
         } else {
