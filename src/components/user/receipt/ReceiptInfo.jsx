@@ -4,14 +4,14 @@
 import React, { Component } from 'react';
 import css from './ReceiptInfo.less';
 import { Form, Button, Checkbox, Row, Col, Input, Icon, Menu, Dropdown, Select } from 'antd';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 import SuperAgent from 'superagent';
 import Toolbar from '../../common/ToolBar';
 
 const InputGroup = Input.Group;
 const Option = Select.Option;
 
-export class ReceiptInfo extends Component {
+class ReceiptInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,9 +27,9 @@ export class ReceiptInfo extends Component {
     }
   }
   // 发票金额
-  componentWillMount() {
+  handleAmount(e) {
     this.setState({
-      amount: localStorage.amount
+      amount: e.target.value
     });
   }
   // 发票抬头
@@ -84,7 +84,7 @@ export class ReceiptInfo extends Component {
         .set('X-User-Token', localStorage.authentication_token)
         .set('X-User-Phone', localStorage.phone)
         .send({
-          invoices: {
+          invoice: {
             amount: amount,
             title: title,
             invoice_type: invoice_type,
@@ -96,7 +96,7 @@ export class ReceiptInfo extends Component {
         })
         .end((err, res) => {
           if (!err || err === null) {
-            const receiptStr = JSON.textify(res.body);
+            const receiptStr = JSON.stringify(res.body);
             sessionStorage.setItem('receipt', receiptStr);
             this.props.router.replace('/receipt_success');
             console.log('ReceiptInfo.jsx 填写的发票信息 =>')
@@ -113,6 +113,7 @@ export class ReceiptInfo extends Component {
     }
   }
   render() {
+    const DefaultAmount = localStorage.getItem('amount')
     return (
       <div className={css.container}>
         <Toolbar url="/user" title="信息填写" theme="dark" />
@@ -135,7 +136,7 @@ export class ReceiptInfo extends Component {
             <Row className={css.cell}>
               <Col span={17} className={css.lf}>发票金额</Col>
               <Col span={7} className={css.rt}>
-                <Input type="number" name="amount" id="amount" defaultValue={this.state.amount} min={1000} max={this.state.amount} />
+                <Input type="number" name="amount" id="amount" defaultValue={DefaultAmount} min={1000} max={DefaultAmount} onChange={this.handleAmount.bind(this)} />
               </Col>
             </Row>
           </InputGroup>
@@ -210,12 +211,12 @@ export class ReceiptInfo extends Component {
             <p style={{ color: 'red' }}>{this.state.errMsg}</p>
           </div>
           <div className={css.btn_position}>
-            <Link to="/receipt_success">
-              <Button type="primary" htmlType="submit" onClick={this.submit.bind(this)}>提交</Button>
-            </Link>
+            <Button type="primary" onClick={this.submit.bind(this)}>提交</Button>
           </div>
         </div>
-      </div >
+      </div>
     )
   }
 }
+
+export default withRouter(ReceiptInfo);
