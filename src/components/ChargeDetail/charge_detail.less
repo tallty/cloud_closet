@@ -83,11 +83,26 @@
   .content {
     font-size: 12px;
   }
+  .attention {
+    display: table;
+    line-height: 24px;
+    label {
+      display: table-cell;
+      width: 63px;
+    }
+    p {
+      display: table-cell;
+      a {
+        color: #7BB7F9;
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 // join us
 .join {
-  margin: 0px 40px 50px;
+  margin: 0px 40px 20px;
   color: #000000;
   font-size: 15px;
   text-align: center;
@@ -99,6 +114,22 @@
     width: 100%;
     height: 44px;
     font-size: 18px;
-    margin-bottom: 30px;
+  }
+}
+
+// 洗衣详情页面
+.wash_container {
+  background: #ECC17D;
+  padding: 10px 25px 25px;
+  height: 100%;
+  text-align: center;
+  overflow: auto;
+  .logo {
+    width: 70%;
+    margin-bottom: 15px;
+  }
+  img {
+    display: inline-block;
+    max-width: 100%;
   }
 }

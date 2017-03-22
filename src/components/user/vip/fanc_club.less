@@ -1,91 +1,141 @@
 .container {
-	height: 100%;
-	background-color: #F5F5F5;
-	.user_info {
-		background: radial-gradient(#EDD6AA, #E6C48E, #DEAF6C);
-		height: 150px;
-		.back {
-			height: 48px;
-			line-height: 48px;
-			overflow: hidden;
-			margin-bottom: 15px;
-			.back_link, .back_link:hover {
-				display: block;
-				width: 48px;
-				line-height: 48px;
-				text-align: center;
-				font-size: 20px;
-				font-weight: bolder;
-				color: #fff;
-				float: left;
-				&:active {
-					background-color: #F8DF8D;
-				}
-			}
-			.title {
-				float: left;
-				width: 100%;
-				margin-right: -48px;
-				padding-right: 96px;
-				text-align: center;
-				color: #fff;
-				font-size: 20px;
-			}
-		}
-		.name {
-			text-align: center;
-			font-size: 24px;
-			color: #fff;
-			margin-bottom: 10px;
-		}
-	}
-	.title_one {
-		height: 54px;
-		line-height: 54px;
-		color: #CDAD64;
-		font-size: 16px;
-		padding: 0 23px;
-		border-bottom: 2px solid #FCE2A0;
-		background-color: #fff;
-	}
-
-	.title_two {
-		height: 54px;
-		line-height: 54px;
-		color: #919191;
-		font-size: 16px;
-		padding: 0 23px;
-		display: block;
-		background-color: #fff;
-		overflow: hidden;
-		span {
-			float: right;
-			line-height: 54px;
-			font-size: 20px;
-		}
-	}
-
-	.slider {
-		width: 100%;
-		padding: 20px 0;
-		background-color: #fff;
-		margin-bottom: 5px;
-		white-space: nowrap;
+  height: 100%;
+  background-color: #FFF;
+  .user_info {
+    background: radial-gradient(#EDD6AA, #E6C48E, #DEAF6C);
+    height: 150px;
+    .back {
+      height: 48px;
+      line-height: 48px;
+      overflow: hidden;
+      margin-bottom: 5px;
+      .back_link,
+      .back_link:hover {
+        display: block;
+        width: 48px;
+        line-height: 48px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bolder;
+        color: #fff;
+        float: left;
+        &:active {
+          background-color: #F8DF8D;
+        }
+      }
+      .title {
+        float: left;
+        width: 100%;
+        margin-right: -48px;
+        padding-right: 96px;
+        text-align: center;
+        color: #fff;
+        font-size: 20px;
+      }
+    }
+    .name {
+      text-align: center;
+      font-size: 24px;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+  }
+  .des {
+    line-height: 48px;
+    height: 48px;
+    background: #fff;
+    padding: 0 25px;
+    border-bottom: 4px solid #F8F8F8;
+    font-size: 14px;
+    color: #7F7F7F;
+  }
+  .text {
+    padding: 14px 25px;
+    line-height: 30px;
+    font-size: 13px;
+    color: #9B9B9B;
+    background: #fff;
+    h3 {
+      font-weight: bold;
+    }
+    p span {
+      font-size: 19px;
+      &:first-child {
+        color: #757575;
+      }
+      &:last-child {
+        color: #ECC17D;
+      }
+    }
+  }
+  .vip_card {
+    border-top: 1px solid #ECC17D;
+    padding: 20px;
+    position: relative;
+    margin-top: 40px;
+    background: #fff;
+    .title {
+      color: #757575;
+      padding: 0 10px;
+      font-size: 18px;
+      position: absolute;
+      top: -40px;
+      left: 25px;
+      background: #fff;
+      display: inline-block;
+      span {
+        font-size: 50px;
+      }
+    }
+    img {
+      width: 100%;
+    }
+  }
+  .title_one {
+    height: 54px;
+    line-height: 54px;
+    color: #CDAD64;
+    font-size: 16px;
+    padding: 0 23px;
+    border-bottom: 2px solid #FCE2A0;
+    background-color: #fff;
+  }
+  .title_two {
+    height: 54px;
+    line-height: 54px;
+    color: #919191;
+    font-size: 16px;
+    padding: 0 23px;
+    display: block;
+    background-color: #fff;
+    overflow: hidden;
+    span {
+      float: right;
+      line-height: 54px;
+      font-size: 20px;
+    }
+  }
+  .slider {
+    width: 100%;
+    padding: 20px 0;
+    background-color: #fff;
+    margin-bottom: 5px;
+    white-space: nowrap;
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
-		.power {
-			margin: 0 20px;
-			width: 60px;
-			height: 60px;
-			display: inline-block;
-			img {
-				width: 100%;
-			}
-			p {
-				color: #757575;
-				font-size: 12px;
-				text-align: center;
-			}
-		}
-	}
+    .power {
+      margin: 0 20px;
+      width: 60px;
+      height: 60px;
+      display: inline-block;
+      img {
+        width: 100%;
+      }
+      p {
+        color: #757575;
+        font-size: 12px;
+        text-align: center;
+      }
+    }
+  }
 }

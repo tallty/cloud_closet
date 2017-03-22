@@ -5,6 +5,7 @@ import agent from 'superagent';
 import styles from './charge_detail.less'
 import classNames from 'classnames'
 import classBind from 'classnames/bind'
+import { Link } from 'react-router'
 
 // 垂直居中
 const DemoBox = props => <p className={`height-${props.value}`}>{props.children}</p>;
@@ -71,10 +72,25 @@ export class ChargeDetail extends Component {
         <div className={styles.explain}>
           <div className={styles.title}>• 注意事项：</div>
           <div className={styles.content}>除柜体租借费用外，我们将收取以下额外的费用<br />
-            1.  服务费(上门收件免费，送件快递费另算)。<br />
-            2. 护理费：分为普通护理-UCC国际洗衣、 高端护理-嘉里酒店精洗。<br />
-            3. 真空袋：(中号)用于叠放柜(10个)10¥/个；<br />
-            (大号)用于叠放柜(5个)15¥/个。</div>
+            <div className={styles.attention}>
+              <label>1.  服务费：</label>
+              <p>我们的服务费包括上门收衣和出库配送的物流费和人工服务费(专车专员配送), 上海市内一律100¥／次(首次上门收衣免服务费)，也可选快递配送，费用自理；</p>
+            </div>
+
+            <div className={styles.attention}>
+              <label>2. 护理费：</label>
+              <p>
+                我们提供沪上两家高端洗衣中心选择<br />
+                <strong>UCC国际洗衣 <Link to="/wash_charge?kind=ucc">点击查看价格表</Link></strong><br />
+                <strong>嘉里酒店精洗 <Link to="/wash_charge?kind=hotel">点击查看价格表</Link></strong>
+              </p>
+            </div>
+
+            <div className={styles.attention}>
+              <label> 3. 真空袋：</label>
+              <p>(中号)用于叠放柜(10个)10¥/个；<br />(大号)用于叠放柜(5个)15¥/个。</p>
+            </div>
+          </div>
         </div>
         {/*Join Us*/}
         <div className={styles.join}>
@@ -92,7 +108,7 @@ ChargeDetail.defaultProps = {
     ['叠放柜', 'sark_one', '400mm*100mm*560mm', '• 叠放柜可存放针织类，卫衣棉服等可折叠衣物60件,也可提供真空袋出售；', '180￥/月', ''],
     ['挂放柜', 'sark_two', '1200mm*100mm*560mm', '• 挂放柜可存放16件套装衣物，适合存放外套、大衣等大件衣物；', '300￥/月', ''],
     ['组合柜', 'sark_three', '1600mm*100mm*560mm', '• 组合柜可存放60件折叠和16件挂放衣物，适合灵活存挂衣物；', '400￥/月', ''],
-    ['礼服柜', 'sark_four', '2400mm*100mm*560mm', '• 礼服柜可存放12件贵重礼服，适合存放大件礼服；', '50￥/件', '600￥/月', '']
+    ['礼服柜', 'sark_four', '2400mm*100mm*560mm', '• 礼服柜可存放12件贵重礼服，适合存放大件礼服；', '60￥/件', '600￥/月', '']
   ]
 }
 

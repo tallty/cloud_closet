@@ -76,7 +76,6 @@ class ReceiptInfo extends Component {
   submit(e) {
     e.preventDefault();
     const { amount, title, invoice_type, cel_name, cel_phone, postcode, address } = this.state;
-    console.log(this.state)
     if (amount && title && invoice_type && cel_name && cel_phone && postcode && address) {
       SuperAgent
         .post('http://closet-api.tallty.com/invoices')
@@ -99,14 +98,9 @@ class ReceiptInfo extends Component {
             const receiptStr = JSON.stringify(res.body);
             sessionStorage.setItem('receipt', receiptStr);
             this.props.router.replace('/receipt_success');
-            console.log('ReceiptInfo.jsx 填写的发票信息 =>')
-            console.log(res.body);
-          } else {
-            console.log('发票创建失败')
           }
         })
     } else {
-      console.log('发票信息不能为空');
       this.setState({
         errMsg: '发票信息的填写不能有空...'
       })

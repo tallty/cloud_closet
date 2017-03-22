@@ -13,6 +13,7 @@ import { User } from '../components/user/User'
 import { MyCloset } from '../components/my_closet/MyCloset'
 // 收费详情
 import { ChargeDetail } from '../components/ChargeDetail/ChargeDetail'
+import WashCharge from '../components/ChargeDetail/WashCharge'
 // 我的衣橱
 import Appointment from '../components/appointment/Appointment'
 import { MapAddress } from '../components/MapAddress/MapAddress'
@@ -83,7 +84,7 @@ export class Routes extends Component {
         </Route>
         {/* 收费详情 */}
         <Route path="/charge_detail" component={ChargeDetail} />
-
+        <Route path="/wash_charge" component={WashCharge} />
         {/* 服务协议 */}
         <Route path="/protocol" component={Protocol} />
 
