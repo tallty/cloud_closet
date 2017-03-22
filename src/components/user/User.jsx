@@ -42,6 +42,7 @@ export class User extends Component {
   getGrid() {
     const list = [];
     const { recharge_amount } = this.state.user;
+    sessionStorage.setItem('amount', recharge_amount);
     this.state.grids.forEach((grid, index, obj) => {
       const dot = grid.message ? <div className={css.dot}></div> : null;
       list.push(
