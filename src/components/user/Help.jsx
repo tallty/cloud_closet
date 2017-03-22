@@ -54,7 +54,7 @@ export class Help extends Component {
               <Link to="/help"><img width="100%" src="src/images/service.png" alt="" /></Link>
             </div>*/}
             <div className={css.border_div}>
-              <Link to="/help"><img width="100%" src="src/images/service.png" alt="" /></Link>
+              <Link to="/help"><img width="100%" src="/src/images/service_code.png" alt="" /></Link>
             </div>
 
             <div className={css.border_div}>
