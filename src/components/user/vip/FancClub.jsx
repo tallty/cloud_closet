@@ -66,7 +66,7 @@ export default class FancClub extends Component {
           </div>
         </div>
 
-        <div className={css.title_one}>尊享特权</div>
+        {/*<div className={css.title_one}>尊享特权</div>*/}
         {/*<div className={css.slider}>
           {this.getPowerImges()}
         </div>*/}
@@ -75,7 +75,7 @@ export default class FancClub extends Component {
         {/*<span><Icon type="right" /></span>*/}
         {/*</Link>*/}
 
-        <div className={css.des}>乐存好衣会员权益说明</div>
+        {/*<div className={css.des}>乐存好衣会员权益说明</div>*/}
         <div className={css.vip_card}>
           <div className={css.title}><span>VIP</span> 会员等级</div>
           <img src="/src/images/vip_card.png" alt="img" />
