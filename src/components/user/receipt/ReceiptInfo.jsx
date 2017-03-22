@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import css from './ReceiptInfo.less';
-import { Form, Button, Checkbox, Row, Col, Input, Icon, Menu, Dropdown, Select } from 'antd';
+import { Form, Button, Checkbox, Row, Col, Input, InputNumber, Icon, Menu, Dropdown, Select } from 'antd';
 import { Link, withRouter } from 'react-router';
 import SuperAgent from 'superagent';
 import Toolbar from '../../common/ToolBar';
@@ -131,7 +131,7 @@ class ReceiptInfo extends Component {
               <Row className={css.cell}>
                 <Col span={17} className={css.lf}>发票金额</Col>
                 <Col span={7} className={css.rt}>
-                  <Input type="number" name="amount" id="amount" defaultValue={DefaultAmount} min={1000} max={DefaultAmount} onChange={this.handleAmount.bind(this)} />
+                  <InputNumber type="number" name="amount" id="amount" defaultValue={DefaultAmount} min={1000} max={DefaultAmount} onChange={this.handleAmount.bind(this)} />
                 </Col>
               </Row>
             </InputGroup>
