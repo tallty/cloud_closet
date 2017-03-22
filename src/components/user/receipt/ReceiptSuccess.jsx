@@ -48,17 +48,17 @@ export class ReceiptSuccess extends Component {
         <div className={css.content_body_bottom}>
           <Row>
             <Col span={12} className={css.lf}>联系人</Col>
-            <Col span={12} className={css.rt}>{cel_name}</Col>
+            <Col span={12} className={css.rt}><strong>{cel_name}</strong></Col>
           </Row>
 
           <Row>
             <Col span={12} className={css.lf}>联系电话</Col>
-            <Col span={12} className={css.rt}>{cel_phone}</Col>
+            <Col span={12} className={css.rt}><strong>{cel_phone}</strong></Col>
           </Row>
 
           <Row>
             <Col span={6} className={css.lf}>地址</Col>
-            <Col span={18} className={css.rt}>{address}</Col>
+            <Col span={18} className={css.rt}><strong>{address}</strong></Col>
           </Row>
 
           <Row>
