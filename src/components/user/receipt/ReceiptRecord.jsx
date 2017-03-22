@@ -13,29 +13,7 @@ const { string, number, arrayOf, shape } = PropTypes;
 
 export class ReceiptRecord extends Component {
   state = {
-    receipts: [
-      // {
-      //   amount: '200',
-      //   date: '2017-03-15',
-      //   invoice_type: '普通发票',
-      //   remaining_limit: '300'
-      // }, {
-      //   amount: '200',
-      //   date: '2017-03-15',
-      //   invoice_type: '增值税专用发票',
-      //   remaining_limit: '300'
-      // }, {
-      //   amount: '200',
-      //   date: '2017-03-15',
-      //   invoice_type: '普通发票',
-      //   remaining_limit: '300'
-      // }, {
-      //   amount: '200',
-      //   date: '2017-03-15',
-      //   invoice_type: '增值税专用发票',
-      //   remaining_limit: '300'
-      // }
-    ]
+    receipts: []
   }
   //加载数据
   componentDidMount() {
@@ -53,10 +31,10 @@ export class ReceiptRecord extends Component {
         if (resualt.ok) {
           const obj = resualt.body;
           this.setState({ receipts: obj.invoices.reverse() });
-          console.log("ReceiptRecord.jsx 获取的发票记录列表 => ")
+          console.log('ReceiptRecord.jsx 获取的发票记录列表 =>')
           console.log(obj);
         } else {
-          console.log("获取发票记录列表失败")
+          console.log('获取发票记录列表失败')
         }
       })
   }
