@@ -27,9 +27,9 @@ class ReceiptInfo extends Component {
     }
   }
   // 发票金额
-  handleAmount(e) {
+  handleAmount(value) {
     this.setState({
-      amount: e.target.value
+      amount: value
     });
   }
   // 发票抬头
@@ -124,13 +124,15 @@ class ReceiptInfo extends Component {
             </Row>
           </div>
 
-          <p>发票信息</p>
+          <div className={css.hint}>
+            <p>发票信息</p>
+          </div>
 
           <div className={css.content_body_top}>
             <InputGroup>
               <Row className={css.cell}>
-                <Col span={17} className={css.lf}>发票金额</Col>
-                <Col span={7} className={css.rt}>
+                <Col span={15} className={css.lf}>发票金额</Col>
+                <Col span={9} className={css.rt}>
                   <InputNumber type="number" name="amount" id="amount" defaultValue={DefaultAmount} min={1000} max={DefaultAmount} onChange={this.handleAmount.bind(this)} />
                 </Col>
               </Row>
@@ -159,7 +161,9 @@ class ReceiptInfo extends Component {
             </InputGroup>
           </div>
 
-          <p>邮寄信息</p>
+          <div className={css.hint}>
+            <p>邮寄信息</p>
+          </div>
 
           <div className={css.content_body_bottom}>
             <InputGroup>
@@ -203,7 +207,7 @@ class ReceiptInfo extends Component {
             <div className={css.box_position}>
               <Checkbox onChange={this.handleCheck.bind(this)}><span>保存为预设发票</span></Checkbox>
               <h4>发票信息提交后不可更改，请仔细填写 ！</h4>
-              <p style={{ color: 'red' }}>{this.state.errMsg}</p>
+              <h3>{this.state.errMsg}</h3>
             </div>
             <div className={css.btn_position}>
               <Button type="primary" onClick={this.submit.bind(this)}>提交</Button>
