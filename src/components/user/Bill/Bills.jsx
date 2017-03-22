@@ -20,42 +20,41 @@ class Bills extends Component {
     this.fetchData();
   }
 
-  fetchData() {
-    Agent
-      .get(`http://closet-api.tallty.com/purchase_logs`)
-      .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
-      .end((err, res) => {
-        if (!err || err === null) {
-          console.log("获取账单成功");
-          console.dir(res.body);
-          this.setState({ bills: res.body.purchase_logs.reverse() });
-        } else {
-          console.log("获取账单失败");
-        }
-      })
-  }
-  
   getBills() {
-    let bills = []
-    for(let bill of this.state.bills) {
+    const bills = []
+    for (const bill of this.state.bills) {
       bills.push(
-        <div className={css.bill} key={bill.id} 
-             onClick={this.handleClick.bind(this, bill)}>
-          <p>
-            <span className={css.kind}>{bill.operation_type}</span>
-            <span className={css.money}>{bill.change_output}</span>
-            <span className={css.date}>{bill.what_day[0]}</span>
-          </p>
+        <div
+          className={css.bill}
+          key={bill.id}
+          onClick={this.handleClick.bind(this, bill)}
+        >
           <p>
             <span className={css.desc}>{bill.operation}</span>
-            <span className={css.time}>{bill.what_day[1]}</span>
+            <span className={css.time}>{bill.date}</span>
+          </p>
+          <p>
+            <span className={css.balance}>余额：{bill.balance}</span>
+            <span className={css.money}>{bill.change_output}</span>
           </p>
         </div>
       );
     }
     return bills;
+  }
+
+  fetchData() {
+    Agent
+      .get('http://closet-api.tallty.com/purchase_logs')
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+        if (!err || err === null) {
+          console.log(res.body);
+          this.setState({ bills: res.body.purchase_logs.reverse() });
+        }
+      })
   }
 
   handleClick(bill) {
@@ -67,9 +66,9 @@ class Bills extends Component {
     const { bills } = this.state;
     return (
       <div className={css.container}>
-        <Toolbar title="账户账单" url="/user"/>
+        <Toolbar title="账户账单" url="/user" />
         <div className={css.list}>
-          {bills ? this.getBills() : <Spiner/>}
+          {bills ? this.getBills() : <Spiner />}
         </div>
       </div>
     )

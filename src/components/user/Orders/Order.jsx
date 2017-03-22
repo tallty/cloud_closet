@@ -47,7 +47,8 @@ class Order extends Component {
 
   // 获取预约订单信息
   getAppointment() {
-    let id = this.props.location.query.id;
+    const id = this.props.location.query.id;
+
     SuperAgent
       .get(`http://closet-api.tallty.com/appointments/${id}`)
       .set('Accept', 'application/json')
@@ -55,12 +56,11 @@ class Order extends Component {
       .set('X-User-Phone', localStorage.phone)
       .end((err, res) => {
         if (res.ok) {
-          let obj = res.body;
-          console.log("Order.jsx 获取的订单详情 => ")
+          const obj = res.body;
           console.log(obj);
           this.setState({ order: obj });
         } else {
-          console.log("获取预约订单详情失败")
+          alert("获取订单详情失败")
         }
       })
   }
@@ -76,7 +76,7 @@ class Order extends Component {
         dot={<Icon type="clock-circle-o" style={{ fontSize: '20px' }} />}
         color="red">
         当前物流状态信息
-          <p>2015-09-01</p>
+        <p>2015-09-01</p>
       </Timeline.Item>
     )
     for (let i = 1; i < 6; i++) {
@@ -203,10 +203,9 @@ class Order extends Component {
 
   render() {
     const { order } = this.state
-
     return (
       <div className={css.appoint_order}>
-        <Toolbar title="选择支付方式" url="/orders" />
+        <Toolbar title="订单详情" url="/orders" />
         <div className={css.content}>
           {
             this.state.order ?

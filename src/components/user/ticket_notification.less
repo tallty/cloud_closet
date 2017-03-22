@@ -1,58 +1,58 @@
 .container {
-	height: 100%;
-	background-color: #F8F8F8;
-	display: flex;
-	display: -webkit-flex;
-	flex-flow: column nowrap;
-	.content {
-		flex-grow: 1;
-		overflow-y: scroll;
-	  -webkit-overflow-scrolling: touch;
-	  .cell_share {
-			display: block;
-			height: 80px;
-			background-color: #fff;
-			color: #7F7F7F;
-			font-size: 16px;
-			&:active {
-				background-color: #ebebeb;
-			}
-			img {
-				margin-right: 16px;
-				vertical-align: middle;
-			}
-		}
-		.ticket_cell {
-			.cell_share;
-			line-height: 80px;
-			margin-bottom: 5px;
-			padding: 0 17px;
-			img {
-				height: 42px;
-				width: 42px;
-			}
-		}
-		.notification_cell {
-			.cell_share;
-			margin-bottom: 1px;
-			padding: 10px 17px 0 10px;
-			img {
-				height: 60px;
-				width: 60px;
-				float: left;
-			}
-			.content {
-				font-size: 13px;
-				color: #ADADAD;
-				display: -webkit-box;
-				-webkit-box-orient: vertical;
-				-webkit-line-clamp: 1;
-				overflow: hidden;
-			}
-			.time {
-				float: right;
-				font-size: 12px;
-			}
-		}
-	}
+  height: 100%;
+  background-color: #F8F8F8;
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: column nowrap;
+  .content {
+    flex-grow: 1;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    .cell_share {
+      display: block;
+      height: 60px;
+      background-color: #fff;
+      color: #7F7F7F;
+      font-size: 16px;
+      &:active {
+        background-color: #ebebeb;
+      }
+      img {
+        margin-right: 16px;
+        vertical-align: middle;
+      }
+    }
+    .ticket_cell {
+      .cell_share;
+      line-height: 80px;
+      margin-bottom: 5px;
+      padding: 0 17px;
+      img {
+        height: 42px;
+        width: 42px;
+      }
+    }
+    .notification_cell {
+      .cell_share;
+      margin-bottom: 3px;
+      padding: 10px 17px 0 10px;
+      img {
+        height: 60px;
+        width: 60px;
+        float: left;
+      }
+      .content {
+        font-size: 13px;
+        color: #ADADAD;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+      }
+      .time {
+        float: right;
+        font-size: 12px;
+      }
+    }
+  }
 }

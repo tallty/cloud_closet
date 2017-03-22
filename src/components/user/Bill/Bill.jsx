@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import css from './bills.less';
 import Toolbar from '../../common/Toolbar'
+import { Link } from 'react-router';
 
 export class Bill extends Component {
   state = {
@@ -8,29 +9,21 @@ export class Bill extends Component {
   }
 
   componentWillMount() {
-    let bill = JSON.parse(sessionStorage.bill);
-    this.setState({ bill: bill });  
+    const obj = JSON.parse(sessionStorage.bill);
+    this.setState({ bill: obj });
   }
 
   getDetail(detail) {
-    let list = [];
-    let i = 0;
-    for (let item of detail) {
-      list.push(
-        <p className={css.row_p} key={i}>
-          <span>{`${item[0]}x${item[1]}`}</span>
-        </p>
-      );
-      i++;
-    }
-    return list;
+    return detail.map((item, index) => (
+      <p className={css.row_p} key={index}><span>{item}</span></p>
+    ))
   }
 
   render() {
-    let { bill } = this.state;
+    const { bill } = this.state;
     return (
       <div className={css.container}>
-        <Toolbar title="账户详情" url="/bills"/>
+        <Toolbar title="账户详情" url="/bills" />
 
         <div className={css.detail}>
           <p className={css.top1}>{bill.operation_type}</p>
@@ -43,7 +36,7 @@ export class Bill extends Component {
 
         <div className={css.detail_footer}>
           <p className={css.row_p}>交易时间 <span>{bill.date} {bill.time}</span></p>
-          <a href="tel:400-123-2345">我对账单有疑问</a>
+          <Link to={`/order?id=${bill.order_id}`}>我对账单有疑问</Link>
         </div>
       </div>
     );
