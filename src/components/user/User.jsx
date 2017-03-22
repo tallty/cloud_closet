@@ -41,17 +41,15 @@ export class User extends Component {
 
   getGrid() {
     const list = [];
-    let user = this.state.user;
-    let amount = user.recharge_amount;
-    localStorage.setItem('amount', amount);
+    const { recharge_amount } = this.state.user;
     this.state.grids.forEach((grid, index, obj) => {
       const dot = grid.message ? <div className={css.dot}></div> : null;
       list.push(
         index === 4 ?
           <Col span={8} className={css.item} key={index}>
             {dot}
-            <Link to={grid.url}>
-              <div className={css.ticket}>{amount}<span className={css.ticket_icon}>￥</span></div>
+            <Link to={`${grid.url}?amount=${recharge_amount}`}>
+              <div className={css.ticket}>{recharge_amount}<span className={css.ticket_icon}>￥</span></div>
               <div>{grid.name}</div>
             </Link>
           </Col> :

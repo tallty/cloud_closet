@@ -12,9 +12,8 @@ export class Receipt extends Component {
   }
   // 发票金额
   componentWillMount() {
-    let value = localStorage.amount;
     this.setState({
-      money: value,
+      money: Number(this.props.location.query.amount) || 0
     });
   }
   //允许点击
