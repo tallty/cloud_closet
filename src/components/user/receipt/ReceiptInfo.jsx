@@ -118,100 +118,102 @@ class ReceiptInfo extends Component {
       <div className={css.container}>
         <Toolbar url="/user" title="信息填写" theme="dark" />
 
-        <div className={css.content_top}>
-          <Row>
-            <Col span={12} className={css.lf}>新添预设信息</Col>
-            <Col span={12} className={css.rt}>
-              <Link to="/receipt_info" className={css.icon_col}>
-                <Icon type="right" />
-              </Link>
-            </Col>
-          </Row>
-        </div>
-
-        <p>发票信息</p>
-
-        <div className={css.content_body_top}>
-          <InputGroup>
-            <Row className={css.cell}>
-              <Col span={17} className={css.lf}>发票金额</Col>
-              <Col span={7} className={css.rt}>
-                <Input type="number" name="amount" id="amount" defaultValue={DefaultAmount} min={1000} max={DefaultAmount} onChange={this.handleAmount.bind(this)} />
-              </Col>
-            </Row>
-          </InputGroup>
-          <InputGroup>
-            <Row className={css.cell}>
-              <Col span={6} className={css.lf}>发票抬头</Col>
-              <Col span={18} className={css.rt}>
-                <Input type="text" name="title" id="title" value={this.state.title} onChange={this.handleTitle.bind(this)} />
-              </Col>
-            </Row>
-          </InputGroup>
-          <InputGroup>
-            <Row className={css.cell}>
-              <Col span={12} className={css.lf}>发票类型 </Col>
+        <div className={css.content}>
+          <div className={css.content_top}>
+            <Row>
+              <Col span={12} className={css.lf}>新添预设信息</Col>
               <Col span={12} className={css.rt}>
-                <Select defaultValue="普通发票" onChange={this.handleInvoiceType.bind(this)}>
-                  <Option value="普通发票">普通发票</Option>
-                  <Option value="增值税专用发票">增值税专用发票</Option>
-                </Select>
-                {/*<Link to="/receipt_info" className={css.icon_col}>
+                <Link to="/receipt_info" className={css.icon_col}>
                   <Icon type="right" />
-                </Link>*/}
+                </Link>
               </Col>
             </Row>
-          </InputGroup>
-        </div>
-
-        <p>邮寄信息</p>
-
-        <div className={css.content_body_bottom}>
-          <InputGroup>
-            <Row className={css.cell}>
-              <Col span={6} className={css.lf}>联系人</Col>
-              <Col span={18} className={css.rt}>
-                <Input type="text" name="cel_name" id="cel_name" value={this.state.cel_name} onChange={this.handleCelName.bind(this)} />
-                {/*<Link to="/receipt_info" className={css.icon_col}>
-                  <Icon type="right" />
-                </Link>*/}
-              </Col>
-            </Row>
-          </InputGroup>
-          <InputGroup>
-            <Row className={css.cell}>
-              <Col span={6} className={css.lf}>联系电话</Col>
-              <Col span={18} className={css.rt}>
-                <Input type="text" name="cel_phone" id="cel_phone" value={this.state.cel_phone} onChange={this.handleCelPhone.bind(this)} />
-              </Col>
-            </Row>
-          </InputGroup>
-          <InputGroup>
-            <Row className={css.cell}>
-              <Col span={6} className={css.lf}>邮政编码</Col>
-              <Col span={18} className={css.rt}>
-                <Input type="text" name="postcode" id="postcode" value={this.state.postcode} onChange={this.handlePostCode.bind(this)} />
-              </Col>
-            </Row>
-          </InputGroup>
-          <InputGroup>
-            <Row className={css.cell}>
-              <Col span={6} className={css.lf}>详细地址</Col>
-              <Col span={18} className={css.rt}>
-                <Input type="text" name="address" id="address" value={this.state.address} onChange={this.handleAddress.bind(this)} />
-              </Col>
-            </Row>
-          </InputGroup>
-        </div>
-
-        <div className={css.content_bottom}>
-          <div className={css.box_position}>
-            <Checkbox onChange={this.handleCheck.bind(this)}><span>保存为预设发票</span></Checkbox>
-            <h4>发票信息提交后不可更改，请仔细填写 ！</h4>
-            <p style={{ color: 'red' }}>{this.state.errMsg}</p>
           </div>
-          <div className={css.btn_position}>
-            <Button type="primary" onClick={this.submit.bind(this)}>提交</Button>
+
+          <p>发票信息</p>
+
+          <div className={css.content_body_top}>
+            <InputGroup>
+              <Row className={css.cell}>
+                <Col span={17} className={css.lf}>发票金额</Col>
+                <Col span={7} className={css.rt}>
+                  <Input type="number" name="amount" id="amount" defaultValue={DefaultAmount} min={1000} max={DefaultAmount} onChange={this.handleAmount.bind(this)} />
+                </Col>
+              </Row>
+            </InputGroup>
+            <InputGroup>
+              <Row className={css.cell}>
+                <Col span={6} className={css.lf}>发票抬头</Col>
+                <Col span={18} className={css.rt}>
+                  <Input type="text" name="title" id="title" value={this.state.title} onChange={this.handleTitle.bind(this)} />
+                </Col>
+              </Row>
+            </InputGroup>
+            <InputGroup>
+              <Row className={css.cell}>
+                <Col span={12} className={css.lf}>发票类型 </Col>
+                <Col span={12} className={css.rt}>
+                  <Select defaultValue="普通发票" onChange={this.handleInvoiceType.bind(this)}>
+                    <Option value="普通发票">普通发票</Option>
+                    <Option value="增值税专用发票">增值税专用发票</Option>
+                  </Select>
+                  {/*<Link to="/receipt_info" className={css.icon_col}>
+                  <Icon type="right" />
+                </Link>*/}
+                </Col>
+              </Row>
+            </InputGroup>
+          </div>
+
+          <p>邮寄信息</p>
+
+          <div className={css.content_body_bottom}>
+            <InputGroup>
+              <Row className={css.cell}>
+                <Col span={6} className={css.lf}>联系人</Col>
+                <Col span={18} className={css.rt}>
+                  <Input type="text" name="cel_name" id="cel_name" value={this.state.cel_name} onChange={this.handleCelName.bind(this)} />
+                  {/*<Link to="/receipt_info" className={css.icon_col}>
+                  <Icon type="right" />
+                </Link>*/}
+                </Col>
+              </Row>
+            </InputGroup>
+            <InputGroup>
+              <Row className={css.cell}>
+                <Col span={6} className={css.lf}>联系电话</Col>
+                <Col span={18} className={css.rt}>
+                  <Input type="text" name="cel_phone" id="cel_phone" value={this.state.cel_phone} onChange={this.handleCelPhone.bind(this)} />
+                </Col>
+              </Row>
+            </InputGroup>
+            <InputGroup>
+              <Row className={css.cell}>
+                <Col span={6} className={css.lf}>邮政编码</Col>
+                <Col span={18} className={css.rt}>
+                  <Input type="text" name="postcode" id="postcode" value={this.state.postcode} onChange={this.handlePostCode.bind(this)} />
+                </Col>
+              </Row>
+            </InputGroup>
+            <InputGroup>
+              <Row className={css.cell}>
+                <Col span={6} className={css.lf}>详细地址</Col>
+                <Col span={18} className={css.rt}>
+                  <Input type="text" name="address" id="address" value={this.state.address} onChange={this.handleAddress.bind(this)} />
+                </Col>
+              </Row>
+            </InputGroup>
+          </div>
+
+          <div className={css.content_bottom}>
+            <div className={css.box_position}>
+              <Checkbox onChange={this.handleCheck.bind(this)}><span>保存为预设发票</span></Checkbox>
+              <h4>发票信息提交后不可更改，请仔细填写 ！</h4>
+              <p style={{ color: 'red' }}>{this.state.errMsg}</p>
+            </div>
+            <div className={css.btn_position}>
+              <Button type="primary" onClick={this.submit.bind(this)}>提交</Button>
+            </div>
           </div>
         </div>
       </div>

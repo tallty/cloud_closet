@@ -1,6 +1,7 @@
 /**
  * 个人中心 - 发票 - 开票成功
  */
+
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Row, Col } from 'antd';
@@ -8,14 +9,14 @@ import SuperAgent from 'superagent';
 import css from './ReceiptSuccess.less';
 import Toolbar from '../../common/ToolBar';
 
-
 export class ReceiptSuccess extends Component {
   state = {
     receipt: {}
   }
 
   componentWillMount() {
-    const obj = JSON.parse(sessionStorage.getItem('receipt'));
+    const obj = JSON.parse(sessionStorage.getItem('receipt')
+    );
     this.setState({
       receipt: obj || {}
     })
