@@ -15,34 +15,35 @@ export class ReceiptInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      money: '',
-      nickname: '',
-      types: '',
+      amount: '100',
+      title: '',
+      invoice_type: '',
       cel_name: '',
       cel_phone: '',
-      post_code: '',
-      address: ''
+      postcode: '',
+      address: '',
+      agree: true
     }
   }
   // 发票金额
-  handleMoney(e) {
-    let value = e.target.value;
+  componentWillMount() {
+    let value = localStorage.amount;
     this.setState({
-      money: value,
+      amount: value,
     });
   }
   // 发票抬头
-  handleNickName(e) {
+  handleTitle(e) {
     let value = e.target.value;
     this.setState({
-      nickname: value,
+      title: value,
     });
   }
   // 发票类型
-  handleTypes(e) {
+  handleInvoiceType(e) {
     let value = e.target.value;
     this.setState({
-      types: value,
+      invoice_type: value,
     });
   }
   // 联系人
@@ -62,7 +63,7 @@ export class ReceiptInfo extends Component {
   handlePostCode(e) {
     let value = e.target.value;
     this.setState({
-      post_code: value,
+      postcode: value,
     });
   }
   // 详细地址
@@ -72,14 +73,46 @@ export class ReceiptInfo extends Component {
       address: value,
     });
   }
+  // 单选框
+  handleCheck(e) {
+    this.setState({ agree: !e.target.value });
+  }
   // 提交
-  submit() {
-    // SuperAgent.post()
-    //           .set('Accept', 'application/json')
-    //           .send({recceipt: {}})
-    //           .end((err, res) => {
+  submit(e) {
+    e.preventDefault();
+    let amount = this.state.amount;
+    let title = this.state.title;
+    let invoice_type = this.state.invoice_type;
+    let cel_name = this.state.cel_name;
+    let cel_phone = this.state.cel_phone;
+    let postcode = this.state.postcode;
+    let address = this.state.address;
 
-    //           })
+    SuperAgent
+      .post('http://closet-api.tallty.com/invoices')
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .send({
+        'invoices': {
+          'amount': amount,
+          'title': title,
+          'invoice_type': invoice_type,
+          'cel_name': cel_name,
+          'cel_phone': cel_phone,
+          'postcode': postcode,
+          'address': address
+        }
+      })
+      .end((err, res) => {
+        if (!err || err === null) {
+          this.props.router.replace('/receipt_success');
+          console.log("ReceiptInfo.jsx 填写的发票信息 => ")
+          console.log(res.body);
+        } else {
+          console.log("发票创建失败")
+        }
+      })
   }
   render() {
     return (
@@ -103,14 +136,14 @@ export class ReceiptInfo extends Component {
           <InputGroup>
             <Row className={css.cell}>
               <Col span={12} className={css.lf}>发票金额</Col>
-              <Col span={12} className={css.rt}>{}元</Col>
+              <Col span={12} className={css.rt}>{this.state.amount}元</Col>
             </Row>
           </InputGroup>
           <InputGroup>
             <Row className={css.cell}>
               <Col span={6} className={css.lf}>发票抬头</Col>
               <Col span={18} className={css.rt}>
-                <Input type='string' name='nickname' id='nickname' value={this.state.nickname} onChange={this.handleNickName.bind(this)} />
+                <Input type='string' name='title' id='title' value={this.state.title} onChange={this.handleTitle.bind(this)} />
               </Col>
             </Row>
           </InputGroup>
@@ -118,7 +151,7 @@ export class ReceiptInfo extends Component {
             <Row className={css.cell}>
               <Col span={12} className={css.lf}>发票类型 </Col>
               <Col span={12} className={css.rt}>
-                <Select defaultValue="1" onChange={this.handleTypes.bind(this)}>
+                <Select defaultValue="1" onChange={this.handleInvoiceType.bind(this)}>
                   <Option value="1">普通发票</Option>
                   <Option value="2">增值税专用发票</Option>
                 </Select>
@@ -156,7 +189,7 @@ export class ReceiptInfo extends Component {
             <Row className={css.cell}>
               <Col span={6} className={css.lf}>邮政编码</Col>
               <Col span={18} className={css.rt}>
-                <Input type='string' name='post_code' id='post_code' value={this.state.post_code} onChange={this.handlePostCode.bind(this)} />
+                <Input type='string' name='postcode' id='postcode' value={this.state.postcode} onChange={this.handlePostCode.bind(this)} />
               </Col>
             </Row>
           </InputGroup>
@@ -172,7 +205,7 @@ export class ReceiptInfo extends Component {
 
         <div className={css.content_bottom}>
           <div className={css.box_position}>
-            <Checkbox><span>保存为预设发票</span></Checkbox>
+            <Checkbox onChange={this.handleCheck.bind(this)}><span>保存为预设发票</span></Checkbox>
             <h4>发票信息提交后不可更改，请仔细填写 ！</h4>
           </div>
           <div className={css.btn_position}>

@@ -14,6 +14,7 @@ export class User extends Component {
     levelName: '黄金会员',
     user: {},
     loadingText: '',
+    amount: '5800',
     grids: [
       { name: '配送篮', message: false, url: '/cart' },
       { name: '我的订单', message: true, url: '/orders' },
@@ -43,6 +44,9 @@ export class User extends Component {
 
   getGrid() {
     const list = [];
+    let user = this.state.user;
+    let amount = user.recharge_amount;
+    localStorage.setItem('amount', amount);
     this.state.grids.forEach((grid, index, obj) => {
       const dot = grid.message ? <div className={css.dot}></div> : null;
       list.push(
@@ -50,7 +54,7 @@ export class User extends Component {
           <Col span={8} className={css.item} key={index}>
             {dot}
             <Link to={grid.url}>
-              <div className={css.ticket}>6800<span className={css.ticket_icon}>￥</span></div>
+              <div className={css.ticket}>{amount}<span className={css.ticket_icon}>￥</span></div>
               <div>{grid.name}</div>
             </Link>
           </Col> :

@@ -6,6 +6,7 @@ import css from './ReceiptSuccess.less'
 import Toolbar from '../../common/Toolbar';
 import { Link } from 'react-router'
 import { Row, Col } from 'antd';
+import SuperAgent from 'superagent';
 
 export class ReceiptSuccess extends Component {
   state = {
@@ -27,7 +28,7 @@ export class ReceiptSuccess extends Component {
   getReceipt() {
     let id = this.props.location.query.id;
     SuperAgent
-      .get('http://closet-api.tallty.com/invoices/${id}')
+      .get(`http://closet-api.tallty.com/invoices/${id}`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
@@ -43,7 +44,7 @@ export class ReceiptSuccess extends Component {
       })
   }
   render() {
-    const receipt = this.state.receipt
+    const receipt = this.state.receipt;
     return (
       <div className={css.container}>
         <div className={css.content_top}>

@@ -53,8 +53,10 @@ export class ReceiptRecord extends Component {
         if (resualt.ok) {
           const obj = resualt.body;
           this.setState({ receipts: obj.invoices.reverse() });
+          console.log("ReceiptRecord.jsx 获取的发票记录列表 => ")
+          console.log(obj);
         } else {
-
+          console.log("获取发票记录列表失败")
         }
       })
   }
