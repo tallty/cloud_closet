@@ -27,50 +27,44 @@ export class ReceiptInfo extends Component {
   }
   // 发票金额
   componentWillMount() {
-    let value = localStorage.amount;
     this.setState({
-      amount: value,
+      amount: localStorage.amount
     });
   }
   // 发票抬头
   handleTitle(e) {
-    let value = e.target.value;
     this.setState({
-      title: value,
+      title: e.target.value
     });
   }
   // 发票类型
   handleInvoiceType(e) {
-    let value = e.target.value;
     this.setState({
-      invoice_type: value,
+      invoice_type: e.target.value
     });
   }
   // 联系人
-  handleCelName(value) {
+  handleCelName(e) {
     this.setState({
-      cel_name: value,
+      cel_name: e.target.value
     });
   }
   // 联系电话
   handleCelPhone(e) {
-    let value = e.target.value;
     this.setState({
-      cel_phone: value,
+      cel_phone: e.target.value
     });
   }
   // 邮政编码
   handlePostCode(e) {
-    let value = e.target.value;
     this.setState({
-      postcode: value,
+      postcode: e.target.value
     });
   }
   // 详细地址
   handleAddress(e) {
-    let value = e.target.value;
     this.setState({
-      address: value,
+      address: e.target.value
     });
   }
   // 单选框
@@ -80,32 +74,27 @@ export class ReceiptInfo extends Component {
   // 提交
   submit(e) {
     e.preventDefault();
-    let amount = this.state.amount;
-    let title = this.state.title;
-    let invoice_type = this.state.invoice_type;
-    let cel_name = this.state.cel_name;
-    let cel_phone = this.state.cel_phone;
-    let postcode = this.state.postcode;
-    let address = this.state.address;
-
+    const { amount, title, invoice_type, cel_name, cel_phone, postcode, address } = this.state;
     SuperAgent
       .post('http://closet-api.tallty.com/invoices')
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
       .send({
-        'invoices': {
-          'amount': amount,
-          'title': title,
-          'invoice_type': invoice_type,
-          'cel_name': cel_name,
-          'cel_phone': cel_phone,
-          'postcode': postcode,
-          'address': address
+        invoices: {
+          amount: amount,
+          title: title,
+          invoice_type: invoice_type,
+          cel_name: cel_name,
+          cel_phone: cel_phone,
+          postcode: postcode,
+          address: address
         }
       })
       .end((err, res) => {
         if (!err || err === null) {
+          const receiptStr = JSON.textify(res.body);
+          sessionStorage.setItem('receipt', receiptStr);
           this.props.router.replace('/receipt_success');
           console.log("ReceiptInfo.jsx 填写的发票信息 => ")
           console.log(res.body);
@@ -136,14 +125,16 @@ export class ReceiptInfo extends Component {
           <InputGroup>
             <Row className={css.cell}>
               <Col span={12} className={css.lf}>发票金额</Col>
-              <Col span={12} className={css.rt}>{this.state.amount}元</Col>
+              <Col span={12} className={css.rt}>{this.state.amount}元
+                <Input placeholder="请输入开票金额" type="number" name="amount" id="amount" defaultValue={this.state.amount} min={1000} max={this.state.amount} />
+              </Col>
             </Row>
           </InputGroup>
           <InputGroup>
             <Row className={css.cell}>
               <Col span={6} className={css.lf}>发票抬头</Col>
               <Col span={18} className={css.rt}>
-                <Input type='string' name='title' id='title' value={this.state.title} onChange={this.handleTitle.bind(this)} />
+                <Input placeholder="请输入发票抬头" type="text" name="title" id="title" value={this.state.title} onChange={this.handleTitle.bind(this)} />
               </Col>
             </Row>
           </InputGroup>
@@ -161,59 +152,59 @@ export class ReceiptInfo extends Component {
               </Col>
             </Row>
           </InputGroup>
-        </div>
+        </div
 
         <p>邮寄信息</p>
 
-        <div className={css.content_body_bottom}>
-          <InputGroup>
-            <Row className={css.cell}>
-              <Col span={6} className={css.lf}>联系人</Col>
-              <Col span={18} className={css.rt}>
-                <Input type='string' name='cel_name' id='cel_name' value={this.state.cel_name} onChange={this.handleCelName.bind(this)} />
-                {/*<Link to="/receipt_info" className={css.icon_col}>
+      <div className={css.content_body_bottom}>
+        <InputGroup>
+          <Row className={css.cell}>
+            <Col span={6} className={css.lf}>联系人</Col>
+            <Col span={18} className={css.rt}>
+              <Input placeholder="请输入联系人姓名" type="text" name="cel_name" id="cel_name" value={this.state.cel_name} onChange={this.handleCelName.bind(this)} />
+              {/*<Link to="/receipt_info" className={css.icon_col}>
                   <Icon type="right" />
                 </Link>*/}
-              </Col>
-            </Row>
-          </InputGroup>
-          <InputGroup>
-            <Row className={css.cell}>
-              <Col span={6} className={css.lf}>联系电话</Col>
-              <Col span={18} className={css.rt}>
-                <Input type='string' name='cel_phone' id='cel_phone' value={this.state.cel_phone} onChange={this.handleCelPhone.bind(this)} />
-              </Col>
-            </Row>
-          </InputGroup>
-          <InputGroup>
-            <Row className={css.cell}>
-              <Col span={6} className={css.lf}>邮政编码</Col>
-              <Col span={18} className={css.rt}>
-                <Input type='string' name='postcode' id='postcode' value={this.state.postcode} onChange={this.handlePostCode.bind(this)} />
-              </Col>
-            </Row>
-          </InputGroup>
-          <InputGroup>
-            <Row className={css.cell}>
-              <Col span={6} className={css.lf}>详细地址</Col>
-              <Col span={18} className={css.rt}>
-                <Input type='string' name='address' id='address' value={this.state.address} onChange={this.handleAddress.bind(this)} />
-              </Col>
-            </Row>
-          </InputGroup>
-        </div>
+            </Col>
+          </Row>
+        </InputGroup>
+        <InputGroup>
+          <Row className={css.cell}>
+            <Col span={6} className={css.lf}>联系电话</Col>
+            <Col span={18} className={css.rt}>
+              <Input placeholder="请输入联系电话" type="text" name="cel_phone" id="cel_phone" value={this.state.cel_phone} onChange={this.handleCelPhone.bind(this)} />
+            </Col>
+          </Row>
+        </InputGroup>
+        <InputGroup>
+          <Row className={css.cell}>
+            <Col span={6} className={css.lf}>邮政编码</Col>
+            <Col span={18} className={css.rt}>
+              <Input placeholder="请输入邮政编码" type="text" name="postcode" id="postcode" value={this.state.postcode} onChange={this.handlePostCode.bind(this)} />
+            </Col>
+          </Row>
+        </InputGroup>
+        <InputGroup>
+          <Row className={css.cell}>
+            <Col span={6} className={css.lf}>详细地址</Col>
+            <Col span={18} className={css.rt}>
+              <Input placeholder="请输入详细地址" type='text' name='address' id='address' value={this.state.address} onChange={this.handleAddress.bind(this)} />
+            </Col>
+          </Row>
+        </InputGroup>
+      </div>
 
-        <div className={css.content_bottom}>
-          <div className={css.box_position}>
-            <Checkbox onChange={this.handleCheck.bind(this)}><span>保存为预设发票</span></Checkbox>
-            <h4>发票信息提交后不可更改，请仔细填写 ！</h4>
-          </div>
-          <div className={css.btn_position}>
-            <Link to="/receipt_success">
-              <Button type="primary" htmlType="submit" onClick={this.submit.bind(this)}>提交</Button>
-            </Link>
-          </div>
+      <div className={css.content_bottom}>
+        <div className={css.box_position}>
+          <Checkbox onChange={this.handleCheck.bind(this)}><span>保存为预设发票</span></Checkbox>
+          <h4>发票信息提交后不可更改，请仔细填写 ！</h4>
         </div>
+        <div className={css.btn_position}>
+          <Link to="/receipt_success">
+            <Button type="primary" htmlType="submit" onClick={this.submit.bind(this)}>提交</Button>
+          </Link>
+        </div>
+      </div>
       </div >
     )
   }
