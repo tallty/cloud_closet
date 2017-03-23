@@ -124,16 +124,14 @@ class ReceiptInfo extends Component {
             </Row>
           </div>
 
-          <div className={css.hint}>
-            <p>发票信息</p>
-          </div>
+          <p className={css.hint}>发票信息</p>
 
           <div className={css.content_body_top}>
             <InputGroup>
               <Row className={css.cell}>
                 <Col span={15} className={css.lf}>发票金额</Col>
                 <Col span={9} className={css.rt}>
-                  <InputNumber type="number" name="amount" id="amount" defaultValue={DefaultAmount} min={1000} max={DefaultAmount} onChange={this.handleAmount.bind(this)} />
+                  <Input type="number" name="amount" id="amount" value={this.state.amount} onChange={this.handleAmount.bind(this)} />
                 </Col>
               </Row>
             </InputGroup>
@@ -161,9 +159,7 @@ class ReceiptInfo extends Component {
             </InputGroup>
           </div>
 
-          <div className={css.hint}>
-            <p>邮寄信息</p>
-          </div>
+          <p className={css.hint}>邮寄信息</p>
 
           <div className={css.content_body_bottom}>
             <InputGroup>
