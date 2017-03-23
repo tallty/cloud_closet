@@ -26,10 +26,19 @@ class ReceiptInfo extends Component {
       errMsg: ''
     }
   }
+
   // 发票金额
-  handleAmount(value) {
+  handleAmount(e) {
+    const num1 = sessionStorage.getItem('amount');
+    const num2 = e.target.value;
+    let num = '';
+    if (num2 > 1000) {
+      num = num2 > num1 ? num1 : num2;
+    } else {
+      num = 1000;
+    }
     this.setState({
-      amount: value
+      amount: num
     });
   }
   // 发票抬头
@@ -129,10 +138,11 @@ class ReceiptInfo extends Component {
           <div className={css.content_body_top}>
             <InputGroup>
               <Row className={css.cell}>
-                <Col span={15} className={css.lf}>发票金额</Col>
-                <Col span={9} className={css.rt}>
+                <Col span={16} className={css.lf}>发票金额</Col>
+                <Col span={5} className={css.rt}>
                   <Input type="number" name="amount" id="amount" value={this.state.amount} onChange={this.handleAmount.bind(this)} />
                 </Col>
+                <Col span={3} className={css.lf}>元</Col>
               </Row>
             </InputGroup>
             <InputGroup>
