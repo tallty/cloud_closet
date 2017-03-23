@@ -31,6 +31,7 @@ import PaySuccess from '../components/user/Orders/PaySuccess';
 import { Ticket } from '../components/user/Ticket'
 import { Notification } from '../components/user/Notification'
 import Recharge from '../components/user/Recharge/Recharge'
+import RechargeRule from '../components/user/vip/RechargeRule'
 import RechargeSuccess from '../components/user/Recharge/RechargeSuccess'
 import { Withdraw } from '../components/user/Withdraw'
 import { Help } from '../components/user/Help'
@@ -96,14 +97,15 @@ export class Routes extends Component {
         <Route path="/tickets" component={Ticket} />
         <Route path="/notifications" component={Notification} />
         <Route path="/recharge" component={Recharge} onEnter={this.requireAuth} />
+        <Route path="/recharge_rules" component={RechargeRule} />
         <Route path="/recharge_success" component={RechargeSuccess} />
         <Route path="/withdraw" component={Withdraw} />
         <Route path="/help" component={Help} />
         {/* 用户发票 */}
         <Route path="/receipt" component={Receipt} />
-        <Route path="/receipt_info" component = { ReceiptInfo }/> 
-        <Route path="/receipt_success" component = { ReceiptSuccess }/>
-        <Route path="/receipt_record" component = { ReceiptRecord }/>
+        <Route path="/receipt_info" component={ReceiptInfo} onEnter={this.requireAuth} />
+        <Route path="/receipt_success" component={ReceiptSuccess} />
+        <Route path="/receipt_record" component={ReceiptRecord} />
 
 
         {/* 用户账单 */}

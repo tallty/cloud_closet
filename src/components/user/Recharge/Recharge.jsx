@@ -76,7 +76,7 @@ class Recharge extends Component {
     });
     list.push(
       <Col span={8} className={css.col} key="rule">
-        <Link to="" className={css.show_rule}>查看充值规则>></Link>
+        <Link to="/recharge_rules" className={css.show_rule}>查看充值规则>></Link>
       </Col>
     );
     return list
@@ -123,7 +123,7 @@ class Recharge extends Component {
           <p className={css.search}>
             <Link to="/user">查询我的余额</Link>
             <span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <Link to="/user">我的充值记录</Link>
+            <Link to="/bills">我的充值记录</Link>
           </p>
         </div>
       </div>
