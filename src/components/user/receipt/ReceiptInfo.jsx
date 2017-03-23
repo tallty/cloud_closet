@@ -28,17 +28,18 @@ class ReceiptInfo extends Component {
   }
 
   // 发票金额
+  componentWillMount() {
+    this.setState({
+      amount: sessionStorage.getItem('amount')
+    });
+  }
+
+  // 发票金额
   handleAmount(e) {
     const num1 = sessionStorage.getItem('amount');
     const num2 = e.target.value;
-    let num = '';
-    if (num2 > 1000) {
-      num = num2 > num1 ? num1 : num2;
-    } else {
-      num = 1000;
-    }
     this.setState({
-      amount: num
+      amount: num2 > num1 ? num1 : num2
     });
   }
   // 发票抬头
@@ -85,7 +86,7 @@ class ReceiptInfo extends Component {
   submit(e) {
     e.preventDefault();
     const { amount, title, invoice_type, cel_name, cel_phone, postcode, address } = this.state;
-    if (amount && title && invoice_type && cel_name && cel_phone && postcode && address) {
+    if (amount && amount > 1000 && title && invoice_type && cel_name && cel_phone && postcode && address) {
       SuperAgent
         .post('http://closet-api.tallty.com/invoices')
         .set('Accept', 'application/json')
@@ -111,7 +112,7 @@ class ReceiptInfo extends Component {
         })
     } else {
       this.setState({
-        errMsg: '发票信息的填写不能有空...'
+        errMsg: '发票信息的填写不能有空且金额必须大于1000...'
       })
     }
   }
