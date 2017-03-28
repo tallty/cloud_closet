@@ -98,12 +98,12 @@ export class User extends Component {
 
     return (
       <div className={css.personal_center}>
-        {/* 头像信息 */}
-        <div
+        {/* 可上传背景代码 */}
+        {/*<div
           className={css.user_info}
           style={{ height: '47%', background: `url(${photoBg}) no-repeat` }}
         >
-          <input
+        <input
             type="file"
             multiple={false}
             accept="image/*"
@@ -112,6 +112,11 @@ export class User extends Component {
             onChange={this.changePhotoBg.bind(this)}
           />
           <span className={css.bg_loading_text}>{loadingText}</span>
+        */}
+        <div
+          className={css.user_info}
+          style={{ height: '47%' }}
+        >
           <div className={css.link_profile}>
             <Link to="/profile">
               <div className={css.avatar}>
@@ -127,7 +132,10 @@ export class User extends Component {
         {/* 业务模块 */}
         <div className={css.center_container}>
           <Row className={css.account}>
-            <Col span={14} className={css.money}>{balance}</Col>
+            <Col span={14} className={css.money}>
+              {balance}
+              <span> 余额</span>
+            </Col>
             <Col span={10} className={css.money_link}>
               <Link to="/bills">账户账单</Link>
               <Icon type="right" />

@@ -8,13 +8,16 @@
     .title_level {
       color: #EBBA6C;
       padding-left: 8px;
+      font-size: 14px;
     }
   }
   .content {
     line-height: 1;
+    width: 240px;
+    position: relative;
     .progress_div {
-      margin: 10px auto 0;
-      width: 180px;
+      margin: 6px auto 0;
+      width: 100%;
       background-color: #FFF6E7;
       padding: 2px 4px 1px;
       border-radius: 12px;
@@ -26,6 +29,27 @@
         font-size: 10px;
         top: 3px;
         right: 5px;
+      }
+      .tick_bg {
+        width: 220px;
+        height: 6px;
+        background: url('/src/images/level_tick.svg') no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        top: 14px;
+        left: 10px;
+      }
+      .tick {
+        width: 100%;
+        font-size: 10px;
+        position: absolute;
+        top: 22px;
+        left: 0px;
+        display: flex;
+        justify-content: space-between;
+        .item {
+          color: #9B9B9B;
+        }
       }
     }
     .char {
