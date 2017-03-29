@@ -14,34 +14,36 @@ import Toolbar from '../../common/Toolbar';
 export class Manage extends Component {
   state = {
     pop: false,
-    popTitle: "",
-    update_key: "",
-    update_value: "",
+    popTitle: '',
+    update_key: '',
+    update_value: '',
+    selectedId: [],
     selectes: [],
     garments: [],
     isPickerShow: false,
     valueGroups: {
-      title: '移动至',
-    }, 
+      title: '移动至'
+    },
     optionGroups: {
-      title: ['移动至','叠放柜一', '叠放柜二', '挂柜一', '礼服柜']
+      title: []
     }
   }
 
   componentWillMount() {
-    let garments = JSON.parse(sessionStorage.garments)
-    const selectes = new Array(garments.length).fill(false)
-    this.getMoveList()
-    this.setState({ garments: garments, selectes: selectes })
+    const garmentsD = JSON.parse(sessionStorage.garments)
+    const selectesD = new Array(garmentsD.length).fill(false)
+    var g = { title: JSON.parse(sessionStorage.titleList) }
+    this.setState({ garments: garmentsD, selectes: selectesD, optionGroups: g })
   }
 
-  getMoveList() {
+  getMoveList(garmentIds, toId) {
     const id = this.getQueryString('id')
     SuperAgent
-      .get(`http://closet-api.tallty.com/exhibition_chests/${this.getQueryString('id')}/the_same_store_method`)
+      .post(`http://closet-api.tallty.com/exhibition_chests/${this.getQueryString('id')}/move_garment`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
+      .send({ 'garment_ids': garmentIds, 'to_exhibition_chest_id': toId })
       .end((err, res) => {
         if (!err || err === null) {
           const obj = res.body;
@@ -50,7 +52,7 @@ export class Manage extends Component {
             opg.push(o.title)
           })
         } else {
-          console.log('获取衣橱列表失败');
+          console.log('移动衣橱失败');
         }
       })
   }
@@ -78,10 +80,15 @@ export class Manage extends Component {
     }));
   }
 
-  selecte(index, id){
-    const {selectes} = this.state
+  selecte(index, id) {
+    const { selectes, selectedId } = this.state
+    var selectedIdList = selectedId
     selectes[index] = !selectes[index]
-    this.setState({selectes: selectes})
+    selectes[index] ? selectedIdList.push(id) : (
+      selectedIdList.forEach((val, i) => { val !== selectedIdList[index] ? selectedIdList.push(val) : '' })
+      )
+    console.log(selectedIdList)
+    this.setState({ selectes: selectes, selectedId: selectedIdList })
   }
 
   initList() {

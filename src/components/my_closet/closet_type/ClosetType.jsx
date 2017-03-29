@@ -13,7 +13,7 @@ import { Row, Col, Button } from 'antd'
 // 解析衣类图片
 const imageMap = new Map([
   ['叠放柜', '/src/images/icon_stack_sm.svg'],
-  ['挂放柜', '/src/images/icon_hang_sm.svg'],
+  ['挂柜', '/src/images/icon_hang_sm.svg'],
   ['组合柜', '/src/images/icon_hang_sm.svg'],
   ['单件礼服', '/src/images/icon_full_dress_sm.svg'],
   ['礼服柜', '/src/images/icon_full_dress_sm.svg'],
@@ -25,7 +25,11 @@ class ClosetType extends Component {
   getCarouselList() {
     const { closets } = this.props;
     const list = [];
+    const titleList = []
+    const idList = []
     closets.forEach((item, index, obj) => {
+      titleList.push(item.title)
+      idList.push(item.id)
       list.push(
         <div key={index} >
           <Link to={`/closet_tabs?id=${item.id}`} >
@@ -42,6 +46,8 @@ class ClosetType extends Component {
         </div>
       )
     })
+    sessionStorage.setItem('titleList', JSON.stringify(titleList))
+    sessionStorage.setItem('idList', JSON.stringify(idList))
     return list
   }
 

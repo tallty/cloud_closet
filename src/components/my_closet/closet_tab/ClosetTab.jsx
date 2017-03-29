@@ -18,6 +18,7 @@ class ClosetTab extends Component {
   componentDidMount() {
     this.getGarments(1, 100, (res) => {
       const obj = res.body;
+      sessionStorage.removeItem('garments')
       sessionStorage.setItem('garments', JSON.stringify(obj.garments))
       this.setState({
         garments: obj.garments, title: obj.title
@@ -132,7 +133,7 @@ class ClosetTab extends Component {
             </Link>
           </div>
           <Row gutter={9} className={styles.my_colset_tab_content}>
-            { garments?this.initList():<Spin size="large" /> }
+            {garments ? (garments.length === 0 ? <div className={styles.release_content} style={{ height: height - 150 }}><h3>当前衣柜为空!</h3><Button type="primary" className={styles.tag} >释放衣柜</Button></div> : this.initList()) : <Spin size="large" />}
           </Row>
         </div>
       </div>
