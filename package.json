@@ -17,6 +17,7 @@
     "react-dom": "^15.1.0",
     "react-mobile-picker": "^0.1.10",
     "react-router": "^2.0.1",
+    "react-swipes": "^1.0.4",
     "src": "^1.1.2",
     "superagent": "^2.2.0",
     "wechat-auth": "^1.1.2",
