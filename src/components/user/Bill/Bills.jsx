@@ -7,7 +7,7 @@ import Toolbar from '../../common/Toolbar'
 import { Spiner } from '../../common/Spiner'
 import classNames from 'classnames/bind'
 import Agent from 'superagent'
-import { withRouter } from 'react-router'
+import { withRouter, Link } from 'react-router'
 
 const cx = classNames.bind(css)
 
@@ -24,10 +24,10 @@ class Bills extends Component {
     const bills = []
     for (const bill of this.state.bills) {
       bills.push(
-        <div
+        <Link
+          to={`/bills/${bill.id}`}
           className={css.bill}
           key={bill.id}
-          onClick={this.handleClick.bind(this, bill)}
         >
           <p>
             <span className={css.desc}>{bill.operation}</span>
@@ -37,7 +37,7 @@ class Bills extends Component {
             <span className={css.balance}>余额：{bill.balance}</span>
             <span className={css.money}>{bill.change_output}</span>
           </p>
-        </div>
+        </Link>
       );
     }
     return bills;
@@ -51,15 +51,9 @@ class Bills extends Component {
       .set('X-User-Phone', localStorage.phone)
       .end((err, res) => {
         if (!err || err === null) {
-          console.log(res.body);
           this.setState({ bills: res.body.purchase_logs.reverse() });
         }
       })
-  }
-
-  handleClick(bill) {
-    sessionStorage.setItem('bill', JSON.stringify(bill));
-    this.props.router.replace('/bill');
   }
 
   render() {

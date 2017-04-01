@@ -110,7 +110,7 @@ export class Routes extends Component {
 
         {/* 用户账单 */}
         <Route path="/bills" component={Bills} />
-        <Route path="/bill" component={Bill} />
+        <Route path="/bills/:id" component={Bill} />
         {/* 会员权益说明 */}
         {/* <Route path="/vip_explain" component={VipExplain} onEnter={this.requireAuth} /> */}
         {/* 服务流程 */}
