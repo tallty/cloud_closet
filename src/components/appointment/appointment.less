@@ -58,8 +58,7 @@
     padding: 0 20px 0 20px;
     input {
       height: 35px;
-      background-color: #F9F9F9;
-      // border-color: #C9C9C9;
+      background-color: #F9F9F9; // border-color: #C9C9C9;
     }
      ::-webkit-input-placeholder {
       /* Chrome */
@@ -106,8 +105,7 @@
       .location_icon {
         width: auto;
         height: 28px;
-        margin-top: 2px;
-        // vertical-align: middle; /*图片垂直居中*/
+        margin-top: 2px; // vertical-align: middle; /*图片垂直居中*/
       }
     }
     .address_show {
@@ -149,6 +147,18 @@
       padding-top: 24px;
       line-height: 22px;
     }
+    .timeSlector {
+      width: 288px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .dateSelector {
+      display: table;
+      p,
+      button {
+        display: table-cell;
+      }
+    }
     .clo_number_radio {
       label {
         padding: 0 15px !important;
@@ -177,12 +187,14 @@
       color: #f15c5c;
     }
     .hint {
-      color: #f15c5c;;
+      color: #f15c5c;
+      ;
       text-align: center;
     }
     .date_input {
       // margin-top: -10px;
       input {
+        width: 100% !important;
         height: 30px !important;
         border-radius: 0;
         text-align: center;

@@ -253,30 +253,33 @@ class Appointment extends Component {
                       )}
                   </FormItem>
                 </Col>
-                <Col span={12}>
-                  <FormItem className={styles.date_input}>
-                    {getFieldDecorator('endDate', {
-                      rules: [
-                        {
-                          required: true,
-                          type: 'object',
-                          message: '请选择预约时间?'
-                        }, {
-                          validator: this.checkOrderTime
-                        }
-                      ]
-                    })(
-                      <DatePicker disabledDate={this.disabledDate} showToday={false} onOpenChange={this.show_tips.bind(this)} placeholder="选择启用时间" />
-                      )}
-                  </FormItem>
-                </Col>
-                <Col span={12}>使用&nbsp;&nbsp;
-                  <Dropdown overlay={menu} trigger={['click']}>
-                    <Button>
-                      {this.state.storeTime}<Icon type="down" />
-                    </Button>
-                  </Dropdown>
-                </Col>
+                <div className={styles.timeSlector}>
+                  <Col span={12}>
+                    <FormItem className={styles.date_input}>
+                      {getFieldDecorator('endDate', {
+                        rules: [
+                          {
+                            required: true,
+                            type: 'object',
+                            message: '请选择服务时间?'
+                          }, {
+                            validator: this.checkOrderTime
+                          }
+                        ]
+                      })(
+                        <DatePicker disabledDate={this.disabledDate} showToday={false} onOpenChange={this.show_tips.bind(this)} placeholder="选择服务时间" />
+                        )}
+                    </FormItem>
+                  </Col>
+                  <Col span={12} className={styles.dateSelector}>
+                    <p>使用&nbsp;</p>
+                    <Dropdown overlay={menu} trigger={['click']}>
+                      <Button style={{ width: '100%' }}>
+                        {this.state.storeTime}<Icon type="down" />
+                      </Button>
+                    </Dropdown>
+                  </Col>
+                </div>
                 <Col span={24} className={styles.line_tips}>*选择预计存衣数量与使用时间，我们将更效率的完成收取工作。</Col>
                 <Col span={24} className={styles.line_two}>
                   {getFieldDecorator('check', { initialValue: false }, {
