@@ -33,6 +33,7 @@ export class User extends Component {
           // 缓存
           localStorage.setItem('user', JSON.stringify(res.body));
           this.setState({ user: res.body });
+          console.log(res.body);
         } else {
           auth.authLogin();
         }
@@ -92,7 +93,7 @@ export class User extends Component {
     // 计算栅格部分容器的高度
     const { user, grids, loadingText } = this.state;
     const gridsHeight = (document.body.clientHeight - 60) * 0.53 - 80;
-    let avatar = user.avatar ? user.avatar : 'src/images/default_photo.svg';
+    const avatar = user.avatar ? user.avatar : 'src/images/default_photo.svg';
     const photoBg = user.user_info_cover ? user.user_info_cover : '#d8d8d8';
     let balance = user.balance ? user.balance : 0;
 
@@ -119,9 +120,11 @@ export class User extends Component {
         >
           <div className={css.link_profile}>
             <Link to="/profile">
-              <div className={css.avatar}>
-                <img src={avatar} alt="头像" />
-                {/*<div className={css.level_name}>{levelName}</div>*/}
+              <div className={css.avatar} style={{ background: `url(${avatar})` }}>
+                {
+                  user.vip_level_info ?
+                    <div className={css.level_name}>{user.vip_level_info.level_now}</div> : null
+                }
               </div>
               <div className={css.user_name}>{user.nickname}</div>
               <Level info={user.vip_level_info} />

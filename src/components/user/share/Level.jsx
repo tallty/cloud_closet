@@ -24,7 +24,7 @@ export default class Level extends Component {
     return (
       <div className={css.level}>
         <div className={css.title}>
-          <span>{info.level_now}</span>
+          <span>会员积分</span>
           <span className={css.title_level}>{info.credit_total}分</span>
         </div>
         <div className={css.content}>

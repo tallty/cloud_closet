@@ -11,22 +11,32 @@
     position: relative;
     top: -25px;
     padding: 0 15vw;
+    font-size: 13px;
     a {
       color: #f15c5c;
     }
   }
 }
+
 .carouse_list_container {
   width: 200vw;
   overflow-x: hidden;
+  .card_slide {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0, 0, 0.25, 1);
+    transition-duration: 350ms;
+    transform: translate3d(0px, 0px, 0px);
+  }
 }
+
 .cell_container {
   // width: 100%;
-  float: left; 
+  float: left;
   img {
     width: 50vw;
   }
 }
+
 .carouse_container_animation {
   position: relative;
 }

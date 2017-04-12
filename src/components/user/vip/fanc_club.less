@@ -1,14 +1,37 @@
 .container {
   height: 100%;
   background-color: #FFF;
+  overflow: auto;
   .user_info {
     background: radial-gradient(#EDD6AA, #E6C48E, #DEAF6C);
     height: 180px;
+    overflow: hidden;
+    .nameLevel {
+      color: #4A4A4A;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .level_name {
+        display: inline-block;
+        width: 72px;
+        height: 24px;
+        line-height: 24px;
+        vertical-align: top;
+        background: url('/src/images/level_name_bg.svg') no-repeat;
+        background-size: 100% 100%;
+        color: #fff;
+        text-align: center;
+        margin-left: 5px;
+        font-size: 10px;
+      }
+    }
     .back {
       height: 48px;
       line-height: 48px;
       overflow: hidden;
       margin-bottom: 5px;
+      overflow: hidden;
       .back_link,
       .back_link:hover {
         display: block;
@@ -53,6 +76,7 @@
     color: #7F7F7F;
   }
   .text {
+    overflow: hidden;
     padding: 14px 25px;
     line-height: 30px;
     font-size: 13px;
@@ -72,17 +96,26 @@
     }
   }
   .vip_card {
-    border-top: 1px solid #ECC17D;
+    overflow: hidden;
     padding: 20px;
     position: relative;
-    margin-top: 40px;
+    padding-top: 80px;
     background: #fff;
+    .orangeLine {
+      height: 1px;
+      width: 100%;
+      background: #ECC17D;
+      position: absolute;
+      top: 50px;
+      left: 0px;
+      right: 0px;
+    }
     .title {
       color: #757575;
       padding: 0 10px;
       font-size: 18px;
       position: absolute;
-      top: -40px;
+      top: 10px;
       left: 25px;
       background: #fff;
       display: inline-block;

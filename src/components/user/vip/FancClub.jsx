@@ -61,7 +61,13 @@ export default class FancClub extends Component {
             <div className={css.title}>VIP特权</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <p style={{ color: '#4A4A4A', fontSize: 24 }}>{user.nickname}</p>
+            <p className={css.nameLevel}>
+              {user.nickname}
+              {
+                user.vip_level_info ?
+                  <div className={css.level_name}>{user.vip_level_info.level_now}</div> : null
+              }
+            </p>
             <Level info={user.vip_level_info} />
           </div>
         </div>
@@ -77,6 +83,7 @@ export default class FancClub extends Component {
 
         {/*<div className={css.des}>乐存好衣会员权益说明</div>*/}
         <div className={css.vip_card}>
+          <div className={css.orangeLine}></div>
           <div className={css.title}><span className={css.vip_stype}>VIP</span> 会员等级</div>
           <img src="/src/images/vip_card.png" alt="img" />
         </div>
