@@ -38,6 +38,7 @@ export class Bill extends Component {
 
   render() {
     const { bill } = this.state;
+    const isOrder = bill.operation in ['预约订单', '操作账单'];
     return (
       <div className={css.container}>
         <Toolbar title="账单详情" url="/bills" />
@@ -53,7 +54,11 @@ export class Bill extends Component {
 
         <div className={css.detail_footer}>
           <p className={css.row_p}>交易时间 <span>{bill.date} {bill.time}</span></p>
-          <Link to={`/order?id=${bill.order_id}`}>我对账单有疑问</Link>
+          {
+            isOrder ?
+              <Link to={`/order?id=${bill.order_id}`}>我对账单有疑问</Link> :
+              <a href="tel:15800634815">联系客服</a>
+          }
         </div>
       </div>
     );
