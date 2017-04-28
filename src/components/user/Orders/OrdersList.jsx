@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames/bind'
 import SuperAgent from 'superagent'
 import { withRouter, Link } from 'react-router'
-import { Row, Col, Button } from 'antd'
+import { Row, Col, Button, message } from 'antd'
 import { OutClothes } from './layouts/OutClothes'
 import { InClothes } from './layouts/InClothes'
 import { AppointClothes } from './layouts/AppointClothes'
@@ -57,19 +57,36 @@ class OrdersList extends Component {
         const states = this.getStates(order.state);
         list.push(
           <div className={css.orders} key={index}>
-            <Link to={`/order?id=${order.id}`}>
-              <div className={css.header}>
-                <div className={css.state}>
-                  <StateBadge now={states[0]} next={states[1]} />
-                </div>
-                <span className={css.time}>{order.date}</span>
-              </div>
-              {this.setOrdersLayout(order)}
-            </Link>
+            {/* 配送订单不显示详情 */}
+            {
+              order.delivery_time ?
+                <div className={css.orderOther}>
+                  <div className={css.header}>
+                    <div className={css.state}>
+                      <StateBadge now={states[0]} next={states[1]} />
+                    </div>
+                    <span className={css.time}>{order.date}</span>
+                  </div>
+                  {this.setOrdersLayout(order)}
+                </div> :
+                <Link to={`/order?id=${order.id}`}>
+                  <div className={css.header}>
+                    <div className={css.state}>
+                      <StateBadge now={states[0]} next={states[1]} />
+                    </div>
+                    <span className={css.time}>{order.date}</span>
+                  </div>
+                  {this.setOrdersLayout(order)}
+                </Link>
+            }
             <Row className={css.footer}>
               <Col span={24}>
                 <div className={css.info}>
-                  <p>预约时间：{order.date}</p>
+                  {
+                    order.delivery_time ?
+                      <p>配送时间：{order.delivery_time}</p> :
+                      <p>预约时间：{order.date}</p>
+                  }
                   <p>订单编号：{order.seq}</p>
                 </div>
                 {/*判断是否显示*/}
@@ -121,37 +138,33 @@ class OrdersList extends Component {
   setOrdersLayout(order) {
     const type = this.props.type;
     let layout = null;
-    if (type === 'import' || type === 'history') {
-      switch (order.state) {
-        case '待确认':
-          layout = (
-            <div className={css.content}>
-              <AppointClothes order={order} />
-            </div>
-          );
-          break;
-        default:
-          layout = (
-            <div className={css.content}>
-              <InClothes order={order} />
-              <p className="text-right">护理费：{order.care_cost}</p>
-              <p className="text-right">服务费：{order.service_cost}</p>
-              <Row>
-                <Col span={12} className={css.nurse}>
-                  护理要求： <span>{order.care_type}</span>
-                </Col>
-                <Col span={12} className={css.total_price}>
-                  合计： <span>{order.price}</span>
-                </Col>
-              </Row>
-            </div>
-          );
-          break;
-      }
-    } else if (type === 'delivery') {
+    if (order.state === '待确认') {
+      layout = (
+        <div className={css.content}>
+          <AppointClothes order={order} />
+        </div>
+      );
+    } else if (order.delivery_time) {
+      // 配送订单
       layout = (
         <div className={css.content}>
           <OutClothes order={order} />
+        </div>
+      );
+    } else {
+      layout = (
+        <div className={css.content}>
+          <InClothes order={order} />
+          <p className="text-right">护理费：{order.care_cost}</p>
+          <p className="text-right">服务费：{order.service_cost}</p>
+          <Row>
+            <Col span={12} className={css.nurse}>
+              护理要求： <span>{order.care_type}</span>
+            </Col>
+            <Col span={12} className={css.total_price}>
+              合计： <span>{order.price}</span>
+            </Col>
+          </Row>
         </div>
       );
     }
@@ -186,7 +199,7 @@ class OrdersList extends Component {
           >付款</Button>
         </div>
       )
-    } else if (order.state === '已支付') {
+    } else if (order.state === '已支付' && !order.delivery_time) {
       value = (
         <div className={css.btns}>
           <Button type="ghost" className={css.disabled_btn} disabled>等待入库</Button>
@@ -204,8 +217,78 @@ class OrdersList extends Component {
           <Button type="ghost" disabled className={css.disabled_btn}>交易取消</Button>
         </div>
       )
+    } else if (order.state === '未支付' && order.delivery_time) {
+      // 配送订单
+      value = (
+        <div className={css.btns}>
+          <Button
+            type="ghost"
+            className={css.cancel_btn}
+            onClick={this.handleCancelDelivery.bind(this, order, index)}
+          >取消订单</Button>
+          <Button
+            type="primary"
+            className={css.sure_btn}
+            onClick={this.handlePayDelivery.bind(this, order, index)}
+          >付款</Button>
+        </div>
+      )
+    } else if (order.state === '已支付' && order.delivery_time) {
+      // 配送订单
+      value = (
+        <div className={css.btns}>
+          <Button type="ghost" className={css.disabled_btn} disabled>等待配送</Button>
+        </div>
+      )
+    } else if (order.state === '已发出' && order.delivery_time) {
+      // 配送订单
+      value = (
+        <div className={css.btns}>
+          <Button
+            type="primary"
+            className={css.sure_btn}
+            onClick={this.confirmReceived.bind(this, order, index)}
+          >确认收货</Button>
+        </div>
+      )
     }
     return value;
+  }
+
+  handlePayDelivery(order, index) {
+    const array = this.state.orders;
+    SuperAgent
+      .post(`http://closet-api.tallty.com/delivery_orders/${order.id}/pay`)
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+        if (!err || err === null) {
+          array.splice(index, 1, res.body);
+          this.setState({ orders: array });
+          message.success('配送订单支付成功');
+        } else {
+          message.error('配送订单支付失败');
+        }
+      })
+  }
+
+  confirmReceived(order, index) {
+    const array = this.state.orders;
+    SuperAgent
+      .delete(`http://closet-api.tallty.com/delivery_orders/${order.id}/get_home`)
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+        if (!err || err === null) {
+          array.splice(index, 1, res.body);
+          this.setState({ orders: array });
+          message.success('确认成功');
+        } else {
+          message.error('确认失败');
+        }
+      })
   }
 
   // 付款
@@ -249,6 +332,25 @@ class OrdersList extends Component {
           this.setState({ orders: array });
         } else {
           console.log('取消订单失败');
+        }
+      })
+  }
+
+  // 取消配送订单
+  handleCancelDelivery(order, index) {
+    const array = this.state.orders;
+    SuperAgent
+      .delete(`http://closet-api.tallty.com/delivery_orders/${order.id}`)
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+        if (!err || err === null) {
+          array.splice(index, 1);
+          this.setState({ orders: array });
+          message.success('取消成功');
+        } else {
+          message.error('取消失败');
         }
       })
   }

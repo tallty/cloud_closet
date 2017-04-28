@@ -10,8 +10,8 @@ const TabPane = Tabs.TabPane;
 
 export class Orders extends Component {
   state = {
-    appointments: null,
-    deliveries: null
+    appointments: [],
+    deliveries: []
   }
 
   componentDidMount() {
@@ -29,8 +29,8 @@ export class Orders extends Component {
         if (res.ok) {
           const obj = res.body;
           this.setState({ appointments: obj.appointments.reverse() });
-          console.log(obj);
         } else {
+          this.setState({ appointments: [] });
         }
       })
   }
@@ -45,26 +45,27 @@ export class Orders extends Component {
         if (res.ok) {
           const obj = res.body;
           this.setState({ deliveries: obj.delivery_orders });
-          console.log(obj);
         } else {
+          this.setState({ deliveries: [] });
         }
       })
   }
 
   render() {
     const { deliveries, appointments } = this.state;
+    const histories = deliveries.concat(appointments);
     return (
       <div className={css.container}>
         <Toolbar title="我的订单" url="/user" theme="dark" />
         <Tabs defaultActiveKey="1" className={css.tab_bar}>
           <TabPane tab="入库订单" key="1">
-            {appointments ? <OrdersList type="import" orders={appointments} /> : <Spiner />}
+            {appointments.length > 0 ? <OrdersList type="import" orders={appointments} /> : <Spiner />}
           </TabPane>
           <TabPane tab="配送订单" key="2">
-            {deliveries ? <OrdersList type="delivery" orders={deliveries} /> : <Spiner />}
+            {deliveries.length > 0 ? <OrdersList type="delivery" orders={deliveries} /> : <Spiner />}
           </TabPane>
           <TabPane tab="历史订单" key="3">
-            {appointments ? <OrdersList type="history" orders={appointments} /> : <Spiner />}
+            {histories.length > 0 ? <OrdersList type="history" orders={histories} /> : <Spiner />}
           </TabPane>
         </Tabs>
       </div>

@@ -26,12 +26,14 @@ class Manage extends Component {
     valueGroups: {
       closet: ''
     },
-    optionGroups: null
+    optionGroups: {
+      closet: []
+    }
   }
 
   componentWillMount() {
-    this.getGarments();
     this.getMoveableClosets();
+    this.getGarments();
   }
 
   getGarments() {
@@ -131,16 +133,20 @@ class Manage extends Component {
   }
 
   // Update the value in response to user picking event
-  handleChange(name, value) {
+  handleChange = (name, value) => {
     this.setState(({ valueGroups }) => ({
       valueGroups: {
         ...valueGroups,
         [name]: value
       }
     }));
-  }
+  };
 
   togglePicker = () => {
+    if (this.state.optionGroups.closet.length <= 0) {
+      message.warning('没有可使用的衣柜');
+      return;
+    }
     if (this.state.selectedIds.length <= 0) {
       message.warning('请先选择要移动的衣服');
       return;
@@ -307,11 +313,11 @@ class Manage extends Component {
                   <button className={css.headerBtn} onClick={this.beginMoveClothes.bind(this)}>确认移动</button>
                 </header>
                 {
-                  valueGroups ?
+                  optionGroups.closet.length > 0 ?
                     <Picker
                       optionGroups={optionGroups}
                       valueGroups={valueGroups}
-                      onChange={this.handleChange.bind(this)} /> : <Spiner />
+                      onChange={this.handleChange} /> : <Spiner />
                 }
               </div>
             </div>
