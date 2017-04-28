@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Row, Col, Button, Card, Icon, Spin } from 'antd'
+import { Row, Col, Button, Card, Icon, Spin, message } from 'antd'
 import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'
 import styles from './ClosetTab.less'
@@ -11,6 +11,7 @@ const height = window.innerHeight - 52;
 
 class ClosetTab extends Component {
   state = {
+    id: this.props.location.query.id,
     garments: [],
     title: ''
   }
@@ -27,18 +28,11 @@ class ClosetTab extends Component {
       console.log(obj);
     })
   }
-  getQueryString(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]);
-    return null;
-  }
 
   // 获取列表
   getGarments(page, per_page, func) {
-    const id = this.getQueryString('id')
     SuperAgent
-      .get(`http://closet-api.tallty.com/exhibition_chests/${id}?random=${Math.random()}`)
+      .get(`http://closet-api.tallty.com/exhibition_chests/${this.state.id}?random=${Math.random()}`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
@@ -82,6 +76,22 @@ class ClosetTab extends Component {
     return list;
   }
 
+  removeCloset() {
+    SuperAgent
+      .post(`http://closet-api.tallty.com/exhibition_chests/${this.state.id}/delete_his_val_chest`)
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+        if (!err || err === null) {
+          message.success('释放衣柜成功');
+          this.props.router.replace('/MyCloset');
+        } else {
+          message.error('释放衣柜失败');
+        }
+      })
+  }
+
   parseTime(x, y) {
     var x = new Date(x)
     var z = {
@@ -112,7 +122,7 @@ class ClosetTab extends Component {
           <div className={styles.title}>
             <p>{title}</p>
           </div>
-          <div className={styles.menu} ><Link to={`/manage?id=${this.getQueryString('id')}`}>管理</Link></div>
+          <div className={styles.menu} ><Link to={`/manage?id=${this.state.id}`}>管理</Link></div>
         </div>
         <div className={styles.closet_container} style={{ height: height }}>
           <div className={styles.tab_content}>
@@ -124,19 +134,18 @@ class ClosetTab extends Component {
                 <Button type="primary" className={styles.tag} onClick={this.show_type}>裤装</Button>
                 <Button type="primary" className={styles.tag} onClick={this.show_type}>裤装</Button>
                 <Button type="primary" className={styles.tag} onClick={this.show_type}>裤装</Button>
-                {/*<Button type="primary" className={styles.ellipsis_btn}><Icon type="ellipsis" className={styles.ellipsis_icon} /></Button>*/}
               </Col>
             </Row>
           </div>
           <div className={styles.cloth_number}>
             {`数量（${garments.length})`}
-            <Link to="/cart" className={styles.cart}>
+            <Link to={`/cart?back_url=/closet_tabs?id=${this.state.id}`} className={styles.cart}>
               <img src="/src/images/icon_cart.svg" alt="cart" />
               <div className={styles.dot}></div>
             </Link>
           </div>
           <Row gutter={9} className={styles.my_colset_tab_content}>
-            {garments ? (garments.length === 0 ? <div className={styles.release_content} style={{ height: height - 150 }}><h3>当前衣柜为空!</h3><Button type="primary" className={styles.tag} >释放衣柜</Button></div> : this.initList()) : <Spin size="large" />}
+            {garments ? (garments.length === 0 ? <div className={styles.release_content} style={{ height: height - 150 }}><h3>当前衣柜为空!</h3><Button type="primary" className={styles.tag} onClick={this.removeCloset.bind(this)}>释放衣柜</Button></div> : this.initList()) : <Spin size="large" />}
           </Row>
         </div>
       </div>

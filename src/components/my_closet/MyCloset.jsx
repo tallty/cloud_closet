@@ -26,8 +26,6 @@ export class MyCloset extends Component {
         storiedCount: countInfo.graments_count,
         closets: closetsArray
       })
-      console.log(closetsArray);
-      console.log(countInfo);
     })
   }
 
@@ -50,7 +48,7 @@ export class MyCloset extends Component {
   // 获取列表
   getGarments(func) {
     SuperAgent
-      .get('http://closet-api.tallty.com/exhibition_chests')
+      .get(`http://closet-api.tallty.com/exhibition_chests?random=${Math.random()}`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)

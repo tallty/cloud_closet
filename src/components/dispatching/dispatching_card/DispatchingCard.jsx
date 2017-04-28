@@ -8,58 +8,31 @@ import styles from './DispatchingCard.less'
 const InputGroup = Input.Group;
 
 export class DispatchingCard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    }
+
+  getList() {
+    return this.props.garments.map(item => (
+      <Row type="flex" justify="space-around" align="middle" key={item.id} className={styles.DispatchingCard}>
+        <Col span={6} className={styles.dispatch_pic_col}>
+          <img src={item.cover_image} alt="" className={styles.dispatch_pic} />
+        </Col>
+        <Col span={18} className={styles.dispatch_title_col}>
+          <div className={styles.dispatch_title}>{item.title}</div>
+        </Col>
+      </Row>
+    ))
   }
 
   render() {
     return (
-      <div>
-        <Row type="flex" justify="space-around" align="middle" className={styles.DispatchingCard}>
-          <div className={styles.cross_icon_link}><Button type="primary" shape="circle" icon="cross" /></div>
-          <Col span={6} className={styles.dispatch_pic_col}>
-            <img src="src/images/recommend_one.png" alt="" className={styles.dispatch_pic}/>
-          </Col>
-          <Col span={18} className={styles.dispatch_title_col}>
-            <div className={styles.dispatch_title}>DOLCE&GABBANA  印花包臀短裙 </div>
-          </Col>
-        </Row>
-        <Row type="flex" justify="space-around" align="middle" className={styles.DispatchingCard}>
-          <div className={styles.cross_icon_link}><Button type="primary" shape="circle" icon="cross" /></div>
-          <Col span={6} className={styles.dispatch_pic_col}>
-            <img src="src/images/recommend_one.png" alt="" className={styles.dispatch_pic}/>
-          </Col>
-          <Col span={18} className={styles.dispatch_title_col}>
-            <div className={styles.dispatch_title}>DOLCE&GABBANA  印花包臀短裙 </div>
-          </Col>
-        </Row>
-        <Row type="flex" justify="space-around" align="middle" className={styles.DispatchingCard}>
-          <div className={styles.cross_icon_link}><Button type="primary" shape="circle" icon="cross" /></div>
-          <Col span={6} className={styles.dispatch_pic_col}>
-            <img src="src/images/recommend_one.png" alt="" className={styles.dispatch_pic}/>
-          </Col>
-          <Col span={18} className={styles.dispatch_title_col}>
-            <div className={styles.dispatch_title}>DOLCE&GABBANA  印花包臀短裙 </div>
-          </Col>
-        </Row>
-        <Row type="flex" justify="space-around" align="middle" className={styles.DispatchingCard}>
-          <div className={styles.cross_icon_link}><Button type="primary" shape="circle" icon="cross" /></div>
-          <Col span={6} className={styles.dispatch_pic_col}>
-            <img src="src/images/recommend_one.png" alt="" className={styles.dispatch_pic}/>
-          </Col>
-          <Col span={18} className={styles.dispatch_title_col}>
-            <div className={styles.dispatch_title}>DOLCE&GABBANA  印花包臀短裙 </div>
-          </Col>
-        </Row>
-      </div>
+      <div>{this.getList()}</div>
     );
   }
 }
 
 DispatchingCard.defaultProps = {
+  garments: []
 }
 
 DispatchingCard.propTypes = {
+  garments: PropTypes.array
 };

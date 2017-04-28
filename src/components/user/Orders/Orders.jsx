@@ -29,7 +29,7 @@ export class Orders extends Component {
         if (res.ok) {
           const obj = res.body;
           this.setState({ appointments: obj.appointments.reverse() });
-          console.log(res.body);
+          console.log(obj);
         } else {
         }
       })
@@ -45,6 +45,7 @@ export class Orders extends Component {
         if (res.ok) {
           const obj = res.body;
           this.setState({ deliveries: obj.delivery_orders });
+          console.log(obj);
         } else {
         }
       })

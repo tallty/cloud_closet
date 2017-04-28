@@ -48,7 +48,6 @@ class Order extends Component {
   // 获取预约订单信息
   getAppointment() {
     const id = this.props.location.query.id;
-
     SuperAgent
       .get(`http://closet-api.tallty.com/appointments/${id}`)
       .set('Accept', 'application/json')

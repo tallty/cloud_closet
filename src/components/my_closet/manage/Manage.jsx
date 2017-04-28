@@ -13,6 +13,7 @@ import Toolbar from '../../common/Toolbar';
 
 class Manage extends Component {
   state = {
+    id: this.props.location.query.id,
     pop: false,
     popTitle: '',
     closetTitle: '',
@@ -34,9 +35,8 @@ class Manage extends Component {
   }
 
   getGarments() {
-    const id = this.props.location.query.id;
     SuperAgent
-      .get(`http://closet-api.tallty.com/exhibition_chests/${id}?random=${Math.random()}`)
+      .get(`http://closet-api.tallty.com/exhibition_chests/${this.state.id}?random=${Math.random()}`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
@@ -50,9 +50,8 @@ class Manage extends Component {
   }
 
   getMoveableClosets() {
-    const id = this.props.location.query.id;
     SuperAgent
-      .get(`http://closet-api.tallty.com/exhibition_chests/${id}/the_same_store_method`)
+      .get(`http://closet-api.tallty.com/exhibition_chests/${this.state.id}/the_same_store_method`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
@@ -73,11 +72,10 @@ class Manage extends Component {
   }
 
   beginMoveClothes() {
-    const id = this.props.location.query.id;
     const { selectedIds, valueGroups, canMoveClosets } = this.state;
     const targetCloset = canMoveClosets.filter(item => item.custom_title === valueGroups.closet)[0];
     SuperAgent
-      .post(`http://closet-api.tallty.com/exhibition_chests/${id}/move_garment`)
+      .post(`http://closet-api.tallty.com/exhibition_chests/${this.state.id}/move_garment`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
@@ -100,8 +98,29 @@ class Manage extends Component {
   }
 
   addToCart() {
+    if (this.state.selectedIds.length <= 0) {
+      message.warning('请先选择要配送的衣服');
+      return;
+    }
     const { selectedIds } = this.state;
-    console.log(selectedIds);
+    SuperAgent
+      .post('http://closet-api.tallty.com/garments/add_them_to_basket')
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .send({ 'garment_ids': selectedIds })
+      .end((err, res) => {
+        if (!err || err === null) {
+          const { garments } = this.state;
+          this.setState({
+            selectedIds: [],
+            garments: garments.filter(item => !item.isSelected)
+          })
+          message.success('加入配送蓝成功');
+        } else {
+          message.error('加入配送蓝失败，请稍后重试。');
+        }
+      })
   }
 
   getQueryString(name) {
@@ -122,6 +141,10 @@ class Manage extends Component {
   }
 
   togglePicker = () => {
+    if (this.state.selectedIds.length <= 0) {
+      message.warning('请先选择要移动的衣服');
+      return;
+    }
     this.setState(({ isPickerShow }) => ({
       isPickerShow: !isPickerShow
     }));
@@ -202,10 +225,8 @@ class Manage extends Component {
   }
 
   updateClosetName() {
-    console.log(this.state.update_value);
-    const id = this.props.location.query.id;
     SuperAgent
-      .put(`http://closet-api.tallty.com/exhibition_chests/${id}`)
+      .put(`http://closet-api.tallty.com/exhibition_chests/${this.state.id}`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
@@ -254,22 +275,28 @@ class Manage extends Component {
               </Col>
             </Row>
           </div>
-          <p className={styles.cloth_number}>{`数量（${garments.length})`}</p>
+
+          <div className={styles.cloth_number}>
+            {`数量（${garments.length})`}
+            <Link to={`/cart?back_url=/manage?id=${this.state.id}`} className={styles.cart}>
+              <img src="/src/images/icon_cart.svg" alt="cart" />
+              <div className={styles.dot}></div>
+            </Link>
+          </div>
+
           <Row gutter={9} className={styles.my_colset_tab_content}>
             {this.initList()}
           </Row>
+
         </div>
-        {
-          selectedIds.length > 0 ?
-            <Row className={css.tab_footer}>
-              <Col span={12}>
-                <Button type="primary" className={css.moveBtn} onClick={this.togglePicker.bind(this)}>移动衣服</Button>
-              </Col>
-              <Col span={12}>
-                <Button type="primary" className={css.distribution_btn} onClick={this.addToCart.bind(this)}>加入配送</Button>
-              </Col>
-            </Row> : null
-        }
+        <Row className={css.tab_footer}>
+          <Col span={12}>
+            <Button type="primary" className={css.moveBtn} onClick={this.togglePicker.bind(this)}>移动衣服</Button>
+          </Col>
+          <Col span={12}>
+            <Button type="primary" className={css.distribution_btn} onClick={this.addToCart.bind(this)}>加入配送</Button>
+          </Col>
+        </Row>
         <Row className={css.dispatch_footer_modal}>
           <Col span={24}>
             <div className={css.picker_modal_container}>

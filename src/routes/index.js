@@ -54,7 +54,7 @@ import Address from '../components/address/Address'
 import AddAddress from '../components/address/add_address/AddAddress'
 import { NewAddress } from '../components/address/new_address/NewAddress'
 //配送
-import { Dispatching } from '../components/dispatching/Dispatching'
+import Dispatching from '../components/dispatching/Dispatching'
 
 export class Routes extends Component {
   componentWillMount() {
@@ -138,8 +138,6 @@ export class Routes extends Component {
         <Route path="/add_address" component={AddAddress} />
         <Route path="/address/new" component={NewAddress} />
         {/* 添加配送路由 */}
-        <Route path="/dispatching" component={Dispatching} />
-        {/* 添加续存路由 */}
         <Route path="/dispatching" component={Dispatching} />
         {/* 获取用户open */}
         <Route path="/get_open_id" component={GetOpenId} />

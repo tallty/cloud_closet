@@ -52,7 +52,8 @@ class OrdersList extends Component {
     const { type, orders } = this.state;
     const list = [];
     orders.forEach((order, index, obj) => {
-      if (order.state !== '已取消' && order.state !== '已上架' && order.state !== '已收货') {
+      const isHistory = (order.state === '已取消' || order.state === '已上架' || order.state === '已收货');
+      if (!isHistory) {
         const states = this.getStates(order.state);
         list.push(
           <div className={css.orders} key={index}>

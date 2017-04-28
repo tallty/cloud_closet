@@ -1,8 +1,9 @@
 // 我的衣橱 - 详情
 import React, { Component, PropTypes } from 'react'
-import { Row, Col, Input, Icon, Button, Tag, Tooltip, Menu, Dropdown } from 'antd'
+import { Row, Col, Input, Icon, Button, Tag, Tooltip, Menu, Dropdown, message } from 'antd'
 import { Link } from 'react-router'
 import classnames from 'classnames'
+import SuperAgent from 'superagent';
 import styles from './ClosetDetails.less'
 
 export class ClosetDetails extends Component {
@@ -11,6 +12,7 @@ export class ClosetDetails extends Component {
     this.state = {
       garment: {},
       tags: ['Tag 1', 'Tag 2'],
+      disabled: false
     }
   }
 
@@ -21,13 +23,32 @@ export class ClosetDetails extends Component {
     this.setState({ garment: garment });
   }
 
-  goback(){
+  addToCart() {
+    SuperAgent
+      .post('http://closet-api.tallty.com/garments/add_them_to_basket')
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .send({ 'garment_ids': [this.state.garment.id] })
+      .end((err, res) => {
+        if (!err || err === null) {
+          this.setState({
+            disabled: true
+          })
+          message.success('加入配送蓝成功');
+        } else {
+          message.error('加入配送蓝失败，请稍后重试。');
+        }
+      })
+  }
+
+  goback() {
     history.back()
   }
 
   parseTime(time) {
     let t = new Date(time);
-    return `${t.getYear()}-${t.getMonth()+1}-${t.getDay()}`
+    return `${t.getYear()}-${t.getMonth() + 1}-${t.getDay()}`
   }
 
   getQueryString(name) {
@@ -69,12 +90,12 @@ export class ClosetDetails extends Component {
       <div>
         {/* 返回按钮 */}
         <Button type="ghost" className={styles.left_link} onClick={this.goback.bind(this)} shape="circle-outline" icon="left" />
-        <div className="scrollContainer" style={{height: tab_height}}>
+        <div className="scrollContainer" style={{ height: tab_height }}>
           <div className={styles.ClosetDetails_content}>
             {/* 主图模块 */}
             <Row className={styles.ClosetDetails_content_header}>
               <Col span={24} className={styles.main_pic_content}>
-                <img src={garment.cover_image} alt=""/>
+                <img src={garment.cover_image} alt="" />
               </Col>
             </Row>
             {/* 名称标签模块 */}
@@ -125,11 +146,9 @@ export class ClosetDetails extends Component {
         </div>
         {/* 加入配送按钮 */}
         <Row>
-          <Link to="/dispatching">
-            <Col span={24} className={styles.dispatching_btn} >
-              <Button type="primary" >加入配送</Button>
-            </Col>
-          </Link>
+          <Col span={24} className={styles.dispatching_btn} >
+            <Button type="primary" disabled={this.state.disabled} onClick={this.addToCart.bind(this)}>加入配送</Button>
+          </Col>
         </Row>
       </div>
     );

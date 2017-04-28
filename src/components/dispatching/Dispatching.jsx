@@ -1,29 +1,176 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
-import { Row, Col, Input, Icon, Button, DatePicker, Radio } from 'antd'
+import { Row, Col, Input, Icon, Button, DatePicker, Radio, message } from 'antd'
 import NavLink from '../../layouts/NavigationLayout/NavLink'
+import { Link, withRouter } from 'react-router';
 import classnames from 'classnames'
+import SuperAgent from 'superagent';
 import styles from './Dispatching.less'
 import { DispatchingCard } from './dispatching_card/DispatchingCard';
 
 const RadioGroup = Radio.Group;
 
-export class Dispatching extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 1,
-    }
+class Dispatching extends Component {
+  state = {
+    way: '官方人员配送',
+    garments: [],
+    time: '',
+    remark: '',
+    address: {},
+    isDefaultAddress: false,
+    user: {},
+    serviceCost: 80,
+    deliveryCost: 120,
+    loading: false,
+    isSubmited: false,
+    order: {}
   }
 
-  onChange = (e) => {
-    console.log('radio checked', e.target.value);
+  componentWillMount() {
+    const data = JSON.parse(sessionStorage.getItem('dispatchGarments')) || {};
+    const userObj = JSON.parse(localStorage.getItem('user')) || {};
     this.setState({
-      value: e.target.value,
+      garments: data,
+      user: userObj
+    });
+    this.getDefaultAddress(userObj.default_address_id);
+  }
+
+  onDeliveryChange(e) {
+    const str = e.target.value;
+    this.setState({
+      way: str,
+      deliveryCost: str === '官方人员配送' ? 120 : 20
     });
   }
 
+  onDateChange(date, dateString) {
+    this.setState({ time: dateString });
+  }
+
+  onSubmit() {
+    const { address, time, way, remark, garments, deliveryCost, serviceCost } = this.state;
+    if (!address.name || !time || !way) {
+      message.error('请完善配送订单信息');
+      return;
+    }
+    if (garments.length <= 0) {
+      message.error('未选择配送的衣服');
+      return;
+    }
+    this.setState({ loading: true });
+    const ids = garments.map(item => item.id);
+    SuperAgent
+      .post('http://closet-api.tallty.com/delivery_orders')
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .send({
+        'delivery_order': {
+          address: address.address_detail,
+          name: address.name,
+          phone: address.phone,
+          'delivery_time': time,
+          'delivery_method': way,
+          remark: remark,
+          'delivery_cost': deliveryCost,
+          'service_cost': serviceCost,
+          'garment_ids': ids
+        }
+      })
+      .end((err, res) => {
+        if (!err || err === null) {
+          this.setState({ loading: false, isSubmited: true, order: res.body });
+          message.success('配送订单生成成功');
+        } else {
+          this.setState({ loading: false });
+          message.error('配送订单生成失败');
+        }
+      })
+  }
+
+  onPayOrder() {
+    this.setState({ loading: true });
+    const order = this.state.order;
+    SuperAgent
+      .post(`http://closet-api.tallty.com/delivery_orders/${order.id}/pay`)
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+        if (!err || err === null) {
+          this.setState({ loading: false });
+          message.success('配送订单支付成功');
+          this.props.router.replace('/orders');
+        } else {
+          this.setState({ loading: false });
+          message.error('配送订单支付失败');
+        }
+      })
+  }
+
+  onCancelOrder() {
+    this.setState({ loading: true });
+    const order = this.state.order;
+    SuperAgent
+      .delete(`http://closet-api.tallty.com/delivery_orders/${order.id}`)
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+        if (!err || err === null) {
+          this.setState({ loading: false });
+          message.success('配送订单取消成功');
+          this.props.router.replace('/MyCloset');
+        } else {
+          this.setState({ loading: false });
+          message.error('配送订单取消失败');
+        }
+      })
+  }
+
+  getDefaultAddress(id) {
+    const addressStr = sessionStorage.selected_address;
+    if (addressStr) {
+      this.setState({
+        address: JSON.parse(addressStr)
+      })
+      return;
+    }
+    SuperAgent
+      .get(`http://closet-api.tallty.com/addresses/${id}`)
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Phone', localStorage.phone)
+      .end((err, res) => {
+        if (!err || err === null) {
+          const addre = JSON.stringify(res.body);
+          sessionStorage.setItem('selected_address', addre);
+          this.setState({
+            address: res.body,
+            isDefaultAddress: true
+          });
+        } else {
+          this.setState({ address: {} });
+        }
+      })
+  }
+
+  disabledDate(current) {
+    return current && current.valueOf() < Date.now();
+  }
+
+  chooseAddress() {
+    sessionStorage.setItem('addresses_back_url', '/dispatching');
+    this.props.router.push('/address');
+  }
+
+  remarkChange(e) {
+    this.setState({ remark: e.target.value });
+  }
+
   render() {
+    const { garments, isDefaultAddress, address, remark, serviceCost, deliveryCost, loading, isSubmited } = this.state;
     const radioStyle = {
       display: 'block',
       height: '30px',
@@ -34,57 +181,97 @@ export class Dispatching extends Component {
       <div className={styles.Dispatching_content}>
         <Row className={styles.Dispatching_content_header}>
           <Col className={styles.cross_icon_col} span={2} offset={22}>
-            <NavLink to="/manage"><Icon type="cross" className={styles.cross_icon} /></NavLink>
+            <NavLink to="/MyCloset"><Icon type="cross" className={styles.cross_icon} /></NavLink>
           </Col>
         </Row>
         <Row className={styles.tab_cell}>
-          <NavLink to="/address">
-            <Col span={24}  className={styles.tab_title}>
-              <Col span={1} className={styles.location_icon_content}>
-                <img src="src/images/location_icon.svg" alt="" className={styles.location_icon}/>
+          <div onClick={isSubmited ? null : this.chooseAddress.bind(this)}>
+            <Col span={22}>
+              <Col span={24} className={styles.tab_title}>
+                <Col span={1} className={styles.location_icon_content}>
+                  <img src="src/images/location_icon.svg" alt="" className={styles.location_icon} />
+                </Col>
+                <Col span={23} className={styles.add_name}>
+                  &nbsp;&nbsp;{address.address_detail}
+                </Col>
               </Col>
-              <Col span={23} className={styles.add_name}>
-                黄浦区济南路260弄翠湖天地隽荟12栋6
-              </Col>
-            </Col>
-            <Col span={24}  className={styles.tab_title}>
-              <Col span={10} className={styles.people_name}>
-                XXX收
-              </Col>
-              <Col span={14}>
-                电话：18743353579
-              </Col>
-            </Col>
-            <Col span={24}  className={styles.tab_title}>
-              <Col span={5} offset={19} className={styles.address}>
-                默认地址
+              <Col span={24} className={styles.tab_title}>
+                <Col span={10} className={styles.people_name}>
+                  收件人：{address.name}
+                </Col>
+                <Col span={14}>
+                  电话：{address.phone}
+                </Col>
               </Col>
             </Col>
-          </NavLink>
+            <Col className={styles.address_show} span={2}>
+              {isSubmited ? null : <Icon type="right" />}
+            </Col>
+            {
+              isDefaultAddress ?
+                <Col span={24} className={styles.tab_title}>
+                  <Col span={5} offset={19} className={styles.address}>
+                    默认地址
+                  </Col>
+                </Col> : null
+            }
+          </div>
         </Row>
         <Row className={styles.tab_cell}>
-          <DispatchingCard />
-          <div className={styles.time_btn}><DatePicker placeholder="选择配送时间" /></div>
+          <DispatchingCard garments={garments} />
+          <div className={styles.time_btn}>
+            <DatePicker
+              disabled={isSubmited}
+              disabledDate={this.disabledDate}
+              onChange={this.onDateChange.bind(this)}
+              placeholder="选择配送时间" />
+          </div>
         </Row>
         <Row className={styles.tab_cell}>
           <Col span={4}>配送方式:</Col>
           <Col span={20}>
-            <RadioGroup onChange={this.onChange} value={this.state.value}>
-              <Radio style={radioStyle} value={1}><span className={styles.span_color}>适用于可以折叠类的衣物</span><span className={styles.span_color_one}>快递配送</span></Radio>
-              <Radio style={radioStyle} value={2}><span className={styles.span_color}>适用于礼服套装类的衣物</span><span className={styles.span_color_one}>官方人员配送</span></Radio>
+            <RadioGroup onChange={this.onDeliveryChange.bind(this)} value={this.state.way} disabled={isSubmited}>
+              <Radio style={radioStyle} value="快递配送">
+                <span className={styles.span_color_one}>快递配送</span>
+                <span className={styles.span_color}> 适用于可以折叠类的衣物</span>
+              </Radio>
+              <Radio style={radioStyle} value="官方人员配送">
+                <span className={styles.span_color_one}>官方人员配送</span>
+                <span className={styles.span_color}> 适用于礼服套装类的衣物</span>
+              </Radio>
             </RadioGroup>
           </Col>
         </Row>
         <Row className={styles.tab_cell}>
-          特别备注:对本次交易的特殊备注说明
+          <Col span={6}>
+            <p style={{ lineHeight: '28px' }}>特别备注:</p>
+          </Col>
+          <Col span={18}>
+            <Input
+              type="text"
+              disabled={isSubmited}
+              onChange={this.remarkChange.bind(this)}
+              value={remark}
+              placeholder="对本次交易的特殊备注说明"
+              style={{ textAlign: 'left' }} />
+          </Col>
         </Row>
         <Row className={styles.tab_cell}>
-          <Col span={24} className={styles.pay_one}>运费：xxx</Col>
-          <Col span={24} className={styles.pay_one}>服务费：xxx</Col>
-          <Col span={24} className={styles.pay_two}>合计：<label>200.00</label></Col>
+          <Col span={24} className={styles.pay_one}>运费：{deliveryCost} 元</Col>
+          <Col span={24} className={styles.pay_one}>服务费：{serviceCost} 元</Col>
+          <Col span={24} className={styles.pay_two}>合计：<label>{serviceCost + deliveryCost}</label></Col>
         </Row>
         <Row className={styles.dispatching_btn_div}>
-          <Col span={24} className={styles.dispatching_btn_col}><Button className={styles.dispatching_btn}>确认配送</Button></Col>
+          <Col span={24} className={styles.dispatching_btn_col}>
+            {
+              isSubmited ?
+                <div>
+                  <Button loading={loading} className={styles.dispatching_btn} onClick={this.onPayOrder.bind(this)}>立即付款</Button>
+                  <Button loading={loading} className={styles.cancelBtn} onClick={this.onCancelOrder.bind(this)}>取消订单</Button>
+                </div> :
+                <Button loading={loading} className={styles.dispatching_btn} onClick={this.onSubmit.bind(this)}>确认配送</Button>
+            }
+          </Col>
         </Row>
       </div>
     );
@@ -96,3 +283,5 @@ Dispatching.defaultProps = {
 
 Dispatching.propTypes = {
 };
+
+export default withRouter(Dispatching);
