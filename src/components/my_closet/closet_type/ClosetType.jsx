@@ -14,7 +14,10 @@ import { Row, Col, Button } from 'antd'
 const imageMap = new Map([
   ['叠放柜', '/src/images/icon_stack_sm.svg'],
   ['挂柜', '/src/images/icon_hang_sm.svg'],
-  ['组合柜', '/src/images/icon_hang_sm.svg'],
+  ['组合柜', '/src/images/icon_stack_sm.svg'],
+  ['组合柜-叠放柜', '/src/images/icon_stack_sm.svg'],
+  ['组合柜-挂柜', '/src/images/icon_hang_sm.svg'],
+  ['组合柜', '/src/images/icon_stack_sm.svg'],
   ['单件礼服', '/src/images/icon_full_dress_sm.svg'],
   ['礼服柜', '/src/images/icon_full_dress_sm.svg'],
   ['真空袋-中', '/src/images/icon_bag_sm.svg'],

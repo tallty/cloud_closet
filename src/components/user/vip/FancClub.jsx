@@ -12,11 +12,6 @@ export default class FancClub extends Component {
   state = {
     points: 5000,
     percent: 60,
-    // powers: [{
-    //   id: 1,
-    //   url: '/src/images/icon_vip_birth.png',
-    //   title: '生日积分'
-    // }],
     user: {}
   }
 
@@ -37,18 +32,6 @@ export default class FancClub extends Component {
       })
   }
 
-  // getPowerImges() {
-  //   const { powers } = this.state;
-  //   return powers.map((item, index) => {
-  //     return (
-  //       <div key={index} className={css.power}>
-  //         <img src={item.url} alt="特权" key={index} />
-  //         <p>{item.title}</p>
-  //       </div>
-  //     );
-  //   })
-  // }
-
   render() {
     const { points, user, percent } = this.state;
     return (
@@ -61,13 +44,13 @@ export default class FancClub extends Component {
             <div className={css.title}>VIP特权</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <p className={css.nameLevel}>
+            <div className={css.nameLevel}>
               {user.nickname}
               {
                 user.vip_level_info ?
                   <div className={css.level_name}>{user.vip_level_info.level_now}</div> : null
               }
-            </p>
+            </div>
             <Level info={user.vip_level_info} />
           </div>
         </div>

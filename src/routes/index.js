@@ -46,7 +46,7 @@ import Bills from '../components/user/Bill/Bills'
 import { Bill } from '../components/user/Bill/Bill'
 //搜索
 import { Search } from '../components/my_closet/search/Search'
-import { Manage } from '../components/my_closet/manage/Manage'
+import Manage from '../components/my_closet/manage/Manage'
 import { ClosetDetails } from '../components/my_closet/closet_tab/closet_details/ClosetDetails'
 import ClosetTab from '../components/my_closet/closet_tab/ClosetTab'
 //地址

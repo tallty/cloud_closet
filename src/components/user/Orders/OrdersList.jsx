@@ -38,18 +38,21 @@ class OrdersList extends Component {
       ['待付款', '入库'],
       ['已支付', '入库'],
       ['入库中', '上架'],
-      ['已上架', '']
+      ['已上架', ''],
+      ['未支付', '付款'],
+      ['已支付', '配送'],
+      ['已发出', '收货'],
+      ['已收货', '']
     ])
     return [state, nextStates.get(state)];
   }
 
   // 订单列表
-  getOrders() {
+  getActiveOrders() {
     const { type, orders } = this.state;
     const list = [];
-
     orders.forEach((order, index, obj) => {
-      if (order.state !== '已取消' && order.state !== '已上架') {
+      if (order.state !== '已取消' && order.state !== '已上架' && order.state !== '已收货') {
         const states = this.getStates(order.state);
         list.push(
           <div className={css.orders} key={index}>
@@ -60,7 +63,6 @@ class OrdersList extends Component {
                 </div>
                 <span className={css.time}>{order.date}</span>
               </div>
-
               {this.setOrdersLayout(order)}
             </Link>
             <Row className={css.footer}>
@@ -77,16 +79,15 @@ class OrdersList extends Component {
         )
       }
     })
-    return list
+    return list;
   }
 
   // 获取历史订单
   getHistoryOrders() {
     const { type, orders } = this.state;
     const list = [];
-
     orders.forEach((order, index, obj) => {
-      if (order.state === '已取消' || order.state === '已上架') {
+      if (order.state === '已取消' || order.state === '已上架' || order.state === '已收货') {
         list.push(
           <div className={css.orders} key={index}>
             <Link to={`/order?id=${order.id}`}>
@@ -112,51 +113,48 @@ class OrdersList extends Component {
         )
       }
     })
-    return list
-  }
-
-  // 空列表样式
-  getOrdersNone() {
-    return (
-      <div className={css.orders_none}>
-        <img src="/src/images/orders_none.png" alt="无订单" />
-        <p>您还没有相关的订单</p>
-      </div>
-    )
+    return list;
   }
 
   // 设置不同状态的模板
   setOrdersLayout(order) {
-    switch (order.state) {
-      case '待确认':
-        return (
-          <div className={css.content}>
-            <AppointClothes order={order} />
-          </div>
-        );
-      case '待收货':
-        return (
-          <div className={css.content}>
-            <OutClothes order={order} />
-          </div>
-        );
-      default:
-        return (
-          <div className={css.content}>
-            <InClothes order={order} />
-            <p className="text-right">护理费：{order.care_cost}</p>
-            <p className="text-right">服务费：{order.service_cost}</p>
-            <Row>
-              <Col span={12} className={css.nurse}>
-                护理要求： <span>{order.care_type}</span>
-              </Col>
-              <Col span={12} className={css.total_price}>
-                合计： <span>{order.price}</span>
-              </Col>
-            </Row>
-          </div>
-        );
+    const type = this.props.type;
+    let layout = null;
+    if (type === 'import' || type === 'history') {
+      switch (order.state) {
+        case '待确认':
+          layout = (
+            <div className={css.content}>
+              <AppointClothes order={order} />
+            </div>
+          );
+          break;
+        default:
+          layout = (
+            <div className={css.content}>
+              <InClothes order={order} />
+              <p className="text-right">护理费：{order.care_cost}</p>
+              <p className="text-right">服务费：{order.service_cost}</p>
+              <Row>
+                <Col span={12} className={css.nurse}>
+                  护理要求： <span>{order.care_type}</span>
+                </Col>
+                <Col span={12} className={css.total_price}>
+                  合计： <span>{order.price}</span>
+                </Col>
+              </Row>
+            </div>
+          );
+          break;
+      }
+    } else if (type === 'delivery') {
+      layout = (
+        <div className={css.content}>
+          <OutClothes order={order} />
+        </div>
+      );
     }
+    return layout;
   }
 
   // 设置不同类型订单的处理事件
@@ -225,6 +223,17 @@ class OrdersList extends Component {
     console.log("查看物流");
   }
 
+  // 根据类型显示订单
+  getOrdersByType() {
+    let orders = null;
+    if (this.props.type === 'history') {
+      orders = this.getHistoryOrders();
+    } else {
+      orders = this.getActiveOrders();
+    }
+    return orders;
+  }
+
   // 待确认 - 取消事件
   handleCancel(order, index) {
     const array = this.state.orders;
@@ -243,13 +252,23 @@ class OrdersList extends Component {
       })
   }
 
+  // 空列表样式
+  noOrders() {
+    return (
+      <div className={css.orders_none}>
+        <img src="/src/images/orders_none.png" alt="无订单" />
+        <p>您还没有相关的订单</p>
+      </div>
+    )
+  }
+
   render() {
     const tabHeight = document.body.clientHeight - 88;
-    const Orders = this.props.type === 'history' ? this.getHistoryOrders() : this.getOrders();
+    const Orders = this.getOrdersByType();
 
     return (
       <div style={{ height: tabHeight }} className="scrollContainer">
-        {Orders.length > 0 ? Orders : this.getOrdersNone()}
+        {Orders.length > 0 ? Orders : this.noOrders()}
       </div>
     )
   }

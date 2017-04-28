@@ -1,7 +1,7 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
 import { Affix, Row, Col, Icon, Button, Card, Input } from 'antd'
-import { Link } from 'react-router'
+import { Link, withRouter } from 'react-router'
 import SuperAgent from 'superagent'
 import classnames from 'classnames'
 import PopWindow from '../../common/PopWindow'
@@ -10,8 +10,7 @@ import styles from '../closet_tab/ClosetTab.less'
 import css from './Manage.less'
 import Toolbar from '../../common/Toolbar';
 
-
-export class Manage extends Component {
+class Manage extends Component {
   state = {
     pop: false,
     popTitle: '',
@@ -36,7 +35,7 @@ export class Manage extends Component {
     this.setState({ garments: garmentsD, selectes: selectesD, optionGroups: g })
   }
 
-  getMoveList(garmentIds, toId) {
+  beginMoveGarments(garmentIds, toId) {
     const id = this.getQueryString('id')
     SuperAgent
       .post(`http://closet-api.tallty.com/exhibition_chests/${this.getQueryString('id')}/move_garment`)
@@ -64,9 +63,9 @@ export class Manage extends Component {
     return null;
   }
 
-  // Update the value in response to user picking event 
+  // Update the value in response to user picking event
   handleChange = (name, value) => {
-    this.setState(({valueGroups}) => ({
+    this.setState(({ valueGroups }) => ({
       valueGroups: {
         ...valueGroups,
         [name]: value
@@ -75,30 +74,29 @@ export class Manage extends Component {
   }
 
   togglePicker = () => {
-    this.setState(({isPickerShow}) => ({
+    this.setState(({ isPickerShow }) => ({
       isPickerShow: !isPickerShow
     }));
   }
 
   selecte(index, id) {
     const { selectes, selectedId } = this.state
-    var selectedIdList = selectedId
+    console.log(selectes, selectedId);
+    const selectedIdList = selectedId
     selectes[index] = !selectes[index]
-    selectes[index] ? selectedIdList.push(id) : (
-      selectedIdList.forEach((val, i) => { val !== selectedIdList[index] ? selectedIdList.push(val) : '' })
-      )
+    selectes[index] ? selectedIdList.push(id) : null
     console.log(selectedIdList)
     this.setState({ selectes: selectes, selectedId: selectedIdList })
   }
 
   initList() {
-    let list = [];
-    const {selectes} = this.state
+    const list = [];
+    const { selectes } = this.state
     this.state.garments.forEach((garment, i, obj) => {
       list.push(
         <Col span={12} className={styles.left_tab} key={garment.id}>
-          <div style={{color:'#fff'}}>
-            <Card className={styles.card_tab} style={selectes[i]?{border:"1px solid #ECC17D"}:{}} onClick={this.selecte.bind(this, i, garment.id)}>
+          <div style={{ color: '#fff' }}>
+            <Card className={styles.card_tab} style={selectes[i] ? { border: "1px solid #ECC17D" } : {}} onClick={this.selecte.bind(this, i, garment.id)}>
               {/* 添加新增标签*/}
               {
                 garment.is_new ? <div className={styles.new_tab}>New</div> : null
@@ -110,11 +108,11 @@ export class Manage extends Component {
               <div className={styles.card_tab_title}>
                 <p className={styles.brand} ></p>
                 <p className={styles.good_type} >{garment.title}</p>
-                <sub className={styles.time_line}>入库时间：{this.parseTime(garment.put_in_time, "yyyy-MM-dd")}</sub><br/>
+                <sub className={styles.time_line}>入库时间：{this.parseTime(garment.put_in_time, "yyyy-MM-dd")}</sub><br />
                 {/*<sub className={styles.time_line}>到期时间：{this.parseTime(garment.expire_time, "yyyy-MM-dd")}</sub>*/}
               </div>
               {/* 添加点赞喜欢模块*/}
-              { /* <div className={styles.like_tab}><Icon className={styles.heart_icon} type="heart-o" /><br/> <sub>2234</sub></div> */ }
+              { /* <div className={styles.like_tab}><Icon className={styles.heart_icon} type="heart-o" /><br/> <sub>2234</sub></div> */}
             </Card>
           </div>
         </Col>
@@ -123,22 +121,19 @@ export class Manage extends Component {
     return list;
   }
 
-  parseTime(x,y) { 
+  parseTime(x, y) {
     var x = new Date(x)
-    var z ={
-        y:x.getFullYear(),
-        M:x.getMonth()+1,
-        d:x.getDate(),
-        h:x.getHours(),
-        m:x.getMinutes(),
-        s:x.getSeconds()}; 
-    return y.replace(/(y+|M+|d+|h+|m+|s+)/g,function(v) {
-        return ((v.length>1?"0":"")+eval('z.'+v.slice(-1))).slice(-(v.length>2?v.length:2))
-     }); 
-  }
-
-  goback(){
-    history.back()
+    var z = {
+      y: x.getFullYear(),
+      M: x.getMonth() + 1,
+      d: x.getDate(),
+      h: x.getHours(),
+      m: x.getMinutes(),
+      s: x.getSeconds()
+    };
+    return y.replace(/(y+|M+|d+|h+|m+|s+)/g, function (v) {
+      return ((v.length > 1 ? "0" : "") + eval('z.' + v.slice(-1))).slice(-(v.length > 2 ? v.length : 2))
+    });
   }
 
   /**
@@ -156,9 +151,9 @@ export class Manage extends Component {
     this.setState({ update_value: e.target.value })
   }
 
-  changename(){
+  changename() {
     console.log("点击了重命名")
-    this.setState({ 
+    this.setState({
       pop: true,
       popTitle: "修改名称",
       update_key: "user_info[nickname]",
@@ -173,7 +168,7 @@ export class Manage extends Component {
 
   render() {
     const tab_height = document.body.clientHeight - 100;
-    const {garments, pop, update_key, update_value, popTitle, isPickerShow, optionGroups, valueGroups } = this.state
+    const { garments, pop, update_key, update_value, popTitle, isPickerShow, optionGroups, valueGroups } = this.state
     const maskStyle = {
       display: isPickerShow ? 'block' : 'none'
     };
@@ -184,16 +179,16 @@ export class Manage extends Component {
     return (
       <div className={styles.Manage_content}>
         <div className={styles.tool_bar}>
-          <div className={styles.back} onClick={this.goback} >
+          <Link className={styles.back} to={`/closet_tabs?id=${this.props.location.query.id}`} >
             <Icon type="left" />
-          </div>
+          </Link>
           <div className={styles.title}>
             <p>挂柜（2）</p>
           </div>
           <div className={styles.menu} onClick={this.changename.bind(this)} >重命名</div>
         </div>
-        
-        <div className={styles.closet_container} style={{height: tab_height}}>
+
+        <div className={styles.closet_container} style={{ height: tab_height }}>
           <div className={styles.tab_content}>
             <Row className={styles.tag_content}>
               <Col span={24}>
@@ -205,17 +200,15 @@ export class Manage extends Component {
           </div>
           <p className={styles.cloth_number}>{`数量（${garments.length})`}</p>
           <Row gutter={9} className={styles.my_colset_tab_content}>
-            { this.initList() }
+            {this.initList()}
           </Row>
         </div>
         <Row className={css.tab_footer}>
-          <Col span={5} className={css.weui_select}>
+          <Col span={10} className={css.weui_select}>
             <input type="text" value={valueGroups.title} readOnly onClick={this.togglePicker} />
-          </Col>
-          <Col span={1}>
             <Icon type="down" />
           </Col>
-          <Col span={6} offset={12}>
+          <Col span={6} offset={8}>
             <Link to="/dispatching">
               <Button type="primary" className={css.distribution_btn}>加入配送</Button>
             </Link>
@@ -224,16 +217,16 @@ export class Manage extends Component {
         <Row className={css.dispatch_footer_modal}>
           <Col span={24}>
             <div className={css.picker_modal_container}>
-              <div className={css.picker_modal_mask} style={maskStyle} onClick={this.togglePicker}></div>
+              <div className={css.picker_modal_mask} style={maskStyle} onClick={this.togglePicker.bind(this)}></div>
               <div className={pickerModalClass}>
                 <header>
                   <div className={css.title}>选择你的柜子</div>
-                  <a href="javascript:;" onClick={this.togglePicker}>完成</a>
+                  <a href="javascript:;" onClick={this.togglePicker.bind(this)}>完成</a>
                 </header>
                 <Picker
-                 optionGroups={optionGroups}
-                 valueGroups={valueGroups}
-                 onChange={this.handleChange} />
+                  optionGroups={optionGroups}
+                  valueGroups={valueGroups}
+                  onChange={this.handleChange.bind(this)} />
               </div>
             </div>
           </Col>
@@ -242,7 +235,7 @@ export class Manage extends Component {
         <PopWindow show={pop} onCancel={this.hidePopWindow.bind(this)}>
           <div className={css.popContainer}>
             <p className={css.title}>{popTitle}</p>
-            <Input size="large" value={update_value} onChange={this.handlePopInputChange.bind(this)}/>
+            <Input size="large" value={update_value} onChange={this.handlePopInputChange.bind(this)} />
             <Button className={css.update}>更新</Button>
           </div>
         </PopWindow>
@@ -250,3 +243,5 @@ export class Manage extends Component {
     );
   }
 }
+
+export default withRouter(Manage);

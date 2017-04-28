@@ -1,187 +1,187 @@
 @orange: #F2C27F;
 .closet_container {
-    width: 100%;
-    padding: 8px 18px 9px 18px;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+  width: 100%;
+  padding: 8px 18px 9px 18px;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 // toolbar样式
 .tool_bar {
-    height: 50px;
-    text-align: center;
-    font-size: 16px;
-    position: relative;
+  height: 50px;
+  text-align: center;
+  font-size: 16px;
+  position: relative;
+  color: #8B612A;
+  line-height: 50px;
+  border-bottom: 2px solid #EBBA6C;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #fff;
+  .back {
+    padding: 0 14px;
+    font-size: 20px;
     color: #8B612A;
-    line-height: 50px;
-    border-bottom: 2px solid #EBBA6C;
+  }
+  .title {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background: #fff;
-    .back {
-        padding: 0 14px;
-        font-size: 20px;
+    align-items: center;
+    p {
+      padding-left: 10px;
     }
-    .title {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        p {
-            padding-left: 10px;
-        }
-        img {
-            width: 32px;
-        }
+    img {
+      width: 32px;
     }
-    .menu {
-        padding: 0 20px;
-        a {
-            color: #8B612A;
-        }
+  }
+  .menu {
+    padding: 0 20px;
+    a {
+      color: #8B612A;
     }
+  }
 }
 
 // 衣服分类标签样式
 .tab_content {
-    padding: 10px 0px 0px;
-    .tag_content {
-        .ellipsis_btn {
-            padding: 0;
-            width: 20px;
-            height: 20px;
-            background-color: #E0E0E0;
-            border-color: #E0E0E0;
-            border-radius: 50%;
-        }
-        .tag {
-            margin: 2px 6px 6px 0;
-            // width: 60px;
-            padding: 6px 15px;
-            line-height: 2px;
-            height: 20px;
-            color: #fff;
-            border: 0;
-            border-radius: 20px;
-            text-align: center;
-            background-color: #E0E0E0;
-        }
-        .tag::after {
-            background-color: @orange;
-        }
-        .search_btn_content {
-            line-height: 20px;
-            text-align: right;
-            padding-top: 3px;
-            .search_btn {
-                padding: 0;
-                background-color: transparent;
-                border-radius: 20px;
-                border: 0;
-                .search_icon {
-                    font-size: 20px;
-                    color: #E0E0E0;
-                }
-            }
-        }
+  padding: 10px 0px 0px;
+  .tag_content {
+    .ellipsis_btn {
+      padding: 0;
+      width: 20px;
+      height: 20px;
+      background-color: #E0E0E0;
+      border-color: #E0E0E0;
+      border-radius: 50%;
     }
+    .tag {
+      margin: 2px 6px 6px 0; // width: 60px;
+      padding: 6px 15px;
+      line-height: 2px;
+      height: 20px;
+      color: #fff;
+      border: 0;
+      border-radius: 20px;
+      text-align: center;
+      background-color: #E0E0E0;
+    }
+    .tag::after {
+      background-color: @orange;
+    }
+    .search_btn_content {
+      line-height: 20px;
+      text-align: right;
+      padding-top: 3px;
+      .search_btn {
+        padding: 0;
+        background-color: transparent;
+        border-radius: 20px;
+        border: 0;
+        .search_icon {
+          font-size: 20px;
+          color: #E0E0E0;
+        }
+      }
+    }
+  }
 }
 
 // 衣服数量标签样式
 .cloth_number {
-    font-size: 16px;
-    color: #7F7F7F;
-    height: 30px;
-    line-height: 30px;
-    margin: 10px 5px;
-    .cart {
-        float: right;
-        position: relative;
-        img {
-            display: inline-block;
-            height: 30px;
-            width: 30px;
-        }
-        .dot {
-            height: 8px;
-            width: 8px;
-            background-color: #EC1C1C;
-            border-radius: 50%;
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
+  font-size: 16px;
+  color: #7F7F7F;
+  height: 30px;
+  line-height: 30px;
+  margin: 10px 5px;
+  .cart {
+    float: right;
+    position: relative;
+    img {
+      display: inline-block;
+      height: 30px;
+      width: 30px;
     }
+    .dot {
+      height: 8px;
+      width: 8px;
+      background-color: #EC1C1C;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
 }
 
 // 衣服列表样式
 .my_colset_tab_content {
-    padding-bottom: 9px;
-    .release_content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        background-color: RGBA(235, 192, 129, 0.1);
-        h3 {
-          margin-bottom: 20px;
-        }
+  padding-bottom: 9px;
+  .release_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: RGBA(235, 192, 129, 0.1);
+    h3 {
+      margin-bottom: 20px;
     }
-    .card_tab {
-        position: relative;
-        padding-bottom: 10px;
-        margin-bottom: 9px;
-        .new_tab {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background-color: #B8E986;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            left: 5px;
-            top: 5px;
-        }
-        .like_tab {
-            line-height: 5px;
-            color: #C6C6C6;
-            text-align: center;
-            position: absolute;
-            right: 5px;
-            top: 160px;
-            .heart_icon {
-                color: #FFA35E;
-                font-size: 16px;
-            }
-        }
-        .card_pic_content {
-            height: 185px;
-            text-align: center;
-            padding: 10px;
-            img {
-                height: 100%;
-                max-width: 100%;
-            }
-        }
-        .card_tab_title {
-            border-top: 1px solid #F9F9F9;
-            text-align: center;
-            .brand,
-            .good_type {
-                text-align: center;
-                font-size: 14px;
-                color: #7F7F7F;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-            .time_line {
-                color: #C6C6C6;
-                padding-left: 6px;
-            }
-        }
+  }
+  .card_tab {
+    position: relative;
+    padding-bottom: 10px;
+    margin-bottom: 9px;
+    .new_tab {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background-color: #B8E986;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 5px;
+      top: 5px;
     }
+    .like_tab {
+      line-height: 5px;
+      color: #C6C6C6;
+      text-align: center;
+      position: absolute;
+      right: 5px;
+      top: 160px;
+      .heart_icon {
+        color: #FFA35E;
+        font-size: 16px;
+      }
+    }
+    .card_pic_content {
+      height: 185px;
+      text-align: center;
+      padding: 10px;
+      img {
+        height: 100%;
+        max-width: 100%;
+      }
+    }
+    .card_tab_title {
+      border-top: 1px solid #F9F9F9;
+      text-align: center;
+      .brand,
+      .good_type {
+        text-align: center;
+        font-size: 14px;
+        color: #7F7F7F;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .time_line {
+        color: #C6C6C6;
+        padding-left: 6px;
+      }
+    }
+  }
 }
