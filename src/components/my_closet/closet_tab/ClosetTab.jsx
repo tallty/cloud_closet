@@ -20,9 +20,11 @@ class ClosetTab extends Component {
       const obj = res.body;
       sessionStorage.removeItem('garments')
       sessionStorage.setItem('garments', JSON.stringify(obj.garments))
+      sessionStorage.setItem('closetTitle', JSON.stringify(obj.custom_title))
       this.setState({
-        garments: obj.garments, title: obj.title
+        garments: obj.garments, title: obj.custom_title
       })
+      console.log(obj);
     })
   }
   getQueryString(name) {
@@ -36,7 +38,7 @@ class ClosetTab extends Component {
   getGarments(page, per_page, func) {
     const id = this.getQueryString('id')
     SuperAgent
-      .get(`http://closet-api.tallty.com/exhibition_chests/${id}`)
+      .get(`http://closet-api.tallty.com/exhibition_chests/${id}?random=${Math.random()}`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
@@ -108,7 +110,7 @@ class ClosetTab extends Component {
             <Icon type="left" />
           </Link>
           <div className={styles.title}>
-            <img src="src/images/sark_one_icon.png" alt="" /><p>{title}</p>
+            <p>{title}</p>
           </div>
           <div className={styles.menu} ><Link to={`/manage?id=${this.getQueryString('id')}`}>管理</Link></div>
         </div>

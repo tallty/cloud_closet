@@ -40,7 +40,7 @@ class ClosetType extends Component {
               <Col span={4} className={css.closet_type_img_row_cell_one}>
                 <img src={imageMap.get(item.title)} alt="icon" />
               </Col>
-              <Col span={8} className={css.closet_type_img_row_cell_two}>{item.title}</Col>
+              <Col span={8} className={css.closet_type_img_row_cell_two}>{item.custom_title}</Col>
               <Col span={12} className={css.closet_type_img_row_cell_three}>
                 {item.max_count - item.remain_space_count}/{item.max_count}
               </Col>
