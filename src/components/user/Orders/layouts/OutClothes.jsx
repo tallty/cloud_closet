@@ -21,7 +21,7 @@ export class OutClothes extends Component {
           <Col span={18} className={css.goods_right}>
             <p>地址：{order.address}</p>
             <p>配送：{order.delivery_method}</p>
-            <p>合计：{order.delivery_cost + order.service_cost}</p>
+            <p>合计：{order.service_cost}</p>
           </Col>
         </Row>
       </div>

@@ -19,8 +19,8 @@ class Dispatching extends Component {
     address: {},
     isDefaultAddress: false,
     user: {},
-    serviceCost: 80,
-    deliveryCost: 120,
+    serviceCost: 100,
+    deliveryCost: 0,
     loading: false,
     isSubmited: false,
     order: {}
@@ -40,7 +40,7 @@ class Dispatching extends Component {
     const str = e.target.value;
     this.setState({
       way: str,
-      deliveryCost: str === '官方人员配送' ? 120 : 20
+      serviceCost: str === '官方人员配送' ? 100 : 0
     });
   }
 
@@ -50,7 +50,7 @@ class Dispatching extends Component {
 
   onSubmit() {
     const { address, time, way, remark, garments, deliveryCost, serviceCost } = this.state;
-    if (!address.name || !time || !way) {
+    if (!address.name || !time || !way || !remark) {
       message.error('请完善配送订单信息');
       return;
     }
@@ -174,8 +174,7 @@ class Dispatching extends Component {
     const radioStyle = {
       display: 'block',
       height: '30px',
-      lineHeight: '30px',
-      float: 'right'
+      lineHeight: '30px'
     };
     return (
       <div className={styles.Dispatching_content}>
@@ -228,15 +227,15 @@ class Dispatching extends Component {
           </div>
         </Row>
         <Row className={styles.tab_cell}>
-          <Col span={4}>配送方式:</Col>
-          <Col span={20}>
+          <Col span={24}>配送方式:</Col>
+          <Col span={24}>
             <RadioGroup onChange={this.onDeliveryChange.bind(this)} value={this.state.way} disabled={isSubmited}>
               <Radio style={radioStyle} value="快递配送">
-                <span className={styles.span_color_one}>快递配送</span>
-                <span className={styles.span_color}> 适用于可以折叠类的衣物</span>
+                <span className={styles.span_color_one}>快递（顺丰到付）</span>
+                <span className={styles.span_color}>适用于可以折叠类的衣物</span>
               </Radio>
               <Radio style={radioStyle} value="官方人员配送">
-                <span className={styles.span_color_one}>官方人员配送</span>
+                <span className={styles.span_color_one}>官方人员配送 </span>
                 <span className={styles.span_color}> 适用于礼服套装类的衣物</span>
               </Radio>
             </RadioGroup>
@@ -257,9 +256,8 @@ class Dispatching extends Component {
           </Col>
         </Row>
         <Row className={styles.tab_cell}>
-          <Col span={24} className={styles.pay_one}>运费：{deliveryCost} 元</Col>
           <Col span={24} className={styles.pay_one}>服务费：{serviceCost} 元</Col>
-          <Col span={24} className={styles.pay_two}>合计：<label>{serviceCost + deliveryCost}</label></Col>
+          <Col span={24} className={styles.pay_two}>合计：<label>{serviceCost}</label></Col>
         </Row>
         <Row className={styles.dispatching_btn_div}>
           <Col span={24} className={styles.dispatching_btn_col}>
