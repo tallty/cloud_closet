@@ -120,7 +120,11 @@ class OrdersList extends Component {
             <Row className={css.footer}>
               <Col span={24}>
                 <div className={css.info}>
-                  <span>预存时间：{order.date}</span>
+                  {
+                    order.delivery_time ?
+                      <p>配送时间：{order.delivery_time}</p> :
+                      <p>预约时间：{order.date}</p>
+                  }
                   <p>订单编号：{order.seq}</p>
                 </div>
                 {/*判断是否显示*/}
@@ -217,6 +221,12 @@ class OrdersList extends Component {
           <Button type="ghost" disabled className={css.disabled_btn}>交易取消</Button>
         </div>
       )
+    } else if (order.state === '已收货') {
+      value = (
+        <div className={css.btns}>
+          <Button type="ghost" disabled className={css.disabled_btn}>交易完成</Button>
+        </div>
+      )
     } else if (order.state === '未支付' && order.delivery_time) {
       // 配送订单
       value = (
@@ -276,7 +286,7 @@ class OrdersList extends Component {
   confirmReceived(order, index) {
     const array = this.state.orders;
     SuperAgent
-      .delete(`http://closet-api.tallty.com/delivery_orders/${order.id}/get_home`)
+      .post(`http://closet-api.tallty.com/delivery_orders/${order.id}/get_home`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
