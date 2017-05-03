@@ -22,8 +22,8 @@ export class MapAddress extends Component {
     // 初始化地图
     this.map = new BMap.Map("map-container");
     // 初始化地图,设置中心点坐标和地图级别
-    this.map.centerAndZoom(new BMap.Point(121.5059,31.2335), 15);
-    this.map.addControl(new BMap.ZoomControl());  
+    this.map.centerAndZoom(new BMap.Point(121.5059, 31.2335), 15);
+    this.map.addControl(new BMap.ZoomControl());
     // 获取当前定位
     this.getCurrentPosition();
     this.mounted = true;
@@ -37,7 +37,7 @@ export class MapAddress extends Component {
   getCurrentPosition() {
     locationPromise().then(
       value => {
-        if (!this.mounted) return ;
+        if (!this.mounted) return;
         let poi = {
           address: value.addr,
           position: { lng: value.lng, lat: value.lat },
@@ -54,29 +54,29 @@ export class MapAddress extends Component {
 
   //初始化定位
   defaultPointAndData(poi) {
-    if (!poi) { return ;}
+    if (!poi) { return; }
     // 更新地图标注
     let location_point = new BMap.Point(poi.position.lng, poi.position.lat)
     let location_icon = new BMap.Icon("src/images/loc_icon.svg", new BMap.Size(66, 66))
-    let marker = new BMap.Marker(location_point, {icon: location_icon});
+    let marker = new BMap.Marker(location_point, { icon: location_icon });
     this.map.clearOverlays();
     this.map.addOverlay(marker);
     this.map.panTo(location_point)
 
     // 更新状态（位置改变了）
-    this.setState({ 
+    this.setState({
       poi: poi,
     })
   }
 
   // 点击地图选点，根据坐标添加标注，并获取数据
   updatePointAndData(poi) {
-    if (!poi) { return ;}
+    if (!poi) { return; }
     console.dir(poi)
     // 更新地图标注
     let location_point = new BMap.Point(poi.position.lng, poi.position.lat)
     let location_icon = new BMap.Icon("src/images/loc_icon.svg", new BMap.Size(66, 66))
-    let marker = new BMap.Marker(location_point, {icon: location_icon});
+    let marker = new BMap.Marker(location_point, { icon: location_icon });
     this.map.clearOverlays();
     this.map.addOverlay(marker);
     this.map.panTo(location_point)
@@ -133,12 +133,12 @@ export class MapAddress extends Component {
 
     return (
       <div className={styles.dhContainer} >
-        <div id="map-container" className={styles.baidumap} style={{height: height}}></div>
+        <div id="map-container" className={styles.baidumap} style={{ height: height }}></div>
         <div className={styles.back_btn} onClick={this.props.hiddenEvent}><Icon type="left" /></div>
-        <div className={styles.location} style={{top: height-43}} onClick={locationEvent}>
-          {loading ? <Icon type="loading" /> : <img src="src/images/map_location.svg" alt="定位"/>}
+        <div className={styles.location} style={{ top: height - 43 }} onClick={locationEvent}>
+          {loading ? <Icon type="loading" /> : <img src="/src/images/map_location.png" alt="定位" />}
         </div>
-        { poi ? <MapTabResult map={this.map} poi={poi} hiddenEvent={this.props.hiddenEvent}/> : <Spiner /> }
+        {poi ? <MapTabResult map={this.map} poi={poi} hiddenEvent={this.props.hiddenEvent} /> : <Spiner />}
       </div>
     )
   }

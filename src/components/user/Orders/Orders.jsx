@@ -11,7 +11,8 @@ const TabPane = Tabs.TabPane;
 export class Orders extends Component {
   state = {
     appointments: [],
-    deliveries: []
+    deliveries: [],
+    loading: false
   }
 
   componentDidMount() {
@@ -20,6 +21,7 @@ export class Orders extends Component {
   }
 
   getAppointments(page) {
+    this.setState({ loading: true });
     SuperAgent
       .get(`http://closet-api.tallty.com/appointments?page=${page}`)
       .set('Accept', 'application/json')
@@ -28,14 +30,15 @@ export class Orders extends Component {
       .end((err, res) => {
         if (res.ok) {
           const obj = res.body;
-          this.setState({ appointments: obj.appointments.reverse() });
+          this.setState({ appointments: obj.appointments.reverse(), loading: false });
         } else {
-          this.setState({ appointments: [] });
+          this.setState({ appointments: [], loading: false });
         }
       })
   }
 
   getDeliveries(page) {
+    this.setState({ loading: true });
     SuperAgent
       .get(`http://closet-api.tallty.com/delivery_orders?page=${page}`)
       .set('Accept', 'application/json')
@@ -44,9 +47,9 @@ export class Orders extends Component {
       .end((err, res) => {
         if (res.ok) {
           const obj = res.body;
-          this.setState({ deliveries: obj.delivery_orders });
+          this.setState({ deliveries: obj.delivery_orders, loading: false });
         } else {
-          this.setState({ deliveries: [] });
+          this.setState({ deliveries: [], loading: false });
         }
       })
   }
@@ -66,20 +69,20 @@ export class Orders extends Component {
   }
 
   render() {
-    const { deliveries, appointments } = this.state;
+    const { deliveries, appointments, loading } = this.state;
     const histories = deliveries.concat(appointments);
     return (
       <div className={css.container}>
         <Toolbar title="我的订单" url="/user" theme="dark" />
         <Tabs defaultActiveKey="1" className={css.tab_bar} onChange={this.handleChange.bind(this)}>
           <TabPane tab="入库订单" key="1">
-            {appointments.length > 0 ? <OrdersList type="import" orders={appointments} /> : <Spiner />}
+            {loading ? <Spiner /> : <OrdersList type="import" orders={appointments} />}
           </TabPane>
           <TabPane tab="配送订单" key="2">
-            {deliveries.length > 0 ? <OrdersList type="delivery" orders={deliveries} /> : <Spiner />}
+            {loading ? <Spiner /> : <OrdersList type="delivery" orders={deliveries} />}
           </TabPane>
           <TabPane tab="历史订单" key="3">
-            {histories.length > 0 ? <OrdersList type="history" orders={histories} /> : <Spiner />}
+            {loading ? <Spiner /> : <OrdersList type="history" orders={histories} />}
           </TabPane>
         </Tabs>
       </div>

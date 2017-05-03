@@ -157,7 +157,9 @@ class Dispatching extends Component {
   }
 
   disabledDate(current) {
-    return current && current.valueOf() < Date.now();
+    const date = new Date();
+    date.setDate(date.getDate() + 1);
+    return current && current.valueOf() < date;
   }
 
   chooseAddress() {
@@ -235,7 +237,7 @@ class Dispatching extends Component {
                 <span className={styles.span_color}>适用于可以折叠类的衣物</span>
               </Radio>
               <Radio style={radioStyle} value="官方人员配送">
-                <span className={styles.span_color_one}>官方人员配送 </span>
+                <span className={styles.span_color_one}>专员限时配送 </span>
                 <span className={styles.span_color}> 适用于礼服套装类的衣物</span>
               </Radio>
             </RadioGroup>

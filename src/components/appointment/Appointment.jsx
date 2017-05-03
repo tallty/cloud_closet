@@ -57,7 +57,6 @@ class Appointment extends Component {
             this.getDefaultAddress(user.default_address_id);
           }
         } else {
-          // alert("获取用户信息失败");
           console.log("获取用户信息失败");
         }
       })
@@ -71,11 +70,10 @@ class Appointment extends Component {
       .set('X-User-Phone', localStorage.phone)
       .end((err, res) => {
         if (!err || err === null) {
-          let addre = JSON.stringify(res.body);
+          const addre = JSON.stringify(res.body);
           sessionStorage.setItem('selected_address', addre);
           this.setState({ defaultAddress: res.body });
         } else {
-          console.log("获取默认地址失败");
           this.setState({ defaultAddress: {} });
         }
       })
@@ -224,20 +222,6 @@ class Appointment extends Component {
                     <Icon type="right" />
                   </Col>
                 </div>
-                {/*<Col span={22}>
-                    <FormItem id="control-input1" >
-                      {getFieldDecorator('address_city', { initialValue: '' })(
-                        <Input id="control-input1" placeholder="上门服务"/>
-                      )}
-                    </FormItem>
-                  </Col>*/}
-                {/*<Col span={22} offset={2}>
-                  <FormItem id="control-input2">
-                  {getFieldDecorator('address_number', { initialValue: '' })(
-                    <Input id="control-input2" placeholder="输入您的所在楼层或门牌号码" className={styles.address_input} />
-                  )}
-                  </FormItem>
-                </Col>*/}
                 <Col span={24} className={styles.line_no_two}>
                   <FormItem className={styles.clo_number_radio}>
                     {getFieldDecorator('number', { initialValue: '10' }, {
