@@ -20,8 +20,18 @@ class OrdersList extends Component {
     orders: []
   }
 
+
   componentWillMount() {
     const { type, orders } = this.props;
+    this.setState({
+      type: type,
+      orders: orders
+    });
+  }
+
+
+  componentWillReceiveProps(nextProps) {
+    const { type, orders } = nextProps;
     this.setState({
       type: type,
       orders: orders
@@ -307,16 +317,6 @@ class OrdersList extends Component {
     this.props.router.replace(`/order?id=${order.id}`);
   }
 
-  // 确认收货
-  handleReceive(order) {
-    console.log("确认收货");
-  }
-
-  // 查看物流
-  showLogistics(order) {
-    console.log("查看物流");
-  }
-
   // 根据类型显示订单
   getOrdersByType() {
     let orders = null;
@@ -378,7 +378,6 @@ class OrdersList extends Component {
   render() {
     const tabHeight = document.body.clientHeight - 88;
     const Orders = this.getOrdersByType();
-
     return (
       <div style={{ height: tabHeight }} className="scrollContainer">
         {Orders.length > 0 ? Orders : this.noOrders()}
@@ -399,7 +398,6 @@ OrdersList.propTypes = {
       id: number,
       name: string,
       phone: string,
-      number: number,
       address: string,
       state: string,
       price: number,
