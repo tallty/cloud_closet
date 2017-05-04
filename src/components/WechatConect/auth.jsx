@@ -29,14 +29,6 @@ module.exports = {
   authLogin() {
     const redirect_url = this.GetUrlRelativePath();
     sessionStorage.setItem('redirect_url', redirect_url);
-    // 无论本地的openid存不存在，都重新获取一次用户的openid
-    // 解决：微信切换账号，云衣橱账号不变的bug
-    // 部署时： 使用注释的判断
-    // if (!(sessionStorage.is_authenticated === 'true')) {
-    // // if (!localStorage.openid) {
-    //   this.getSkipUrl();
-    // }
-    // localStorage.openid = 'olclvwCOMobnRYQRtXLAdhujZbtM'
     if (localStorage.openid) {
       SuperAgent
         .post('http://closet-api.tallty.com/user_info/check_openid')
