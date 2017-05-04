@@ -3,22 +3,22 @@ import OAuth from 'wechat-oauth';
 
 module.exports = {
 
-  getSkipUrl(){
-    let appid = 'wx47b02e6b45bf1dad'
-    let secret = 'b78a5266c57391d8bd7bce75e86fc3c0'
-    let client = new OAuth(appid, secret);
-    let urlt = 'http://closet.tallty.com/'+'get_open_id'
-    let url = client.getAuthorizeURL(urlt, '123', 'snsapi_base');
+  getSkipUrl() {
+    const appid = 'wx47b02e6b45bf1dad'
+    const secret = 'b78a5266c57391d8bd7bce75e86fc3c0'
+    const client = new OAuth(appid, secret);
+    const urlt = 'http://closet.tallty.com/' + 'get_open_id'
+    const url = client.getAuthorizeURL(urlt, '123', 'snsapi_base');
     window.location.href = url;
   },
 
-  GetUrlRelativePath(){
-    let url = document.location.toString();
-    let arrUrl = url.split("//");
-    let start = arrUrl[1].indexOf("/");
+  GetUrlRelativePath() {
+    const url = document.location.toString();
+    const arrUrl = url.split('//');
+    const start = arrUrl[1].indexOf('/');
     let relUrl = arrUrl[1].substring(start);//stop省略，截取从start开始到结尾的所有字符
-    if(relUrl.indexOf("?") != -1){
-      relUrl = relUrl.split("?")[0];
+    if (relUrl.indexOf('?') != -1) {
+      relUrl = relUrl.split('?')[0];
     }
     return relUrl;
   },
@@ -33,7 +33,6 @@ module.exports = {
     // 解决：微信切换账号，云衣橱账号不变的bug
     // 部署时： 使用注释的判断
     // if (!(sessionStorage.is_authenticated === 'true')) {
-    // console.log(localStorage.openid);
     // // if (!localStorage.openid) {
     //   this.getSkipUrl();
     // }

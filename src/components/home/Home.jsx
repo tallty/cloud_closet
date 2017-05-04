@@ -15,35 +15,23 @@ export class Home extends Component {
   }
 
   componentWillMount() {
-    var code = this.getQueryString('code')
-    var url = "http://wechat-api.tallty.com/cloud_closet_wechat/web_access_token"
-    //获取open
-    // SuperAgent.post(url)
-    //           .set('Accept', 'application/json')
-    //           .send({code: code})
-    //           .end( (err, res) => {
-    //             let result = res.body.openid
-    //             console.log(err)
-    //             console.log(result)
-    //             // let openid = result
-    //             // 改变状态
-    //             this.setState({openid:openid})
-    //           })
+    const code = this.getQueryString('code')
+    const url = 'http://wechat-api.tallty.com/cloud_closet_wechat/web_access_token'
   }
 
-  getQueryString(name) { 
-    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i'); 
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) { 
-      return unescape(r[2]); 
+  getQueryString(name) {
+    const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    const r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+      return unescape(r[2]);
     }
-      return null;
+    return null;
   }
 
   render() {
     return (
       <div className={styles.home_content}>
-        <img src="src/images/home_one.png" alt="" className={styles.home_pic}/>
+        <img src="src/images/home_one.png" alt="" className={styles.home_pic} />
         <Row className={styles.home_order_content}>
           <Col span={24} className={styles.home_order}>
             打造美感与舒适感相结合的完美成衣

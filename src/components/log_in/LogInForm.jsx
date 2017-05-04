@@ -1,7 +1,7 @@
 // 登陆页
 import SuperAgent from 'superagent'
 import React, { Component, PropTypes } from 'react'
-import { Row, Col, Input, Button } from 'antd'
+import { Row, Col, Input, Button, message } from 'antd'
 import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'
 import styles from './LogInForm.less'
@@ -56,9 +56,7 @@ class LogInForm extends Component {
       .set('Accept', 'application/json')
       .send({ 'sms_token': { 'phone': phone } })
       .end((err, res) => {
-        let result = res.body.token;
-        console.log(res);
-        console.log(result);
+        const result = res.body.token;
       })
   }
 
@@ -97,7 +95,6 @@ class LogInForm extends Component {
       .end((err, res) => {
         // 绑定
         this.userBind();
-        console.log(res);
       })
   }
 
@@ -106,7 +103,7 @@ class LogInForm extends Component {
    * 缓存：nickname、phone
    */
   userBind() {
-    let { phone } = this.state
+    const { phone } = this.state
     SuperAgent
       .post("http://closet-api.tallty.com/user_info/bind")
       .set('Accept', 'application/json')
@@ -121,12 +118,8 @@ class LogInForm extends Component {
           localStorage.setItem('user', user_str);
           // 用户登录
           this.signIn();
-
-          console.log('用户绑定成功 =>')
-          console.dir(res)
         } else {
-          console.dir(err);
-          alert('用户绑定失败！')
+          message.error('用户绑定失败！');
         }
       })
   }
@@ -145,12 +138,8 @@ class LogInForm extends Component {
       .end((err, res) => {
         if (res.ok) {
           this.props.router.replace(sessionStorage.redirect_url);
-
-          console.log('用户登录成功 =>')
-          console.dir(res)
         } else {
-          console.dir(err);
-          alert('用户登录失败！')
+          message.error('用户登录失败！')
         }
       })
   }

@@ -7,7 +7,7 @@ import Toolbar from '../../common/Toolbar'
 import { Spiner } from '../../common/Spiner'
 import { Link, withRouter } from 'react-router'
 import { InClothes } from './layouts/InClothes'
-import { Row, Col, Timeline, Icon, Modal, Button } from 'antd'
+import { Row, Col, Timeline, Icon, Modal, Button, message } from 'antd'
 import SuperAgent from 'superagent'
 
 const confirm = Modal.confirm;
@@ -35,12 +35,10 @@ class Order extends Component {
       .set('X-User-Phone', localStorage.phone)
       .end((err, res) => {
         if (res.ok) {
-          let obj = res.body;
-          console.log("Order.jsx 获取用户详情 => ")
-          console.log(obj);
+          const obj = res.body;
           this.setState({ user: obj });
         } else {
-          console.log("获取用户详情失败")
+          message.warning('获取用户详情失败')
         }
       })
   }
@@ -56,10 +54,9 @@ class Order extends Component {
       .end((err, res) => {
         if (res.ok) {
           const obj = res.body;
-          console.log(obj);
           this.setState({ order: obj });
         } else {
-          alert("获取订单详情失败")
+          message.error('获取订单详情失败');
         }
       })
   }

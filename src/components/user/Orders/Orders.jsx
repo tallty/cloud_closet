@@ -31,7 +31,6 @@ export class Orders extends Component {
         if (res.ok) {
           const obj = res.body;
           this.setState({ appointments: obj.appointments.reverse(), loading: false });
-          console.log(res.body.appointments);
         } else {
           this.setState({ appointments: [], loading: false });
         }

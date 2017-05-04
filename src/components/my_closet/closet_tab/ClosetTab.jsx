@@ -12,25 +12,20 @@ const height = window.innerHeight - 52;
 class ClosetTab extends Component {
   state = {
     id: this.props.location.query.id,
-    garments: [],
-    title: ''
+    garments: null,
+    closet: null,
+    title: '',
+    supportTags: [],
+    selectedTag: '全部'
   }
 
   componentDidMount() {
-    this.getGarments(1, 100, (res) => {
-      const obj = res.body;
-      sessionStorage.removeItem('garments')
-      sessionStorage.setItem('garments', JSON.stringify(obj.garments))
-      sessionStorage.setItem('closetTitle', JSON.stringify(obj.custom_title))
-      this.setState({
-        garments: obj.garments, title: obj.custom_title
-      })
-      console.log(obj);
-    })
+    this.getGarments();
+    this.getTags();
   }
 
   // 获取列表
-  getGarments(page, per_page, func) {
+  getGarments() {
     SuperAgent
       .get(`http://closet-api.tallty.com/exhibition_chests/${this.state.id}?random=${Math.random()}`)
       .set('Accept', 'application/json')
@@ -38,20 +33,46 @@ class ClosetTab extends Component {
       .set('X-User-Phone', localStorage.phone)
       .end((err, res) => {
         if (!err || err === null) {
-          func(res);
+          const obj = res.body;
+          sessionStorage.setItem('closetTitle', JSON.stringify(obj.custom_title))
+          this.setState({
+            garments: obj.garments,
+            title: obj.custom_title,
+            closet: obj
+          });
         } else {
-          console.log("获取衣橱列表失败");
+          message.error('获取衣橱列表失败, 请稍后重试');
+          this.setState({
+            garments: [], title: ''
+          })
         }
       })
   }
 
-  initList() {
-    let list = [];
-    this.state.garments.forEach((garment, i, obj) => {
-      list.push(
-        <Col span={12} className={styles.left_tab} key={garment.id}>
-          <Link to={`/closet_details?id=${i}`}>
-            <div style={{ color: '#fff' }}>
+  getTags() {
+    SuperAgent
+      .get('http://closet-api.tallty.com/constant_tags')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        if (!err || err === null) {
+          const obj = res.body;
+          sessionStorage.setItem('supportTags', JSON.stringify(obj));
+          this.setState({ supportTags: obj });
+        } else {
+          message.error('获取标签列表失败');
+        }
+      })
+  }
+
+  showGarments() {
+    const { garments, selectedTag, closet } = this.state;
+    const list = [];
+    if (!garments) return list;
+    garments.forEach((garment, i, obj) => {
+      if (garment.tag_list.includes(selectedTag) || selectedTag === '全部') {
+        list.push(
+          <Col span={12} className={styles.left_tab} key={garment.id}>
+            <div style={{ color: '#fff' }} onClick={this.showDetail.bind(this, garment)}>
               <Card className={styles.card_tab}>
                 {/* 添加新增标签*/}
                 {garment.is_new ? <div className={styles.new_tab}>New</div> : null}
@@ -62,18 +83,27 @@ class ClosetTab extends Component {
                 <div className={styles.card_tab_title}>
                   <p className={styles.brand} ></p>
                   <p className={styles.good_type} >{garment.title}</p>
-                  <sub className={styles.time_line}>入库时间：{this.parseTime(garment.put_in_time, 'yyyy-MM-dd')}</sub><br />
-                  {/*<sub className={styles.time_line}>到期时间：{this.parseTime(garment.expire_time, "yyyy-MM-dd")}</sub>*/}
+                  <sub className={styles.time_line}>入库时间：{this.parseTime(garment.put_in_time)}</sub>
+                  <br />
                 </div>
-                {/* 添加点赞喜欢模块*/}
-                {/* <div className={styles.like_tab}><Icon className={styles.heart_icon} type="heart-o" /><br/> <sub>2234</sub></div> */}
               </Card>
             </div>
-          </Link>
-        </Col>
-      )
-    })
+          </Col>
+        )
+      }
+    });
+    if (closet.remain_space_count === closet.max_count) {
+      list.push(<div className={styles.release_content} style={{ height: height - 150 }}>
+        <h3>当前衣柜为空!</h3>
+        <Button type="primary" className={styles.tag} onClick={this.removeCloset.bind(this)}>释放衣柜</Button>
+      </div>)
+    }
     return list;
+  }
+
+  showDetail(garment) {
+    sessionStorage.setItem('garment', JSON.stringify(garment));
+    this.props.router.push('/closet_details')
   }
 
   removeCloset() {
@@ -92,27 +122,33 @@ class ClosetTab extends Component {
       })
   }
 
-  parseTime(x, y) {
-    var x = new Date(x)
-    var z = {
-      y: x.getFullYear(),
-      M: x.getMonth() + 1,
-      d: x.getDate(),
-      h: x.getHours(),
-      m: x.getMinutes(),
-      s: x.getSeconds()
-    };
-    return y.replace(/(y+|M+|d+|h+|m+|s+)/g, function (v) {
-      return ((v.length > 1 ? "0" : "") + eval('z.' + v.slice(-1))).slice(-(v.length > 2 ? v.length : 2))
-    });
+  parseTime(time) {
+    return time.slice(0, -10).split('T')[0];
   }
 
   goback() {
     history.back()
   }
 
+  showSupportTags() {
+    return this.state.supportTags.map((item, index) => (
+      <Button
+        key={index}
+        type="primary"
+        className={styles.tag}
+        onClick={this.selectedTag.bind(this, item)}
+      > {item.title}
+      </Button>
+    ));
+  }
+
+  selectedTag(tag) {
+    this.setState({ selectedTag: tag.title });
+  }
+
   render() {
-    const { garments, title } = this.state
+    const { garments, title, selectedTag } = this.state;
+    const garmentList = this.showGarments();
     return (
       <div>
         <div className={styles.tool_bar}>
@@ -128,24 +164,23 @@ class ClosetTab extends Component {
           <div className={styles.tab_content}>
             <Row className={styles.tag_content}>
               <Col span={24}>
-                <Button type="primary" className={styles.tag} onClick={this.show_type}>裙装</Button>
-                <Button type="primary" className={styles.tag} onClick={this.show_type}>外套</Button>
-                <Button type="primary" className={styles.tag} onClick={this.show_type}>上衣</Button>
-                <Button type="primary" className={styles.tag} onClick={this.show_type}>裤装</Button>
-                <Button type="primary" className={styles.tag} onClick={this.show_type}>裤装</Button>
-                <Button type="primary" className={styles.tag} onClick={this.show_type}>裤装</Button>
+                <Button
+                  type="primary"
+                  className={styles.tag}
+                  onClick={this.selectedTag.bind(this, { title: '全部' })}>全部</Button>
+                {this.showSupportTags()}
               </Col>
             </Row>
           </div>
           <div className={styles.cloth_number}>
-            {`数量（${garments.length})`}
+            {`${selectedTag} 数量（${garmentList.length})`}
             <Link to={`/cart?back_url=/closet_tabs?id=${this.state.id}`} className={styles.cart}>
               <img src="/src/images/icon_cart.svg" alt="cart" />
               <div className={styles.dot}></div>
             </Link>
           </div>
           <Row gutter={9} className={styles.my_colset_tab_content}>
-            {garments ? (garments.length === 0 ? <div className={styles.release_content} style={{ height: height - 150 }}><h3>当前衣柜为空!</h3><Button type="primary" className={styles.tag} onClick={this.removeCloset.bind(this)}>释放衣柜</Button></div> : this.initList()) : <Spin size="large" />}
+            {garments ? garmentList : <Spin size="large" />}
           </Row>
         </div>
       </div>

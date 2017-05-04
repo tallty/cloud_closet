@@ -4,7 +4,7 @@ import { Row, Col, Icon, Button } from 'antd'
 import classnames from 'classnames'
 import { Link, withRouter } from 'react-router'
 import SuperAgent from 'superagent'
-import AddAddress from './add_address/AddAddress'
+import AddressList from './address_list/AddressList'
 import styles from './Address.less'
 import { Spiner } from '../common/Spiner';
 import Toolbar from '../common/Toolbar';
@@ -48,13 +48,13 @@ export class Address extends Component {
         <div className={styles.content}>
           <div className="scrollContainer">
             <div className={styles.list_tab_body}>
-              {this.state.addresses ? <AddAddress addresses={this.state.addresses} /> : <Spiner />}
+              {this.state.addresses ? <AddressList addresses={this.state.addresses} /> : <Spiner />}
             </div>
           </div>
           <Row className={styles.tab_footer}>
             <Col span={24}>
               <button className={styles.add_address_btn} onClick={this.addNewAddress.bind(this)}>
-              添加新地址
+                添加新地址
               </button>
             </Col>
           </Row>

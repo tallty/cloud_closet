@@ -9,6 +9,7 @@ import SuperAgent from 'superagent'
 import { Link, withRouter } from 'react-router'
 import classNames from 'classnames/bind'
 import { Row, Col, Button } from 'antd'
+import StateNone from '../../common/StateNone';
 
 // 解析衣类图片
 const imageMap = new Map([
@@ -27,7 +28,7 @@ const imageMap = new Map([
 class ClosetType extends Component {
   getCarouselList() {
     const { closets } = this.props;
-    const list = [];
+    let list = [];
     const titleList = []
     const idList = []
     closets.forEach((item, index, obj) => {
@@ -51,7 +52,10 @@ class ClosetType extends Component {
     })
     sessionStorage.setItem('titleList', JSON.stringify(titleList))
     sessionStorage.setItem('idList', JSON.stringify(idList))
-    return list
+    if (list.length === 0) {
+      list = <StateNone desc="您还没有购买过任何衣柜" />;
+    }
+    return list;
   }
 
   render() {

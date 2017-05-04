@@ -33,7 +33,6 @@ export class User extends Component {
           // 缓存
           localStorage.setItem('user', JSON.stringify(res.body));
           this.setState({ user: res.body });
-          console.log(res.body);
         } else {
           auth.authLogin();
         }
@@ -43,14 +42,14 @@ export class User extends Component {
   getGrid() {
     const list = [];
     const { recharge_amount } = this.state.user;
-    sessionStorage.setItem('amount', recharge_amount);
+    sessionStorage.setItem('receipt_amount', recharge_amount);
     this.state.grids.forEach((grid, index, obj) => {
       const dot = grid.message ? <div className={css.dot}></div> : null;
       list.push(
         index === 4 ?
           <Col span={8} className={css.item} key={index}>
             {dot}
-            <Link to={`${grid.url}?amount=${recharge_amount}`}>
+            <Link to={grid.url}>
               <div className={css.ticket}>{recharge_amount}<span className={css.ticket_icon}>￥</span></div>
               <div>{grid.name}</div>
             </Link>

@@ -47,11 +47,11 @@ import { Bill } from '../components/user/Bill/Bill'
 //搜索
 import { Search } from '../components/my_closet/search/Search'
 import Manage from '../components/my_closet/manage/Manage'
-import { ClosetDetails } from '../components/my_closet/closet_tab/closet_details/ClosetDetails'
+import ClosetDetails from '../components/my_closet/closet_tab/closet_details/ClosetDetails'
 import ClosetTab from '../components/my_closet/closet_tab/ClosetTab'
 //地址
 import Address from '../components/address/Address'
-import AddAddress from '../components/address/add_address/AddAddress'
+import AddressList from '../components/address/address_list/AddressList'
 import { NewAddress } from '../components/address/new_address/NewAddress'
 //配送
 import Dispatching from '../components/dispatching/Dispatching'
@@ -135,7 +135,7 @@ export class Routes extends Component {
         {/* 添加地址路由 */}
         <Route path="/address" component={Address} />
         {/* 添加新增地址路由 */}
-        <Route path="/add_address" component={AddAddress} />
+        <Route path="/add_address" component={AddressList} />
         <Route path="/address/new" component={NewAddress} />
         {/* 添加配送路由 */}
         <Route path="/dispatching" component={Dispatching} />

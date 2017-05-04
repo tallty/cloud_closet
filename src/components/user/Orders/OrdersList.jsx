@@ -341,7 +341,7 @@ class OrdersList extends Component {
           array.splice(index, 1, res.body);
           this.setState({ orders: array });
         } else {
-          console.log('取消订单失败');
+          message.error('取消订单失败');
         }
       })
   }

@@ -108,7 +108,7 @@ export class InClothes extends Component {
 
 InClothes.defaultProps = {
   order: {},
-  itemClickEvent: () => { console.log("响应默认的点击事件") }
+  itemClickEvent: () => { }
 }
 
 InClothes.PropTypes = {
@@ -116,7 +116,6 @@ InClothes.PropTypes = {
     id: number,
     name: string,
     phone: string,
-    number: number,
     address: string,
     state: string,
     price: number,

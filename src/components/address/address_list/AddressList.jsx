@@ -1,16 +1,16 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
-import { Radio, Row, Col, Icon, Button } from 'antd'
-import NavLink from '../../../layouts/NavigationLayout/NavLink'
+import { Radio, Row, Col, Icon, Button, message } from 'antd'
 import classnames from 'classnames'
 import { Link, withRouter } from 'react-router'
-import styles from './AddAddress.less'
+import styles from './address_list.less'
 import SuperAgent from 'superagent'
+import StateNone from '../../common/StateNone';
 
 const { string, number, bool, shape, arrayOf } = PropTypes;
 const RadioGroup = Radio.Group;
 
-class AddAddress extends Component {
+class AddressList extends Component {
   state = {
     addresses: null
   }
@@ -21,10 +21,9 @@ class AddAddress extends Component {
 
   // 修改默认地址
   setDefaultAddress = (e) => {
-    console.log(e.target.value);
-    let address_id = e.target.value;
+    const addressId = e.target.value;
     SuperAgent
-      .post(`http://closet-api.tallty.com/addresses/${address_id}/set_default`)
+      .post(`http://closet-api.tallty.com/addresses/${addressId}/set_default`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
@@ -32,7 +31,7 @@ class AddAddress extends Component {
         if (!err || err === null) {
           this.getAddresses();
         } else {
-          alert("设置默认地址失败");
+          message.error('设置默认地址失败');
         }
       })
   }
@@ -57,7 +56,7 @@ class AddAddress extends Component {
           this.getAddresses();
           sessionStorage.removeItem('selected_address');
         } else {
-          alert("获取地址列表失败");
+          message.error('获取地址列表失败');
         }
       })
   }
@@ -65,7 +64,7 @@ class AddAddress extends Component {
   // 获取列表
   getAddresses() {
     SuperAgent
-      .get("http://closet-api.tallty.com/addresses")
+      .get('http://closet-api.tallty.com/addresses')
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.authentication_token)
       .set('X-User-Phone', localStorage.phone)
@@ -73,7 +72,7 @@ class AddAddress extends Component {
         if (res.ok) {
           this.setState({ addresses: res.body });
         } else {
-          alert("获取地址列表失败");
+          message.error('获取地址列表失败');
           this.setState({ addresses: [] });
         }
       })
@@ -91,7 +90,7 @@ class AddAddress extends Component {
   }
 
   setList() {
-    const list = [];
+    let list = [];
     this.state.addresses.forEach((address, i, obj) => {
       list.push(
         <Row key={i} className={styles.tab_cell}>
@@ -121,33 +120,34 @@ class AddAddress extends Component {
             <Col span={5} offset={9}>
               {
                 address.is_default ?
-                  <Radio key="a" value={i} checked={true} >默认地址</Radio> :
+                  <Radio key="a" value={i} checked >默认地址</Radio> :
                   <Radio key="a" value={address.id} checked={false} onChange={this.setDefaultAddress} >设为默认</Radio>
               }
             </Col>
           </Col>
         </Row>
       )
-    })
+    });
+    if (list.length === 0) {
+      list = <StateNone desc="您尚未添加收货地址" />;
+    }
     return list;
   }
 
   render() {
-    let tab_height = document.body.clientHeight - 80;
-
     return (
-      <div className={styles.AddAddress_content}>
+      <div className={styles.AddressList_content}>
         {this.setList()}
       </div>
     );
   }
 }
 
-AddAddress.defaultProps = {
+AddressList.defaultProps = {
   addresses: []
 }
 
-AddAddress.PropTypes = {
+AddressList.PropTypes = {
   addresses: arrayOf(
     shape({
       id: number,
@@ -161,4 +161,4 @@ AddAddress.PropTypes = {
     })
   )
 }
-export default withRouter(AddAddress);
+export default withRouter(AddressList);

@@ -210,7 +210,6 @@ class Manage extends Component {
    * [hidePopWindow 隐藏弹出框]
    */
   hidePopWindow() {
-    console.log("=====弹出框关闭=====")
     this.setState({ pop: false })
   }
 

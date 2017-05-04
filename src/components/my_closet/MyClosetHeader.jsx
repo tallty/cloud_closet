@@ -14,14 +14,15 @@ class MyClosetHeader extends React.Component {
   render() {
     const { user, storingCount, storiedCount } = this.props;
     let photo = user.avatar ? user.avatar : 'src/images/default_photo_dark.svg';
+    const level = user.vip_level_info ? user.vip_level_info.level_now : null;
     return (
-      <div>
+      <div className={styles.closetHeader}>
         <Row className={styles.my_cliset_header_part_one_content}>
           <Col span={12} className={styles.user_name}>{user.nickname}</Col>
           <Col span={11} offset={1} className={styles.user_pic_content}>
             <div className={styles.user_pic_position}>
               <img className={styles.user_pic} src={photo} alt="" />
-              <div className={styles.empty_cicle}></div>
+              <div className={styles.empty_cicle}>{level}</div>
             </div>
           </Col>
         </Row>

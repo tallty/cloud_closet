@@ -132,11 +132,11 @@ class MyProfile extends Component {
   }
 
   handleSafe() {
-    console.log("点击了celler")
+
   }
 
   handlePassword() {
-    console.log("点击了celler")
+
   }
 
   formatPhoto() {

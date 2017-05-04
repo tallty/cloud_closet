@@ -6,24 +6,23 @@ import { Button } from 'antd';
 class RechargeSuccess extends Component {
 
   state = {
-    redirect_url: "",
+    redirectUrl: '',
     money: 0
   }
 
   componentWillMount() {
-    console.log(this.props.location);
-    let redirect_url = this.props.location.query.redirect_url;
-    let money = this.props.location.query.money;
-    if (redirect_url && money) {
+    const soneRedirectUrl = this.props.location.query.redirect_url;
+    const someMoney = this.props.location.query.money;
+    if (soneRedirectUrl && someMoney) {
       this.setState({
-        redirect_url: redirect_url,
-        money: money
+        redirectUrl: soneRedirectUrl,
+        money: someMoney
       });
     }
   }
 
   handleClick() {
-    this.props.router.replace(this.state.redirect_url);
+    this.props.router.replace(this.state.redirectUrl);
   }
 
   render() {

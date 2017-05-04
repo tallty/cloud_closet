@@ -4,6 +4,7 @@ import { message } from 'antd';
 import SuperAgent from 'superagent';
 import { withRouter } from 'react-router';
 import css from './cart.less';
+import StateNone from '../common/StateNone';
 
 class Cart extends Component {
   state = {
@@ -35,6 +36,10 @@ class Cart extends Component {
 
   handleSelectAll() {
     const { clothes, selectAll } = this.state;
+    if (clothes.length === 0) {
+      message.warning('配送蓝空空如也，赶快添加衣服去吧');
+      return;
+    }
     let cache = [];
     // TOOD 处理全选反选
     if (this.state.selectAll) {
@@ -120,9 +125,13 @@ class Cart extends Component {
           <span onClick={this.handleSelectAll.bind(this)}>{string}</span>
         </Toolbar>
         <div className={css.content}>
-          <ul>
-            {this.showList()}
-          </ul>
+          {
+            clothes.length > 0 ?
+              <ul>
+                {this.showList()}
+              </ul> :
+              <StateNone desc="您还没有添加一件衣服" />
+          }
         </div>
         <div className={css.footActions}>
           <div className={css.left}>已选：<span>{count} </span>件</div>

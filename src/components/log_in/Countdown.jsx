@@ -1,4 +1,4 @@
-{/* 倒计时按钮 */}
+{/* 倒计时按钮 */ }
 import SuperAgent from 'superagent'
 import React, { Component, PropTypes } from 'react'
 import { Button } from 'antd'
@@ -22,11 +22,11 @@ class Countdown extends Component {
   // 定时器执行函数
   timerCallback() {
     if (this.state.number > 0) {
-      var num = this.state.number-1
+      var num = this.state.number - 1
       this.setState({
         number: num, state: false,
       });
-    }else{
+    } else {
       this.setState({
         state: true, number: 40
       });
@@ -34,26 +34,23 @@ class Countdown extends Component {
     }
   }
 
-  enterIconLoading(){
+  enterIconLoading() {
     var phone = this.props.phone;
-    if(!(/^1(3|4|5|7|8)\d{9}$/.test(phone))){ 
-      alert("手机号码有误，请重填");  
-    }else{
+    if (!(/^1(3|4|5|7|8)\d{9}$/.test(phone))) {
+      alert("手机号码有误，请重填");
+    } else {
       this.timer = setInterval(this.timerCallback.bind(this), 1000)
-      var url = "http://closet-api.tallty.com/sms_tokens/register"
-      console.log(this.props.phone);
+      const url = "http://closet-api.tallty.com/sms_tokens/register"
       //获取验证码
       SuperAgent.post(url)
-                .set('Accept', 'application/json')
-                .send( {'sms_token': {'phone': phone} } )
-                .end( (err, res) => {
-                  let result = res.body.token
-                  console.log(res)
-                  console.log(result)
-                  this.setState({
-                    state: false,
-                  });
-                })
+        .set('Accept', 'application/json')
+        .send({ 'sms_token': { 'phone': phone } })
+        .end((err, res) => {
+          const result = res.body.token
+          this.setState({
+            state: false,
+          });
+        })
     }
   }
 

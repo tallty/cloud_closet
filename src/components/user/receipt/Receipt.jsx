@@ -12,8 +12,9 @@ export class Receipt extends Component {
   }
   // 发票金额
   componentWillMount() {
+    const receiptAmount = sessionStorage.getItem('receipt_amount');
     this.setState({
-      money: Number(this.props.location.query.amount) || 0
+      money: Number(receiptAmount) || 0
     });
   }
   //允许点击

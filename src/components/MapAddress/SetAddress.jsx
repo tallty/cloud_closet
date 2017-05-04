@@ -1,6 +1,6 @@
 // 品牌主页
 import React, { Component, PropTypes } from 'react'
-import { Row, Col, Icon, Button, Form, Input, Radio } from 'antd'
+import { Row, Col, Icon, Button, Form, Input, Radio, message } from 'antd'
 import classnames from 'classnames'
 import { Link, withRouter } from 'react-router'
 import Toolbar from '../common/Toolbar';
@@ -21,8 +21,7 @@ class SetAddress extends Component {
 
   componentWillMount() {
     if (sessionStorage.edit_address) {
-      console.log(sessionStorage.edit_address)
-      let edit_address = JSON.parse(sessionStorage.edit_address);
+      const edit_address = JSON.parse(sessionStorage.edit_address);
       this.setState({
         address: edit_address,
         action: 'edit'
@@ -45,12 +44,10 @@ class SetAddress extends Component {
       address.phone = phone;
       address.address_detail = map_address;
       address.house_number = house_number;
-      console.log("提交的address")
-      console.dir(address)
       // 新建或更新地址
       this.createOrUpdateAddress(address);
     } else {
-      alert("请完善地址信息");
+      message.warning('请完善地址信息');
     }
   }
 
@@ -72,10 +69,9 @@ class SetAddress extends Component {
       })
       .end((err, res) => {
         if (!err || err === null) {
-          console.log(res.body);
           this.props.router.replace('/address');
         } else {
-          console.log("创建或更新地址失败")
+          message.warning('创建或更新地址失败');
         }
       })
   }
@@ -89,11 +85,11 @@ class SetAddress extends Component {
   }
 
   showMap() {
-    this.setState({pop: true});
+    this.setState({ pop: true });
   }
 
   onCancel() {
-    this.setState({pop: false});
+    this.setState({ pop: false });
   }
 
   render() {
@@ -118,15 +114,15 @@ class SetAddress extends Component {
               <Col span={6} className={styles.label_input_head}>姓名:</Col>
               <Col span={18}>
                 <FormItem id="control-input1" >
-                {getFieldDecorator('name', { initialValue: address.name })(
-                  <Input id="control-input11" 
-                         placeholder="请填写寄货/收货人的姓名" 
-                         className={styles.set_address_input}/>
-                )}
+                  {getFieldDecorator('name', { initialValue: address.name })(
+                    <Input id="control-input11"
+                      placeholder="请填写寄货/收货人的姓名"
+                      className={styles.set_address_input} />
+                  )}
                 </FormItem>
               </Col>
             </Col>
-            <hr/>
+            <hr />
 
             {
               /*
@@ -146,9 +142,9 @@ class SetAddress extends Component {
               <Col span={18}>
                 <FormItem id="control-input2">
                   {getFieldDecorator('phone', { initialValue: address.phone })(
-                    <Input id="control-input22" 
-                           placeholder="请填写寄货/收货人的手机号码" 
-                           className={styles.set_address_input}/>
+                    <Input id="control-input22"
+                      placeholder="请填写寄货/收货人的手机号码"
+                      className={styles.set_address_input} />
                   )}
                 </FormItem>
               </Col>
@@ -161,10 +157,10 @@ class SetAddress extends Component {
               <Col span={8} className={styles.label_input_head}>小区/大厦/学校:</Col>
               <Col span={13}>
                 <FormItem >
-                {getFieldDecorator('map_address', { initialValue: address_input_value })(
-                  <Input placeholder="手动输入上门地址" className={styles.set_address_input}/>
-                )}
-              </FormItem>
+                  {getFieldDecorator('map_address', { initialValue: address_input_value })(
+                    <Input placeholder="手动输入上门地址" className={styles.set_address_input} />
+                  )}
+                </FormItem>
               </Col>
               <Col span={3} className={styles.label_input_head}>
                 {/* <img src="src/images/orange_location_icon.svg" className={styles.location_icon}/> */}
@@ -176,20 +172,20 @@ class SetAddress extends Component {
               <Col span={8} className={styles.label_input_head}>楼号-门牌号:</Col>
               <Col span={16}>
                 <FormItem id="control-input4" >
-                {getFieldDecorator('house_number', { initialValue: address.house_number })(
-                  <Input id="control-input44" placeholder="例:16号楼423室" className={styles.set_address_input}/>
-                )}
-              </FormItem>
+                  {getFieldDecorator('house_number', { initialValue: address.house_number })(
+                    <Input id="control-input44" placeholder="例:16号楼423室" className={styles.set_address_input} />
+                  )}
+                </FormItem>
               </Col>
             </Col>
           </Row>
         </Form>
-        
+
         {/* 地图选址 */}
-        <PopWindow show={pop} 
-                   direction='right' 
-                   onCancel={this.onCancel.bind(this)}>
-          <MapAddress hiddenEvent={this.onCancel.bind(this)}/>
+        <PopWindow show={pop}
+          direction='right'
+          onCancel={this.onCancel.bind(this)}>
+          <MapAddress hiddenEvent={this.onCancel.bind(this)} />
         </PopWindow>
       </div>
     );

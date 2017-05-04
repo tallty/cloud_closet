@@ -23,57 +23,55 @@ class MapTabResult extends Component {
     this.searchNearby(this.state.keyword, nextProps.poi);
   }
 
-  local_address(address){
+  local_address(address) {
     sessionStorage.setItem('map_address', address);
-    console.log("选中了============>" + address);
-    console.dir(this.props);
     this.props.hiddenEvent();
   }
 
-  searchNearby(keyword, poi){
+  searchNearby(keyword, poi) {
     let { map } = this.props;
-    let point = new BMap.Point(poi.position.lng, poi.position.lat); // 初始化地图,设置中心点坐标和地图级别  
+    let point = new BMap.Point(poi.position.lng, poi.position.lat); // 初始化地图,设置中心点坐标和地图级别
     let options = {
-      onSearchComplete: function(results){    
-        if (local.getStatus() == BMAP_STATUS_SUCCESS){
+      onSearchComplete: function (results) {
+        if (local.getStatus() == BMAP_STATUS_SUCCESS) {
           let list = [];
           // 加入目前定位的地址
           list.push(
-            <Row key={0} className={styles.add_col} 
-                         onClick={this.local_address.bind(this, poi.address)}>
+            <Row key={0} className={styles.add_col}
+              onClick={this.local_address.bind(this, poi.address)}>
               <Col span={3} className={styles.location_icon_content}>
-                <img src="src/images/location_icon.svg" className={styles.location_icon}/>
+                <img src="src/images/location_icon.svg" className={styles.location_icon} />
               </Col>
               <Col span={21} className={styles.add_name}><span>[当前] </span>{poi.address}</Col>
             </Row>
           );
-          // 判断状态是否正确        
-          for (let i = 0; i < results.getCurrentNumPois(); i ++){
+          // 判断状态是否正确
+          for (let i = 0; i < results.getCurrentNumPois(); i++) {
             let title = results.getPoi(i).title;
             let address = results.getPoi(i).address;
 
             list.push(
-              <Row key={i+1} className={styles.add_col} 
-                           onClick={this.local_address.bind(this, address)}>
+              <Row key={i + 1} className={styles.add_col}
+                onClick={this.local_address.bind(this, address)}>
                 <Col span={3} className={styles.location_icon_content}>
-                  <img src="src/images/location_icon.svg" className={styles.location_icon}/>
+                  <img src="src/images/location_icon.svg" className={styles.location_icon} />
                 </Col>
                 <Col span={21} className={styles.add_name}>{title}</Col>
                 <Col span={21} offset={3} className={styles.add_address}>{address}</Col>
               </Row>
             )
           }
-          this.setState({list: list, keyword: keyword})
+          this.setState({ list: list, keyword: keyword })
         }
       }.bind(this)
-    };      
+    };
     let local = new BMap.LocalSearch(map, options);
     local.setPageCapacity = 80;
     local.searchNearby(keyword, point, 2000);
   }
 
   render() {
-    const height = document.body.clientHeight*0.6-37;
+    const height = document.body.clientHeight * 0.6 - 37;
 
     return (
       <div className={styles.container}>
@@ -83,7 +81,7 @@ class MapTabResult extends Component {
           <TabPane tab="写字楼" key="写字楼"></TabPane>
           <TabPane tab="学校" key="学校"></TabPane>
         </Tabs>
-        <div className={styles.address_list} style={{height: height}}>{this.state.list}</div>
+        <div className={styles.address_list} style={{ height: height }}>{this.state.list}</div>
       </div>
     )
   }

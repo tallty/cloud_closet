@@ -91,10 +91,7 @@ export class MapAddress extends Component {
     const geocoder = new BMap.Geocoder();
     this.map.addEventListener("click", (e) => {
       let point = e.point
-      console.dir(e);
       geocoder.getLocation(point, (rs) => {
-        console.log("百度地图定位")
-        console.dir(rs)
         let poi = {
           address: rs.address,
           position: { lng: point.lng, lat: point.lat },

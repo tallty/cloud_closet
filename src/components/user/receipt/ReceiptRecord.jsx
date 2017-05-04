@@ -8,6 +8,7 @@ import Toolbar from '../../common/ToolBar';
 import { Link } from 'react-router';
 import { Spiner } from '../../common/Spiner';
 import { Row, Col } from 'antd';
+import StateNone from '../../common/StateNone';
 
 const { string, number, arrayOf, shape } = PropTypes;
 
@@ -31,10 +32,7 @@ export class ReceiptRecord extends Component {
         if (resualt.ok) {
           const obj = resualt.body;
           this.setState({ receipts: obj.invoices.reverse() });
-          console.log('ReceiptRecord.jsx 获取的发票记录列表 =>')
-          console.log(obj);
         } else {
-          console.log('获取发票记录列表失败')
         }
       })
   }
@@ -77,9 +75,9 @@ export class ReceiptRecord extends Component {
     const Receipts = this.getReceiptList();
     return (
       <div className={css.container}>
-        <Toolbar url="/user" title="开票记录" theme="dark" className={css.tops} />
+        <Toolbar url="/receipt" title="开票记录" theme="dark" className={css.tops} />
         <div className={css.content}>
-          {Receipts.length > 0 ? Receipts : this.getReceiptsNone()}
+          {Receipts.length > 0 ? Receipts : <StateNone desc="您还没有任何开票记录" />}
         </div>
       </div>
     );

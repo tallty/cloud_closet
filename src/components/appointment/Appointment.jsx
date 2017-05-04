@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import SuperAgent from 'superagent'
 import locationPromise from '../Common/locationPromise'
 import { Spiner } from '../common/Spiner';
-import { Form, Radio, Button, Checkbox, DatePicker, Row, Col, Input, Icon, Menu, Dropdown, Select } from 'antd'
+import { Form, Radio, Button, Checkbox, DatePicker, Row, Col, Input, Icon, Menu, Dropdown, Select, message } from 'antd'
 import { Link, withRouter } from 'react-router'
 import classnames from 'classnames'
 import styles from './appointment.less'
@@ -49,15 +49,15 @@ class Appointment extends Component {
       .end((err, res) => {
         if (!err || err === null) {
           // 缓存
-          let user = res.body;
-          let str = JSON.stringify(user);
+          const user = res.body;
+          const str = JSON.stringify(user);
           localStorage.setItem('user', str);
           // 如果没有手动选择地址，显示默认地址
           if (!sessionStorage.selected_address) {
             this.getDefaultAddress(user.default_address_id);
           }
         } else {
-          console.log("获取用户信息失败");
+          message.warning('获取用户信息失败');
         }
       })
   }
@@ -85,9 +85,7 @@ class Appointment extends Component {
   }
 
   checkOrderTime(rule, value, callback) {
-    console.log(Date.now());
     if (value && value.valueOf() < Date.now()) {
-      console.log(value.valueOf());
       callback(new Error('我们的服务需提前三日预约!'));
     } else {
       callback();
@@ -96,7 +94,6 @@ class Appointment extends Component {
 
   handleMenuClick(e) {
     this.setState({ storeTime: e.key })
-    console.log('click', e);
   }
 
   handleCheck(e) {
@@ -108,12 +105,10 @@ class Appointment extends Component {
     const selected_address = sessionStorage.selected_address ? JSON.parse(sessionStorage.selected_address) : {};
     const value = this.props.form.getFieldsValue();
 
-    console.log(value);
-
     if (value.check) {
       this.props.form.validateFieldsAndScroll((errors, values) => {
         if (errors) {
-          console.log('Errors in form!!!');
+          message.warning('表单填写有误');
         } else {
           this.pushAppoint(selected_address, value);
         }

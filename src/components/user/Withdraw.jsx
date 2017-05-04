@@ -12,7 +12,6 @@ export class Withdraw extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('收到表单值：', this.props.form.getFieldsValue());
   }
 
   render() {
@@ -29,7 +28,7 @@ export class Withdraw extends Component {
             <Form inline onSubmit={this.handleSubmit}>
               <div className={css.label}>￥&nbsp;&nbsp;</div>
               <FormItem>
-                <Input placeholder="请输入金额" {...getFieldProps('money')} className={css.input} type="number" />
+                <Input placeholder="请输入金额" {...getFieldProps('money') } className={css.input} type="number" />
               </FormItem>
             </Form>
           </div>

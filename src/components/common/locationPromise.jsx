@@ -4,9 +4,8 @@ import tencentToBaidu from './tencentToBaidu'
 
 const locationPromise = () => {
   return new Promise((resolve, reject) => {
-    console.log("开始定位")
-    let geolocation = new qq.maps.Geolocation("OZBBZ-ZQLC3-MKF3U-3VCU4-DFWO7-AGFPB", "weather_survey")
-    geolocation.getLocation((poi) => { 
+    const geolocation = new qq.maps.Geolocation("OZBBZ-ZQLC3-MKF3U-3VCU4-DFWO7-AGFPB", "weather_survey")
+    geolocation.getLocation((poi) => {
       let _poi = poi;
       // 标准坐标转百度坐标
       let lng_lat = tencentToBaidu(_poi.lng, _poi.lat);
@@ -19,13 +18,11 @@ const locationPromise = () => {
       //  _poi.addr = rs.address
       //  resolve(_poi)
       // })
-      // 
-      console.log("=======定位成功（百度坐标）========");
-      console.dir(_poi);
+      //
       resolve(_poi);
-    }, { 
-      enableHighAccuracy: true
-    })
+    }, {
+        enableHighAccuracy: true
+      })
   })
 }
 

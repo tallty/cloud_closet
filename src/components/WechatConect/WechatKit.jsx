@@ -78,14 +78,13 @@ module.exports = {
             success: function (res) {
               // 支付成功后的回调函数
               if(res.errMsg == "chooseWXPay:ok" ) {
-                console.log('success');
+
               }else{
                 alert(res.errMsg);
               }
             },
             cancel:function(res){
               //支付取消
-              console.log('cancel');
             }
           });
         }

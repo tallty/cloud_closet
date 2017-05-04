@@ -8,6 +8,7 @@ import { Spiner } from '../../common/Spiner'
 import classNames from 'classnames/bind'
 import Agent from 'superagent'
 import { withRouter, Link } from 'react-router'
+import StateNone from '../../common/StateNone'
 
 const cx = classNames.bind(css)
 
@@ -21,7 +22,7 @@ class Bills extends Component {
   }
 
   getBills() {
-    const bills = []
+    let bills = []
     for (const bill of this.state.bills) {
       bills.push(
         <Link
@@ -39,6 +40,9 @@ class Bills extends Component {
           </p>
         </Link>
       );
+    }
+    if (bills.length === 0) {
+      bills = <StateNone desc="您暂时还没有任何账单记录" />
     }
     return bills;
   }
