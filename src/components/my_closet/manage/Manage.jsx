@@ -11,6 +11,8 @@ import styles from '../closet_tab/ClosetTab.less'
 import css from './Manage.less'
 import Toolbar from '../../common/Toolbar';
 
+const height = window.innerHeight - 52;
+
 class Manage extends Component {
   state = {
     id: this.props.location.query.id,
@@ -20,7 +22,10 @@ class Manage extends Component {
     update_key: '',
     update_value: '',
     selectedIds: [],
+    closet: null,
     garments: [],
+    selectedTag: '全部',
+    supportTags: [],
     isPickerShow: false,
     canMoveClosets: [],
     valueGroups: {
@@ -44,7 +49,13 @@ class Manage extends Component {
       .set('X-User-Phone', localStorage.phone)
       .end((err, res) => {
         if (!err || err === null) {
-          this.setState({ garments: res.body.garments, closetTitle: res.body.custom_title })
+          const cacheSupportTags = JSON.parse(sessionStorage.getItem('supportTags'));
+          this.setState({
+            garments: res.body.garments,
+            closetTitle: res.body.custom_title,
+            supportTags: cacheSupportTags,
+            closet: res.body
+          })
         } else {
           message.error('获取衣柜信息失败');
         }
@@ -181,7 +192,7 @@ class Manage extends Component {
               <div className={styles.card_tab_title}>
                 <p className={styles.brand} ></p>
                 <p className={styles.good_type} >{garment.title}</p>
-                <sub className={styles.time_line}>入库时间：{this.parseTime(garment.put_in_time, "yyyy-MM-dd")}</sub><br />
+                <sub className={styles.time_line}>入库时间：{this.parseTime(garment.put_in_time)}</sub><br />
               </div>
             </Card>
           </div>
@@ -191,19 +202,44 @@ class Manage extends Component {
     return list;
   }
 
-  parseTime(x, y) {
-    var x = new Date(x)
-    var z = {
-      y: x.getFullYear(),
-      M: x.getMonth() + 1,
-      d: x.getDate(),
-      h: x.getHours(),
-      m: x.getMinutes(),
-      s: x.getSeconds()
-    };
-    return y.replace(/(y+|M+|d+|h+|m+|s+)/g, function (v) {
-      return ((v.length > 1 ? "0" : "") + eval('z.' + v.slice(-1))).slice(-(v.length > 2 ? v.length : 2))
+  showGarments() {
+    const { garments, selectedTag, closet } = this.state;
+    const list = [];
+    if (!garments) return list;
+    garments.forEach((garment, i, obj) => {
+      if (garment.tag_list.includes(selectedTag) || selectedTag === '全部') {
+        list.push(
+          <Col span={12} className={styles.left_tab} key={garment.id}>
+            <div style={{ color: '#fff' }}>
+              <Card
+                className={styles.card_tab}
+                style={garment.isSelected ? { outline: '3px solid #ECC17D' } : {}}
+                onClick={this.handleSelectClothe.bind(this, i)}
+              >
+                {/* 添加新增标签*/}
+                {garment.is_new ? <div className={styles.new_tab}>New</div> : null}
+                {/* 添加衣服展示卡片模块*/}
+                <div className={styles.card_pic_content}>
+                  <img alt="example" src={garment.cover_image} />
+                </div>
+                <div className={styles.card_tab_title}>
+                  <p className={styles.brand} ></p>
+                  <p className={styles.good_type} >{garment.title}</p>
+                  <sub className={styles.time_line}>入库时间：{this.parseTime(garment.put_in_time)}</sub>
+                  <br />
+                </div>
+              </Card>
+            </div>
+          </Col>
+        )
+      }
     });
+    return list;
+  }
+
+
+  parseTime(time) {
+    return time.slice(0, -10).split('T')[0];
   }
 
   /**
@@ -248,9 +284,27 @@ class Manage extends Component {
       })
   }
 
+  showSupportTags() {
+    return this.state.supportTags.map((item, index) => (
+      <button
+        key={index}
+        className={styles.tag}
+        onClick={this.selectedTag.bind(this, item)}
+      > {item.title}
+      </button>
+    ));
+  }
+
+  selectedTag(tag) {
+    this.setState({ selectedTag: tag.title });
+  }
+
   render() {
-    const tab_height = document.body.clientHeight - 100;
-    const { garments, pop, update_key, update_value, popTitle, isPickerShow, optionGroups, valueGroups, closetTitle, selectedIds } = this.state
+    const tabHeight = document.body.clientHeight - 100;
+    const { garments, pop, update_key,
+      update_value, popTitle, isPickerShow,
+      optionGroups, valueGroups, closetTitle,
+      selectedIds, selectedTag } = this.state
     const maskStyle = {
       display: isPickerShow ? 'block' : 'none'
     };
@@ -258,6 +312,8 @@ class Manage extends Component {
       css.picker_modal,
       isPickerShow ? css.picker_modal_toggle : ''
     );
+    const garmentList = this.showGarments();
+
     return (
       <div className={styles.Manage_content}>
         <div className={styles.tool_bar}>
@@ -270,19 +326,20 @@ class Manage extends Component {
           <div className={styles.menu} onClick={this.changename.bind(this)} >重命名</div>
         </div>
 
-        <div className={styles.closet_container} style={{ height: tab_height }}>
+        <div className={styles.closet_container} style={{ height: tabHeight }}>
           <div className={styles.tab_content}>
             <Row className={styles.tag_content}>
               <Col span={24}>
-                <Button type="primary" className={styles.tag} onClick={this.show_type}>裙装</Button>
-                <Button type="primary" className={styles.tag} onClick={this.show_type}>外套</Button>
-                {/*<Button type="primary" className={styles.ellipsis_btn}><Icon type="ellipsis" className={styles.ellipsis_icon} /></Button>*/}
+                <button
+                  className={styles.tag}
+                  onClick={this.selectedTag.bind(this, { title: '全部' })}>全部</button>
+                {this.showSupportTags()}
               </Col>
             </Row>
           </div>
 
           <div className={styles.cloth_number}>
-            {`数量（${garments.length})`}
+            {`【${selectedTag}】数量（${garmentList.length})`}
             <Link to={`/cart?back_url=/manage?id=${this.state.id}`} className={styles.cart}>
               <img src="/src/images/icon_cart.svg" alt="cart" />
               <div className={styles.dot}></div>
@@ -290,7 +347,7 @@ class Manage extends Component {
           </div>
 
           <Row gutter={9} className={styles.my_colset_tab_content}>
-            {this.initList()}
+            {garments ? garmentList : <Spiner />}
           </Row>
 
         </div>

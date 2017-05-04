@@ -132,13 +132,12 @@ class ClosetTab extends Component {
 
   showSupportTags() {
     return this.state.supportTags.map((item, index) => (
-      <Button
+      <button
         key={index}
-        type="primary"
         className={styles.tag}
         onClick={this.selectedTag.bind(this, item)}
       > {item.title}
-      </Button>
+      </button>
     ));
   }
 
@@ -164,23 +163,22 @@ class ClosetTab extends Component {
           <div className={styles.tab_content}>
             <Row className={styles.tag_content}>
               <Col span={24}>
-                <Button
-                  type="primary"
+                <button
                   className={styles.tag}
-                  onClick={this.selectedTag.bind(this, { title: '全部' })}>全部</Button>
+                  onClick={this.selectedTag.bind(this, { title: '全部' })}>全部</button>
                 {this.showSupportTags()}
               </Col>
             </Row>
           </div>
           <div className={styles.cloth_number}>
-            {`${selectedTag} 数量（${garmentList.length})`}
+            {`【${selectedTag}】数量（${garmentList.length})`}
             <Link to={`/cart?back_url=/closet_tabs?id=${this.state.id}`} className={styles.cart}>
               <img src="/src/images/icon_cart.svg" alt="cart" />
               <div className={styles.dot}></div>
             </Link>
           </div>
           <Row gutter={9} className={styles.my_colset_tab_content}>
-            {garments ? garmentList : <Spin size="large" />}
+            {garments ? garmentList : <Spiner />}
           </Row>
         </div>
       </div>
