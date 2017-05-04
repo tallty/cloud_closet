@@ -20,6 +20,8 @@ class MyProfile extends Component {
   }
 
   componentWillMount() {
+    localStorage.setItem('openid', 'olclvwNgQ3dpmuw_EZNwkph-J9vM');
+    localStorage.setItem('authentication_token', 'uiGhAXaxu4Q9Sp9zrGdx');
     this.getUserInfo();
   }
 
@@ -112,7 +114,7 @@ class MyProfile extends Component {
       popTitle: '修改昵称',
       update_key: 'user_info[nickname]',
       update_value: this.state.user.nickname,
-      update_type: 'string'
+      updateType: 'string'
     });
     this.props.form.setFieldsValue({
       value: this.state.user.nickname
@@ -125,7 +127,7 @@ class MyProfile extends Component {
       popTitle: '修改邮箱',
       update_key: 'user_info[mail]',
       update_value: this.state.user.mail,
-      update_type: 'email'
+      updateType: 'email'
     });
     this.props.form.setFieldsValue({
       value: this.state.user.mail
@@ -153,7 +155,7 @@ class MyProfile extends Component {
 
 
   render() {
-    const { pop, user, popTitle, update_key, update_value, update_type, loading } = this.state;
+    const { pop, user, popTitle, update_key, update_value, updateType, loading } = this.state;
     const { getFieldDecorator } = this.props.form;
 
     return (
@@ -161,17 +163,12 @@ class MyProfile extends Component {
         {loading ? <div className={css.spinContainer}><Spin /></div> : null}
         <div className={css.container}>
           <span className={css.photoInput}>
-            <input
-              type="file"
-              multiple={false}
-              accept="image/*"
-              ref="photo"
-              onChange={this.handlePhotoChange.bind(this)}
-            />
+            <input type="file" accept="image/*" multiple={false} onChange={this.handlePhotoChange.bind(this)} />
             <Celler
               name="我的头像"
               type="image"
               value={user.avatar}
+              bottom={14}
               defaultValue="src/images/default_photo.svg"
               event={() => { }}
             />
@@ -193,7 +190,7 @@ class MyProfile extends Component {
                 <FormItem hasFeedback>
                   {getFieldDecorator('value', {
                     rules: [{
-                      type: `${update_type}`, message: '格式不正确'
+                      type: `${updateType}`, message: '格式不正确'
                     }, {
                       required: true, message: '请输入正确格式的信息'
                     }]
