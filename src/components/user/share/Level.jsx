@@ -4,23 +4,38 @@ import { Link } from 'react-router';
 import css from './share.less'
 
 export default class Level extends Component {
-
   getTicks() {
     if (!this.props.info.level_now) {
       return null;
     }
-    const next = this.props.info.level_now.substring(0, 2);
+    const now = this.props.info.level_now.substring(0, 2);
     return ['普通', '银卡', '金卡', '钻石'].map((item, index) => {
-      const style = next === item ? { color: '#757575', fontWeight: 'blod' } : null;
+      const style = now === item ? { color: '#757575', fontWeight: 'blod' } : null;
       return (
         <div className={css.item} style={style} key={index}>{item}</div>
       );
     })
   }
 
+  calcPercent() {
+    if (!this.props.info.level_now) {
+      return 0;
+    }
+    const { exp_now, need_exp, level_now } = this.props.info;
+    const levelNow = level_now.substring(0, 2);
+    let tickIndex = 0;
+    ['普通', '银卡', '金卡', '钻石'].forEach((item, index) => {
+      tickIndex = item === levelNow ? index : tickIndex;
+    });
+    const stagePercent = ((Math.abs(exp_now) / Math.abs(need_exp)) * 33.33) || 0;
+    const basePercent = tickIndex * 33.33;
+    const allPercent = (basePercent + stagePercent) > 100 ? 100 : (basePercent + stagePercent);
+    return allPercent;
+  }
+
   render() {
     const { info } = this.props;
-    const percent = ((Math.abs(info.exp_now) / Math.abs(info.need_exp)) * 100) || 0;
+    const percent = this.calcPercent();
     return (
       <div className={css.level}>
         <div className={css.title}>
@@ -36,7 +51,6 @@ export default class Level extends Component {
               {this.getTicks()}
             </div>
           </div>
-          {/*<span className={css.tips}> | <Link to="/user">查看积分机制</Link></span>*/}
         </div>
       </div>
     )
