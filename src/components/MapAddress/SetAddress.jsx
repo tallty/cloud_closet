@@ -57,8 +57,8 @@ class SetAddress extends Component {
 
     Agent(method, `http://closet-api.tallty.com/addresses/${id}`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .send({
         address: {
           name: address.name,

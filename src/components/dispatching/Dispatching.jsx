@@ -28,7 +28,7 @@ class Dispatching extends Component {
 
   componentWillMount() {
     const data = JSON.parse(sessionStorage.getItem('dispatchGarments')) || {};
-    const userObj = JSON.parse(localStorage.getItem('user')) || {};
+    const userObj = JSON.parse(localStorage.getItem('closet_user')) || {};
     this.setState({
       garments: data,
       user: userObj
@@ -63,19 +63,19 @@ class Dispatching extends Component {
     SuperAgent
       .post('http://closet-api.tallty.com/delivery_orders')
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .send({
-        'delivery_order': {
+        delivery_order: {
           address: address.address_detail,
           name: address.name,
           phone: address.phone,
-          'delivery_time': time,
-          'delivery_method': way,
+          delivery_time: time,
+          delivery_method: way,
           remark: remark,
-          'delivery_cost': deliveryCost,
-          'service_cost': serviceCost,
-          'garment_ids': ids
+          delivery_cost: deliveryCost,
+          service_cost: serviceCost,
+          garment_ids: ids
         }
       })
       .end((err, res) => {
@@ -95,8 +95,8 @@ class Dispatching extends Component {
     SuperAgent
       .post(`http://closet-api.tallty.com/delivery_orders/${order.id}/pay`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           this.setState({ loading: false });
@@ -115,8 +115,8 @@ class Dispatching extends Component {
     SuperAgent
       .delete(`http://closet-api.tallty.com/delivery_orders/${order.id}`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           this.setState({ loading: false });
@@ -140,8 +140,8 @@ class Dispatching extends Component {
     SuperAgent
       .get(`http://closet-api.tallty.com/addresses/${id}`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           const addre = JSON.stringify(res.body);

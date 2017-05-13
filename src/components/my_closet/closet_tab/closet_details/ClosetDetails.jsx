@@ -25,23 +25,25 @@ class ClosetDetails extends Component {
     });
   }
 
-  addToCart() {
-    SuperAgent
-      .post('http://closet-api.tallty.com/garments/add_them_to_basket')
-      .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
-      .send({ 'garment_ids': [this.state.garment.id] })
-      .end((err, res) => {
-        if (!err || err === null) {
-          this.setState({
-            disabled: true
-          })
-          message.success('加入配送蓝成功');
-        } else {
-          message.error('加入配送蓝失败，请稍后重试。');
-        }
-      })
+  getAllTags() {
+    return this.state.tags.map((tag, index) => {
+      const isLongTag = tag.length > 20;
+      const tagElem = (
+        <Tag key={tag} className={styles.tag} closable afterClose={() => this.removeTags(tag)}>
+          {isLongTag ? `${tag.slice(0, 20)}...` : tag}
+        </Tag>
+      );
+      return isLongTag ? <Tooltip title={tag}>{tagElem}</Tooltip> : tagElem;
+    })
+  }
+
+  addTags(e) {
+    const myTags = this.state.tags;
+    if (!myTags.includes(e.key)) {
+      myTags.push(e.key);
+      this.setState({ tags: myTags });
+      this.updateTags(e.key, '');
+    }
   }
 
   goback() {
@@ -58,17 +60,6 @@ class ClosetDetails extends Component {
     this.updateTags('', removedTag);
   }
 
-  addTags(e) {
-    const myTags = this.state.tags;
-    if (!myTags.includes(e.key)) {
-      myTags.push(e.key);
-      this.setState({ tags: myTags });
-      this.updateTags(e.key, '');
-    }
-  }
-
-  saveInputRef = input => this.input = input
-
   showDetailImages() {
     let images = [];
     if (this.state.garment.detail_image) {
@@ -79,24 +70,31 @@ class ClosetDetails extends Component {
     return images;
   }
 
-  getAllTags() {
-    return this.state.tags.map((tag, index) => {
-      const isLongTag = tag.length > 20;
-      const tagElem = (
-        <Tag key={tag} className={styles.tag} closable afterClose={() => this.removeTags(tag)}>
-          {isLongTag ? `${tag.slice(0, 20)}...` : tag}
-        </Tag>
-      );
-      return isLongTag ? <Tooltip title={tag}>{tagElem}</Tooltip> : tagElem;
-    })
+  addToCart() {
+    SuperAgent
+      .post('http://closet-api.tallty.com/garments/add_them_to_basket')
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
+      .send({ garment_ids: [this.state.garment.id] })
+      .end((err, res) => {
+        if (!err || err === null) {
+          this.setState({
+            disabled: true
+          })
+          message.success('加入配送蓝成功');
+        } else {
+          message.error('加入配送蓝失败，请稍后重试。');
+        }
+      })
   }
 
   updateTags(newTags, removeTags) {
     SuperAgent
       .put(`http://closet-api.tallty.com/garments/${this.state.garment.id}`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .send({
         garment: {
           add_tag_list: newTags,
@@ -121,7 +119,12 @@ class ClosetDetails extends Component {
     return (
       <div>
         {/* 返回按钮 */}
-        <Button type="ghost" className={styles.left_link} onClick={this.goback.bind(this)} shape="circle-outline" icon="left" />
+        <Button
+          type="ghost"
+          className={styles.left_link}
+          onClick={this.goback.bind(this)}
+          shape="circle-outline" icon="left"
+        />
         <div className="scrollContainer" style={{ height: tabHeight }}>
           <div className={styles.ClosetDetails_content}>
             {/* 主图模块 */}
@@ -136,6 +139,7 @@ class ClosetDetails extends Component {
                 <Row className={styles.name_tab_content_row}>
                   <Col span={24} >
                     <p className={styles.name}>{garment.title}</p>
+                    <p className={styles.time_story}>{garment.description}</p>
                     <p className={styles.time_story}>
                       入库时间：{this.parseTime(garment.put_in_time)}
                     </p>
@@ -170,7 +174,11 @@ class ClosetDetails extends Component {
         {/* 加入配送按钮 */}
         <Row>
           <Col span={24} className={styles.dispatching_btn} >
-            <Button type="primary" disabled={this.state.disabled} onClick={this.addToCart.bind(this)}>
+            <Button
+              type="primary"
+              disabled={this.state.disabled}
+              onClick={this.addToCart.bind(this)}
+            >
               {this.state.disabled ? '已加入配送' : '加入配送'}
             </Button>
           </Col>

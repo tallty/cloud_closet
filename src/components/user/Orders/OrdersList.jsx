@@ -280,8 +280,8 @@ class OrdersList extends Component {
     SuperAgent
       .post(`http://closet-api.tallty.com/delivery_orders/${order.id}/pay`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           array.splice(index, 1, res.body);
@@ -298,8 +298,8 @@ class OrdersList extends Component {
     SuperAgent
       .post(`http://closet-api.tallty.com/delivery_orders/${order.id}/get_home`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           array.splice(index, 1, res.body);
@@ -334,8 +334,8 @@ class OrdersList extends Component {
     SuperAgent
       .post(`http://closet-api.tallty.com/appointments/${order.id}/cancel`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (res.ok) {
           array.splice(index, 1, res.body);
@@ -352,8 +352,8 @@ class OrdersList extends Component {
     SuperAgent
       .delete(`http://closet-api.tallty.com/delivery_orders/${order.id}`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           array.splice(index, 1);

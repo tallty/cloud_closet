@@ -45,8 +45,8 @@ class Manage extends Component {
     SuperAgent
       .get(`http://closet-api.tallty.com/exhibition_chests/${this.state.id}?random=${Math.random()}`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           const cacheSupportTags = JSON.parse(sessionStorage.getItem('supportTags'));
@@ -66,8 +66,8 @@ class Manage extends Component {
     SuperAgent
       .get(`http://closet-api.tallty.com/exhibition_chests/${this.state.id}/the_same_store_method`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           const closets = res.body.exhibition_chests;
@@ -90,8 +90,8 @@ class Manage extends Component {
     SuperAgent
       .post(`http://closet-api.tallty.com/exhibition_chests/${this.state.id}/move_garment`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .send({ 'garment_ids': selectedIds, 'to_exhibition_chest_id': targetCloset.id })
       .end((err, res) => {
         if (!err || err === null) {
@@ -119,8 +119,8 @@ class Manage extends Component {
     SuperAgent
       .post('http://closet-api.tallty.com/garments/add_them_to_basket')
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .send({ 'garment_ids': selectedIds })
       .end((err, res) => {
         if (!err || err === null) {
@@ -269,8 +269,8 @@ class Manage extends Component {
     SuperAgent
       .put(`http://closet-api.tallty.com/exhibition_chests/${this.state.id}`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .send({ 'exhibition_chest': { 'custom_title': this.state.update_value } })
       .end((err, res) => {
         if (!err || err === null) {

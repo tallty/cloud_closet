@@ -29,8 +29,8 @@ class ClosetTab extends Component {
     SuperAgent
       .get(`http://closet-api.tallty.com/exhibition_chests/${this.state.id}?random=${Math.random()}`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           const obj = res.body;
@@ -93,7 +93,7 @@ class ClosetTab extends Component {
       }
     });
     if (closet.remain_space_count === closet.max_count) {
-      list.push(<div className={styles.release_content} style={{ height: height - 150 }}>
+      list.push(<div className={styles.release_content} style={{ height: height - 150 }} key={0}>
         <h3>当前衣柜为空!</h3>
         <Button type="primary" className={styles.tag} onClick={this.removeCloset.bind(this)}>释放衣柜</Button>
       </div>)
@@ -110,8 +110,8 @@ class ClosetTab extends Component {
     SuperAgent
       .post(`http://closet-api.tallty.com/exhibition_chests/${this.state.id}/delete_his_val_chest`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           message.success('释放衣柜成功');

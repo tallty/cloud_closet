@@ -26,8 +26,8 @@ export class ReceiptRecord extends Component {
     SuperAgent
       .get('http://closet-api.tallty.com/invoices?page=${page}')
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, resualt) => {
         if (resualt.ok) {
           const obj = resualt.body;

@@ -34,8 +34,8 @@ export class MyCloset extends Component {
     SuperAgent
       .get(`http://closet-api.tallty.com/user_info?random=${Math.random()}`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           this.setState({ user: res.body });
@@ -50,8 +50,8 @@ export class MyCloset extends Component {
     SuperAgent
       .get(`http://closet-api.tallty.com/exhibition_chests?random=${Math.random()}`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           func(res);

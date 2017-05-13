@@ -32,19 +32,28 @@ class GetOpenId extends Component {
       })
   }
 
+  getQueryString(name) {
+    var reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`, 'i');
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+      return unescape(r[2]);
+    }
+    return null;
+  }
+
   /**
    * [checkOpenid 验证openId]
    */
   checkOpenid() {
     SuperAgent
-      .post("http://closet-api.tallty.com/user_info/check_openid")
+      .post('http://closet-api.tallty.com/user_info/check_openid')
       .set('Accept', 'application/json')
-      .send({ 'user': { 'openid': localStorage.openid } })
+      .send({ user: { openid: localStorage.closet_openid } })
       .end((err, res) => {
         if (res.ok) {
-          let obj = res.body;
-          localStorage.setItem('phone', obj.phone);
-          localStorage.setItem('authentication_token', obj.authentication_token);
+          const obj = res.body;
+          localStorage.setItem('closet_phone', obj.phone);
+          localStorage.setItem('closet_token', obj.authentication_token);
           // 添加标志位，防止进入死循环
           sessionStorage.setItem('is_authenticated', 'true');
           this.props.router.replace(sessionStorage.redirect_url);
@@ -52,15 +61,6 @@ class GetOpenId extends Component {
           this.props.router.replace('/login');
         }
       })
-  }
-
-  getQueryString(name) {
-    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) {
-      return unescape(r[2]);
-    }
-    return null;
   }
 
   render() {

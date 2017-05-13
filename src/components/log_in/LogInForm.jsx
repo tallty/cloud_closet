@@ -21,40 +21,36 @@ class LogInForm extends Component {
   }
 
   handlePhone(e) {
-    let value = e.target.value;
     this.setState({
-      phone: value,
+      phone: e.target.value
     });
   }
 
   handlePassword(e) {
-    let value = e.target.value;
     this.setState({
-      password: value,
+      password: e.target.value
     });
   }
 
   handleCodenum(e) {
-    let value = e.target.value;
     this.setState({
-      codenum: value,
+      codenum: e.target.value
     });
   }
 
   handleNickname(e) {
-    let value = e.target.value;
     this.setState({
-      nickname: value,
+      nickname: e.target.value
     });
   }
 
   enterIconLoading() {
-    let phone = this.state.phone;
-    let url = "http://closet-api.tallty.com/sms_tokens/register";
+    const phone = this.state.phone;
+    const url = 'http://closet-api.tallty.com/sms_tokens/register';
     //获取验证码
     SuperAgent.post(url)
       .set('Accept', 'application/json')
-      .send({ 'sms_token': { 'phone': phone } })
+      .send({ sms_token: { phone: phone } })
       .end((err, res) => {
         const result = res.body.token;
       })
@@ -62,7 +58,7 @@ class LogInForm extends Component {
 
   /**
    * [register 用户注册]
-   * 缓存：authentication_token
+   * 缓存：closet_token
    */
   register() {
     const { phone, password, codenum } = this.state;
@@ -74,11 +70,11 @@ class LogInForm extends Component {
       .end((err, res) => {
         if (res.ok) {
           // 保存token, phone,
-          localStorage.setItem('authentication_token', res.body.authentication_token)
+          localStorage.setItem('closet_token', res.body.authentication_token)
           // 更新用户信息
           this.updateUserInfo();
         } else {
-          alert('用户注册失败！')
+          message.error('用户注册失败！');
         }
       })
   }
@@ -90,7 +86,7 @@ class LogInForm extends Component {
     SuperAgent
       .put('http://closet-api.tallty.com/user_info')
       .set('X-User-Phone', this.state.phone)
-      .set('X-User-Token', localStorage.authentication_token)
+      .set('X-User-Token', localStorage.closet_token)
       .send({ user_info: { nickname: this.state.nickname } })
       .end((err, res) => {
         // 绑定
@@ -105,17 +101,17 @@ class LogInForm extends Component {
   userBind() {
     const { phone } = this.state
     SuperAgent
-      .post("http://closet-api.tallty.com/user_info/bind")
+      .post('http://closet-api.tallty.com/user_info/bind')
       .set('Accept', 'application/json')
       .set('X-User-Phone', phone)
-      .set('X-User-Token', localStorage.authentication_token)
-      .send({ 'user': { 'openid': localStorage.openid } })
+      .set('X-User-Token', localStorage.closet_token)
+      .send({ user: { openid: localStorage.closet_openid } })
       .end((err, res) => {
         if (res.ok) {
           // 保存用户信息
-          localStorage.setItem('phone', res.body.phone);
-          let user_str = JSON.stringify(res.body);
-          localStorage.setItem('user', user_str);
+          localStorage.setItem('closet_phone', res.body.phone);
+          const userStr = JSON.stringify(res.body);
+          localStorage.setItem('closet_user', userStr);
           // 用户登录
           this.signIn();
         } else {
@@ -130,11 +126,11 @@ class LogInForm extends Component {
    * 重定向
    */
   signIn() {
-    let { phone, password } = this.state
+    const { phone, password } = this.state
     SuperAgent
       .post('http://closet-api.tallty.com/users/sign_in')
       .set('Accept', 'application/json')
-      .send({ 'user': { 'phone': phone, 'password': password } })
+      .send({ user: { phone: phone, password: password } })
       .end((err, res) => {
         if (res.ok) {
           this.props.router.replace(sessionStorage.redirect_url);

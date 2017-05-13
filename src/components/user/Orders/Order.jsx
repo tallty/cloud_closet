@@ -31,8 +31,8 @@ class Order extends Component {
     SuperAgent
       .get('http://closet-api.tallty.com/user_info')
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (res.ok) {
           const obj = res.body;
@@ -49,8 +49,8 @@ class Order extends Component {
     SuperAgent
       .get(`http://closet-api.tallty.com/appointments/${id}`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (res.ok) {
           const obj = res.body;
@@ -106,8 +106,8 @@ class Order extends Component {
     SuperAgent
       .post(`http://closet-api.tallty.com/appointments/${id}/pay_by_balance`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (res.ok) {
           if (res.body.error) {
@@ -132,8 +132,8 @@ class Order extends Component {
         SuperAgent
           .post(`http://closet-api.tallty.com/appointments/${id}/cancel`)
           .set('Accept', 'application/json')
-          .set('X-User-Token', localStorage.authentication_token)
-          .set('X-User-Phone', localStorage.phone)
+          .set('X-User-Token', localStorage.closet_token)
+          .set('X-User-Phone', localStorage.closet_phone)
           .end((err, res) => {
             if (res.ok) {
               window.location.replace('/orders');

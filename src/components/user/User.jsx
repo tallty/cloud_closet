@@ -26,12 +26,12 @@ export class User extends Component {
     SuperAgent
       .get(`http://closet-api.tallty.com/user_info?random=${Math.random()}`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           // 缓存
-          localStorage.setItem('user', JSON.stringify(res.body));
+          localStorage.setItem('closet_user', JSON.stringify(res.body));
           this.setState({ user: res.body });
         } else {
           auth.authLogin();
@@ -41,8 +41,7 @@ export class User extends Component {
 
   getGrid() {
     const list = [];
-    const { recharge_amount } = this.state.user;
-    sessionStorage.setItem('receipt_amount', recharge_amount);
+    const rechargeAmount = this.state.user.recharge_amount;
     this.state.grids.forEach((grid, index, obj) => {
       const dot = grid.message ? <div className={css.dot}></div> : null;
       list.push(
@@ -50,7 +49,10 @@ export class User extends Component {
           <Col span={8} className={css.item} key={index}>
             {dot}
             <Link to={grid.url}>
-              <div className={css.ticket}>{recharge_amount}<span className={css.ticket_icon}>￥</span></div>
+              <div className={css.ticket}>
+                {rechargeAmount}
+                <span className={css.ticket_icon}>￥</span>
+              </div>
               <div>{grid.name}</div>
             </Link>
           </Col> :
@@ -73,8 +75,8 @@ export class User extends Component {
     SuperAgent
       .put('http://closet-api.tallty.com/user_info')
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .send(formData)
       .end((er, res) => {
         if (!er || er === null) {

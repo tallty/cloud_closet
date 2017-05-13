@@ -44,8 +44,8 @@ class Appointment extends Component {
     SuperAgent
       .get("http://closet-api.tallty.com/user_info")
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           // 缓存
@@ -66,8 +66,8 @@ class Appointment extends Component {
     SuperAgent
       .get(`http://closet-api.tallty.com/addresses/${default_address_id}`)
       .set('Accept', 'application/json')
-      .set('X-User-Token', localStorage.authentication_token)
-      .set('X-User-Phone', localStorage.phone)
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
       .end((err, res) => {
         if (!err || err === null) {
           const addre = JSON.stringify(res.body);
@@ -146,9 +146,9 @@ class Appointment extends Component {
       SuperAgent
         .post("http://closet-api.tallty.com/appointments")
         .set('Accept', 'application/json')
-        .set('X-User-Phone', localStorage.phone)
-        .set('X-User-Token', localStorage.authentication_token)
-        .send({ 'appointment': { 'address': address_detail, 'name': name, 'phone': localStorage.phone, 'number': number, 'date': date } })
+        .set('X-User-Phone', localStorage.closet_phone)
+        .set('X-User-Token', localStorage.closet_token)
+        .send({ 'appointment': { 'address': address_detail, 'name': name, 'phone': localStorage.closet_phone, 'number': number, 'date': date } })
         .end((err, res) => {
           if (res.ok) {
             sessionStorage.removeItem('selected_address');
