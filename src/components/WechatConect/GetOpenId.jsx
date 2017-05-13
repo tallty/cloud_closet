@@ -24,7 +24,7 @@ class GetOpenId extends Component {
       .send({ code: code })
       .end((err, res) => {
         if (res.ok) {
-          localStorage.setItem('openid', res.body.openid);
+          localStorage.setItem('closet_openid', res.body.openid);
           this.checkOpenid();
         } else {
           this.props.router.replace('/login');
