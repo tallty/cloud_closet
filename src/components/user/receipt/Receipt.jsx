@@ -54,7 +54,7 @@ export class Receipt extends Component {
   }
   render() {
     const { money, isActive } = this.state;
-    const tips = isActive ? '可开发票额度' : '（暂不可开，单张发票需大于1000元）';
+    const tips = isActive ? '可开发票额度' : '（暂不可开，单张发票需大于3000元）';
 
     return (
       <div className={css.container}>
