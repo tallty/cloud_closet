@@ -36,8 +36,8 @@ class MyProfile extends Component {
           const userStr = JSON.stringify(res.body);
           localStorage.setItem('user', userStr);
         } else {
-          // alert("获取用户信息失败")
           this.setState({ loading: false });
+          message.error(res.body.error);
         }
       })
   }

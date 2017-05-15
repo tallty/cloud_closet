@@ -42,7 +42,7 @@ class Appointment extends Component {
 
   getUserInfo() {
     SuperAgent
-      .get("http://closet-api.tallty.com/user_info")
+      .get('http://closet-api.tallty.com/user_info')
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.closet_token)
       .set('X-User-Phone', localStorage.closet_phone)
@@ -156,7 +156,7 @@ class Appointment extends Component {
           }
         })
     } else {
-      alert('请选择地址');
+      message.warning('请选择地址');
     }
   }
 
@@ -167,7 +167,7 @@ class Appointment extends Component {
     return current && current.valueOf() < d;
   }
 
-  show_tips() {
+  showTips() {
     const sta = this.state.showDateTips
     this.setState({ showDateTips: !sta })
   }
@@ -199,7 +199,7 @@ class Appointment extends Component {
         <Row className={styles.order_content}>
           {
             defaultAddress ?
-              <Form horizontal onSubmit={this.handleSubmit.bind(this)} >
+              <Form layout="horizontal" onSubmit={this.handleSubmit.bind(this)} >
                 <Col span={20} offset={2} className={styles.location_icon_content}>
                   <img src="src/images/orange_location_icon.svg" alt="" className={styles.location_icon} />
                 </Col>
@@ -246,12 +246,12 @@ class Appointment extends Component {
                           }
                         ]
                       })(
-                        <DatePicker disabledDate={this.disabledDate} showToday={false} onOpenChange={this.show_tips.bind(this)} placeholder="选择服务时间" />
+                        <DatePicker disabledDate={this.disabledDate} showToday={false} onOpenChange={this.showTips.bind(this)} placeholder="选择服务时间" />
                         )}
                     </FormItem>
                   </Col>
                   <Col span={12} className={styles.dateSelector}>
-                    <p>使用&nbsp;</p>
+                    <p>使用</p>
                     <Dropdown overlay={menu} trigger={['click']}>
                       <Button style={{ width: '100%' }}>
                         {this.state.storeTime}<Icon type="down" />

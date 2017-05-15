@@ -45,12 +45,12 @@ class LogInForm extends Component {
   }
 
   enterIconLoading() {
-    const phone = this.state.phone;
+    const mPhone = this.state.phone;
     const url = 'http://closet-api.tallty.com/sms_tokens/register';
     //获取验证码
     SuperAgent.post(url)
       .set('Accept', 'application/json')
-      .send({ sms_token: { phone: phone } })
+      .send({ sms_token: { phone: mPhone } })
       .end((err, res) => {
         const result = res.body.token;
       })
@@ -68,13 +68,13 @@ class LogInForm extends Component {
       .set('Accept', 'application/json')
       .send({ user: { phone: phone, password: password, sms_token: codenum } })
       .end((err, res) => {
-        if (res.ok) {
+        if (!err || err === null) {
           // 保存token, phone,
           localStorage.setItem('closet_token', res.body.authentication_token)
           // 更新用户信息
           this.updateUserInfo();
         } else {
-          message.error('用户注册失败！');
+          message.error(res.body.error);
         }
       })
   }
@@ -107,7 +107,7 @@ class LogInForm extends Component {
       .set('X-User-Token', localStorage.closet_token)
       .send({ user: { openid: localStorage.closet_openid } })
       .end((err, res) => {
-        if (res.ok) {
+        if (!err || err === null) {
           // 保存用户信息
           localStorage.setItem('closet_phone', res.body.phone);
           const userStr = JSON.stringify(res.body);
@@ -115,7 +115,7 @@ class LogInForm extends Component {
           // 用户登录
           this.signIn();
         } else {
-          message.error('用户绑定失败！');
+          message.error(res.body.error);
         }
       })
   }
@@ -132,10 +132,10 @@ class LogInForm extends Component {
       .set('Accept', 'application/json')
       .send({ user: { phone: phone, password: password } })
       .end((err, res) => {
-        if (res.ok) {
+        if (!err || err === null) {
           this.props.router.replace(sessionStorage.redirect_url);
         } else {
-          message.error('用户登录失败！')
+          message.error(res.body.error);
         }
       })
   }

@@ -15,13 +15,12 @@ class GetOpenId extends Component {
   }
 
   componentWillMount() {
-    const code = this.getQueryString('code')
-
+    const mCode = this.getQueryString('code');
     //获取openId
     SuperAgent
-      .post("http://wechat-api.tallty.com/cloud_closet_wechat/web_access_token")
+      .post('http://wechat-api.tallty.com/cloud_closet_wechat/web_access_token')
       .set('Accept', 'application/json')
-      .send({ code: code })
+      .send({ code: mCode })
       .end((err, res) => {
         if (res.ok) {
           localStorage.setItem('closet_openid', res.body.openid);
@@ -54,8 +53,6 @@ class GetOpenId extends Component {
           const obj = res.body;
           localStorage.setItem('closet_phone', obj.phone);
           localStorage.setItem('closet_token', obj.authentication_token);
-          // 添加标志位，防止进入死循环
-          sessionStorage.setItem('is_authenticated', 'true');
           this.props.router.replace(sessionStorage.redirect_url);
         } else {
           this.props.router.replace('/login');

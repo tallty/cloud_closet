@@ -27,9 +27,6 @@ module.exports = {
    * [authLogin 对用户进行鉴权]
    */
   authLogin() {
-    // uiGhAXaxu4Q9Sp9zrGdx
-    // olclvwNgQ3dpmuw_EZNwkph-J9vM
-    // 18516512221
     const redirectUrl = this.getUrlRelativePath();
     sessionStorage.setItem('redirect_url', redirectUrl);
     const mOpenid = localStorage.getItem('closet_openid');

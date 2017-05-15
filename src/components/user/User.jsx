@@ -11,7 +11,7 @@ export class User extends Component {
   state = {
     user: {},
     loadingText: '',
-    amount: '5800',
+    amount: '0',
     grids: [
       { name: '配送篮', message: false, url: '/cart' },
       { name: '我的订单', message: true, url: '/orders' },
