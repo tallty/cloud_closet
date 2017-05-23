@@ -136,19 +136,28 @@ class Appointment extends Component {
   }
 
   // 预约
-  pushAppoint(selected_address, value) {
-    const addressDetail = selected_address.address_detail;
-    const name = selected_address.name;
-    const number = value.number;
-    const date = this.date2str(new Date(value.endDate), 'yyyy-MM-d');
+  pushAppoint(selectedAddress, value) {
+    const addressDetail = selectedAddress.address_detail;
+    const mName = selectedAddress.name;
+    const numberAlias = value.number;
+    const mDate = this.date2str(new Date(value.endDate), 'yyyy-MM-d');
 
-    if (addressDetail && number && date) {
+    if (addressDetail && numberAlias && mDate) {
       SuperAgent
         .post('http://closet-api.tallty.com/appointments')
         .set('Accept', 'application/json')
         .set('X-User-Phone', localStorage.closet_phone)
         .set('X-User-Token', localStorage.closet_token)
-        .send({ 'appointment': { 'address': addressDetail, 'name': name, 'phone': localStorage.closet_phone, 'number': number, 'date': date } })
+        .send({
+          appointment: {
+            address: addressDetail,
+            name: mName,
+            phone: localStorage.closet_phone,
+            number: Number(numberAlias.slice(-2)),
+            number_alias: numberAlias,
+            date: mDate
+          }
+        })
         .end((err, res) => {
           if (res.ok) {
             sessionStorage.removeItem('selected_address');
@@ -187,9 +196,6 @@ class Appointment extends Component {
     const selected_address = sessionStorage.selected_address ? JSON.parse(sessionStorage.selected_address) : null;
     return (
       <div className={styles.order_container}>
-
-        {/*<p className={styles.title}>乐存好衣</p>autoplay*/}
-        {/*<img className={styles.appointment_top_bg} src="src/images/appointment_top_bg.png" alt=""/>*/}
         <div style={showDateTips ? {} : { display: 'none' }} className={styles.calendarTip}><label>我们的服务需提前三日预约</label></div>
         <Row className={styles.appointment_top_sark}>
           <Col span={24} style={{ height: height }}>
@@ -221,13 +227,13 @@ class Appointment extends Component {
                   <FormItem className={styles.clo_number_radio}>
                     {getFieldDecorator('number', { initialValue: '10' }, {
                       rules: [
-                        { required: true, message: '请选择衣服数量' },
+                        { required: true, message: '请选择衣服数量' }
                       ]
                     })(
                       <RadioGroup>
-                        <RadioButton className={styles.label_one} value="10">5-20件</RadioButton>
-                        <RadioButton className={styles.label_two} value="30">20-50件</RadioButton>
-                        <RadioButton className={styles.label_three} value="50">大于50件</RadioButton>
+                        <RadioButton className={styles.label_one} value="5-20">5-20件</RadioButton>
+                        <RadioButton className={styles.label_two} value="20-50">20-50件</RadioButton>
+                        <RadioButton className={styles.label_three} value="大于50">大于50件</RadioButton>
                       </RadioGroup>
                       )}
                   </FormItem>
