@@ -137,18 +137,18 @@ class Appointment extends Component {
 
   // 预约
   pushAppoint(selected_address, value) {
-    let address_detail = selected_address.address_detail;
-    let name = selected_address.name;
-    let number = value.number;
-    let date = this.date2str(new Date(value.endDate), "yyyy-MM-d");
+    const addressDetail = selected_address.address_detail;
+    const name = selected_address.name;
+    const number = value.number;
+    const date = this.date2str(new Date(value.endDate), 'yyyy-MM-d');
 
-    if (address_detail && number && date) {
+    if (addressDetail && number && date) {
       SuperAgent
-        .post("http://closet-api.tallty.com/appointments")
+        .post('http://closet-api.tallty.com/appointments')
         .set('Accept', 'application/json')
         .set('X-User-Phone', localStorage.closet_phone)
         .set('X-User-Token', localStorage.closet_token)
-        .send({ 'appointment': { 'address': address_detail, 'name': name, 'phone': localStorage.closet_phone, 'number': number, 'date': date } })
+        .send({ 'appointment': { 'address': addressDetail, 'name': name, 'phone': localStorage.closet_phone, 'number': number, 'date': date } })
         .end((err, res) => {
           if (res.ok) {
             sessionStorage.removeItem('selected_address');
@@ -211,7 +211,7 @@ class Appointment extends Component {
                           {selected_address.address_detail} {selected_address.house_number}<br />
                           <span>{selected_address.phone} {selected_address.name}</span>
                         </p> :
-                        <p style={{ height: 42, lineHeight: '40px' }}>请选择一个地址</p>}
+                        <p style={{ height: 42, lineHeight: '40px' }}>选择地址（当前仅服务上海地区）</p>}
                   </Col>
                   <Col className={styles.address_show} span={2}>
                     <Icon type="right" />
@@ -259,7 +259,7 @@ class Appointment extends Component {
                     </Dropdown>
                   </Col>
                 </div>
-                <Col span={24} className={styles.line_tips}>*选择预计存衣数量与使用时间，我们将更效率的完成收取工作。</Col>
+                <Col span={24} className={styles.line_tips}>* 选择预计存衣数量与使用时间，我们将更效率的完成收取工作。（注：当前仅开放上海地区服务）</Col>
                 <Col span={24} className={styles.line_two}>
                   {getFieldDecorator('check', { initialValue: false }, {
                     rules: [
