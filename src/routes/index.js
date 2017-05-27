@@ -56,6 +56,11 @@ import { NewAddress } from '../components/address/new_address/NewAddress'
 //配送
 import Dispatching from '../components/dispatching/Dispatching'
 
+// 华服租赁
+import Rent from '../components/rent/Rent';
+// 一键转卖
+import Sell from '../components/sell/Sell';
+
 export class Routes extends Component {
   componentWillMount() {
     WechatKit.getConfig();
@@ -137,6 +142,12 @@ export class Routes extends Component {
         {/* 添加新增地址路由 */}
         <Route path="/add_address" component={AddressList} />
         <Route path="/address/new" component={NewAddress} />
+
+        {/* 租赁 */}
+        <Route path="/rent" component={Rent} onEnter={this.requireAuth} />
+        {/* 转卖 */}
+        <Route path="/sell" component={Sell} onEnter={this.requireAuth} />
+
         {/* 添加配送路由 */}
         <Route path="/dispatching" component={Dispatching} />
         {/* 获取用户open */}
