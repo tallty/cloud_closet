@@ -4,7 +4,7 @@ const path = require('path');
 const glob = require('glob');
 const escapeRegExp = require('lodash/escapeRegExp');
 
-module.exports = function(webpackConfig) {
+module.exports = function (webpackConfig) {
   webpackConfig.babel.plugins.push('transform-runtime');
   webpackConfig.babel.plugins.push(['import', {
     libraryName: 'antd',
@@ -15,14 +15,13 @@ module.exports = function(webpackConfig) {
   const globalLessMatch = new RegExp('(?:/node_modules/.+|/global/.+-global)\\.less$');
   // less files in project "src" folder
   const localLessMatch = new RegExp('^' + escapeRegExp(__dirname) + '/src/.+\\.less$');
-  webpackConfig.module.loaders.forEach(function(loader) {
+
+  webpackConfig.module.loaders.forEach(function (loader) {
     if (typeof loader.test === 'function' && loader.test.toString().indexOf('\\.less$') > -1) {
-      // Parse these as global CSS
       loader.test = globalLessMatch;
     }
     if (loader.test.toString() === '/\\.module\\.less$/') {
-      // Parse these as local-scoped CSS modules. Global CSS matches are excluded
-      loader.test = function(pth) {
+      loader.test = function (pth) {
         return localLessMatch.test(pth) && !globalLessMatch.test(pth);
       };
     }
@@ -30,7 +29,7 @@ module.exports = function(webpackConfig) {
 
   // Load src/entries/*.js as entry automatically.
   const files = glob.sync('./src/entries/*.js');
-  const newEntries = files.reduce(function(memo, file) {
+  const newEntries = files.reduce(function (memo, file) {
     const name = path.basename(file, '.js');
     memo[name] = file;
     return memo;

@@ -50,7 +50,7 @@ class Dispatching extends Component {
 
   onSubmit() {
     const { address, time, way, remark, garments, deliveryCost, serviceCost } = this.state;
-    if (!address.name || !time || !way || !remark) {
+    if (!address.name || !time || !way) {
       message.error('请完善配送订单信息');
       return;
     }
@@ -60,24 +60,25 @@ class Dispatching extends Component {
     }
     this.setState({ loading: true });
     const ids = garments.map(item => item.id);
+    const orderData = {
+      address: address.address_detail,
+      name: address.name,
+      phone: address.phone,
+      delivery_time: time,
+      delivery_method: way,
+      delivery_cost: deliveryCost,
+      service_cost: serviceCost,
+      garment_ids: ids
+    };
+    if (!!remark) {
+      orderData.remark = remark;
+    }
     SuperAgent
       .post('http://closet-api.tallty.com/delivery_orders')
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.closet_token)
       .set('X-User-Phone', localStorage.closet_phone)
-      .send({
-        delivery_order: {
-          address: address.address_detail,
-          name: address.name,
-          phone: address.phone,
-          delivery_time: time,
-          delivery_method: way,
-          remark: remark,
-          delivery_cost: deliveryCost,
-          service_cost: serviceCost,
-          garment_ids: ids
-        }
-      })
+      .send({ delivery_order: orderData })
       .end((err, res) => {
         if (!err || err === null) {
           this.setState({ loading: false, isSubmited: true, order: res.body });
