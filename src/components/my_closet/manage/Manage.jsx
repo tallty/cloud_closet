@@ -353,7 +353,7 @@ class Manage extends Component {
         </div>
         <Row className={css.tab_footer}>
           <Col span={12}>
-            <Button type="primary" className={css.moveBtn} onClick={this.togglePicker.bind(this)}>移动衣服</Button>
+            {/*<Button type="primary" className={css.moveBtn} onClick={this.togglePicker.bind(this)}>移动衣服</Button>*/}
           </Col>
           <Col span={12}>
             <Button type="primary" className={css.distribution_btn} onClick={this.addToCart.bind(this)}>加入配送</Button>

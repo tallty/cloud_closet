@@ -95,7 +95,7 @@ class ClosetTab extends Component {
     if (closet.remain_space_count === closet.max_count) {
       list.push(<div className={styles.release_content} style={{ height: height - 150 }} key={0}>
         <h3>当前衣柜为空!</h3>
-        <Button type="primary" className={styles.tag} onClick={this.removeCloset.bind(this)}>释放衣柜</Button>
+        {/* <Button type="primary" className={styles.tag} onClick={this.removeCloset.bind(this)}>释放衣柜</Button> */}
       </div>)
     }
     return list;
