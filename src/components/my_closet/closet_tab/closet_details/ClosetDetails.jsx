@@ -131,6 +131,7 @@ class ClosetDetails extends Component {
             <Row className={styles.ClosetDetails_content_header}>
               <Col span={24} className={styles.main_pic_content}>
                 <img src={garment.cover_image} alt="" />
+                {garment.garment_status === '已入库' || '配送篮中' ? <i></i> : '' }
               </Col>
             </Row>
             {/* 名称标签模块 */}
