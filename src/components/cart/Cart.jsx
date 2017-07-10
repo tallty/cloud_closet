@@ -101,7 +101,7 @@ class Cart extends Component {
       const klass = item.isSelected ? css.item_active : css.item;
       list.push(
         <li key={index}>
-          <div className={klass} onClick={this.handleSelect.bind(this, index)}>
+          <div className={css.klass} onClick={this.handleSelect.bind(this, index)}>
             <img src={item.cover_image} alt="衣服" className={css.photo} />
             <img src="/src/images/icon_close.svg" alt="关闭" className={css.close} onClick={this.handleRemove.bind(this, index)} />
             <div className={css.text}>
@@ -121,7 +121,7 @@ class Cart extends Component {
     const count = clothes.filter(item => item.isSelected).length;
     return (
       <div className={css.container}>
-        <Toolbar url={url} title="配送篮">
+        <Toolbar url={url} title="配送篮1">
           <span onClick={this.handleSelectAll.bind(this)}>{string}</span>
         </Toolbar>
         <div className={css.content}>

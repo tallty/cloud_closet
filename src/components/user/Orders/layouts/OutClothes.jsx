@@ -4,7 +4,7 @@
  */
 import React, { Component, PropTypes } from 'react'
 import css from './layouts.less'
-import { Row, Col } from 'antd'
+import { Row, Col, Table } from 'antd'
 
 const { string, number, arrayOf, shape } = PropTypes;
 
@@ -12,6 +12,17 @@ export class OutClothes extends Component {
 
   render() {
     const { order } = this.props;
+    const columns = [{
+      title: '照片',
+      dataIndex: 'cover_image',
+      render: (text, record) => (
+        <img src={text} alt="" className={css.table_image} />
+      ),
+    }, {
+      title: '名称',
+      dataIndex: 'title',
+      key: 'title',
+    }];
     return (
       <div className={css.goods}>
         <Row>
@@ -22,7 +33,14 @@ export class OutClothes extends Component {
             <p>地址：{order.address}</p>
             <p>配送：{order.delivery_method}</p>
             <p>合计：{order.service_cost}</p>
+            <Table
+              columns={columns}
+              rowKey="id"
+              dataSource={order.garments}
+              pagination={{ pageSize: 20 }}
+            />
           </Col>
+
         </Row>
       </div>
     )

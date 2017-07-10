@@ -34,6 +34,7 @@ class ClosetTab extends Component {
       .end((err, res) => {
         if (!err || err === null) {
           const obj = res.body;
+          console.log(obj)
           sessionStorage.setItem('closetTitle', JSON.stringify(obj.custom_title))
           this.setState({
             garments: obj.garments,
@@ -79,6 +80,8 @@ class ClosetTab extends Component {
                 {/* 添加衣服展示卡片模块*/}
                 <div className={styles.card_pic_content}>
                   <img alt="example" src={garment.cover_image} />
+                  {console.log(garment)}
+                  {garment.garment_status === '已入库' || garment.garment_status === '配送篮中' ? '' : <i><div className={styles.state_tab}>{garment.garment_status}</div></i>}
                 </div>
                 <div className={styles.card_tab_title}>
                   <p className={styles.brand} ></p>

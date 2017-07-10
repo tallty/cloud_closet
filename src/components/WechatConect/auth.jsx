@@ -29,6 +29,7 @@ module.exports = {
   authLogin() {
     const redirectUrl = this.getUrlRelativePath();
     sessionStorage.setItem('redirect_url', redirectUrl);
+    // localStorage.setItem('closet_openid', 'olclvwCOMobnRYQRtXLAdhujZbtM');
     const mOpenid = localStorage.getItem('closet_openid');
     if (mOpenid) {
       SuperAgent
