@@ -4,7 +4,7 @@
  */
 import React, { Component, PropTypes } from 'react'
 import css from './layouts.less'
-import { Row, Col } from 'antd'
+import { Row, Col, Table } from 'antd'
 
 const { string, number, arrayOf, shape } = PropTypes;
 // 解析衣类图片
@@ -66,41 +66,77 @@ export class InClothes extends Component {
   }
 
   render() {
-    const { order } = this.props;
+    const { order, url } = this.props;
+    console.log(this.props.location)
+    const columns = [{
+      title: '照片',
+      dataIndex: 'cover_image',
+      render: (text, record) => (
+        <img src={text} alt="" className={css.table_image} />
+      )
+    }, {
+      title: '名称',
+      dataIndex: 'title',
+      key: 'title'
+    }];
     const garmentCount = order.garment_count_info || { full_dress: 0, hanging: 0, stacking: 0 };
     return (
       <div>
-        {/* 表格header */}
-        <Row className={css.order_table_header}>
-          <Col span={7} style={{ textAlign: 'left', paddingLeft: 15 }}>种类</Col>
-          <Col span={5}>仓储时长</Col>
-          <Col span={4}>数量</Col>
-          <Col span={4}>单价</Col>
-          <Col span={4}>总价</Col>
-        </Row>
-
-        {/* 所有入库的衣服 */}
         {
-          order.appointment_price_groups.length > 0 ?
-            this.getClotheList() :
-            <Row>
-              <Col span={24} className={css.empty_table}>未添加任何衣柜</Col>
-            </Row>
+          url && url === 'delivery_orders' ?
+            <div className={css.goods}>
+              <Row>
+                <Col span={6} className={css.goods_left}>
+                  <img src="src/images/notification_icon0.png" alt="商品图片" />
+                </Col>
+                <Col span={18} className={css.goods_right}>
+                  <p>地址：{order.address}</p>
+                  <p>配送：{order.delivery_method}</p>
+                  <p>合计：{order.service_cost}</p>
+                  <Table
+                    columns={columns}
+                    rowKey="id"
+                    dataSource={order.garments}
+                    pagination={{ pageSize: 20 }}
+                  />
+                </Col>
+              </Row>
+            </div>
+             :
+            <div>
+              {/* 表格header */}
+              <Row className={css.order_table_header}>
+                <Col span={7} style={{ textAlign: 'left', paddingLeft: 15 }}>种类</Col>
+                <Col span={5}>仓储时长</Col>
+                <Col span={4}>数量</Col>
+                <Col span={4}>单价</Col>
+                <Col span={4}>总价</Col>
+              </Row>
+
+              {/* 所有入库的衣服 */}
+              {
+                order.appointment_price_groups.length > 0 ?
+                  this.getClotheList() :
+                  <Row>
+                    <Col span={24} className={css.empty_table}>未添加任何衣柜</Col>
+                  </Row>
+              }
+              <div className={css.clothes_numebr}>
+                <p className={css.title}>种类件数</p>
+                <Row>
+                  <Col span={8}>
+                    <img src="/src/images/icon_fold.svg" alt="icon" /> 叠放 <span>{garmentCount.stacking}</span> 件
+                  </Col>
+                  <Col span={8}>
+                    <img src="/src/images/icon_hang.svg" alt="icon" /> 挂放 <span>{garmentCount.hanging}</span> 件
+                  </Col>
+                  <Col span={8}>
+                    <img src="/src/images/icon_dress.svg" alt="icon" /> 礼服 <span>{garmentCount.full_dress}</span> 件
+                  </Col>
+                </Row>
+              </div>
+            </div>
         }
-        <div className={css.clothes_numebr}>
-          <p className={css.title}>种类件数</p>
-          <Row>
-            <Col span={8}>
-              <img src="/src/images/icon_fold.svg" alt="icon" /> 叠放 <span>{garmentCount.stacking}</span> 件
-            </Col>
-            <Col span={8}>
-              <img src="/src/images/icon_hang.svg" alt="icon" /> 挂放 <span>{garmentCount.hanging}</span> 件
-            </Col>
-            <Col span={8}>
-              <img src="/src/images/icon_dress.svg" alt="icon" /> 礼服 <span>{garmentCount.full_dress}</span> 件
-            </Col>
-          </Row>
-        </div>
       </div>
     )
   }
@@ -112,6 +148,7 @@ InClothes.defaultProps = {
 }
 
 InClothes.PropTypes = {
+  url: string,
   order: PropTypes.shape({
     id: number,
     name: string,

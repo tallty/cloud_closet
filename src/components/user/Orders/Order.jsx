@@ -23,7 +23,8 @@ class Order extends Component {
   }
 
   componentDidMount() {
-    this.getAppointment();
+    const url = this.props.location.query.url;
+    this.getAppointment(url);
     this.getUserInfo();
   }
 
@@ -44,10 +45,10 @@ class Order extends Component {
   }
 
   // 获取预约订单信息
-  getAppointment() {
+  getAppointment(url) {
     const id = this.props.location.query.id;
     SuperAgent
-      .get(`http://closet-api.tallty.com/appointments/${id}`)
+      .get(`http://closet-api.tallty.com/${url}/${id}`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.closet_token)
       .set('X-User-Phone', localStorage.closet_phone)
@@ -187,7 +188,7 @@ class Order extends Component {
           <Button type="primary" className={css.orange_btn}>查看衣橱</Button>
         </Link>
       )
-    } else if (order.state === '已取消') {
+    } else if (order.state === '已取消' || order.state === '已收货') {
       value = (
         <Link to="/orders" className={css.btns}>
           <Button type="ghost" className={css.gray_btn}>返回列表</Button>
@@ -199,6 +200,7 @@ class Order extends Component {
 
   render() {
     const { order } = this.state
+    const url = this.props.location.query.url;
     return (
       <div className={css.appoint_order}>
         <Toolbar title="订单详情" url="/orders" />
@@ -207,14 +209,21 @@ class Order extends Component {
             this.state.order ?
               <div className={css.order}>
                 {/* 订单 */}
-                <InClothes order={order} />
+                <InClothes order={order} url={url} />
                 {/* 费用 */}
-                <p className={css.tips}>
-                  护理要求：&nbsp;&nbsp;<span>{order.care_type}</span>
-                  <span style={{ float: 'right' }}>护理费：{order.care_cost}</span>
-                </p>
-                <p className="text-right">服务费：{order.service_cost}</p>
-                <p className={css.total_price}>合计：<span>{order.price}</span></p>
+                {
+                  url && url === 'delivery_orders' ?
+                    <p className={css.total_price}>合计：<span>{order.service_cost}</span></p>
+                    :
+                    <div>
+                      <p className={css.tips}>
+                        护理要求：&nbsp;&nbsp;<span>{order.care_type}</span>
+                        <span style={{ float: 'right' }}>护理费：{order.care_cost}</span>
+                      </p>
+                      <p className="text-right">服务费：{order.service_cost}</p>
+                      <p className={css.total_price}>合计：<span>{order.price}</span></p>
+                    </div>
+                }
               </div> : <Spiner />
           }
           {/* 物流 */}

@@ -40,7 +40,7 @@ export class Orders extends Component {
   getDeliveries(page) {
     this.setState({ loading: true });
     SuperAgent
-      .get(`http://closet-api.tallty.com/delivery_orders?page=${page}`)
+      .get(`http://closet-api.tallty.com/delivery_orders?page=${page}&need_garment_info=true`)
       .set('Accept', 'application/json')
       .set('X-User-Token', localStorage.closet_token)
       .set('X-User-Phone', localStorage.closet_phone)

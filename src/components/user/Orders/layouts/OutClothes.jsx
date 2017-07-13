@@ -12,6 +12,7 @@ export class OutClothes extends Component {
 
   render() {
     const { order } = this.props;
+    console.log(order)
     const columns = [{
       title: '照片',
       dataIndex: 'cover_image',
@@ -40,7 +41,6 @@ export class OutClothes extends Component {
               pagination={{ pageSize: 20 }}
             />
           </Col>
-
         </Row>
       </div>
     )

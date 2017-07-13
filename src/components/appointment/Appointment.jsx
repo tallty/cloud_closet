@@ -290,6 +290,6 @@ class Appointment extends Component {
   }
 }
 
-Appointment = Form.create({})(Appointment);
+Appointment = Form.create()(Appointment);
 
 export default withRouter(Appointment);

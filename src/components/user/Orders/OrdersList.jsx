@@ -23,6 +23,7 @@ class OrdersList extends Component {
 
   componentWillMount() {
     const { type, orders } = this.props;
+    console.log(orders)
     this.setState({
       type: type,
       orders: orders
@@ -71,15 +72,17 @@ class OrdersList extends Component {
             {
               order.delivery_time ?
                 <div className={css.orderOther}>
-                  <div className={css.header}>
-                    <div className={css.state}>
-                      <StateBadge now={states[0]} next={states[1]} />
+                  <Link to={`/order?id=${order.id}&url=delivery_orders`}>
+                    <div className={css.header}>
+                      <div className={css.state}>
+                        <StateBadge now={states[0]} next={states[1]} />
+                      </div>
+                      <span className={css.time}>{order.date}</span>
                     </div>
-                    <span className={css.time}>{order.date}</span>
-                  </div>
-                  {this.setOrdersLayout(order)}
+                    {this.setOrdersLayout(order)}
+                  </Link>
                 </div> :
-                <Link to={`/order?id=${order.id}`}>
+                <Link to={`/order?id=${order.id}&url=appointments`}>
                   <div className={css.header}>
                     <div className={css.state}>
                       <StateBadge now={states[0]} next={states[1]} />
@@ -116,9 +119,10 @@ class OrdersList extends Component {
     const list = [];
     orders.forEach((order, index, obj) => {
       if (order.state === '已取消' || order.state === '已上架' || order.state === '已收货') {
+        const url = order.delivery_time ? 'delivery_orders' : 'appointments'
         list.push(
           <div className={css.orders} key={index}>
-            <Link to={`/order?id=${order.id}`}>
+            <Link to={`/order?id=${order.id}&url=` + url}>
               <div className={css.header}>
                 <div className={css.state}>
                   <StateBadge now={order.state} bg="#9B9B9B" next="" />
