@@ -38,7 +38,8 @@ export class OutClothes extends Component {
               columns={columns}
               rowKey="id"
               dataSource={order.garments}
-              pagination={{ pageSize: 20 }}
+              pagination={false}
+              scroll={{ y: 200 }}
             />
           </Col>
         </Row>

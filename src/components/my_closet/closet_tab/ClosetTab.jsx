@@ -65,6 +65,25 @@ class ClosetTab extends Component {
       })
   }
 
+  addToCart(id) {
+    SuperAgent
+      .post('http://closet-api.tallty.com/garments/add_them_to_basket')
+      .set('Accept', 'application/json')
+      .set('X-User-Token', localStorage.closet_token)
+      .set('X-User-Phone', localStorage.closet_phone)
+      .send({ garment_ids: [id] })
+      .end((err, res) => {
+        if (!err || err === null) {
+          this.setState({
+            disabled: true
+          })
+          message.success('加入配送蓝成功');
+        } else {
+          message.error('加入配送蓝失败，请稍后重试。');
+        }
+      })
+  }
+
   showGarments() {
     const { garments, selectedTag, closet } = this.state;
     const list = [];
@@ -73,8 +92,8 @@ class ClosetTab extends Component {
       if (garment.tag_list.includes(selectedTag) || selectedTag === '全部') {
         list.push(
           <Col span={12} className={styles.left_tab} key={garment.id}>
-            <div style={{ color: '#fff' }} onClick={this.showDetail.bind(this, garment)}>
-              <Card className={styles.card_tab}>
+            <div style={{ color: '#fff' }}>
+              <Card className={styles.card_tab} onClick={this.showDetail.bind(this, garment)}>
                 {/* 添加新增标签*/}
                 {garment.is_new ? <div className={styles.new_tab}>New</div> : null}
                 {/* 添加衣服展示卡片模块*/}
@@ -90,6 +109,12 @@ class ClosetTab extends Component {
                   <br />
                 </div>
               </Card>
+              <button
+                className={styles.peisong}
+                onClick={this.addToCart.bind(this, garment.id)}
+              >
+                加入配送蓝
+              </button>
             </div>
           </Col>
         )
@@ -176,6 +201,7 @@ class ClosetTab extends Component {
           <div className={styles.cloth_number}>
             {`【${selectedTag}】数量（${garmentList.length})`}
             <Link to={`/cart?back_url=/closet_tabs?id=${this.state.id}`} className={styles.cart}>
+              <span className={styles.cart_span}>配送蓝</span>
               <img src="/src/images/icon_cart.svg" alt="cart" />
               <div className={styles.dot}></div>
             </Link>

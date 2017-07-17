@@ -101,7 +101,7 @@ class Cart extends Component {
       const klass = item.isSelected ? css.item_active : css.item;
       list.push(
         <li key={index}>
-          <div className={css.klass} onClick={this.handleSelect.bind(this, index)}>
+          <div className={klass} onClick={this.handleSelect.bind(this, index)}>
             <img src={item.cover_image} alt="衣服" className={css.photo} />
             <img src="/src/images/icon_close.svg" alt="关闭" className={css.close} onClick={this.handleRemove.bind(this, index)} />
             <div className={css.text}>
