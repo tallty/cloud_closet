@@ -43,7 +43,7 @@ class PaySuccess extends Component {
             <div className={css.halfCircle}></div>
             <div className={css.leftTriangle}></div>
             <div className={css.rightTriangle}></div>
-            <Link to={`/order?id=${order.id}`}>查看订单</Link>
+            <Link to={`/order?id=${order.id}&url=appointments`}>查看订单</Link>
             <Link to="/MyCloset">返回衣橱</Link>
           </div>
         </div>

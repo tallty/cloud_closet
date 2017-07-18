@@ -58,6 +58,20 @@ class OrdersList extends Component {
     return [state, nextStates.get(state)];
   }
 
+  setType(order, states) {
+    console.log('=======================')
+    console.log(states)
+    const typeDiv = []
+    if (order.appt_type === '衣柜续期') {
+      typeDiv.push(<StateBadge now={'续期'} next={'订单'} />)
+    } else if (order.appt_type === '服务订单') {
+      typeDiv.push(<StateBadge now={'服务'} next={'订单'} />)
+    } else {
+      typeDiv.push(<StateBadge now={states[0]} next={states[1]} />)
+    }
+    return typeDiv
+  }
+
   // 订单列表
   getActiveOrders() {
     const { type, orders } = this.state;
@@ -85,7 +99,7 @@ class OrdersList extends Component {
                 <Link to={`/order?id=${order.id}&url=appointments`}>
                   <div className={css.header}>
                     <div className={css.state}>
-                      <StateBadge now={states[0]} next={states[1]} />
+                      {this.setType(order, states)}
                     </div>
                     <span className={css.time}>{order.date}</span>
                   </div>
@@ -318,7 +332,7 @@ class OrdersList extends Component {
   // 付款
   handlePay(order) {
     // 重定向
-    this.props.router.replace(`/order?id=${order.id}`);
+    this.props.router.replace(`/order?id=${order.id}&url=appointments`);
   }
 
   // 根据类型显示订单

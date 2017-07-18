@@ -24,6 +24,7 @@ class Order extends Component {
 
   componentDidMount() {
     const url = this.props.location.query.url;
+    console.log(url);
     this.getAppointment(url);
     this.getUserInfo();
   }
