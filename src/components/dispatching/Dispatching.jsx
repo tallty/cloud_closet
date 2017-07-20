@@ -19,7 +19,7 @@ class Dispatching extends Component {
     address: {},
     isDefaultAddress: false,
     user: {},
-    serviceCost: 0,
+    serviceCost: 100,
     deliveryCost: 0,
     loading: false,
     isSubmited: false,
@@ -40,7 +40,7 @@ class Dispatching extends Component {
     const str = e.target.value;
     this.setState({
       way: str,
-      serviceCost: str === '官方人员配送' ? 0 : 0
+      serviceCost: str === '官方人员配送' ? 100 : 0
     });
   }
 
@@ -238,7 +238,7 @@ class Dispatching extends Component {
                 <span className={styles.span_color}>适用于可以折叠类的衣物</span>
               </Radio>
               <Radio style={radioStyle} value="官方人员配送">
-                <span className={styles.span_color_one}>专员限时配送（到付） </span>
+                <span className={styles.span_color_one}>专员限时配送</span>
                 <span className={styles.span_color}> 适用于礼服套装类的衣物</span>
               </Radio>
             </RadioGroup>

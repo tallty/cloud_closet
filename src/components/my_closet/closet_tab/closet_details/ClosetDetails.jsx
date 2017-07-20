@@ -82,9 +82,9 @@ class ClosetDetails extends Component {
           this.setState({
             disabled: true
           })
-          message.success('加入配送蓝成功');
+          message.success('加入配送篮成功');
         } else {
-          message.error('加入配送蓝失败，请稍后重试。');
+          message.error('加入配送篮失败，请稍后重试。');
         }
       })
   }
@@ -140,9 +140,6 @@ class ClosetDetails extends Component {
                   <Col span={24} >
                     <p className={styles.name}>{garment.title}</p>
                     <p className={styles.time_story}>{garment.description}</p>
-                    <p className={styles.time_story}>
-                      入库时间：{this.parseTime(garment.put_in_time)}
-                    </p>
                   </Col>
                   <Col span={24} className={styles.tag_tab}>
                     <div>

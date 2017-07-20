@@ -91,7 +91,12 @@ class OrdersList extends Component {
                       <div className={css.state}>
                         <StateBadge now={states[0]} next={states[1]} />
                       </div>
-                      <span className={css.time}>{order.date}</span>
+                      {
+                        order.delivery_time ?
+                          <span className={css.time}>{this.parseTime(order.created_at)}</span>
+                          :
+                          <span className={css.time}>{order.date}</span>
+                      }
                     </div>
                     {this.setOrdersLayout(order)}
                   </Link>
@@ -141,7 +146,12 @@ class OrdersList extends Component {
                 <div className={css.state}>
                   <StateBadge now={order.state} bg="#9B9B9B" next="" />
                 </div>
-                <span className={css.time}>{order.date}</span>
+                {
+                  order.delivery_time ?
+                    <span className={css.time}>{this.parseTime(order.created_at)}</span>
+                  :
+                    <span className={css.time}>{order.date}</span>
+                }
               </div>
               {this.setOrdersLayout(order)}
             </Link>
@@ -344,6 +354,10 @@ class OrdersList extends Component {
       orders = this.getActiveOrders();
     }
     return orders;
+  }
+
+  parseTime(time) {
+    return time.slice(0, -10).split('T')[0];
   }
 
   // 待确认 - 取消事件

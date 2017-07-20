@@ -27,22 +27,25 @@ class MyClosetHeader extends React.Component {
           </Col>
         </Row>
         <Row className={styles.my_cliset_header_part_two_content}>
-          <Col span={9} className={styles.left_closet_number}>
+          <Col span={7} className={styles.left_closet_number}>
             <div className={styles.center_item}>
               <div htmlFor="" className={styles.number_closet}>{storiedCount}</div>
               <div htmlFor="">衣橱存数</div>
             </div>
           </Col>
-
-          <Col span={6} className={styles.addClothesDiv}>
-            <Link to='/appointment'><Button type="primary" className={styles.input_closet_btn}>添加新衣</Button></Link>
-          </Col>
-
-          <Col span={9} className={styles.right_closet_number}>
+          <Col span={6} className={styles.right_closet_number}>
             <div className={styles.center_item}>
               <div htmlFor="" className={styles.number_closet}>{storingCount}</div>
-              <div htmlFor="">入库中...</div>
+              <div htmlFor="">入库中</div>
             </div>
+          </Col>
+          <Col span={5} className={styles.addClothesDiv}>
+            <Link to='/cart'>
+              <Button type="primary" className={styles.input_closet_btn}>配送篮</Button>
+            </Link>
+          </Col>
+          <Col span={6} className={styles.addClothesDiv}>
+            <Link to='/appointment'><Button type="primary" className={styles.input_closet_btn}>添加新衣</Button></Link>
           </Col>
         </Row>
       </div>

@@ -37,7 +37,7 @@ class Cart extends Component {
   handleSelectAll() {
     const { clothes, selectAll } = this.state;
     if (clothes.length === 0) {
-      message.warning('配送蓝空空如也，赶快添加衣服去吧');
+      message.warning('配送篮空空如也，赶快添加衣服去吧');
       return;
     }
     let cache = [];

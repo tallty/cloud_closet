@@ -129,9 +129,9 @@ class Manage extends Component {
             selectedIds: [],
             garments: garments.filter(item => !item.isSelected)
           })
-          message.success('加入配送蓝成功');
+          message.success('加入配送篮成功');
         } else {
-          message.error('加入配送蓝失败，请稍后重试。');
+          message.error('加入配送篮失败，请稍后重试。');
         }
       })
   }

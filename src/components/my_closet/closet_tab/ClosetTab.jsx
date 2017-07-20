@@ -79,9 +79,9 @@ class ClosetTab extends Component {
           this.setState({
             disabled: true
           })
-          message.success('加入配送蓝成功');
+          message.success('加入配送篮成功');
         } else {
-          message.error('加入配送蓝失败，请稍后重试。');
+          message.error('加入配送篮失败，请稍后重试。');
         }
       })
   }
@@ -122,7 +122,7 @@ class ClosetTab extends Component {
                 className={styles.peisong}
                 onClick={this.addToCart.bind(this, garment.id)}
               >
-                加入配送蓝
+                加入配送篮
               </button>
             </div>
           </Col>
@@ -210,7 +210,7 @@ class ClosetTab extends Component {
           <div className={styles.cloth_number}>
             {`【${selectedTag}】数量（${garmentList.length})`}
             <Link to={`/cart?back_url=/closet_tabs?id=${this.state.id}`} className={styles.cart}>
-              <span className={styles.cart_span}>配送蓝</span>
+              <span className={styles.cart_span}>配送篮</span>
               <img src="/src/images/icon_cart.svg" alt="cart" />
               <div className={styles.dot}></div>
             </Link>
