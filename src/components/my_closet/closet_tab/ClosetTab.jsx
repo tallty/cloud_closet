@@ -14,6 +14,7 @@ class ClosetTab extends Component {
     id: this.props.location.query.id,
     garments: null,
     closet: null,
+    needJoin: true,
     title: '',
     supportTags: [],
     selectedTag: '全部'
@@ -37,6 +38,7 @@ class ClosetTab extends Component {
           console.log(obj)
           sessionStorage.setItem('closetTitle', JSON.stringify(obj.custom_title))
           this.setState({
+            needJoin: obj.need_join,
             garments: obj.garments,
             title: obj.custom_title,
             closet: obj
@@ -85,7 +87,7 @@ class ClosetTab extends Component {
   }
 
   showGarments() {
-    const { garments, selectedTag, closet } = this.state;
+    const { garments, selectedTag, closet, needJoin } = this.state;
     const list = [];
     if (!garments) return list;
     garments.forEach((garment, i, obj) => {
@@ -105,7 +107,14 @@ class ClosetTab extends Component {
                 <div className={styles.card_tab_title}>
                   <p className={styles.brand} ></p>
                   <p className={styles.good_type} >{garment.title}</p>
-                  <sub className={styles.time_line}>入库时间：{this.parseTime(garment.put_in_time)}</sub>
+                  <sub className={styles.time_line}>
+                    {
+                      needJoin ?
+                        <span>
+                          到期时间：{this.parseTime(garment.expire_time)}
+                        </span> : ''
+                    }
+                  </sub>
                   <br />
                 </div>
               </Card>
@@ -216,10 +225,12 @@ class ClosetTab extends Component {
 }
 
 ClosetTab.defaultProps = {
-  garments: []
+  garments: [],
+  need_join: true
 }
 
 ClosetTab.propTypes = {
+  need_join: Boolean,
   garments: arrayOf(
     shape({
       id: number,

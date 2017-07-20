@@ -28,6 +28,7 @@ const imageMap = new Map([
 class ClosetType extends Component {
   getCarouselList() {
     const { closets } = this.props;
+    console.log(closets)
     let list = [];
     const titleList = []
     const idList = []
@@ -43,7 +44,8 @@ class ClosetType extends Component {
               </Col>
               <Col span={8} className={css.closet_type_img_row_cell_two}>{item.custom_title}</Col>
               <Col span={12} className={css.closet_type_img_row_cell_three}>
-                {item.max_count - item.remain_space_count}/{item.max_count}
+                <span>{item.max_count - item.remain_space_count}/{item.max_count}</span><br />
+                <span className={css.endline}>到期时间：<span className={css.endline_time}>{item.expire_time}</span></span>
               </Col>
             </Row>
           </Link>
