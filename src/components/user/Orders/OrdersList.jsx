@@ -76,6 +76,7 @@ class OrdersList extends Component {
   getActiveOrders() {
     const { type, orders } = this.state;
     const list = [];
+    console.log(orders)
     orders.forEach((order, index, obj) => {
       const isHistory = (order.state === '已取消' || order.state === '已上架' || order.state === '已收货');
       if (!isHistory) {
@@ -91,12 +92,7 @@ class OrdersList extends Component {
                       <div className={css.state}>
                         <StateBadge now={states[0]} next={states[1]} />
                       </div>
-                      {
-                        order.delivery_time ?
-                          <span className={css.time}>{this.parseTime(order.created_at)}</span>
-                          :
-                          <span className={css.time}>{order.date}</span>
-                      }
+                      <span className={css.time}>{this.parseTime(order.created_at)}</span>
                     </div>
                     {this.setOrdersLayout(order)}
                   </Link>
@@ -106,7 +102,7 @@ class OrdersList extends Component {
                     <div className={css.state}>
                       {this.setType(order, states)}
                     </div>
-                    <span className={css.time}>{order.date}</span>
+                    <span className={css.time}>{this.parseTime(order.created_at)}</span>
                   </div>
                   {this.setOrdersLayout(order)}
                 </Link>
@@ -117,7 +113,7 @@ class OrdersList extends Component {
                   {
                     order.delivery_time ?
                       <p>配送时间：{order.delivery_time}</p> :
-                      <p>预约时间：{order.date}</p>
+                      <p>预约时间：{order.date ? order.date : '空'}</p>
                   }
                   <p>订单编号：{order.seq}</p>
                 </div>
@@ -136,6 +132,7 @@ class OrdersList extends Component {
   getHistoryOrders() {
     const { type, orders } = this.state;
     const list = [];
+    console.log(orders)
     orders.forEach((order, index, obj) => {
       if (order.state === '已取消' || order.state === '已上架' || order.state === '已收货') {
         const url = order.delivery_time ? 'delivery_orders' : 'appointments'
@@ -147,10 +144,7 @@ class OrdersList extends Component {
                   <StateBadge now={order.state} bg="#9B9B9B" next="" />
                 </div>
                 {
-                  order.delivery_time ?
-                    <span className={css.time}>{this.parseTime(order.created_at)}</span>
-                  :
-                    <span className={css.time}>{order.date}</span>
+                  <span className={css.time}>{this.parseTime(order.created_at)}</span>
                 }
               </div>
               {this.setOrdersLayout(order)}
@@ -161,7 +155,7 @@ class OrdersList extends Component {
                   {
                     order.delivery_time ?
                       <p>配送时间：{order.delivery_time}</p> :
-                      <p>预约时间：{order.date}</p>
+                      <p>预约时间：{order.date ? order.date : '空'}</p>
                   }
                   <p>订单编号：{order.seq}</p>
                 </div>

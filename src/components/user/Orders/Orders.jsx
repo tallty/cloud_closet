@@ -30,7 +30,7 @@ export class Orders extends Component {
       .end((err, res) => {
         if (res.ok) {
           const obj = res.body;
-          this.setState({ appointments: obj.appointments.reverse(), loading: false });
+          this.setState({ appointments: obj.appointments, loading: false });
         } else {
           this.setState({ appointments: [], loading: false });
         }

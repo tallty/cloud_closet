@@ -5,7 +5,7 @@ const shareUrl = location.href.split('#')[0];
 const shareImageUrl = 'http://closet.tallty.com/src/images/logo.png';
 const shareTitle = '乐存好衣';
 const shareDesc = '您的私人云衣橱';
-const openid = localStorage.openid
+const openid = localStorage.closet_openid
 
 module.exports = {
   getConfig() {
