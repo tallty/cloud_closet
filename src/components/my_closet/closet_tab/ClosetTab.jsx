@@ -225,12 +225,10 @@ class ClosetTab extends Component {
 }
 
 ClosetTab.defaultProps = {
-  garments: [],
-  need_join: true
+  garments: []
 }
 
 ClosetTab.propTypes = {
-  need_join: Boolean,
   garments: arrayOf(
     shape({
       id: number,

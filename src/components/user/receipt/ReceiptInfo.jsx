@@ -91,14 +91,14 @@ class ReceiptInfo extends Component {
   submit(e) {
     e.preventDefault();
     const { amount, title, invoice_type, cel_name, cel_phone, postcode, address, maxAmount } = this.state;
-    if (amount < 3000) {
-      message.warning('开票金额不得少于 3000 元', 4);
-      return;
-    }
-    if (amount > maxAmount) {
-      message.warning(`您的可开票金额最高为 ${maxAmount} 元`, 4);
-      return;
-    }
+    // if (amount < 3000) {
+    //   message.warning('开票金额不得少于 3000 元', 4);
+    //   return;
+    // }
+    // if (amount > maxAmount) {
+    //   message.warning(`您的可开票金额最高为 ${maxAmount} 元`, 4);
+    //   return;
+    // }
     if (amount && title && invoice_type && cel_name && cel_phone && postcode && address) {
       SuperAgent
         .post('http://closet-api.tallty.com/invoices')
@@ -136,18 +136,18 @@ class ReceiptInfo extends Component {
         <Toolbar url="/user" title="信息填写" theme="dark" />
         <div className={css.content}>
           {
-          /**
-            <div className={css.content_top}>
-              <Row>
-                <Col span={12} className={css.lf}>新添预设信息</Col>
-                <Col span={12} className={css.rt}>
-                  <Link to="/receipt_info" className={css.icon_col}>
-                    <Icon type="right" />
-                  </Link>
-                </Col>
-              </Row>
-            </div>
-          */
+            /**
+              <div className={css.content_top}>
+                <Row>
+                  <Col span={12} className={css.lf}>新添预设信息</Col>
+                  <Col span={12} className={css.rt}>
+                    <Link to="/receipt_info" className={css.icon_col}>
+                      <Icon type="right" />
+                    </Link>
+                  </Col>
+                </Row>
+              </div>
+            */
           }
           <p className={css.hint}>发票信息</p>
 
